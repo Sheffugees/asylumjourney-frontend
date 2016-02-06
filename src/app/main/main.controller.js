@@ -6,34 +6,24 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, webDevTec, toastr) {
+  function MainController($timeout, services) {
     var vm = this;
 
-    vm.awesomeThings = [];
-    vm.classAnimation = '';
-    vm.creationDate = 1454770101083;
-    vm.showToastr = showToastr;
+    vm.services = [];
 
     activate();
 
+    ////////
+
     function activate() {
-      getWebDevTec();
+      getServices();
       $timeout(function() {
         vm.classAnimation = 'rubberBand';
       }, 4000);
     }
 
-    function showToastr() {
-      toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
-      vm.classAnimation = '';
-    }
-
-    function getWebDevTec() {
-      vm.awesomeThings = webDevTec.getTec();
-
-      angular.forEach(vm.awesomeThings, function(awesomeThing) {
-        awesomeThing.rank = Math.random();
-      });
+    function getServices() {
+      vm.services = services.getServices();
     }
   }
 })();
