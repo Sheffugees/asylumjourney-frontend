@@ -4,9 +4,11 @@
       <div class="caption">
         <h3>{{ service.name }}</h3>
         <p>{{ service.description }}</p>
+        <p>{{ service.phone }}</p>
+        <a href="mailto:{{ service.email }}">{{ service.email }}</a>
+        <p>{{ service.address }} {{ service.postcode }}</p>
         <p><a ng-href="{{ service.url }}">{{ service.url }}</a></p>
       </div>
     </div>
   </div>
-
 </div>

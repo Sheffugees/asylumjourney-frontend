@@ -17,9 +17,6 @@
 
     function activate() {
       getServices();
-      $timeout(function() {
-        vm.classAnimation = 'rubberBand';
-      }, 4000);
     }
 
     function getServices() {
