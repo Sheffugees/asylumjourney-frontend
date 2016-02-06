@@ -10,13 +10,20 @@ npm install
 gulp
 ````
 
-Run a local webserver of your choice, for example:
+## Running locally
 
 ```
-python -m SimpleHTTPServer 8000
+gulp serve
 ```
-Go to http://localhost:8000/dist
 
 ## Deployment
 
 TBC
+
+## Task list
+
+https://trello.com/b/HCxgrmFQ/asylum-journey-task-list
+
+## Style guide
+
+https://github.com/johnpapa/angular-styleguide
