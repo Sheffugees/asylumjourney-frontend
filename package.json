@@ -50,6 +50,9 @@
     "chalk": "~1.1.1",
     "uglify-save-license": "~0.4.1",
     "wrench": "~1.5.8"
+  },,
+  "scripts": {
+    "postinstall": "bower install"
   },
   "engines": {
     "node": ">=0.10.0"
