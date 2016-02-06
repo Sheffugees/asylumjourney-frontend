@@ -3,6 +3,98 @@
 // bower:scss
 // endbower
 
+// variables
+// Primary Palette
+$color-a: #61BD4F;
+$color-b: #F2D600;
+$color-c: #FFAB4A;
+$color-d: #EB5A46;
+$color-e: #C377E0;
+$color-f: #0079BF;
+$color-g: #FF80CE;
+
+// Greys
+$grey-a: #333;
+$grey-b: #666;
+$grey-c: #999;
+$grey-d: #ccc;
+
+// Aliases
+$color-text: $grey-a;
+
+// Dimensions
+$font-size-html: 100%;
+$vertical-rhythm: 6px; // use $vr*X to maintain vertical consistency
+$vr: $vertical-rhythm; // Alias
+
+// Typography
+$font-family-sans-serif: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family-serif: 'Georgia Pro', Georgia, Times, serif;
+$font-family-mono: 'Anonymous Pro', 'Droid Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, 'Lucida Console', Courier, monospace;
+$font-family-base: $font-family-sans-serif;
+
+// Font Sizing
+$font-size-base: 16px;
+$font-size-small: 14px;
+$line-height-base: $vr*4; // 24px
+$line-height-small: $vr*3; // 18px
+
+$font-weight-bold: 700; // 700 when not using $font-face
+$font-weight-medium: 600; // 600 when not using $font-face
+$font-weight-regular: 400; // 400 when not using $font-face
+$font-weight-light: 100; // 100 when not using $font-face
+
+// Media Query Break Points (px & em)
+$break-point-a-px: 320px;
+$break-point-a-em-val: 320 / 16;
+$break-point-a-em: #{$break-point-a-em-val}em;
+// Set to -px or -em
+$break-point-a: $break-point-a-em;
+
+$break-point-b-px: 480px;
+$break-point-b-em-val: 480 / 16;
+$break-point-b-em: #{$break-point-b-em-val}em;
+// Set to -px or -em
+$break-point-b: $break-point-b-em;
+
+$break-point-c-px: 600px;
+$break-point-c-em-val: 600 / 16;
+$break-point-c-em: #{$break-point-c-em-val}em;
+// Set to -px or -em
+$break-point-c: $break-point-c-em;
+
+$break-point-d-px: 768px;
+$break-point-d-em-val: 768 / 16;
+$break-point-d-em: #{$break-point-d-em-val}em;
+// Set to -px or -em
+$break-point-d: $break-point-d-em;
+
+$break-point-e-px: 980px;
+$break-point-e-em-val: 980 / 16;
+$break-point-e-em: #{$break-point-e-em-val}em;
+// Set to -px or -em
+$break-point-e: $break-point-e-em;
+
+$break-point-f-px: 1200px;
+$break-point-f-em-val: 1200 / 16;
+$break-point-f-em: #{$break-point-f-em-val}em;
+// Set to -px or -em
+$break-point-f: $break-point-f-em;
+
+$break-point-g-px: 1400px;
+$break-point-g-em-val: 1400 / 16;
+$break-point-g-em: #{$break-point-g-em-val}em;
+// Set to -px or -em
+$break-point-g: $break-point-g-em;
+
+// For break point shorthands
+$BPA: "(min-width:" $break-point-a")";
+$BPB: "(min-width:" $break-point-b")";
+$BPC: "(min-width:" $break-point-c")";
+$BPD: "(min-width:" $break-point-d")";
+$BPE: "(min-width:" $break-point-e")";
+$BPF: "(min-width:" $break-point-f")";
+$BPG: "(min-width:" $break-point-g")";
 
 /* Do not remove the comments below. It's the markers used by gulp-inject to inject
    all your sass files automatically */
