@@ -19,3 +19,11 @@ gulp serve
 ## Deployment
 
 TBC
+
+## Task list
+
+https://trello.com/b/HCxgrmFQ/asylum-journey-task-list
+
+## Style guide
+
+https://github.com/johnpapa/angular-styleguide
