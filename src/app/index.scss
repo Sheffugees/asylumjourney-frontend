@@ -96,6 +96,39 @@ $BPE: "(min-width:" $break-point-e")";
 $BPF: "(min-width:" $break-point-f")";
 $BPG: "(min-width:" $break-point-g")";
 
+// global
+
+* {
+	-webkit-tap-highlight-color: transparent;
+	word-wrap: break-word;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 100%;
+	background: #FFF;
+	-webkit-overflow-scrolling: touch;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	// Disable iOS/WinMobile font size changes
+	@media screen and (max-device-width: 480px) {
+		-webkit-text-size-adjust: 100%;
+		-ms-text-size-adjust: 100%;
+	}
+}
+
+body {
+	color: $color-text;
+	font-family: $font-family-base;
+	font-weight: $font-weight-regular;
+	line-height: $line-height-base;
+}
+
+img {
+	-ms-interpolation-mode: bicubic;
+}
+
 /* Do not remove the comments below. It's the markers used by gulp-inject to inject
    all your sass files automatically */
 // injector
