@@ -1,0 +1,41 @@
+.card {
+  display: block;
+  color: $color-text;
+  font-size: $font-size-small;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 1px solid $color-text;
+  padding: $vr;
+  margin: 0 2px;
+
+  &.card--stage-1 {
+    background: $stage-1-color;
+    border-color: darken($stage-1-color, 30%);
+  }
+
+  &.card--stage-2 {
+    background: $stage-2-color;
+    border-color: darken($stage-2-color, 30%);
+  }
+
+  &.card--stage-3 {
+    background: $stage-3-color;
+    border-color: darken($stage-3-color, 30%);
+  }
+
+  &.card--stage-4 {
+    background: $stage-4-color;
+    border-color: darken($stage-4-color, 30%);
+  }
+
+}
+
+@media(min-width: $break-point-b-px) {
+
+  .card {
+    font-size: $font-size-base;
+    padding: $vr*2;
+    margin: 0 $vr;
+  }
+
+}
