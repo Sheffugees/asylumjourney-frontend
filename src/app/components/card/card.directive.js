@@ -9,6 +9,7 @@
 		var card = {
 			templateUrl: 'app/components/card/card.html',
 			restrict: 'AE',
+			controller: 'CardController',
 			scope: {
 					service: '='
 			}
