@@ -40,7 +40,7 @@
             data.categories().get().$promise.then(function(response) {
 				vm.categories = response._embedded.categories;
 			});
-        }
+		}
     }
 
 })();
