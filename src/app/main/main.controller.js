@@ -6,21 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, services) {
+  function MainController($timeout) {
     var vm = this;
-
-    vm.services = [];
-
-    activate();
-
-    ////////
-
-    function activate() {
-      getServices();
-    }
-
-    function getServices() {
-      vm.services = services.getServices();
-    }
   }
 })();

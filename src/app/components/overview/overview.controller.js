@@ -5,7 +5,7 @@
   .module('asylumjourneyFrontend')
   .controller('OverviewController', OverviewController);
 
-    function OverviewController(services, ngDialog) {
+    function OverviewController(data, ngDialog) {
         var vm = this;
         vm.services = [];
 
@@ -51,8 +51,10 @@
         }
 
         function getServices() {
-            vm.services = services.getServices();
+            data.services().get().$promise.then(function(response) {
+				vm.services = response._embedded.services;
+			});
         }
     }
-    
+
 })();
