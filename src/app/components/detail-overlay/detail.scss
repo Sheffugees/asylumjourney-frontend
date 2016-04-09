@@ -1,10 +1,23 @@
+body.ngdialog-open {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+}
+
 .ngdialog.ngdialog-theme-default .ngdialog-content {
   width: 90%;
   max-width: 600px;
+
+  .touch & {
+    height: auto;
+    max-height: 600px;
+    overflow: scroll;
+  }
 }
 
 .ngdialog.ngdialog-theme-default {
-  padding-top: 100px;
+  padding-top: $vr*5;
+  padding-bottom: $vr*5;
 }
 
 
