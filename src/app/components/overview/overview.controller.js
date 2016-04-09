@@ -9,21 +9,32 @@
         var vm = this;
         vm.services = [];
 
-        // TO DO: Move these to service
-        vm.categories = [
-            {
-                id: 1,
-                name: "Education"
-            },
-            {
-                id: 2,
-                name: "Health"
-            },
-            {
-                id: 3,
-                name: "Housing"
-            }
-        ];
+        activate();
+
+        function activate() {
+            getServices();
+            getProviders();
+            getStages();
+            getCategories();
+        }
+
+        function getServices() {
+            data.services().get().$promise.then(function(response) {
+				vm.services = response._embedded.services;
+			});
+        }
+
+        function getProviders() {
+            data.providers().get().$promise.then(function(response) {
+				vm.providers = response._embedded.providers;
+			});
+        }
+
+        function getStages() {
+//            data.stages().get().$promise.then(function(response) {
+//				vm.stages = response._embedded.stages;
+//			});
+
 
         vm.stages = [
             {
@@ -43,17 +54,26 @@
                 name: "Awaiting Return"
             }
         ];
+		}
 
-        activate();
-
-        function activate() {
-            getServices();
-        }
-
-        function getServices() {
-            data.services().get().$promise.then(function(response) {
-				vm.services = response._embedded.services;
-			});
+        function getCategories() {
+//            data.categories().get().$promise.then(function(response) {
+//				vm.categories = response._embedded.categories;
+//			});
+			vm.categories = [
+            {
+                id: 1,
+                name: "Education"
+            },
+            {
+                id: 2,
+                name: "Health"
+            },
+            {
+                id: 3,
+                name: "Housing"
+            }
+        ];
         }
     }
 
