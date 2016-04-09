@@ -4,5 +4,6 @@ coverage/
 .sass-cache/
 .idea/
 .tmp/
+.publish/
 dist/
 *.log
