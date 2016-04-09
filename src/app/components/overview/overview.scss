@@ -65,7 +65,7 @@ $numColumns: 7;
   padding: $vr;
 }
 
-@media(min-width: $break-point-b-px) {
+@media(min-width: $break-point-e-px) {
 
   .overview-stages__stage, .overview-category__heading, .overview-category__stage {
     width: percentage(1/$numColumns);
