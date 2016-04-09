@@ -1,8 +1,38 @@
 <article class="details">
-	<h2 class="details__heading">{{ service.name }}</h2>
+	<h2 class="details__heading">
+    <span ng-if="service._embedded.issues" class="details__alert">
+      <svg class="icon icon-warning"><use xlink:href="#icon-warning"></use></svg>
+      <i>Warning</i>
+    </span>
+    {{ service.name }}
+  </h2>
+
+  <ul class="tag-list">
+    <li ng-repeat="stage in service._embedded.stages" class="tag-list__tag tag-list__tag--stage-{{ stage.id }}">{{ stage.name }}</li>
+    <li ng-repeat="category in service._embedded.categories" class="tag-list__tag">{{ category.name }}</li>
+    <li ng-repeat="serviceUser in service._embedded.serviceUsers" class="tag-list__tag">{{ serviceUser.name }}</li>
+  </ul>
+
 	<p>{{ service.description }}</p>
-	<p>{{ service.phone }}</p>
-	<a href="mailto:{{ service.email }}">{{ service.email }}</a>
-	<p>{{ service.address }} {{ service.postcode }}</p>
-	<p><a ng-href="{{ service.url }}">{{ service.url }}</a></p>
+  <p ng-if="service.endDate"><strong>End Date:</strong> {{ service.endDate | date }}</p>
+
+  <div ng-if="service._embedded.issues">
+    <h3 class="details__sub-heading">Gaps or issues</h3>
+    <p ng-repeat="issue in service._embedded.issues">{{ issue.name }}</p>
+  </div>
+	
+  <div ng-if="service._embedded.providers">
+    <h3 class="details__sub-heading">Providers</h3>
+
+    <div ng-repeat="provider in service._embedded.providers" class="details__provider">
+      <h4 class="details__service-name">{{ provider.name }}</h4>
+      <p>{{ provider.description }}</p>
+      <p ng-if="provider.phone"><strong>Tel:</strong> {{ provider.phone }}</p>
+      <p ng-if="provider.email"><strong>Email:</strong> <a href="mailto:{{ provider.email }}">{{ provider.email }}</a></p>
+      <p ng-if="provider.website"><strong>Website:</strong> <a href="{{ provider.website }}">{{ provider.website }}</a></p>
+      <p ng-if="provider.address"><strong>Address:</strong> {{ provider.address }}, {{ provider.postcode }}
+      </p>
+    </div>
+  </div>
+
 </article>

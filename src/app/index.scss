@@ -30,6 +30,15 @@ $stage-4-color: #59C8DF;
 $stage-5-color: #CCC;
 $stage-6-color: #846dce;
 
+$stages: (
+	stage-1: $stage-1-color, 
+	stage-2: $stage-2-color,
+	stage-3: $stage-3-color,
+	stage-4: $stage-4-color,
+	stage-5: $stage-5-color,
+	stage-6: $stage-6-color
+);
+
 // Dimensions
 $font-size-html: 100%;
 $vertical-rhythm: 6px; // use $vr*X to maintain vertical consistency
@@ -44,7 +53,7 @@ $font-family-base: $font-family-sans-serif;
 // Font Sizing
 $font-size-base: 16px;
 $font-size-small: 14px;
-$line-height-base: $vr*4; // 24px
+$line-height-base: 1.5; // 24px
 $line-height-small: $vr*3; // 18px
 
 $font-weight-bold: 700; // 700 when not using $font-face
@@ -186,6 +195,10 @@ body {
 
 img {
 	-ms-interpolation-mode: bicubic;
+}
+
+strong {
+	font-weight: bold;
 }
 
 /* Do not remove the comments below. It's the markers used by gulp-inject to inject
