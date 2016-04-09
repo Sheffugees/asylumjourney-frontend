@@ -2,7 +2,7 @@
 
     <ul class="overview-stages">
         <li class="overview-stages__stage"></li>
-        <li ng-repeat="stage in overview.stages" class="overview-stages__stage overview-stages__stage--{{stage.id}}">
+        <li ng-repeat="stage in overview.stages" class="overview-stages__stage overview-stages__stage--{{$index + 1}}">
             {{stage.name}}
         </li>
     </ul>
@@ -12,7 +12,7 @@
         <h2 class="overview-category__heading">{{category.name}}</h2>
 
         <ul class="overview-category__stage overview-category__stage--1">
-            <li ng-repeat="service in overview.services">
+            <li ng-repeat="service in overview.services | filter: {category: category.id ,stage: 1">
                 <card service="service"></card>
             </li>
         </ul>
@@ -31,6 +31,18 @@
 
         <ul class="overview-category__stage overview-category__stage--4">
             <li ng-repeat="service in overview.services | filter: {category: category.id ,stage: 4}">
+                <card service="service"></card>
+            </li>
+        </ul>
+
+        <ul class="overview-category__stage overview-category__stage--5">
+            <li ng-repeat="service in overview.services | filter: {category: category.id ,stage: 5}">
+                <card service="service"></card>
+            </li>
+        </ul>
+
+        <ul class="overview-category__stage overview-category__stage--6">
+            <li ng-repeat="service in overview.services | filter: {category: category.id ,stage: 6}">
                 <card service="service"></card>
             </li>
         </ul>
