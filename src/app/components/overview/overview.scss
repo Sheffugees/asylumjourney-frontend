@@ -1,17 +1,10 @@
-$numColumnsSmall: 4;
-$numColumns: 5;
-
-.overview {
-  padding-top: $vr*10;
-}
+$numColumnsSmall: 6;
+$numColumns: 7;
 
 .overview-stages {
   display: flex;
-  position: fixed;
   width: 100%;
-  left: 0;
-  top: 0;
-  height: $vr*10;
+  min-height: $vr*10;
   background: #FFF;
 }
 
@@ -24,7 +17,10 @@ $numColumns: 5;
   height: 100%;
   align-items: center;
   display: flex;
-  padding: 0 $vr;
+  padding: $vr;
+  line-height: 1.2;
+  font-size: 14px;
+  overflow: hidden;
 
   &:first-child {
     display: none;
@@ -44,6 +40,14 @@ $numColumns: 5;
 
   &.overview-stages__stage--4 {
     border-color: $stage-4-color;
+  }
+
+  &.overview-stages__stage--5 {
+    border-color: $stage-5-color;
+  }
+
+  &.overview-stages__stage--6 {
+    border-color: $stage-6-color;
   }
 }
 
@@ -68,7 +72,7 @@ $numColumns: 5;
   }
 
   .overview-stages__stage {
-    font-size: 20px;
+    font-size: 16px;
 
     &:first-child {
       display: flex;
@@ -81,8 +85,15 @@ $numColumns: 5;
 
   .overview-category__heading {
     position: relative;
-    font-size: 20px;
+    font-size: 16px;
     padding: $vr*2 $vr;
   }
 
+}
+
+@media(min-width: $break-point-f-px) {
+
+  .overview-stages__stage, .overview-category__heading {
+    font-size: 18px;
+  }
 }
