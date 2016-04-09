@@ -8,24 +8,40 @@
   padding: $vr;
   margin: 0 2px;
 
-  &.card--stage-1 {
+  &.card--stage-1,
+  .overview-category__stage--1 & {
     background: $stage-1-color;
     border-color: darken($stage-1-color, 30%);
   }
 
-  &.card--stage-2 {
+  &.card--stage-2,
+  .overview-category__stage--2 & {
     background: $stage-2-color;
     border-color: darken($stage-2-color, 30%);
   }
 
-  &.card--stage-3 {
+  &.card--stage-3,
+  .overview-category__stage--3 & {
     background: $stage-3-color;
     border-color: darken($stage-3-color, 30%);
   }
 
-  &.card--stage-4 {
+  &.card--stage-4,
+  .overview-category__stage--4 & {
     background: $stage-4-color;
     border-color: darken($stage-4-color, 30%);
+  }
+
+  &.card--stage-5,
+  .overview-category__stage--5 & {
+    background: $stage-5-color;
+    border-color: darken($stage-5-color, 30%);
+  }
+
+  &.card--stage-6,
+  .overview-category__stage--6 & {
+    background: $stage-6-color;
+    border-color: darken($stage-6-color, 30%);
   }
 
 }
