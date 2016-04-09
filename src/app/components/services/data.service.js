@@ -7,7 +7,7 @@
 
 	function data($resource) {
 
-		var url = 'http://private-7172d-asylumjourney.apiary-mock.com/';
+		var url = 'http://asylum-journey-dev.herokuapp.com/';
 
 		this.services = services;
 		this.providers = providers;
