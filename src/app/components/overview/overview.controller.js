@@ -5,7 +5,7 @@
   .module('asylumjourneyFrontend')
   .controller('OverviewController', OverviewController);
 
-    function OverviewController(data, ngDialog) {
+    function OverviewController(data) {
         var vm = this;
         vm.services = [];
 

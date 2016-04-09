@@ -12,7 +12,7 @@
         <h2 class="overview-category__heading">{{category.name}}</h2>
 
         <ul class="overview-category__stage overview-category__stage--1">
-            <li ng-repeat="service in overview.services | filter: {category: category.id ,stage: 1">
+            <li ng-repeat="service in overview.services | filter: {category: category.id ,stage: 1}">
                 <card service="service"></card>
             </li>
         </ul>

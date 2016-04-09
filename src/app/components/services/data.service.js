@@ -13,6 +13,8 @@
 		this.providers = providers;
 		this.stages = stages;
 		this.categories = categories;
+		this.serviceUsers = serviceUsers;
+		this.issues = issues;
 
 		///////////
 
@@ -30,6 +32,14 @@
 
 		function categories() {
 			return $resource(url + 'categories');
+		}
+
+		function serviceUsers() {
+			return $resource(url + 'service-users');
+		}
+
+		function issues() {
+			return $resource(url + 'issues');
 		}
 	}
 })();
