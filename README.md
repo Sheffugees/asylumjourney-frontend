@@ -18,7 +18,9 @@ gulp serve
 
 ## Deployment
 
-TBC
+```
+gulp deploy
+```
 
 ## Task list
 
