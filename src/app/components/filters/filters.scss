@@ -1,0 +1,44 @@
+.filters {
+  background: white;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  border-top: 2px solid $grey-b;
+
+}
+
+.filter {
+  float: left;
+  width: 300px;
+  margin-right: $vr;
+  border-right: 1px solid #ccc;
+}
+
+.filter__toggle, .filter__button  {
+  padding: $vr*2;
+  background: none;
+  border: none;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+}
+
+.filter__list {
+  position: absolute;
+  bottom: 50px;
+  width: 300px;
+  background: white;
+  box-shadow: 0px -1px 4px rgba(0,0,0,0.1),
+        -1px 0px 4px rgba(0,0,0,0.1),
+        1px 0px 4px rgba(0,0,0,0.1);
+
+
+  li {
+    border-bottom: 1px solid #ccc;
+
+    &:last-child {
+      border: none;
+    }
+  }
+}

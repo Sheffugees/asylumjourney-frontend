@@ -2,21 +2,23 @@
 
     <ul class="overview-stages">
         <li class="overview-stages__stage"></li>
-        <li ng-repeat="stage in overview.stages" class="overview-stages__stage overview-stages__stage--{{$index + 1}}">
+        <li ng-if="stage.display" ng-repeat="stage in overview.stages" class="overview-stages__stage overview-stages__stage--{{stage.id}}">
             {{stage.name}}
         </li>
     </ul>
 
-    <div ng-repeat="category in overview.categories" class="overview-category">
+    <div ng-if="category.display" ng-repeat="category in overview.categories" class="overview-category">
 
         <h2 class="overview-category__heading">{{category.name}}</h2>
 
-        <ul class="overview-category__stage overview-category__stage--{{stage.id}}" ng-repeat="stage in overview.stages">
+        <ul ng-if="stage.display" class="overview-category__stage overview-category__stage--{{stage.id}}" ng-repeat="stage in overview.stages">
             <li ng-repeat="service in overview.services | category: category.id | stage: stage.id">
                 <card service="service"></card>
             </li>
         </ul>
 
     </div>
+
+    <filters></filters>
 
 </div>
