@@ -4,25 +4,18 @@
 // endbower
 
 // variables
-// Primary Palette
-$color-a: #61BD4F;
-$color-b: #F2D600;
-$color-c: #FFAB4A;
-$color-d: #EB5A46;
-$color-e: #C377E0;
-$color-f: #0079BF;
-$color-g: #FF80CE;
 
 // Greys
 $grey-a: #333;
 $grey-b: #666;
 $grey-c: #999;
 $grey-d: #ccc;
+$grey-e: #ddd;
 
 // Aliases
 $color-text: $grey-a;
 
-// Stage colours 
+// Stage colours
 $stage-1-color: #ef5350;
 $stage-2-color: #F5DF65;
 $stage-3-color: #4CAF50;
@@ -31,13 +24,15 @@ $stage-5-color: #CCC;
 $stage-6-color: #846dce;
 
 $stages: (
-	stage-1: $stage-1-color, 
+	stage-1: $stage-1-color,
 	stage-2: $stage-2-color,
 	stage-3: $stage-3-color,
 	stage-4: $stage-4-color,
 	stage-5: $stage-5-color,
 	stage-6: $stage-6-color
 );
+
+$color-warning: #db2a2a;
 
 // Dimensions
 $font-size-html: 100%;
@@ -115,7 +110,7 @@ $BPG: "(min-width:" $break-point-g")";
 
 // reset
 
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -129,8 +124,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -141,7 +136,7 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }

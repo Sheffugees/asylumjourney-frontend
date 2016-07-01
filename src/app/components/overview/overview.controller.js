@@ -115,6 +115,10 @@
             filterItems(filterId, filteredCategories, vm.categories);
         };
 
+		vm.toggleIssues = function () {
+			vm.showIssues = !vm.showIssues;
+        }
+
         vm.resetFilters = function(array, list) {
             resetFilter(list);
             array = [];

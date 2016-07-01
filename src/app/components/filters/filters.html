@@ -1,5 +1,14 @@
 <div class="filters">
     <div class="filter">
+        <button type="button" class="filter__toggle" ng-class="{ 'filter__toggle--active': overview.showIssues}" ng-click="overview.toggleIssues()">
+			<svg class="icon icon-warning">
+				<use xlink:href="#icon-warning"></use>
+			</svg>
+			Gaps/issues
+		</button>
+    </div>
+
+    <div class="filter">
         <button type="button" class="filter__toggle" ng-click="overview.expandStageFilters(overview.showStageFilters)">Stage</button>
         <ul class="filter__list" ng-show="overview.showStageFilters">
             <li ng-repeat="stage in overview.stages">
