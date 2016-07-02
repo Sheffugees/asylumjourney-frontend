@@ -1,13 +1,13 @@
 body.ngdialog-open {
-    height: 100%;
     width: 100%;
-    position: fixed;
+    overflow: hidden;
+    height: initial;
 }
 .ngdialog.ngdialog-theme-default .ngdialog-content {
     width: 90%;
     max-width: 600px;
     font-family: freight-sans-pro;
-    
+
     .touch & {
         height: auto;
         max-height: 600px;
@@ -19,12 +19,12 @@ body.ngdialog-open {
     padding-bottom: $vr*5;
 }
 .details {
-        font-size: $font-size-base;
+    font-size: $font-size-base;
     line-height: 1.5;
     p {
         margin-bottom: $vr*2;
         white-space: pre-line;
-        
+
     }
 }
 .details__heading {
