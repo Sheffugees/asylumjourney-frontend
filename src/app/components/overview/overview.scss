@@ -1,15 +1,26 @@
-$numColumnsSmall: 6;
-$numColumns: 7;
+$numColumnsSmall: 7;
+$numColumns: 8;
 
 .overview {
-  padding-bottom: 50px;
+  padding: $vr*15 0 $vr*9 0;
 }
 
 .overview-stages {
   display: flex;
+  position: fixed;
+  z-index: 10;
   width: 100%;
-  min-height: $vr*10;
+  height: $vr*15;
   background: #FFF;
+  top: 0;
+  left: 0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+
+  // required to force text to wrap in IE10
+  span {
+    max-width: 100%;
+    display: block;
+  }
 }
 
 .overview-stages__stage, .overview-category__stage {
@@ -25,6 +36,7 @@ $numColumns: 7;
   line-height: 1.2;
   font-size: 14px;
   overflow: hidden;
+  font-weight: bold;
 
   &:first-child {
     display: $grey-f;
@@ -54,6 +66,10 @@ $numColumns: 7;
     border-color: $stage-6-color;
   }
     
+&.overview-stages__stage--7 {
+    border-color: $stage-7-color;
+  }
+    
     &.brand {
 //logo placeholder
         h1 {
@@ -69,6 +85,7 @@ $numColumns: 7;
         }
         
     }
+
 }
 
 .overview-category {
@@ -83,6 +100,7 @@ $numColumns: 7;
   position: absolute;
   top: 0;
   padding: $vr;
+  font-weight: bold;
 }
 
 @media(min-width: $break-point-e-px) {
@@ -113,7 +131,11 @@ $numColumns: 7;
 
 @media(min-width: $break-point-f-px) {
 
-  .overview-stages__stage, .overview-category__heading {
-    font-size: 21px;
+  .overview {
+    padding-top: $vr*15
+  }
+
+  .overview-stages {
+    height: $vr*13;
   }
 }
