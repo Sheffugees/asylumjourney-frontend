@@ -8,6 +8,11 @@
   function routeConfig($routeProvider) {
     $routeProvider
       .when('/', {
+        templateUrl: 'app/home/home.html',
+        controller: 'HomeController',
+        controllerAs: 'home'
+      })
+      .when('/tool', {
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
         controllerAs: 'main'
