@@ -1,6 +1,8 @@
 <a ng-controller="CardController as card" href="#/" ng-click="card.openDialog()" class="card">
-	<svg class="icon icon-warning" ng-if="card.service._embedded.issues.length">
-		<use xlink:href="#icon-warning"></use>
-	</svg>
-	<h3>{{ card.service.name }}</h3>
+    <svg class="icon icon-warning" ng-if="card.service._embedded.issues.length">
+        <use xlink:href="#icon-warning"></use>
+    </svg>
+    <h3>{{ card.service.name }}</h3>
+
+
 </a>
