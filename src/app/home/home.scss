@@ -1,0 +1,41 @@
+.banner {
+  background: url(/app/images/homebackground.png);
+  background-repeat: no-repeat;
+	background-size: contain;
+  width: 100%;
+  padding: 11em 0;
+  max-width: 900px;
+  margin: auto;
+  h1 {
+
+   }
+   a {
+		border: none;
+    outline: none;
+		color: #FFFFFF;
+		background-color: black;
+		padding: .4rem .7rem;
+		border-radius: .6em;
+		font-size: 1.2em;
+		margin: 0 0 0 1.5em;
+    font-weight: 600;
+    text-decoration: none;
+   }
+  }
+.questions {
+  max-width: 900px;
+  margin: auto;
+  ul {
+    padding-top: .1em;
+    li {
+      padding-top: 1em;
+      h4 {
+        font-size: 1.5em;
+        font-weight: 900;
+      }
+      p {
+        font-size: 1em;
+      }
+    }
+  }
+}
