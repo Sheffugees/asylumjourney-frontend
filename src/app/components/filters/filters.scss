@@ -6,6 +6,11 @@
   bottom: 0;
   border-top: 2px solid $grey-b;
   z-index: 10;
+    
+   button.button {
+      margin-top: 10px;
+       margin-left: 5px;
+      }
 }
 
 .filters__overlay {
@@ -66,5 +71,7 @@
     &:last-child {
       border: none;
     }
+      
+
   }
 }

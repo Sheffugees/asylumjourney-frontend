@@ -36,10 +36,10 @@ $numColumns: 8;
   line-height: 1.2;
   font-size: 14px;
   overflow: hidden;
-  font-weight: bold;
+  font-weight: 400;
 
   &:first-child {
-    display: none;
+    display: $grey-f;
   }
 
   &.overview-stages__stage--1 {
@@ -65,10 +65,26 @@ $numColumns: 8;
   &.overview-stages__stage--6 {
     border-color: $stage-6-color;
   }
-
-  &.overview-stages__stage--7 {
+    
+&.overview-stages__stage--7 {
     border-color: $stage-7-color;
   }
+    
+    &.brand {
+//logo placeholder
+        h1 {
+            font-weight: 400;
+        }
+        img {
+            height: 30px;
+            position: relative;
+            top: -5px;
+            padding-right:5px;
+        }
+        
+        
+    }
+
 }
 
 .overview-category {
@@ -83,7 +99,7 @@ $numColumns: 8;
   position: absolute;
   top: 0;
   padding: $vr;
-  font-weight: bold;
+  font-weight: 400;
 }
 
 @media(min-width: $break-point-e-px) {

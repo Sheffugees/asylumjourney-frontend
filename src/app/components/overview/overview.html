@@ -1,8 +1,9 @@
 <div ng-controller="OverviewController as overview" class="overview">
 
     <ul class="overview-stages">
-        <li class="overview-stages__stage">
-            <button ng-click="overview.openDialog()">What's this</button>
+        <li class="overview-stages__stage brand">
+            <img src="/app/images/logo-basic.png"> <h1>The Asylum Journey</h1>
+<!--            <button ng-click="overview.openDialog()" class="button">What's this?</button>-->
         </li>
         <li ng-if="stage.display" ng-repeat="stage in overview.stages" class="overview-stages__stage overview-stages__stage--{{stage.id}}">
             <span>{{stage.name}}</span>
