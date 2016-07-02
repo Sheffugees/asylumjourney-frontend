@@ -7,6 +7,15 @@
   border-top: 2px solid $grey-b;
   z-index: 10;
     
+    .feedback {
+        float: right;
+        margin: 10px 10px;
+        text-decoration: none;
+        color: $grey-a;
+        padding: 1px 5px;
+        
+      }
+    
    button.button {
       margin-top: 10px;
        margin-left: 5px;
@@ -85,6 +94,8 @@
               font-size: 18px;
           }
       }
+      
+      
 
     &:last-child {
       border: none;
