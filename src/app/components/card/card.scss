@@ -8,7 +8,7 @@
     margin: 0 2px;
     background: #fff;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
-    
+
     &.card--stage-1,
     .overview-category__stage--1 & {
 //        background: lighten($stage-1-color, 35%);
@@ -43,6 +43,15 @@
         font-size: $font-size-small;
         line-height: $vr*3;
     }
+
+	.icon {
+		height: 20px;
+		width: 20px;
+	}
+
+	.icon-warning {
+		fill: $color-warning;
+	}
 }
 @media(min-width: $break-point-e-px) {
     .card {
