@@ -3,21 +3,34 @@
   background-repeat: no-repeat;
 	background-size: contain;
   width: 100%;
-  padding: 11em 0;
+  padding: 7em 0;
   max-width: 900px;
   margin: auto;
-  h1 {
 
+  .button-container{
+  display: block;
+  clear: both;
+}
+  img {
+    float: left;
+    height: 10%;
+    width: 10%;
+  }
+  h1 {
+    font-size: 1.3em;
+    font-weight: 700;
+   }
+   h3 {
+     margin-bottom: 30px;
    }
    a {
 		border: none;
     outline: none;
 		color: #FFFFFF;
-		background-color: black;
+		background-color: #ff2b41;
 		padding: .4rem .7rem;
 		border-radius: .6em;
 		font-size: 1.2em;
-		margin: 0 0 0 1.5em;
     font-weight: 600;
     text-decoration: none;
    }
@@ -25,6 +38,7 @@
 .questions {
   max-width: 900px;
   margin: auto;
+  padding-bottom: 7em;
   ul {
     padding-top: .1em;
     li {
