@@ -36,7 +36,7 @@ $numColumns: 8;
   line-height: 1.2;
   font-size: 14px;
   overflow: hidden;
-  font-weight: bold;
+  font-weight: 600;
 
   &:first-child {
     display: $grey-f;
@@ -73,9 +73,14 @@ $numColumns: 8;
     &.brand {
 //logo placeholder
         h1 {
-            font-weight: 600;
+            font-weight: 400;
         }
-        
+        img {
+            height: 30px;
+            position: relative;
+            top: -5px;
+            padding-right:5px;
+        }
         button.help-link {
             display: inline-block;
             font-size: $font-size-small;
@@ -100,7 +105,7 @@ $numColumns: 8;
   position: absolute;
   top: 0;
   padding: $vr;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 @media(min-width: $break-point-e-px) {
