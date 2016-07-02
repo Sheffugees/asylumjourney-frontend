@@ -14,6 +14,7 @@
         vm.filtered = false;
         vm.showCategoryFilters = false;
         vm.showStageFilters = false;
+        vm.showLoader = true;
 
         activate();
 
@@ -27,6 +28,7 @@
         function getServices() {
             data.services().get().$promise.then(function(response) {
 				vm.services = response._embedded.services;
+                vm.showLoader = false;
 			});
         }
 

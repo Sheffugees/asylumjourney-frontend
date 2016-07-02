@@ -9,11 +9,16 @@
     </div>
 
     <div class="filter">
-        <button type="button" class="filter__toggle" ng-click="overview.expandStageFilters(overview.showStageFilters)">Stage</button>
+        <button type="button"
+            class="filter__toggle"
+            ng-class="{ 'filter__toggle--active': overview.showStageFilters}"
+            ng-click="overview.expandStageFilters(overview.showStageFilters)">
+            Stage
+        </button>
         <ul class="filter__list" ng-show="overview.showStageFilters">
             <li ng-repeat="stage in overview.stages">
-                <button type="button" class="filter__button" ng-class="{ 'filter__toggle--active': stage.filtered}" ng-click="overview.filterStage(stage.id)">{{stage.name}}
-                    <span ng-if="stage.filtered">FILTERED</span>
+                <button type="button" class="filter__button" ng-class="{ 'filter__button--active': stage.filtered}" ng-click="overview.filterStage(stage.id)"><span ng-if="stage.filtered">></span>
+                    {{stage.name}}
                 </button>
             </li>
 
@@ -21,12 +26,17 @@
     </div>
 
     <div class="filter">
-        <button type="button" class="filter__toggle" ng-click="overview.expandCategoryFilters(overview.showCategoryFilters)">Category</button>
+        <button type="button"
+            class="filter__toggle"
+            ng-class="{ 'filter__toggle--active': overview.showCategoryFilters}"
+            ng-click="overview.expandCategoryFilters(overview.showCategoryFilters)">
+            Category
+        </button>
         <ul class="filter__list" ng-show="overview.showCategoryFilters">
             <li ng-repeat="category in overview.categories">
-                <button type="button" class="filter__button" ng-class="{ 'filter__toggle--active': category.filtered}" ng-click="overview.filterCategory(category.id)">
+                <button type="button" class="filter__button" ng-class="{ 'filter__button--active': category.filtered}" ng-click="overview.filterCategory(category.id)">
+                    <span ng-if="category.filtered">></span>
                     {{category.name}}
-                    <span ng-if="category.filtered">FILTERED</span>
                 </button>
             </li>
         </ul>

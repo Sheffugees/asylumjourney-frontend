@@ -67,6 +67,14 @@
 
   li {
     border-bottom: 1px solid #ccc;
+      
+      button {
+          
+          span {
+              font-weight: 600;
+              font-size: 18px;
+          }
+      }
 
     &:last-child {
       border: none;
