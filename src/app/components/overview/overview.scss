@@ -65,11 +65,11 @@ $numColumns: 8;
   &.overview-stages__stage--6 {
     border-color: $stage-6-color;
   }
-    
+
 &.overview-stages__stage--7 {
     border-color: $stage-7-color;
   }
-    
+
     &.brand {
 //logo placeholder
         h1 {
@@ -81,8 +81,8 @@ $numColumns: 8;
             top: -5px;
             padding-right:5px;
         }
-        
-        
+
+
     }
 
 }
@@ -100,6 +100,34 @@ $numColumns: 8;
   top: 0;
   padding: $vr;
   font-weight: 400;
+}
+
+@keyframes bcnloader {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.overview__loader {
+  height: $vr*16;
+  width: $vr*16;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -$vr*8;
+  margin-left: -$vr*8;
+  text-align: center;
+
+  img {
+    width: $vr*10;
+    animation: bcnloader 1s infinite ease-in-out;
+  }
 }
 
 @media(min-width: $break-point-e-px) {

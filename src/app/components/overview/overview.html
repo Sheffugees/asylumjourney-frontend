@@ -10,7 +10,13 @@
         </li>
     </ul>
 
-    <div ng-if="category.display" ng-repeat="category in overview.categories" class="overview-category">
+
+    <div ng-if="overview.showLoader" class="overview__loader">
+        <img ng-src="/app/images/loader-logo.svg" alt="Loading" />
+        Loading...
+    </div>
+
+    <div ng-if="category.display && !overview.showLoader" ng-repeat="category in overview.categories" class="overview-category">
 
         <h2 class="overview-category__heading">{{category.name}}</h2>
 
