@@ -42,7 +42,7 @@
         padding-bottom: 8px;
         
         &.filter__button--active {
-            border-bottom: 4px solid red;        
+            border-bottom: 4px solid $stage-3-color;        
         }
     }
     
@@ -103,8 +103,9 @@
 
   }
 }
-       .filter__button--active {
-            border-bottom: 4px solid red;        
+
+button.filter__toggle--active {
+            border-bottom: 4px solid $stage-3-color;      
         }
 
 //        .filter__button--active {
