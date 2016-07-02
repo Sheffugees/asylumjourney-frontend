@@ -27,7 +27,7 @@ $numColumns: 7;
   overflow: hidden;
 
   &:first-child {
-    display: none;
+    display: $grey-f;
   }
 
   &.overview-stages__stage--1 {
@@ -53,6 +53,22 @@ $numColumns: 7;
   &.overview-stages__stage--6 {
     border-color: $stage-6-color;
   }
+    
+    &.brand {
+//logo placeholder
+        h1 {
+            font-weight: 600;
+        }
+        
+        button.help-link {
+            display: inline-block;
+            font-size: $font-size-small;
+            border: 1px solid $grey-f;
+            border-bottom: 2px solid $grey-e;
+            background: $grey-f;
+        }
+        
+    }
 }
 
 .overview-category {
