@@ -1,57 +1,54 @@
 .card {
-  display: block;
-  color: $color-text;
-  font-size: $font-size-small;
-  font-weight: bold;
-  text-decoration: none;
-  border-bottom: 1px solid $color-text;
-  padding: $vr;
-  margin: 0 2px;
-
-  &.card--stage-1,
-  .overview-category__stage--1 & {
-    background: $stage-1-color;
-    border-color: darken($stage-1-color, 30%);
-  }
-
-  &.card--stage-2,
-  .overview-category__stage--2 & {
-    background: $stage-2-color;
-    border-color: darken($stage-2-color, 30%);
-  }
-
-  &.card--stage-3,
-  .overview-category__stage--3 & {
-    background: $stage-3-color;
-    border-color: darken($stage-3-color, 30%);
-  }
-
-  &.card--stage-4,
-  .overview-category__stage--4 & {
-    background: $stage-4-color;
-    border-color: darken($stage-4-color, 30%);
-  }
-
-  &.card--stage-5,
-  .overview-category__stage--5 & {
-    background: $stage-5-color;
-    border-color: darken($stage-5-color, 30%);
-  }
-
-  &.card--stage-6,
-  .overview-category__stage--6 & {
-    background: $stage-6-color;
-    border-color: darken($stage-6-color, 30%);
-  }
-
+    display: block;
+    color: $color-text;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 4px solid $color-text;
+    padding: $vr;
+    margin: 0 2px;
+    background: #fff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
+    
+    &.card--stage-1,
+    .overview-category__stage--1 & {
+//        background: lighten($stage-1-color, 35%);
+        border-color: $stage-1-color;
+    }
+    &.card--stage-2,
+    .overview-category__stage--2 & {
+//        background: lighten($stage-2-color, 30%);
+        border-color: $stage-2-color;
+    }
+    &.card--stage-3,
+    .overview-category__stage--3 & {
+//        background: lighten($stage-3-color, 45%);
+        border-color: $stage-3-color;
+    }
+    &.card--stage-4,
+    .overview-category__stage--4 & {
+//        background: lighten($stage-4-color, 35%);
+        border-color: $stage-4-color;
+    }
+    &.card--stage-5,
+    .overview-category__stage--5 & {
+//        background: lighten($stage-5-color, 15%);
+        border-color: $stage-5-color;
+    }
+    &.card--stage-6,
+    .overview-category__stage--6 & {
+//        background: lighten($stage-6-color, 30%);
+        border-color: $stage-6-color;
+    }
+    h3 {
+        font-size: $font-size-small;
+        line-height: $vr*3;
+    }
 }
-
 @media(min-width: $break-point-e-px) {
-
-  .card {
-    font-size: $font-size-base;
-    padding: $vr*2;
-    margin: 0 $vr;
-  }
-
+    .card {
+        font-size: $font-size-base;
+        padding: $vr;
+        margin: $vr;
+        line-height: $vr*3;
+    }
 }

@@ -1,99 +1,84 @@
 body.ngdialog-open {
-  height: 100%;
-  width: 100%;
-  position: fixed;
-}
-
-.ngdialog.ngdialog-theme-default .ngdialog-content {
-  width: 90%;
-  max-width: 600px;
-
-  .touch & {
-    height: auto;
-    max-height: 600px;
-    overflow: scroll;
-  }
-}
-
-.ngdialog.ngdialog-theme-default {
-  padding-top: $vr*5;
-  padding-bottom: $vr*5;
-}
-
-
-.details {
-  font-size: 14px;
-  line-height: 1.5;
-
-  p {
-    margin-bottom: $vr*2;
-    white-space: pre-line;
-  }
-
-}
-
-.details__heading {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: $vr*2;
-  display: flex;
-  border-bottom: 2px solid #666;
-}
-
-.details__alert {
-  width: $vr*5;
-  height: $vr*5;
-  margin-right: $vr;
-  display: inline-block;
-
-  svg {
-    width: 100%;
     height: 100%;
-    fill: red;
-  }
-
-  i {
-    position: absolute;
-    text-indent: -9999999px;
-  }
+    width: 100%;
+    position: fixed;
 }
-
+.ngdialog.ngdialog-theme-default .ngdialog-content {
+    width: 90%;
+    max-width: 600px;
+    font-family: freight-sans-pro;
+    
+    .touch & {
+        height: auto;
+        max-height: 600px;
+        overflow: scroll;
+    }
+}
+.ngdialog.ngdialog-theme-default {
+    padding-top: $vr*5;
+    padding-bottom: $vr*5;
+}
+.details {
+        font-size: $font-size-base;
+    line-height: 1.5;
+    p {
+        margin-bottom: $vr*2;
+        white-space: pre-line;
+        
+    }
+}
+.details__heading {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: $vr*2;
+    display: flex;
+    border-bottom: 2px solid #666;
+}
+.details__alert {
+    width: $vr*5;
+    height: $vr*5;
+    margin-right: $vr;
+    display: inline-block;
+    svg {
+        width: 100%;
+        height: 100%;
+        fill: red;
+    }
+    i {
+        position: absolute;
+        text-indent: -9999999px;
+    }
+}
 .details__sub-heading {
-  font-size: 16px;
-  font-weight: bold;
-  border-top: 1px solid #CCC;
-  padding: $vr*2 0;
+    font-size: 16px;
+    font-weight: bold;
+    border-top: 1px solid #CCC;
+    padding: $vr*2 0;
 }
-
 .details__service-name {
-  font-weight: bold;
-  margin-bottom: $vr*2;
+    font-weight: bold;
+    margin-bottom: $vr*2;
 }
-
 .details__provider {
-  border-bottom: 1px dotted #CCC;
-  margin-bottom: $vr*2;
+    border-bottom: 1px dotted #CCC;
+    margin-bottom: $vr*2;
 }
-
-
 .tag-list {
-  margin-bottom: $vr*2;
+    margin-bottom: $vr*2;
 }
-
 .tag-list__tag {
-  display: inline-block;
-  font-size: 14px;
-  background: #666;
-  color: white;
-  border-radius: 4px;
-  padding: 2px 6px;
-  margin: 2px 2px 2px 0;
+    display: inline-block;
+    font-size: 14px;
+    background: #666;
+    color: white;
+    border-radius: 4px;
+    padding: 2px 6px;
+    margin: 2px 2px 2px 0;
 }
-
-@each $stage, $bgcolor in $stages {
-
-  .tag-list__tag--#{$stage} {
-    background: $bgcolor;
-    color: $color-text;
-  }
+@each $stage,
+$bgcolor in $stages {
+    .tag-list__tag--#{$stage} {
+        background: $bgcolor;
+        color: $color-text;
+    }
 }
