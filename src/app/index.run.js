@@ -1,14 +1,19 @@
 (function() {
-  'use strict';
+	'use strict';
 
-  angular
-    .module('asylumjourneyFrontend')
-    .run(runBlock);
+	angular
+		.module('asylumjourneyFrontend')
+		.run(runBlock);
 
-  /** @ngInject */
-  function runBlock($log) {
+	/** @ngInject */
+	function runBlock(ngDialog, $rootScope) {
 
-    $log.debug('runBlock end');
-  }
+		$rootScope.$on('$routeChangeStart', function(next, current) {
+			if (next !== current){
+				ngDialog.closeAll();
+				$rootScope.dialogOpen = false;
+			}
+		});
+	}
 
 })();
