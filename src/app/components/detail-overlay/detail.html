@@ -6,6 +6,7 @@
     </span>
     {{ service.name }}
   </h2>
+	<a href="#/service/{{service.id}}">Permalink</a>
 
   <ul class="tag-list">
     <li ng-repeat="stage in service._embedded.stages" class="tag-list__tag tag-list__tag--stage-{{ stage.id }}">{{ stage.name }}</li>

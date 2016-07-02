@@ -10,6 +10,7 @@
 			templateUrl: 'app/components/card/card.html',
 			restrict: 'AE',
 			controller: 'CardController',
+			controllerAs: 'card',
 			scope: {
 					service: '='
 			}
