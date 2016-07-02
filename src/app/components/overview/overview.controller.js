@@ -5,7 +5,7 @@
   .module('asylumjourneyFrontend')
   .controller('OverviewController', OverviewController);
 
-    function OverviewController(data) {
+    function OverviewController(data, $scope, ngDialog) {
         var vm = this;
         var filteredCategories = [];
         var filteredStages = [];
@@ -138,6 +138,13 @@
         vm.expandStageFilters = function(a) {
             vm.showStageFilters = !a;
         };
+
+        vm.openDialog = function () {
+            ngDialog.open({
+                template: 'app/components/info-overlay/info.html',
+                scope: $scope
+            });
+        }
 
     }
 
