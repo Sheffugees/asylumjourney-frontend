@@ -27,6 +27,18 @@
   width: 300px;
   margin-right: $vr;
   border-right: 1px solid #ccc;
+    
+    button {
+        border-bottom: 4px solid #fff ;
+        padding-bottom: 8px
+            
+        
+        &.filter__button--active {
+        border-bottom: 4px solid $stage-3-color;
+        
+    }
+    }
+    
 }
 
 .filter__toggle,
