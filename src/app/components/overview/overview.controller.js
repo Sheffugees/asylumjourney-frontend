@@ -132,13 +132,21 @@
 			vm.showIssues = false;
         };
 
+		// toggle category filter
         vm.expandCategoryFilters = function(a) {
             vm.showCategoryFilters = !a;
         };
 
+		// toggle stage filter
         vm.expandStageFilters = function(a) {
             vm.showStageFilters = !a;
         };
+
+		// close all filters
+		vm.closeFilters = function() {
+			vm.showCategoryFilters = false;
+			vm.showStageFilters = false;
+		}
 
     }
 
