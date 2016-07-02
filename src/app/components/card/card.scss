@@ -61,3 +61,13 @@
         line-height: $vr*3;
     }
 }
+
+.show-issues {
+	.card {
+		display: none;
+	}
+
+	.card--has-issue {
+		display: block;
+	}
+}

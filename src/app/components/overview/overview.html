@@ -1,4 +1,4 @@
-<div ng-controller="OverviewController as overview" class="overview">
+<div ng-controller="OverviewController as overview" class="overview" ng-class="{'show-issues': overview.showIssues}">
 
     <ul class="overview-stages">
         <li class="overview-stages__stage brand">
@@ -22,7 +22,7 @@
 
         <ul ng-if="stage.display" class="overview-category__stage overview-category__stage--{{stage.id}}" ng-repeat="stage in overview.stages">
             <li ng-repeat="service in overview.services | category: category.id | stage: stage.id">
-                <card service="service" ng-if="!overview.showIssues || service._embedded.issues.length"></card>
+                <card service="service"></card>
             </li>
         </ul>
 
