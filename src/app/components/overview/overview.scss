@@ -36,7 +36,7 @@ $numColumns: 8;
   line-height: 1.2;
   font-size: 14px;
   overflow: hidden;
-  font-weight: 600;
+  font-weight: 400;
 
   &:first-child {
     display: $grey-f;
@@ -81,13 +81,7 @@ $numColumns: 8;
             top: -5px;
             padding-right:5px;
         }
-        button.help-link {
-            display: inline-block;
-            font-size: $font-size-small;
-            border: 1px solid $grey-f;
-            border-bottom: 2px solid $grey-e;
-            background: $grey-f;
-        }
+        
         
     }
 
@@ -105,7 +99,7 @@ $numColumns: 8;
   position: absolute;
   top: 0;
   padding: $vr;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 @media(min-width: $break-point-e-px) {

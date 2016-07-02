@@ -200,6 +200,14 @@ strong {
 	font-weight: bold;
 }
 
+button.button {
+    display: inline-block;
+    font-size: $font-size-small;
+    border: 1px solid $grey-f;
+    border-bottom: 2px solid $grey-e;
+    background: $grey-f;
+}
+
 /* Do not remove the comments below. It's the markers used by gulp-inject to inject
    all your sass files automatically */
 // injector
