@@ -14,7 +14,14 @@
         vm.filtered = false;
         vm.showCategoryFilters = false;
         vm.showStageFilters = false;
+
         vm.showLoader = true;
+
+        vm.stagesFiltered = false;
+        vm.currentFilters = {
+            stages: false,
+            categories: false
+        }
 
         activate();
 
@@ -60,7 +67,7 @@
 			});
 		}
 
-        function updateFilteredArray(filteredId, array, list) {
+        function updateFilteredArray(filteredId, array, list, type) {
             var index = array.indexOf(filteredId);
 
             if (index === -1) {
@@ -71,7 +78,7 @@
             array.splice(index, 1);
 
             if (!array.length) {
-                vm.resetFilters(array, list);
+                vm.resetFilters(array, list, type);
             }
         }
 
@@ -80,7 +87,7 @@
             item.filtered = filter;
         }
 
-        function filterItems(filterId, filteredArray, list) {
+        function filterItems(filterId, filteredArray, list, type) {
             vm.filtered = true;
 
             angular.forEach(list, function(item) {
@@ -98,7 +105,7 @@
 
             });
 
-            updateFilteredArray(filterId, filteredArray, list);
+            updateFilteredArray(filterId, filteredArray, list, type);
         }
 
         function resetFilter (list) {
@@ -109,20 +116,23 @@
         }
 
         vm.filterStage = function(stageId) {
-            filterItems(stageId, filteredStages, vm.stages);
+            vm.currentFilters['stage'] = true;
+            filterItems(stageId, filteredStages, vm.stages, 'stage');
         };
 
 
         vm.filterCategory = function(filterId) {
-            filterItems(filterId, filteredCategories, vm.categories);
+            vm.currentFilters['category'] = true;
+            filterItems(filterId, filteredCategories, vm.categories, 'category');
         };
 
 		vm.toggleIssues = function () {
 			vm.showIssues = !vm.showIssues;
         }
 
-        vm.resetFilters = function(array, list) {
+        vm.resetFilters = function(array, list, type) {
             resetFilter(list);
+            vm.currentFilters[type] = false;
             array = [];
         };
 
