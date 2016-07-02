@@ -11,7 +11,7 @@
     <div class="filter">
         <button type="button"
             class="filter__toggle"
-            ng-class="{ 'filter__toggle--active': overview.showStageFilters}"
+            ng-class="{ 'filter__toggle--active': overview.currentFilters.stage}"
             ng-click="overview.expandStageFilters(overview.showStageFilters)">
             Stage
         </button>
@@ -28,7 +28,7 @@
     <div class="filter">
         <button type="button"
             class="filter__toggle"
-            ng-class="{ 'filter__toggle--active': overview.showCategoryFilters}"
+            ng-class="{ 'filter__toggle--active': overview.currentFilters.category}"
             ng-click="overview.expandCategoryFilters(overview.showCategoryFilters)">
             Category
         </button>
@@ -42,7 +42,7 @@
         </ul>
     </div>
 
-    <button type="button" class="button" ng-click="overview.resetAll()">Reset</buttoni>
+    <button type="button" class="button" ng-click="overview.resetAll()">Clear filters</buttoni>
 </div>
 
 <div class="filters__overlay" ng-show="overview.showStageFilters || overview.showCategoryFilters" ng-click="overview.closeFilters()"></div>
