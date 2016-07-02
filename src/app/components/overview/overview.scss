@@ -71,19 +71,25 @@ $numColumns: 8;
   }
 
     &.brand {
-//logo placeholder
+
+
         h1 {
             font-weight: 400;
+            display: inline-block;
         }
         img {
+            display: inline-block;
             height: 30px;
             position: relative;
-            top: -5px;
+            top: 2px;
             padding-right:5px;
         }
+    }
 
+    button {
 
     }
+
 
 }
 

@@ -36,7 +36,10 @@
         </ul>
     </div>
 
-    <button type="button" class="button" ng-click="overview.resetAll()">Reset</buttoni>
+    <button type="button" class="button" ng-click="overview.resetAll()">Reset</button>
+    
+    <button ng-click="overview.openDialog()" class="button help">Help with this tool</button>
+
 </div>
 
 <div class="filters__overlay" ng-show="overview.showStageFilters || overview.showCategoryFilters" ng-click="overview.closeFilters()"></div>

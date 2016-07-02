@@ -49,6 +49,7 @@ $font-family-mono: 'Anonymous Pro', 'Droid Sans Mono', 'DejaVu Sans Mono', Monac
 $font-family-base: $font-family-sans-serif;
 
 // Font Sizing
+$font-size-large: 21px;
 $font-size-base: 16px;
 $font-size-small: 14px;
 $font-size-xsmall: 12px;
@@ -203,9 +204,28 @@ strong {
 button.button {
     display: inline-block;
     font-size: $font-size-small;
-    border: 1px solid $grey-f;
+    border: 0px solid $grey-f;
     border-bottom: 2px solid $grey-e;
     background: $grey-f;
+    &.help {
+        float: right;
+        margin-right: $vr*2;
+        border-color: $stage-4-color;
+    }
+}
+
+
+
+.info {
+    h2 {
+        padding: $vr 0;
+        font-weight: 400;
+        font-size: $font-size-large;
+    }
+    p {
+        padding: $vr 0;
+        font-size: $font-size-base;
+    }
 }
 
 /* Do not remove the comments below. It's the markers used by gulp-inject to inject
