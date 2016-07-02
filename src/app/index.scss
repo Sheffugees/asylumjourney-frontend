@@ -23,6 +23,7 @@ $stage-3-color: #4CAF50;
 $stage-4-color: #59C8DF;
 $stage-5-color: #CCC;
 $stage-6-color: #846dce;
+$stage-7-color: pink;
 
 $stages: (
 	stage-1: $stage-1-color,
@@ -30,7 +31,8 @@ $stages: (
 	stage-3: $stage-3-color,
 	stage-4: $stage-4-color,
 	stage-5: $stage-5-color,
-	stage-6: $stage-6-color
+	stage-6: $stage-6-color,
+	stage-7: $stage-7-color
 );
 
 $color-warning: #db2a2a;

@@ -3,7 +3,7 @@
     <ul class="overview-stages">
         <li class="overview-stages__stage"></li>
         <li ng-if="stage.display" ng-repeat="stage in overview.stages" class="overview-stages__stage overview-stages__stage--{{stage.id}}">
-            {{stage.name}}
+            <span>{{stage.name}}</span>
         </li>
     </ul>
 
