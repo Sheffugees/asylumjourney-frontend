@@ -129,6 +129,7 @@
             resetFilter(vm.categories);
             filteredCategories = [];
             filteredStages = [];
+			vm.showIssues = false;
         };
 
         vm.expandCategoryFilters = function(a) {

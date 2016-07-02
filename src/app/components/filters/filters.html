@@ -12,7 +12,7 @@
         <button type="button" class="filter__toggle" ng-click="overview.expandStageFilters(overview.showStageFilters)">Stage</button>
         <ul class="filter__list" ng-show="overview.showStageFilters">
             <li ng-repeat="stage in overview.stages">
-                <button type="button" class="filter__button" ng-click="overview.filterStage(stage.id)">{{stage.name}}
+                <button type="button" class="filter__button" ng-class="{ 'filter__toggle--active': stage.filtered}" ng-click="overview.filterStage(stage.id)">{{stage.name}}
                     <span ng-if="stage.filtered">FILTERED</span>
                 </button>
             </li>
@@ -24,7 +24,7 @@
         <button type="button" class="filter__toggle" ng-click="overview.expandCategoryFilters(overview.showCategoryFilters)">Category</button>
         <ul class="filter__list" ng-show="overview.showCategoryFilters">
             <li ng-repeat="category in overview.categories">
-                <button type="button" class="filter__button" ng-click="overview.filterCategory(category.id)">
+                <button type="button" class="filter__button" ng-class="{ 'filter__toggle--active': category.filtered}" ng-click="overview.filterCategory(category.id)">
                     {{category.name}}
                     <span ng-if="category.filtered">FILTERED</span>
                 </button>
