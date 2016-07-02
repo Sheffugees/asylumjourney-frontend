@@ -1,0 +1,8 @@
+.info__subtitle {
+	border-bottom: 2px solid black;
+}
+@each $stage, $color in $stages {
+	.info__subtitle--#{$stage} {
+		border-color: $color;
+	}
+}
