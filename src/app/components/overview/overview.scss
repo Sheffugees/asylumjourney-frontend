@@ -17,10 +17,21 @@ $numColumns: 8;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
 
   // required to force text to wrap in IE10
-  span {
-    max-width: 100%;
-    display: block;
-  }
+    
+    .overview-stages__stage {
+        position: relative;
+          span {
+                max-width: 100%;
+                display: block;
+          }
+
+          button {
+              position: absolute;
+              top: 0;
+              right: 0;
+
+          }
+}
 }
 
 .overview-stages__stage, .overview-category__stage {

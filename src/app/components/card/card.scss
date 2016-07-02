@@ -39,6 +39,11 @@
 //        background: lighten($stage-6-color, 30%);
         border-color: $stage-6-color;
     }
+    &.card--stage-7,
+    .overview-category__stage--7 & {
+//        background: lighten($stage-6-color, 30%);
+        border-color: $stage-7-color;
+    }
     h3 {
         font-size: $font-size-small;
         line-height: $vr*3;

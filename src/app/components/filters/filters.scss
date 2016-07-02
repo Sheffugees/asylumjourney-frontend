@@ -22,7 +22,7 @@
 	z-index: 5;
 }
 
-.filter {
+.filter { font-size: $font-size-small;
   float: left;
   width: 300px;
   margin-right: $vr;
@@ -30,13 +30,11 @@
     
     button {
         border-bottom: 4px solid #fff ;
-        padding-bottom: 8px
-            
+        padding-bottom: 8px;
         
         &.filter__button--active {
         border-bottom: 4px solid $stage-3-color;
-        
-    }
+        }
     }
     
 }

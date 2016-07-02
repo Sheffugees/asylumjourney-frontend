@@ -23,7 +23,7 @@ $stage-3-color: #4CAF50;
 $stage-4-color: #59C8DF;
 $stage-5-color: #CCC;
 $stage-6-color: #846dce;
-$stage-7-color: pink;
+$stage-7-color: #f898a9;
 
 $stages: (
 	stage-1: $stage-1-color,
@@ -221,6 +221,11 @@ button.button {
         padding: $vr 0;
         font-weight: 400;
         font-size: $font-size-large;
+    }
+    h3 {
+        padding: $vr 0;
+        font-weight: 600;
+        font-size: $font-size-base;
     }
     p {
         padding: $vr 0;
