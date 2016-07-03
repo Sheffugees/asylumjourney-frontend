@@ -1,25 +1,14 @@
 .filters {
-  background: white;
-  width: 100%;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  border-top: 2px solid $grey-b;
-  z-index: 10;
-    
-    .feedback {
-        float: right;
-        margin: 10px 10px;
-        text-decoration: none;
-        color: $grey-a;
-        padding: 1px 5px;
-        
-      }
-    
-   button.button {
-      margin-top: 10px;
-       margin-left: 5px;
-      }
+	background: white;
+	width: 100%;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	border-top: 2px solid $grey-b;
+	z-index: 10;
+	.button {
+		margin: 8px 5px;
+	}
 }
 
 .filters__overlay {
@@ -31,82 +20,63 @@
 	z-index: 5;
 }
 
-.filter { font-size: $font-size-small;
-  float: left;
-  width: 300px;
-  margin-right: $vr;
-  border-right: 1px solid #ccc;
-    
-    button {
-        border-bottom: 4px solid #fff ;
-        padding-bottom: 8px;
-        
-        &.filter__button--active {
-            border-bottom: 4px solid $stage-3-color;        
-        }
-    }
-    
+.filter {
+	position: relative;
+	font-size: $font-size-small;
+	float: left;
+	width: 300px;
+	border-right: 1px solid #ccc;
+	button {
+		border-bottom: 4px solid #fff;
+		padding-bottom: 8px;
+		&.filter__button--active {
+			border-bottom: 4px solid $stage-3-color;
+		}
+	}
 }
 
 .filter__toggle,
-.filter__button  {
-  padding: $vr*2;
-  background: none;
-  border: none;
-  text-align: left;
-  width: 100%;
-  cursor: pointer;
-
+.filter__button {
+	padding: $vr*2;
+	background: none;
+	border: none;
+	text-align: left;
+	width: 100%;
+	cursor: pointer;
 	.icon {
 		height: 20px;
 		width: 20px;
 		display: inline-block;
 		vertical-align: sub;
 	}
-
 	.icon-warning {
 		fill: $color-warning;
 	}
 }
 
-
-    
-
-
 .filter__list {
-  position: absolute;
-  bottom: 50px;
-  width: 300px;
-  background: white;
-  box-shadow: 0px -1px 4px rgba(0,0,0,0.1),
-        -1px 0px 4px rgba(0,0,0,0.1),
-        1px 0px 4px rgba(0,0,0,0.1);
-
-
-  li {
-    border-bottom: 1px solid #ccc;
-      
-      button {
-          
-          span {
-              font-weight: 600;
-              font-size: 18px;
-          }
-      }
-      
-      
-
-    &:last-child {
-      border: none;
-    }
-      
-
-  }
+	position: absolute;
+	bottom: 47px;
+	width: 300px;
+	background: white;
+	box-shadow: 0px -1px 4px rgba(0, 0, 0, 0.1), -1px 0px 4px rgba(0, 0, 0, 0.1), 1px 0px 4px rgba(0, 0, 0, 0.1);
+	li {
+		border-bottom: 1px solid #ccc;
+		button {
+			span {
+				font-weight: 600;
+				font-size: 18px;
+			}
+		}
+		&:last-child {
+			border: none;
+		}
+	}
 }
 
 button.filter__toggle--active {
-            border-bottom: 4px solid $stage-3-color;      
-        }
+	border-bottom: 4px solid $stage-3-color;
+}
 
 //        .filter__button--active {
 //    border-left: 4px solid red;
