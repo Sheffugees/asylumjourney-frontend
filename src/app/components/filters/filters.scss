@@ -44,10 +44,9 @@
 	width: 100%;
 	cursor: pointer;
 	.icon {
+		float: left;
 		height: 20px;
 		width: 20px;
-		display: inline-block;
-		vertical-align: sub;
 	}
 	.icon-warning {
 		fill: $color-warning;
@@ -58,6 +57,7 @@
 	position: absolute;
 	bottom: 47px;
 	width: 300px;
+	max-width: 100%;
 	background: white;
 	box-shadow: 0px -1px 4px rgba(0, 0, 0, 0.1), -1px 0px 4px rgba(0, 0, 0, 0.1), 1px 0px 4px rgba(0, 0, 0, 0.1);
 	li {
