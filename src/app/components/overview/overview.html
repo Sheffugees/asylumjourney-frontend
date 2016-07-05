@@ -7,7 +7,6 @@
         </li>
         <li ng-if="stage.display" ng-repeat="stage in overview.stages" class="overview-stages__stage overview-stages__stage--{{stage.id}}">
             <span>{{stage.name}} </span>
-<!--            <button class="button help">?</button>-->
         </li>
     </ul>
 
@@ -21,7 +20,7 @@
         <h2 class="overview-category__heading">{{category.name}}</h2>
 
         <ul ng-if="stage.display" class="overview-category__stage overview-category__stage-{{stage.id}}" ng-repeat="stage in overview.stages">
-            <li ng-repeat="service in overview.services | category: category.id | stage: stage.id">
+            <li ng-repeat="service in overview.services | category: category.id | stage: stage.id | serviceUser: overview.filteredServiceUsers">
                 <card service="service"></card>
             </li>
         </ul>

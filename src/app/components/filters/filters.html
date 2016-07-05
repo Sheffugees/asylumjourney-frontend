@@ -42,6 +42,23 @@
         </ul>
     </div>
 
+    <div class="filter">
+        <button type="button"
+            class="filter__toggle toggle"
+            ng-class="{ 'filter__toggle--active': overview.currentFilters.serviceUser}"
+            ng-click="overview.expandServiceUserFilters(overview.showServiceUserFilters)">
+            Service user
+        </button>
+        <ul class="filter__list" ng-show="overview.showServiceUserFilters">
+            <li ng-repeat="serviceUser in overview.serviceUsers">
+                <button type="button" class="filter__button" ng-class="{ 'filter__button--active': serviceUser.filtered}" ng-click="overview.filterServiceUser(serviceUser.id)">
+             
+                    {{serviceUser.name}}
+                </button>
+            </li>
+        </ul>
+    </div>
+
     <button type="button" class="button" ng-click="overview.resetAll()">Clear filters</button>
     
     <button ng-click="overview.openDialog()" class="button help">Help with this tool</button>
@@ -50,4 +67,4 @@
 
 </div>
 
-<div class="filters__overlay" ng-show="overview.showStageFilters || overview.showCategoryFilters" ng-click="overview.closeFilters()"></div>
+<div class="filters__overlay" ng-show="overview.showStageFilters || overview.showCategoryFilters || overview.showServiceUserFilters" ng-click="overview.closeFilters()"></div>

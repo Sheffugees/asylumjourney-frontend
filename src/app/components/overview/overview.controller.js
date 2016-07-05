@@ -5,7 +5,7 @@
   .module('asylumjourneyFrontend')
   .controller('OverviewController', OverviewController);
 
-    function OverviewController(data, $scope, ngDialog) {
+    function OverviewController(data, $scope, ngDialog, $filter) {
         var vm = this;
         var filteredCategories = [];
         var filteredStages = [];
@@ -14,14 +14,14 @@
         vm.filtered = false;
         vm.showCategoryFilters = false;
         vm.showStageFilters = false;
-
+        vm.showServiceUserFilters = false;
         vm.showLoader = true;
-
-        vm.stagesFiltered = false;
         vm.currentFilters = {
-            stages: false,
-            categories: false
+            stage: false,
+            category: false,
+            serviceUser: false
         }
+        vm.filteredServiceUsers = [];
 
         activate();
 
@@ -30,6 +30,7 @@
             getProviders();
             getStages();
             getCategories();
+            getServiceUsers();
         }
 
         function getServices() {
@@ -66,6 +67,17 @@
 
 			});
 		}
+
+        function getServiceUsers() {
+            data.serviceUsers().get().$promise.then(function(response) {
+                vm.serviceUsers = response._embedded.serviceUsers;
+
+                angular.forEach(vm.serviceUsers, function(itemServiceUser) {
+                    itemServiceUser.display = true;
+                });
+
+            });
+        }
 
         function updateFilteredArray(filteredId, array, list, type) {
             var index = array.indexOf(filteredId);
@@ -126,9 +138,14 @@
             filterItems(filterId, filteredCategories, vm.categories, 'category');
         };
 
+        vm.filterServiceUser = function(filterId) {
+            vm.currentFilters['serviceUser'] = true;
+            filterItems(filterId, vm.filteredServiceUsers, vm.serviceUsers, 'serviceUser');
+        };
+
 		vm.toggleIssues = function () {
 			vm.showIssues = !vm.showIssues;
-        }
+        };
 
         vm.resetFilters = function(array, list, type) {
             resetFilter(list);
@@ -139,9 +156,16 @@
         vm.resetAll = function () {
             resetFilter(vm.stages);
             resetFilter(vm.categories);
+            resetFilter(vm.serviceUsers);
             filteredCategories = [];
             filteredStages = [];
+            vm.filteredServiceUsers = [];
 			vm.showIssues = false;
+            vm.currentFilters = {
+                stage: false,
+                category: false,
+                serviceUser: false
+            };
         };
 
 		// toggle category filter
@@ -154,18 +178,25 @@
             vm.showStageFilters = !a;
         };
 
+        // toggle service user filter
+        vm.expandServiceUserFilters = function(a) {
+            vm.showServiceUserFilters = !a;
+        };
+
         vm.openDialog = function () {
             ngDialog.open({
                 template: 'app/components/info-overlay/info.html',
                 scope: $scope
             });
-        }
+        };
+
 		// close all filters
 		vm.closeFilters = function() {
 			vm.showCategoryFilters = false;
 			vm.showStageFilters = false;
-		}
-
+            vm.showServiceUserFilters = false;
+		};
+       
     }
 
 })();
