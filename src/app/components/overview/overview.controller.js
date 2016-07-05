@@ -15,13 +15,16 @@
         vm.showCategoryFilters = false;
         vm.showStageFilters = false;
         vm.showServiceUserFilters = false;
+        vm.showProviderFilters = false;
         vm.showLoader = true;
         vm.currentFilters = {
             stage: false,
             category: false,
-            serviceUser: false
+            serviceUser: false,
+            provider: false
         }
         vm.filteredServiceUsers = [];
+        vm.filteredProviders = [];
 
         activate();
 
@@ -43,6 +46,10 @@
         function getProviders() {
             data.providers().get().$promise.then(function(response) {
 				vm.providers = response._embedded.providers;
+
+                angular.forEach(vm.providers, function(provider) {
+                    provider.display = true;
+                });
 			});
         }
 
@@ -143,6 +150,11 @@
             filterItems(filterId, vm.filteredServiceUsers, vm.serviceUsers, 'serviceUser');
         };
 
+        vm.filterProvider = function(filterId) {
+            vm.currentFilters['provider'] = true;
+            filterItems(filterId, vm.filteredProviders, vm.providers, 'provider');
+        };
+
 		vm.toggleIssues = function () {
 			vm.showIssues = !vm.showIssues;
         };
@@ -157,14 +169,17 @@
             resetFilter(vm.stages);
             resetFilter(vm.categories);
             resetFilter(vm.serviceUsers);
+            resetFilter(vm.providers);
             filteredCategories = [];
             filteredStages = [];
             vm.filteredServiceUsers = [];
+            vm.filteredProviders = []
 			vm.showIssues = false;
             vm.currentFilters = {
                 stage: false,
                 category: false,
-                serviceUser: false
+                serviceUser: false,
+                provider: false
             };
         };
 
@@ -183,6 +198,11 @@
             vm.showServiceUserFilters = !a;
         };
 
+        // toggle Provider filter
+        vm.expandProviderFilters = function(a) {
+            vm.showProviderFilters = !a;
+        };
+
         vm.openDialog = function () {
             ngDialog.open({
                 template: 'app/components/info-overlay/info.html',
@@ -195,6 +215,7 @@
 			vm.showCategoryFilters = false;
 			vm.showStageFilters = false;
             vm.showServiceUserFilters = false;
+            vm.showProviderFilters = false;
 		};
        
     }
