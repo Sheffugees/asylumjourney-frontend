@@ -5,7 +5,7 @@
   .module('asylumjourneyFrontend')
   .controller('OverviewController', OverviewController);
 
-    function OverviewController(data, $scope, ngDialog, $filter) {
+    function OverviewController(data, $scope, ngDialog) {
         var vm = this;
         var filteredCategories = [];
         var filteredStages = [];
@@ -15,14 +15,13 @@
         vm.showCategoryFilters = false;
         vm.showStageFilters = false;
         vm.showServiceUserFilters = false;
-        vm.showProviderFilters = false;
         vm.showLoader = true;
         vm.currentFilters = {
             stage: false,
             category: false,
             serviceUser: false,
             provider: false
-        }
+        };
         vm.filteredServiceUsers = [];
         vm.filteredProviders = [];
 
@@ -173,7 +172,7 @@
             filteredCategories = [];
             filteredStages = [];
             vm.filteredServiceUsers = [];
-            vm.filteredProviders = []
+            vm.filteredProviders = [];
 			vm.showIssues = false;
             vm.currentFilters = {
                 stage: false,
@@ -199,8 +198,11 @@
         };
 
         // toggle Provider filter
-        vm.expandProviderFilters = function(a) {
-            vm.showProviderFilters = !a;
+        vm.expandProviderFilters = function() {
+            ngDialog.open({
+                template: 'app/components/filters/providers-overlay.html',
+                scope: $scope
+            });
         };
 
         vm.openDialog = function () {
@@ -215,7 +217,6 @@
 			vm.showCategoryFilters = false;
 			vm.showStageFilters = false;
             vm.showServiceUserFilters = false;
-            vm.showProviderFilters = false;
 		};
        
     }

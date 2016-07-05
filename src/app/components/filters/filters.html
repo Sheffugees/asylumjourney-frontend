@@ -16,7 +16,7 @@
             Stage
         </button>
         <ul class="filter__list" ng-show="overview.showStageFilters">
-            <li ng-repeat="stage in overview.stages">
+            <li class="filter__list-item" ng-repeat="stage in overview.stages">
                 <button type="button" class="filter__button" ng-class="{ 'filter__button--active': stage.filtered}" ng-click="overview.filterStage(stage.id)">
                     {{stage.name}}
                 </button>
@@ -33,7 +33,7 @@
             Category
         </button>
         <ul class="filter__list" ng-show="overview.showCategoryFilters">
-            <li ng-repeat="category in overview.categories">
+            <li class="filter__list-item" ng-repeat="category in overview.categories">
                 <button type="button" class="filter__button" ng-class="{ 'filter__button--active': category.filtered}" ng-click="overview.filterCategory(category.id)">
              
                     {{category.name}}
@@ -50,7 +50,7 @@
             Service user
         </button>
         <ul class="filter__list" ng-show="overview.showServiceUserFilters">
-            <li ng-repeat="serviceUser in overview.serviceUsers">
+            <li class="filter__list-item" ng-repeat="serviceUser in overview.serviceUsers">
                 <button type="button" class="filter__button" ng-class="{ 'filter__button--active': serviceUser.filtered}" ng-click="overview.filterServiceUser(serviceUser.id)">
              
                     {{serviceUser.name}}
@@ -66,22 +66,15 @@
             ng-click="overview.expandProviderFilters(overview.showProviderFilters)">
             Providers
         </button>
-        <ul class="filter__list" ng-show="overview.showProviderFilters">
-            <li ng-repeat="provider in overview.providers">
-                <button type="button" class="filter__button" ng-class="{ 'filter__button--active': provider.filtered}" ng-click="overview.filterProvider(provider.id)">
-             
-                    {{provider.name}}
-                </button>
-            </li>
-        </ul>
     </div>
 
-    <button type="button" class="button" ng-click="overview.resetAll()">Clear filters</button>
-    
-    <button ng-click="overview.openDialog()" class="button help">Help with this tool</button>
-    
-    <a href="http://goo.gl/forms/3helLLSBgK5qRvpg1" target="_blank" class="feedback button help">Feedback</a>
-
+    <div class="filter">
+        <button type="button" class="button" ng-click="overview.resetAll()">Clear filters</button>
+        
+        <button ng-click="overview.openDialog()" class="button help">Help with this tool</button>
+        
+        <a href="http://goo.gl/forms/3helLLSBgK5qRvpg1" target="_blank" class="feedback button help">Feedback</a>
+    </div>
 </div>
 
 <div class="filters__overlay" ng-show="overview.showStageFilters || overview.showCategoryFilters || overview.showServiceUserFilters || overview.showProviderFilters" ng-click="overview.closeFilters()"></div>
