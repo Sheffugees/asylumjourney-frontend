@@ -4,9 +4,9 @@
   </h2>
 
   <ul class="filter__list filter__list--overlay">
-            <li class="filter__list-item" ng-repeat="provider in overview.providers">
+            <li class="filter__list-item" ng-repeat="provider in overview.providers | orderBy: 'name'">
                 <button type="button" class="filter__button" ng-class="{ 'filter__button--active': provider.filtered}" ng-click="overview.filterProvider(provider.id)">
-             
+
                     {{provider.name}}
                 </button>
             </li>
