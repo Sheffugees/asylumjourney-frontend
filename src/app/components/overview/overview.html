@@ -2,8 +2,7 @@
 
     <ul class="overview-stages">
         <li class="overview-stages__stage brand">
-          <img src="/app/images/logo-basic.png">
-                <h1>The Asylum Journey</h1>
+            <h1><a ng-href="#/" class="logo logo--small">The Asylum Journey</a></h1>
         </li>
         <li ng-if="stage.display" ng-repeat="stage in overview.stages" class="overview-stages__stage overview-stages__stage--{{stage.id}}">
             <span>{{stage.name}} </span>
