@@ -1,0 +1,29 @@
+.button {
+    display: inline-block;
+    border: 0;
+    border-bottom: 2px solid $grey-e;
+    background: $grey-f;
+	box-shadow: none;
+	color: $color-text;
+	cursor: pointer;
+	font-family: $font-family-base;
+	font-size: $font-size-small;
+	line-height: $line-height-small;
+	margin-bottom: 0; // For input.button
+	padding: 5px;
+	text-align: center;
+	text-decoration: none;
+	vertical-align: top;
+	white-space: nowrap;
+	-webkit-font-smoothing: antialiased; // get rid of faux bolding
+
+    &.help {
+        border-color: $stage-4-color;
+    }
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: $color-text;
+	}
+}
