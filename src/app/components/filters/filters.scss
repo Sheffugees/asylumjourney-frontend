@@ -6,35 +6,20 @@
 	bottom: 0;
 	border-top: 2px solid $grey-b;
 	z-index: 10;
-
-	display: flex;
-
 	.button {
 		margin: 8px 5px;
 	}
 }
 
-.filters__overlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: 5;
-}
-
 .filter {
 	font-size: $font-size-small;
-	flex-grow: 1;
-	border-right: 1px solid #ccc;
-
-	.no-flexbox & {
-		float: left;
+	@media #{$BPD} {
+		flex-grow: 1;
+		border-right: 1px solid $grey-d;
+		.no-flexbox & {
+			float: left;
+		}
 	}
-}
-
-.filter__toggle {	
-	padding-bottom: 8px;
 }
 
 .filter__toggle,
@@ -50,9 +35,30 @@
 		float: left;
 		height: 20px;
 		width: 20px;
+		margin-right: 5px;
+		fill: $color-text;
 	}
 	.icon-warning {
 		fill: $color-warning;
+	}
+}
+
+.filter__toggle {
+	font-weight: $font-weight-bold;
+	border-bottom: 1px solid $grey-d;
+	@media #{$BPD} {
+		font-weight: $font-weight-regular;
+		border-bottom: 4px solid #fff;
+	}
+}
+
+.filter__mobile-toggle {
+	width: auto;
+	border: none;
+	font-weight: $font-weight-regular;
+
+	@media #{$BPD} {
+		display: none;
 	}
 }
 
@@ -60,13 +66,52 @@
 	border-bottom: 4px solid $stage-3-color;
 }
 
+.filter-menu {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: $vr*8;
+	background: #fff;
+	border-bottom: 1px solid $grey-d;
+	overflow: auto;
+
+	@media #{$BPD} {
+		display: flex;
+		position: relative;
+		bottom: auto;
+		overflow: visible;
+	}
+}
+
+.filter-menu--active {
+	display: block;
+	@media #{$BPD} {
+		display: flex;
+	}
+}
+
+.filters__overlay {
+	@media #{$BPD} {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 5;
+	}
+}
+
 .filter__list {
-	position: absolute;
-	bottom: 47px;
-	width: 300px;
-	max-width: 100%;
-	background: white;
-	box-shadow: 0px -1px 4px rgba(0, 0, 0, 0.1), -1px 0px 4px rgba(0, 0, 0, 0.1), 1px 0px 4px rgba(0, 0, 0, 0.1);
+	@media #{$BPD} {
+		position: absolute;
+		bottom: 47px;
+		width: 300px;
+		max-width: 100%;
+		background: white;
+		box-shadow: 0px -1px 4px rgba(0, 0, 0, 0.1), -1px 0px 4px rgba(0, 0, 0, 0.1), 1px 0px 4px rgba(0, 0, 0, 0.1);
+	}
 }
 
 .filter__list--overlay {
@@ -77,7 +122,6 @@
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row;
-
 	.filter__list-item {
 		width: 48%;
 		margin: 0 1%;
@@ -85,16 +129,18 @@
 }
 
 .filter__list-item {
-	border-bottom: 1px solid #ccc;
-		button {
-			span {
-				font-weight: 600;
-				font-size: 18px;
-			}
+	border-bottom: 1px solid $grey-d;
+	button {
+		span {
+			font-weight: 600;
+			font-size: 18px;
 		}
+	}
+	@media #{$BPD} {
 		&:last-child {
 			border: none;
 		}
+	}
 }
 
 .filter__toggle--active {

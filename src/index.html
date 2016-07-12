@@ -2,66 +2,83 @@
 <html ng-app="asylumjourneyFrontend">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="robots" content="noindex, nofollow">
-    <title>The Asylum Journey</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <script src="https://use.typekit.net/bgw7hub.js"></script>
-    <script>try{Typekit.load({ async: true });}catch(e){}</script>
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<meta charset="utf-8">
+	<meta name="robots" content="noindex, nofollow">
+	<title>The Asylum Journey</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+	<script src="https://use.typekit.net/bgw7hub.js"></script>
+	<script>
+		try {
+			Typekit.load({
+				async: true
+			});
+		} catch (e) {}
+	</script>
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- run `gulp inject` to automatically populate bower styles dependencies -->
-    <!-- endbower -->
-    <!-- endbuild -->
+	<!-- build:css({.tmp/serve,src}) styles/vendor.css -->
+	<!-- bower:css -->
+	<!-- run `gulp inject` to automatically populate bower styles dependencies -->
+	<!-- endbower -->
+	<!-- endbuild -->
 
-    <!-- build:css({.tmp/serve,src}) styles/app.css -->
-    <!-- inject:css -->
-    <!-- css files will be automatically insert here -->
-    <!-- endinject -->
-    <!-- endbuild -->
+	<!-- build:css({.tmp/serve,src}) styles/app.css -->
+	<!-- inject:css -->
+	<!-- css files will be automatically insert here -->
+	<!-- endinject -->
+	<!-- endbuild -->
 </head>
 
 <body>
-    <svg style="position: absolute; width: 0; height: 0;" width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <defs>
-            <symbol id="icon-warning" viewBox="0 0 24 24">
-                <title>warning</title>
-                <path class="path1" d="M12.984 14.016v-4.031h-1.969v4.031h1.969zM12.984 18v-2.016h-1.969v2.016h1.969zM0.984 21l11.016-18.984 11.016 18.984h-22.031z"></path>
-            </symbol>
-        </defs>
-    </svg>
-    <!--[if lt IE 10]>
+	<svg style="position: absolute; width: 0; height: 0;" width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<defs>
+			<symbol id="icon-warning" viewBox="0 0 24 24">
+				<title>warning</title>
+				<path class="path1" d="M12.984 14.016v-4.031h-1.969v4.031h1.969zM12.984 18v-2.016h-1.969v2.016h1.969zM0.984 21l11.016-18.984 11.016 18.984h-22.031z"></path>
+			</symbol>
+			<symbol id="icon-filter" viewBox="0 0 25 32">
+				<title>filter</title>
+				<path class="path1" d="M25.054 5.268q0.304 0.732-0.25 1.25l-8.804 8.804v13.25q0 0.75-0.696 1.054-0.232 0.089-0.446 0.089-0.482 0-0.804-0.339l-4.571-4.571q-0.339-0.339-0.339-0.804v-8.679l-8.804-8.804q-0.554-0.518-0.25-1.25 0.304-0.696 1.054-0.696h22.857q0.75 0 1.054 0.696z"></path>
+			</symbol>
+		</defs>
+	</svg>
+	<!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div ng-view></div>
+	<div ng-view></div>
 
-    <!-- build:js(src) scripts/vendor.js -->
-    <!-- bower:js -->
-    <!-- run `gulp inject` to automatically populate bower script dependencies -->
-    <!-- endbower -->
-    <!-- endbuild -->
+	<!-- build:js(src) scripts/vendor.js -->
+	<!-- bower:js -->
+	<!-- run `gulp inject` to automatically populate bower script dependencies -->
+	<!-- endbower -->
+	<!-- endbuild -->
 
-    <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
-    <!-- inject:js -->
-    <!-- js files will be automatically insert here -->
-    <!-- endinject -->
+	<!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
+	<!-- inject:js -->
+	<!-- js files will be automatically insert here -->
+	<!-- endinject -->
 
-    <!-- inject:partials -->
-    <!-- angular templates will be automatically converted in js and inserted here -->
-    <!-- endinject -->
-    <!-- endbuild -->
+	<!-- inject:partials -->
+	<!-- angular templates will be automatically converted in js and inserted here -->
+	<!-- endinject -->
+	<!-- endbuild -->
 
 
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    </script>
+	<script>
+		(function(i, s, o, g, r, a, m) {
+			i['GoogleAnalyticsObject'] = r;
+			i[r] = i[r] || function() {
+				(i[r].q = i[r].q || []).push(arguments)
+			}, i[r].l = 1 * new Date();
+			a = s.createElement(o),
+				m = s.getElementsByTagName(o)[0];
+			a.async = 1;
+			a.src = g;
+			m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+	</script>
 </body>
 
 </html>

@@ -16,6 +16,8 @@
         vm.showStageFilters = false;
         vm.showServiceUserFilters = false;
         vm.showLoader = true;
+		vm.showIssues = false;
+		vm.showFilters = false;
         vm.currentFilters = {
             stage: false,
             category: false,
@@ -157,6 +159,9 @@
 		vm.toggleIssues = function () {
 			vm.showIssues = !vm.showIssues;
         };
+		vm.toggleFilters = function () {
+			vm.showFilters = !vm.showFilters;
+        };
 
         vm.resetFilters = function(array, list, type) {
             resetFilter(list);
@@ -218,7 +223,7 @@
 			vm.showStageFilters = false;
             vm.showServiceUserFilters = false;
 		};
-       
+
     }
 
 })();
