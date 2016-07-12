@@ -32,6 +32,7 @@ $numColumns: 8;
 .overview-stages__stage,
 .overview-category__stage {
 	flex: 1 1;
+	min-width: 0;
 }
 
 .overview-stages__stage.brand,
@@ -107,13 +108,10 @@ $numColumns: 8;
 
 .overview-category {
 	position: relative;
+	display: flex;
 	border-top: 1px solid #CCC;
 	padding-top: $vr*6;
 	margin-bottom: $vr*2;
-
-	@media #{$BPD} {
-		display: flex;
-	}
 }
 
 .overview-category__heading {
