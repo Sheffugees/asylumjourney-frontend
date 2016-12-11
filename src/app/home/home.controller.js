@@ -6,6 +6,11 @@
     .controller('HomeController', HomeController);
 
   /** @ngInject */
-  function HomeController() {
+  function HomeController($location) {
+    var vm = this;
+
+    vm.doSearch = function () {
+      $location.path('/tool').search({q: vm.searchText})
+    }
   }
 })();

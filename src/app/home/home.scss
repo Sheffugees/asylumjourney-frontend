@@ -5,9 +5,28 @@
 	max-width: 900px;
 }
 
-.banner {
-	background: url(/app/images/homebackground.png) right bottom no-repeat;
-	background-size: 75% auto;
+.home-intro {
+
+	h2 {
+		font-weight: bold;
+		font-size: 1.3em;
+		margin-top: 10px;
+	}
+
+	p {
+		margin-bottom: 4px;
+	}
+}
+
+.search-label {
+	margin-bottom: 10px;
+	font-size: 1.3em;
+}
+
+.search-input {
+	width: 55%;
+	padding: 10px;
+	margin-right: 10px;
 }
 
 .logo {
@@ -74,7 +93,8 @@ a.logo {
 @media (min-width: 450px) {
 
 	.banner {
-		background-size: contain;
+		background: url(/app/images/homebackground.png) right bottom no-repeat;
+		background-size: 42% auto;
 		padding: 1em 0 2em 0;
 	}
 
@@ -86,8 +106,16 @@ a.logo {
 		padding: 1em 10px 7em 10px;
 	}
 
+	.home-intro {
+		width: 70%;
+	}
+
+	.search-input {
+		width: 70%;
+	}
+
 	.banner {
-		padding: 6em 0 7em 0;
+		padding: 1em 0 0 0;
 	}
 
 	.logo {

@@ -5,10 +5,11 @@
   .module('asylumjourneyFrontend')
   .controller('OverviewController', OverviewController);
 
-    function OverviewController(data, $scope, ngDialog) {
+    function OverviewController(data, $scope, ngDialog, $routeParams, $location) {
         var vm = this;
         var filteredCategories = [];
         var filteredStages = [];
+        var searchModal;
 
         vm.services = [];
         vm.filtered = false;
@@ -26,8 +27,11 @@
         };
         vm.filteredServiceUsers = [];
         vm.filteredProviders = [];
+        vm.searchText = $routeParams.q;
 
         activate();
+
+
 
         function activate() {
             getServices();
@@ -40,6 +44,10 @@
         function getServices() {
             data.services().get().$promise.then(function(response) {
 				vm.services = response._embedded.services;
+
+                if (vm.searchText) {
+                    vm.doSearch();
+                }
                 vm.showLoader = false;
 			});
         }
@@ -135,6 +143,15 @@
             });
         }
 
+         vm.resetSearch = function () {
+            vm.searchText = '';
+            $location.search('q', null);
+            angular.forEach(vm.services, function(item) {
+                item.display = true;
+                item.filtered = false;
+            });
+        }
+
         vm.filterStage = function(stageId) {
             vm.currentFilters['stage'] = true;
             filterItems(stageId, filteredStages, vm.stages, 'stage');
@@ -174,6 +191,7 @@
             resetFilter(vm.categories);
             resetFilter(vm.serviceUsers);
             resetFilter(vm.providers);
+            vm.resetSearch();
             filteredCategories = [];
             filteredStages = [];
             vm.filteredServiceUsers = [];
@@ -223,6 +241,35 @@
 			vm.showStageFilters = false;
             vm.showServiceUserFilters = false;
 		};
+
+        vm.showSearchForm = function () {
+            searchModal = ngDialog.open({
+                template: 'app/components/search/search-modal.html',
+                scope: $scope
+            });
+        };
+
+        vm.doSearch = function () {
+            if (searchModal) {
+                searchModal.close();
+            }
+            if(!vm.searchText) {return;}
+            var searchText = vm.searchText.toLowerCase();
+
+            angular.forEach(vm.services, function(item) {
+                var name = item.name.toLowerCase();
+                var description = item.description ? item.description.toLowerCase() : '';
+
+                if (name.indexOf(searchText) !== -1 || description.indexOf(searchText) !== -1) {
+                    updateFilteredItem(item, true);
+                    return;
+                }
+                updateFilteredItem(item, false);
+
+            });
+
+            $location.search('q', vm.searchText);
+        };
 
     }
 

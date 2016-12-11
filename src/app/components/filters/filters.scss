@@ -146,3 +146,41 @@
 .filter__toggle--active {
 	border-bottom: 4px solid $stage-3-color;
 }
+
+.search-button {
+	background: none;
+	border: none;
+	box-shadow: none;
+	-webkit-appearance: none;
+	width: 40px;
+	height: 40px;
+	padding: 8px;
+	margin: 2px 0;
+
+	svg {
+		width: 100%;
+		height: 100%;
+	}
+
+	span {
+		position: absolute;
+		left: -9999999px;
+	}
+}
+
+.search-term {
+	background: #666;
+	color: white;
+	font-weight: bold;
+	font-style: italic;
+	padding: 4px;
+
+	button {
+		display: inline-block;
+		background: none;
+		box-shadow: none;
+	  -webkit-appearance: none;
+	  border: 1px solid white;
+	  margin-left: 8px;
+	}
+}

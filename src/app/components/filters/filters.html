@@ -1,4 +1,10 @@
 <div class="filters">
+	<div ng-if="overview.searchText" class="search-term">
+		<p>Current search term: {{overview.searchText}}
+		<button type="button" ng-click="overview.resetSearch()">
+		Clear Search</button>
+		</p>
+	</div>
 	<button class="filter__toggle filter__mobile-toggle" ng-click="overview.toggleFilters()">
 		<svg class="icon">
 			<use xlink:href="#icon-filter"></use>
@@ -69,6 +75,13 @@
 			<button ng-click="overview.openDialog()" class="button help">Help with this tool</button>
 
 			<a href="http://goo.gl/forms/3helLLSBgK5qRvpg1" target="_blank" class="feedback button help">Feedback</a>
+
+			<button type="button" class="search-button" ng-click="overview.showSearchForm()">
+				<svg class="icon">
+					<use xlink:href="#icon-search"></use>
+				</svg>
+				<span>Search</span>
+			</button>
 		</div>
 	</div>
 </div>
