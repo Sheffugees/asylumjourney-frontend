@@ -15,7 +15,8 @@
       .when('/tool', {
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
-        controllerAs: 'main'
+        controllerAs: 'main',
+        reloadOnSearch: false
       })
       .when('/service/:serviceId', {
         templateUrl: 'app/main/main.html',

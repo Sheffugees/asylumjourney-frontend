@@ -1,40 +1,57 @@
-<div class="home">
-  <div class="banner">
-    <div class="logo">
-      <h1>The Asylum Journey</h1>
-      <p>By Sheffugees</p>
-      </div>
-    <a class="button-link" href="#/tool">Get Started</a>
-  </div>
+<div ng-controller="HomeController as home">
+    <div class="home">
+      <div class="banner">
 
-  <div class="questions">
+        <div class="logo">
+          <h1>The Asylum Journey</h1>
+          <p>By Sheffugees</p>
+        </div>
+        <div class="home-intro">
 
-    <h2>What is it?</h2>
-    <p>The Asylum Journey tool shows the different services available in Sheffield for asylum seekers and refugees at different stages of the asylum process - from arrival to the city to a positive decision, or to destitution.</p>
+          <h2>View all services</h2>
+          <p>Start with an overview of all services then filter by stage, category, service users and provider to find the information you need.</p>
+          <a class="button-link" href="#/tool">View all services</a>
 
+          <form class="home__search-form">
+            <h2><label for="search">Search for a service</label></h2>
+            <p>Search for specific services by keyword</p>
+            <input type="search" name="search" id="search" ng-model="home.searchText" placeholder="Search by keyword" class="search-input" />
+            <button type="submit" ng-click="home.doSearch();" class="button-link">Search</button>
+          </form>
 
-    <h2>What problem does it solve?</h2>
-    <p>Services for asylum seekers and refugees are often complex and confusing. They are provided by many different statutory and voluntary organisations, and it can be difficult for any single organisation to know the whole picture. The Asylum Journey tool brings together information about these services in one place.</p>
+        </div>
 
+    </div>
 
-    <h2>Who is it for?</h2>
-    <p>The Asylum Journey is for people working for Sheffield-based statutory and voluntary organisations which provide advice and support for asylum seekers and refugees.</p>
+    <div class="questions">
 
-
-    <h2>Who made it?</h2>
-    <p>The Asylum Journey was created by members of the Sheffield tech community in partnership with volunteers from local refugee and asylum seeker organisations. It was initiated as part of the <a href="http://sheffugees.org">Sheffugees Hackathon</a>.</p>
-
-
-    <h2>Who updates the content?</h2>
-    <p>The Sheffield City Council Locality Management Team, in partnership with a lead voluntary sector organisation, keeps the content of the Asylum Journey tool up to date, with input from local partners.</p>
-
-
-    <h2>What is the current status?</h2>
-    <p>This is the first version of the tool, and it is currently undergoing user testing. Feedback is welcome.</p>
+      <h2>What is it?</h2>
+      <p>The Asylum Journey tool shows the different services available in Sheffield for asylum seekers and refugees at different stages of the asylum process - from arrival to the city to a positive decision, or to destitution.</p>
 
 
-    <h2>What next?</h2>
-    <p>Partners will be invited to participate in a demonstration and provide comments for further change if necessary.</p>
+      <h2>What problem does it solve?</h2>
+      <p>Services for asylum seekers and refugees are often complex and confusing. They are provided by many different statutory and voluntary organisations, and it can be difficult for any single organisation to know the whole picture. The Asylum Journey tool brings together information about these services in one place.</p>
 
+
+      <h2>Who is it for?</h2>
+      <p>The Asylum Journey is for people working for Sheffield-based statutory and voluntary organisations which provide advice and support for asylum seekers and refugees.</p>
+
+
+      <h2>Who made it?</h2>
+      <p>The Asylum Journey was created by members of the Sheffield tech community in partnership with volunteers from local refugee and asylum seeker organisations. It was initiated as part of the <a href="http://sheffugees.org">Sheffugees Hackathon</a>.</p>
+
+
+      <h2>Who updates the content?</h2>
+      <p>The Sheffield City Council Locality Management Team, in partnership with a lead voluntary sector organisation, keeps the content of the Asylum Journey tool up to date, with input from local partners.</p>
+
+
+      <h2>What is the current status?</h2>
+      <p>This is the first version of the tool, and it is currently undergoing user testing. Feedback is welcome.</p>
+
+
+      <h2>What next?</h2>
+      <p>Partners will be invited to participate in a demonstration and provide comments for further change if necessary.</p>
+
+    </div>
   </div>
 </div>
