@@ -7,12 +7,6 @@
     {{ service.name }}
   </h2>
 
-  <ul class="tag-list">
-    <li ng-repeat="stage in service._embedded.stages" class="tag-list__tag tag-list__tag--stage-{{ stage.id }}">{{ stage.name }}</li>
-    <li ng-repeat="category in service._embedded.categories" class="tag-list__tag">{{ category.name }}</li>
-    <li ng-repeat="serviceUser in service._embedded.serviceUsers" class="tag-list__tag">{{ serviceUser.name }}</li>
-  </ul>
-
 	<p ng-bind-html="service.description | linky"></p>
   <p ng-if="service.endDate"><strong>End Date:</strong> {{ service.endDate | date }}</p>
 
@@ -34,7 +28,12 @@
       </p>
     </div>
   </div>
-    <a href="#/service/{{service.id}}">Permanent link to this card</a>
+  <ul class="tag-list">
+    <li ng-repeat="stage in service._embedded.stages" class="tag-list__tag tag-list__tag--stage-{{ stage.id }}">{{ stage.name }}</li>
+    <li ng-repeat="category in service._embedded.categories" class="tag-list__tag">{{ category.name }}</li>
+    <li ng-repeat="serviceUser in service._embedded.serviceUsers" class="tag-list__tag">{{ serviceUser.name }}</li>
+  </ul>
+  <a href="#/service/{{service.id}}">Permanent link to this card</a>
 
 
 </article>
