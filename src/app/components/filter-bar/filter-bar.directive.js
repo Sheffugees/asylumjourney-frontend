@@ -3,11 +3,11 @@
 
   angular
     .module('asylumjourneyFrontend')
-    .directive('filters', filters);
+    .directive('filterBar', filters);
 
   function filters() {
     var filters = {
-      templateUrl: 'app/components/filters/filters.html',
+      templateUrl: 'app/components/filter-bar/filter-bar.html',
       restrict: 'AE'
     };
     return filters;

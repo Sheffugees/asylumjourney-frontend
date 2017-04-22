@@ -27,3 +27,21 @@
 		color: $color-text;
 	}
 }
+
+
+.button-link {
+	border: none;
+	outline: none;
+	color: #FFFFFF;
+	background-color: $stage-1-color;
+	padding: .4rem .7rem;
+
+	font-size: 1.2em;
+	font-weight: 600;
+	text-decoration: none;
+	display: inline-block;
+
+	&:hover, &:focus {
+		background-color: darken($stage-1-color, 20%);
+	}
+}
