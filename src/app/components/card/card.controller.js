@@ -8,6 +8,14 @@
     function CardController($scope, ngDialog, $routeParams, $rootScope) {
         var vm = this;
         vm.service = $scope.service;
+        angular.forEach($scope.service._embedded.providers, function(provider) {
+          var googleMapsUrl = 'https://www.google.co.uk/maps/place/';
+          provider.addressUrl = googleMapsUrl + [provider.address, provider.postcode]
+            .join(' ')
+            .replace(new RegExp(/\s/g, 'g'), '+');
+        });
+
+
 		vm.openDialog = openDialog;
 
         activate();

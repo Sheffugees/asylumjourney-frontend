@@ -30,7 +30,8 @@
       <p ng-if="provider.phone"><strong>Tel:</strong> {{ provider.phone }}</p>
       <p ng-if="provider.email"><strong>Email:</strong> <a href="mailto:{{ provider.email }}">{{ provider.email }}</a></p>
       <p ng-if="provider.website"><strong>Website:</strong> <a href="{{ provider.website }}">{{ provider.website }}</a></p>
-      <p ng-if="provider.address"><strong>Address:</strong> {{ provider.address }}, {{ provider.postcode }}
+      <p ng-if="provider.address"><strong>Address:</strong>
+				<a href="{{ provider.addressUrl }}" target="_blank">{{ provider.address }}, {{ provider.postcode }}</a>
       </p>
     </div>
   </div>
