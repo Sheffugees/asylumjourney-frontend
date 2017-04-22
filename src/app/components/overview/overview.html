@@ -1,31 +1,31 @@
-<div ng-controller="OverviewController as overview" class="overview" ng-class="{'show-issues': overview.showIssues}">
+<div ng-controller="OverviewController as overview" class="overview" ng-class="{'show-issues': overview.showIssues, 'filters-open': overview.showAllFilters}">
 
-    <ul class="overview-stages">
-        <li class="overview-stages__stage brand">
-            <h1><a ng-href="#/" class="logo logo--small">The Asylum Journey</a></h1>
-        </li>
-        <li ng-if="stage.display" ng-repeat="stage in overview.stages" class="overview-stages__stage overview-stages__stage--{{stage.id}}">
-            <span>{{stage.name}} </span>
-        </li>
+  <filter-bar></filter-bar>
+
+  <ul class="overview-stages overview-stages--cols-{{overview.numStagesDisplayed}}">
+    <li class="overview-stages__stage brand">
+    </li>
+    <li ng-if="stage.display" ng-repeat="stage in overview.stages" class="overview-stages__stage overview-stages__stage--{{stage.id}}">
+      <span>{{stage.name}}</span>
+    </li>
+  </ul>
+
+  <div ng-if="overview.showLoader" class="overview__loader">
+    <img ng-src="/app/images/loader-logo.svg" alt="Loading" />
+    Loading...
+  </div>
+
+  <div ng-if="category.display && !overview.showLoader" ng-repeat="category in overview.categories" class="overview-category">
+
+    <h2 class="overview-category__heading">{{category.name}}</h2>
+    <ul ng-if="stage.display" class="overview-category__stage overview-category__stage-{{stage.id}} overview-category__stage--cols-{{overview.numStagesDisplayed}}" ng-repeat="stage in overview.stages">
+      <li ng-repeat="service in overview.services | category: category.id | stage: stage.id | serviceUser: overview.filteredServiceUsers | provider: overview.filteredProviders" ng-if="service.display">
+        <card service="service"></card>
+
+
+      </li>
     </ul>
 
-    <div ng-if="overview.showLoader" class="overview__loader">
-        <img ng-src="/app/images/loader-logo.svg" alt="Loading" />
-        Loading...
-    </div>
-
-    <div ng-if="category.display && !overview.showLoader" ng-repeat="category in overview.categories" class="overview-category">
-
-        <h2 class="overview-category__heading">{{category.name}}</h2>
-
-        <ul ng-if="stage.display" class="overview-category__stage overview-category__stage-{{stage.id}}" ng-repeat="stage in overview.stages">
-            <li ng-repeat="service in overview.services | category: category.id | stage: stage.id | serviceUser: overview.filteredServiceUsers | provider: overview.filteredProviders">
-                <card service="service"></card>
-            </li>
-        </ul>
-
-    </div>
-
-    <filters></filters>
+  </div>
 
 </div>
