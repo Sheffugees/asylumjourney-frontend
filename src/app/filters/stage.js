@@ -6,7 +6,6 @@
 		.filter('stage', stage);
 
 	function stage() {
-
 		return function stageFilter(items, stage) {
 			var filtered = [];
 

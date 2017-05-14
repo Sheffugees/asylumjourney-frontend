@@ -5,273 +5,340 @@
   .module('asylumjourneyFrontend')
   .controller('OverviewController', OverviewController);
 
-    function OverviewController(data, $scope, ngDialog, $routeParams, $location) {
-        var vm = this;
-        var filteredCategories = [];
-        var filteredStages = [];
-        var searchModal;
+  function OverviewController(data, $route, $scope, ngDialog, $routeParams, $location) {
+    var vm = this;
+    vm.services = [];
+    vm.filtered = false;
+    vm.showLoader = true;
+    vm.showIssues = false;
+    vm.showFilters = false;
+    vm.filteredServiceUsers = [];
+    vm.filteredProviders = [];
+    vm.searchText = $routeParams.q;
+    vm.showAllFilters = false;
+    vm.numStagesDisplayed = 0;
 
-        vm.services = [];
-        vm.filtered = false;
-        vm.showCategoryFilters = false;
-        vm.showStageFilters = false;
-        vm.showServiceUserFilters = false;
-        vm.showLoader = true;
-		vm.showIssues = false;
-		vm.showFilters = false;
-        vm.currentFilters = {
-            stage: false,
-            category: false,
-            serviceUser: false,
-            provider: false
-        };
-        vm.filteredServiceUsers = [];
-        vm.filteredProviders = [];
-        vm.searchText = $routeParams.q;
+    vm.expandFilters = {
+      stages: false,
+      categories: false,
+      serviceUsers: false,
+      providers: false
+    }
 
-        activate();
+    vm.currentFilters = {
+      stages: [],
+      categories: [],
+      serviceUsers: [],
+      providers: []
+    };
 
+    activate();
 
+    function activate() {
+      getServices();
+      getProviders();
+      getStages();
+      getCategories();
+      getServiceUsers();
+    }
 
-        function activate() {
-            getServices();
-            getProviders();
-            getStages();
-            getCategories();
-            getServiceUsers();
-        }
+    function filterFromRouteParams (type, item) {
+      var selected = $routeParams[type].split(',');
+      angular.forEach(selected, function(selectedItem) {
 
-        function getServices() {
-            data.services().get().$promise.then(function(response) {
-				vm.services = response._embedded.services;
+        if (item.id === parseInt(selectedItem, 10)) {
+          item.display = true;
 
-                if (vm.searchText) {
-                    vm.doSearch();
-                }
-                vm.showLoader = false;
-			});
-        }
+          updateActiveFilters(item.id, type);
+          updateCurrentFilter(item.id, type);
 
-        function getProviders() {
-            data.providers().get().$promise.then(function(response) {
-				vm.providers = response._embedded.providers;
-
-                angular.forEach(vm.providers, function(provider) {
-                    provider.display = true;
-                });
-			});
-        }
-
-        function getStages() {
-            data.stages().get().$promise.then(function(response) {
-				vm.stages = response._embedded.stages;
-
-                angular.forEach(vm.stages, function(stage) {
-                    stage.display = true;
-                });
-
-			});
-		}
-
-        function getCategories() {
-            data.categories().get().$promise.then(function(response) {
-				vm.categories = response._embedded.categories;
-
-                angular.forEach(vm.categories, function(itemCategory) {
-                    itemCategory.display = true;
-                });
-
-			});
-		}
-
-        function getServiceUsers() {
-            data.serviceUsers().get().$promise.then(function(response) {
-                vm.serviceUsers = response._embedded.serviceUsers;
-
-                angular.forEach(vm.serviceUsers, function(itemServiceUser) {
-                    itemServiceUser.display = true;
-                });
-
+          if (type === 'stages') {
+            var displayedStages = vm.stages.filter(function (stage) {
+              return stage.display;
             });
+            vm.numStagesDisplayed = displayedStages.length;
+          }
         }
 
-        function updateFilteredArray(filteredId, array, list, type) {
-            var index = array.indexOf(filteredId);
+      });
+      return;
+    }
 
-            if (index === -1) {
-                array.push(filteredId);
-                return;
-            }
+    function updateDisplay (type) {
+      angular.forEach(vm[type], function(item) {
+        if ($routeParams[type]) {
+          filterFromRouteParams(type, item);
+          return;
+        }
+        item.display = true;
+      });
+    }
 
-            array.splice(index, 1);
+    function getServices() {
+      data.getServices().then(function () {
+        vm.services  = data.services;
 
-            if (!array.length) {
-                vm.resetFilters(array, list, type);
-            }
+        angular.forEach(vm.services, function(item) {
+          item.display = true;
+        });
+
+        if (vm.searchText) {
+          vm.doSearch();
+        }
+        vm.showLoader = false;
+      });
+    }
+
+    function getProviders() {
+      data.getProviders().then(function() {
+        vm.providers = data.providers;
+        updateDisplay('providers');
+      });
+    }
+
+    function getStages() {
+      data.getStages().then(function() {
+        vm.stages = data.stages;
+        updateDisplay('stages');
+      });
+    }
+
+    function getCategories() {
+      data.getCategories().then(function() {
+        vm.categories = data.categories;
+        updateDisplay('categories');
+      });
+    }
+
+    function getServiceUsers() {
+      data.getServiceUsers().then(function() {
+        vm.serviceUsers = data.serviceUsers;
+        updateDisplay('serviceUsers');
+      });
+    }
+
+    // shows which are filtered in dropdown
+    function updateFilteredItem(item, filter) {
+      item.display = filter;
+      item.filtered = filter;
+    }
+
+    //Updates active filters in dropdown
+    function updateActiveFilters (filterId, type) {
+      angular.forEach(vm[type], function(item) {
+        var isFiltered = vm.currentFilters[type].filter(function (filteredItem) {
+          return filteredItem.id === item.id;
+        })[0];
+        var isCurrentlyFiltered = isFiltered ? true : false;
+        if (item.id === filterId) {
+          updateFilteredItem(item, !isCurrentlyFiltered);
+          return;
         }
 
-        function updateFilteredItem(item, filter) {
-            item.display = filter;
-            item.filtered = filter;
+        if (isCurrentlyFiltered) {
+          return;
         }
 
-        function filterItems(filterId, filteredArray, list, type) {
-            vm.filtered = true;
+        updateFilteredItem(item, false);
+      });
+    }
 
-            angular.forEach(list, function(item) {
+    function resetFilter (list) {
+      angular.forEach(list, function(item) {
+        item.display = true;
+        item.filtered = false;
+      });
+    }
 
-                if (item.id === filterId) {
-                    updateFilteredItem(item, filteredArray.indexOf(filterId) === -1);
-                    return;
-                }
+    vm.resetSearch = function () {
+      vm.searchText = '';
+      $location.search('q', null);
+      angular.forEach(vm.services, function(item) {
+        item.display = true;
+        item.filtered = false;
+      });
+    }
 
-                if (filteredArray.indexOf(item.id) !== -1) {
-                    return;
-                }
+    function addToQS (qs, item, type) {
+      var qsArray = [];
+      if (qs) {
+        qsArray = qs.length > 1 ? qs.split(',') : [qs];
+      }
+      var qsString = item;
+      if (qsArray.indexOf(item.toString()) === -1) {
+        qsArray.push(item);
+        if (qsArray.length > 1) {
+          qsString = qsArray.join(",");
+        }
+        var params = {};
+        params[type]  = qsString;
+        $route.updateParams(params);
+      }
+    }
 
-                updateFilteredItem(item, false);
+    function removeFromQS (qs, item, type) {
+      if (!qs) {
+        return;
+      }
+      var qsArray = qs.length ? qs.split(',') : [];
+      var qsString = item;
+      qsArray.splice(qsArray.indexOf(item.toString()), 1);
+      qsString = qsArray.join(",");
+      var params = {};
+      params[type] = qsString;
+      $route.updateParams(params);
+    }
 
-            });
+    function updateCurrentFilter (filterId, type){
 
-            updateFilteredArray(filterId, filteredArray, list, type);
+      var currentlyFiltered = vm.currentFilters[type].filter(function (item) {
+        return item.id === filterId;
+      })[0];
+
+      // adding filter
+      if (!currentlyFiltered) {
+
+        var selectedFilter = vm[type].filter(function(item) {
+          return item.id === filterId;
+        })[0];
+        vm.currentFilters[type].push({id: filterId, name: selectedFilter.name});
+        addToQS($routeParams[type], filterId, type);
+
+        if (type === 'serviceUsers') {
+          vm.filteredServiceUsers.push(filterId);
+        }
+        if (type === 'providers') {
+          vm.filteredProviders.push(filterId);
         }
 
-        function resetFilter (list) {
-            angular.forEach(list, function(item) {
-                item.display = true;
-                item.filtered = false;
-            });
+        return;
+      }
+      //removing filter
+      vm.currentFilters[type] = vm.currentFilters[type].filter(function(obj) {
+        return obj.id !== filterId;
+      });
+
+      removeFromQS($routeParams[type], filterId, type);
+
+      if (!vm.currentFilters[type].length) {
+        resetFilter(vm[type]);
+      }
+
+      if (type === 'serviceUsers') {
+        var index = vm.filteredServiceUsers.indexOf(filterId);
+        vm.filteredServiceUsers.splice(index, 1);
+      }
+
+      if (type === 'providers') {
+        var providerIndex = vm.filteredProviders.indexOf(filterId);
+        vm.filteredProviders.splice(providerIndex, 1);
+      }
+    }
+
+    vm.filterServices = function (filterId, type) {
+      updateActiveFilters(filterId, type);
+      updateCurrentFilter(filterId, type);
+
+      //Get number of stages displayed for use in CSS class
+      if (type === 'stages') {
+        var displayedStages = vm.stages.filter(function (stage) {
+          return stage.display;
+        });
+        vm.numStagesDisplayed = displayedStages.length;
+      }
+    }
+
+    vm.toggleIssues = function () {
+      vm.showIssues = !vm.showIssues;
+    };
+
+    // for mobile
+    vm.toggleMobileFilters = function () {
+      vm.showFilters = !vm.showFilters;
+    };
+
+    vm.resetFilters = function(array, list, type) {
+      resetFilter(list);
+      vm.currentFilters[type] = [];
+      array = [];
+      vm.numStagesDisplayed = vm.stages.length;
+    };
+
+    vm.showAll = function () {
+      vm.closeFilters();
+      resetFilter(vm.stages);
+      resetFilter(vm.categories);
+      resetFilter(vm.serviceUsers);
+      resetFilter(vm.providers);
+      vm.resetSearch();
+      vm.numStagesDisplayed = vm.stages.length;
+      vm.filteredServiceUsers = [];
+      vm.filteredProviders = [];
+      vm.showIssues = false;
+      vm.currentFilters = {
+        stages: [],
+        categories: [],
+        serviceUsers: [],
+        providers: []
+      };
+      $location.search({});
+    };
+
+    vm.toggleSecondaryFilters = function () {
+      vm.showAllFilters = !vm.showAllFilters;
+      vm.closeFilters();
+    }
+
+    vm.toggleFilter = function (type) {
+      vm.expandFilters[type] = !vm.expandFilters[type];
+      angular.forEach(vm.expandFilters, function (value, key) {
+        if (key !== type) {
+          vm.expandFilters[key] = false;
         }
+      });
+    }
 
-         vm.resetSearch = function () {
-            vm.searchText = '';
-            $location.search('q', null);
-            angular.forEach(vm.services, function(item) {
-                item.display = true;
-                item.filtered = false;
-            });
-        }
+    // toggle Provider filter
+    vm.toggleProviderFilters = function() {
+      ngDialog.open({
+        template: 'app/components/filter-bar/providers-overlay.html',
+        scope: $scope
+      });
+    };
 
-        vm.filterStage = function(stageId) {
-            vm.currentFilters['stage'] = true;
-            filterItems(stageId, filteredStages, vm.stages, 'stage');
-        };
-
-
-        vm.filterCategory = function(filterId) {
-            vm.currentFilters['category'] = true;
-            filterItems(filterId, filteredCategories, vm.categories, 'category');
-        };
-
-        vm.filterServiceUser = function(filterId) {
-            vm.currentFilters['serviceUser'] = true;
-            filterItems(filterId, vm.filteredServiceUsers, vm.serviceUsers, 'serviceUser');
-        };
-
-        vm.filterProvider = function(filterId) {
-            vm.currentFilters['provider'] = true;
-            filterItems(filterId, vm.filteredProviders, vm.providers, 'provider');
-        };
-
-		vm.toggleIssues = function () {
-			vm.showIssues = !vm.showIssues;
-        };
-		vm.toggleFilters = function () {
-			vm.showFilters = !vm.showFilters;
-        };
-
-        vm.resetFilters = function(array, list, type) {
-            resetFilter(list);
-            vm.currentFilters[type] = false;
-            array = [];
-        };
-
-        vm.resetAll = function () {
-            resetFilter(vm.stages);
-            resetFilter(vm.categories);
-            resetFilter(vm.serviceUsers);
-            resetFilter(vm.providers);
-            vm.resetSearch();
-            filteredCategories = [];
-            filteredStages = [];
-            vm.filteredServiceUsers = [];
-            vm.filteredProviders = [];
-			vm.showIssues = false;
-            vm.currentFilters = {
-                stage: false,
-                category: false,
-                serviceUser: false,
-                provider: false
-            };
-        };
-
-		// toggle category filter
-        vm.expandCategoryFilters = function(a) {
-            vm.showCategoryFilters = !a;
-        };
-
-		// toggle stage filter
-        vm.expandStageFilters = function(a) {
-            vm.showStageFilters = !a;
-        };
-
-        // toggle service user filter
-        vm.expandServiceUserFilters = function(a) {
-            vm.showServiceUserFilters = !a;
-        };
-
-        // toggle Provider filter
-        vm.expandProviderFilters = function() {
-            ngDialog.open({
-                template: 'app/components/filters/providers-overlay.html',
-                scope: $scope
-            });
-        };
-
-        vm.openDialog = function () {
-            ngDialog.open({
-                template: 'app/components/info-overlay/info.html',
-                scope: $scope
-            });
-        };
+    vm.openDialog = function () {
+      ngDialog.open({
+        template: 'app/components/info-overlay/info.html',
+        scope: $scope
+      });
+    };
 
 		// close all filters
 		vm.closeFilters = function() {
-			vm.showCategoryFilters = false;
-			vm.showStageFilters = false;
-            vm.showServiceUserFilters = false;
-		};
+      angular.forEach(vm.expandFilters, function (value, key) {
+        vm.expandFilters[key] = false;
+      });
+    };
 
-        vm.showSearchForm = function () {
-            searchModal = ngDialog.open({
-                template: 'app/components/search/search-modal.html',
-                scope: $scope
-            });
-        };
+    vm.doSearch = function () {
+      if(!vm.searchText) {return;}
+      var searchText = vm.searchText.toLowerCase();
 
-        vm.doSearch = function () {
-            if (searchModal) {
-                searchModal.close();
-            }
-            if(!vm.searchText) {return;}
-            var searchText = vm.searchText.toLowerCase();
+      angular.forEach(vm.services, function(item) {
+        var name = item.name.toLowerCase();
+        var description = item.description ? item.description.toLowerCase() : '';
 
-            angular.forEach(vm.services, function(item) {
-                var name = item.name.toLowerCase();
-                var description = item.description ? item.description.toLowerCase() : '';
+        if (name.indexOf(searchText) !== -1 || description.indexOf(searchText) !== -1) {
+          updateFilteredItem(item, true);
+          return;
+        }
+        updateFilteredItem(item, false);
 
-                if (name.indexOf(searchText) !== -1 || description.indexOf(searchText) !== -1) {
-                    updateFilteredItem(item, true);
-                    return;
-                }
-                updateFilteredItem(item, false);
+      });
 
-            });
+      $location.search('q', vm.searchText);
+    };
 
-            $location.search('q', vm.searchText);
-        };
-
-    }
+  }
 
 })();
-
