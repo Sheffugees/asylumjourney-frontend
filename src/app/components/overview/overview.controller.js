@@ -75,8 +75,9 @@
     }
 
     function getServices() {
-      data.services().get().$promise.then(function(response) {
-        vm.services = response._embedded.services;
+      data.getServices().then(function () {
+        vm.services  = data.services;
+
         angular.forEach(vm.services, function(item) {
           item.display = true;
         });
@@ -89,29 +90,29 @@
     }
 
     function getProviders() {
-      data.providers().get().$promise.then(function(response) {
-        vm.providers = response._embedded.providers;
+      data.getProviders().then(function() {
+        vm.providers = data.providers;
         updateDisplay('providers');
       });
     }
 
     function getStages() {
-      data.stages().get().$promise.then(function(response) {
-        vm.stages = response._embedded.stages;
+      data.getStages().then(function() {
+        vm.stages = data.stages;
         updateDisplay('stages');
       });
     }
 
     function getCategories() {
-      data.categories().get().$promise.then(function(response) {
-        vm.categories = response._embedded.categories;
+      data.getCategories().then(function() {
+        vm.categories = data.categories;
         updateDisplay('categories');
       });
     }
 
     function getServiceUsers() {
-      data.serviceUsers().get().$promise.then(function(response) {
-        vm.serviceUsers = response._embedded.serviceUsers;
+      data.getServiceUsers().then(function() {
+        vm.serviceUsers = data.serviceUsers;
         updateDisplay('serviceUsers');
       });
     }

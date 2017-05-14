@@ -36,15 +36,15 @@
     }
 
     function getStages() {
-      data.stages().get().$promise.then(function(response) {
-        vm.stages = response._embedded.stages;
+      data.getStages().then(function () {
+        vm.stages = data.stages;
         vm.showLoader = false;
       });
     }
 
     function getCategories() {
-      data.categories().get().$promise.then(function(response) {
-        vm.categories = response._embedded.categories;
+      data.getCategories().then(function () {
+        vm.categories  = data.categories;
       });
     }
 
