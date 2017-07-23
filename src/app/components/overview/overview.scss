@@ -1,7 +1,22 @@
 $numColumnsSmall: 7;
 $numColumns: 8;
 .overview {
-	padding: $vr*15 0 $vr*9 0;
+	padding: 44px 0 $vr*9 0;
+	transform: padding 0.3s ease;
+
+	@media #{$BPD} {
+		padding-top: 80px;
+	}
+
+
+	&.filters-open {
+		padding-top: 202px;
+
+		@media #{$BPD} {
+			padding-top: 148px;
+		}
+
+	}
 }
 
 .overview-stages {
@@ -9,17 +24,18 @@ $numColumns: 8;
 	position: fixed;
 	z-index: 10;
 	width: 100%;
-	height: $vr*15;
-	background: #FFF;
-	top: 0;
+	height: 36px;
+	bottom: 0;
 	left: 0;
-	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+
 	// required to force text to wrap in IE10
 	.overview-stages__stage {
 		position: relative;
 		span {
 			max-width: 100%;
 			display: block;
+			height: 28px;
+			overflow: hidden;
 		}
 		button {
 			position: absolute;
@@ -33,6 +49,19 @@ $numColumns: 8;
 .overview-category__stage {
 	flex: 1 1;
 	min-width: 0;
+
+	&.overview-category__stage--cols-1 {
+		display: flex;
+		flex-wrap: wrap;
+		li {
+			width: 50%;
+			margin-bottom: 10px;
+
+			@media #{$BPD} {
+				width: 20%;
+			}
+		}
+	}
 }
 
 .overview-stages__stage.brand,
@@ -56,35 +85,37 @@ $numColumns: 8;
 }
 
 .overview-stages__stage {
-	border-top: $vr solid transparent;
 	height: 100%;
 	align-items: center;
 	display: flex;
 	padding: $vr;
 	line-height: 1.2;
-	font-size: 14px;
+	font-size: 12px;
 	overflow: hidden;
-	font-weight: 400;
+	font-weight: bold;
 	&.overview-stages__stage--1 {
-		border-color: $stage-1-color;
+		background: $stage-1-color;
+		color: white;
 	}
 	&.overview-stages__stage--2 {
-		border-color: $stage-2-color;
+		background: $stage-2-color;
 	}
 	&.overview-stages__stage--3 {
-		border-color: $stage-3-color;
+		background: $stage-3-color;
 	}
 	&.overview-stages__stage--4 {
-		border-color: $stage-4-color;
+		background: $stage-4-color;
+		color: white;
 	}
 	&.overview-stages__stage--5 {
-		border-color: $stage-5-color;
+		background: $stage-5-color;
 	}
 	&.overview-stages__stage--6 {
-		border-color: $stage-6-color;
+		background: $stage-6-color;
+		color: white;
 	}
 	&.overview-stages__stage--7 {
-		border-color: $stage-7-color;
+		background: $stage-7-color;
 	}
 	&.brand {
 		display: none;
@@ -112,6 +143,10 @@ $numColumns: 8;
 	border-top: 1px solid #CCC;
 	padding-top: $vr*6;
 	margin-bottom: $vr*2;
+
+	&:first-of-type {
+		border-top: none;
+	}
 }
 
 .overview-category__heading {
@@ -150,7 +185,6 @@ $numColumns: 8;
 
 @media(min-width: $break-point-e-px) {
 	.overview-stages__stage {
-		font-size: 16px;
 	}
 	.overview-category {
 		padding-top: $vr*2;
@@ -166,7 +200,5 @@ $numColumns: 8;
 	.overview {
 		padding-top: $vr*13
 	}
-	.overview-stages {
-		height: $vr*13;
-	}
+
 }

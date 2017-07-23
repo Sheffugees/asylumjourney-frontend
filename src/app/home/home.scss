@@ -1,39 +1,26 @@
-.home {
-	padding: 1em 10px;
+.container {
+	padding: 0 10px;
 	margin: 0 auto;
 	width: 100%;
-	max-width: 900px;
+	max-width: 1200px;
 }
 
-.home-intro {
-
-	h2 {
-		font-weight: bold;
-		font-size: 1.3em;
-		margin-top: 10px;
-	}
-
-	p {
-		margin-bottom: 4px;
-	}
+.home-header {
+	background: white;
+	background-size: auto 124%;
+	padding: 16px 0;
+	overflow: auto;
+	box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2);
+	position: relative;
+	z-index: 1;
 }
 
-.search-label {
-	margin-bottom: 10px;
-	font-size: 1.3em;
-}
-
-.search-input {
-	width: 55%;
-	padding: 10px;
-	margin-right: 10px;
-}
-
-.logo {
+.home-header__logo {
 	background: url('/app/images/logo-basic.png') left center no-repeat;
 	background-size: 56px auto;
 	padding: 0 0 0 64px;
-	margin-bottom: 30px;
+  text-align: left;
+  float: left;
 
 	h1 {
 		line-height: 1;
@@ -42,42 +29,156 @@
 	}
 }
 
-a.logo {
-	text-decoration: none;
-	color: $color-text;
-
-	&:hover, &:focus {
-		color: $stage-4-color;
-	}
-}
-
-.button-link {
-	border: none;
-	outline: none;
-	color: #FFFFFF;
-	background-color: $stage-1-color;
-	padding: .4rem .7rem;
-	border-radius: .6em;
-	font-size: 1.2em;
-	font-weight: 600;
-	text-decoration: none;
-	display: inline-block;
-
-	&:hover, &:focus {
-		background-color: darken($stage-1-color, 20%);
-	}
-}
-
-.questions {
+.home-start {
+	text-align: center;
+	padding: 10px 0 20px 0;
+	background-size: 42% auto;
 
 	h2 {
-		padding-top: 16px;
+		font-weight: bold;
+		font-size: 1.3em;
+		margin-bottom: 0;
+	}
+
+	p {
+		margin-bottom: 6px;
+	}
+}
+
+.home-search {
+	margin: 0 auto 20px auto;
+	width: 100%;
+
+	input[type="search"] {
+		border: none;
+		box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+	}
+}
+
+.home-search__input {
+	width: 55%;
+	padding: 10px;
+	margin-right: 10px;
+}
+
+.home-filters {
+	margin: 0 auto 20px auto;
+	position: relative;
+	min-height: 145px;
+
+	.overview__loader {
+		top: 70%;
+	}
+}
+
+.home-filters__stages {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin: 10px auto;
+	max-width: 780px;
+}
+
+.home-filters__stage {
+	width: percentage(1/3);
+	padding: 0 4px;
+	margin-bottom: 10px;
+
+	button {
+		background: white;
+		border: none;
+		-webkit-appearance: none;
+		width: 100%;
+		height: 100%;
+		padding: 8px 4px;
+		line-height: 1.2;
+		box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+
+		&.active {
+			color: white;
+		}
+
+	}
+
+	&.home-filters__stage--1 {
+		button {
+		border-bottom: 2px solid $stage-1-color;
+
+		&.active {
+			background: $stage-1-color;
+		}
+		}
+	}
+	&.home-filters__stage--2 {
+		button {
+		border-bottom: 2px solid $stage-2-color;
+
+		&.active {
+			background: $stage-2-color;
+		}
+		}
+	}
+	&.home-filters__stage--3 {
+		button {
+		border-bottom: 2px solid $stage-3-color;
+
+		&.active {
+			background: $stage-3-color;
+		}
+		}
+	}
+	&.home-filters__stage--4 {
+		button {
+		border-bottom: 2px solid $stage-4-color;
+
+		&.active {
+			background: $stage-4-color;
+		}
+		}
+	}
+	&.home-filters__stage--5 {
+		button {
+		border-bottom: 2px solid $stage-5-color;
+
+		&.active {
+			background: $stage-5-color;
+		}
+		}
+	}
+	&.home-filters__stage--6 {
+		button {
+		border-bottom: 2px solid $stage-6-color;
+
+		&.active {
+			background: $stage-6-color;
+		}
+		}
+	}
+	&.home-filters__stage--7 {
+		button {
+		border-bottom: 2px solid $stage-7-color;
+
+		&.active {
+			background: $stage-7-color;
+		}
+		}
+	}
+}
+
+.home-info {
+	background: white;
+	padding: 20px 0;
+
+	h2 {
+		margin-bottom: 16px;
 		font-size: 1.5em;
 		font-weight: 900;
+		line-height: 1.3;
 	}
 
 	p {
 		font-size: 1em;
+		margin-bottom: 16px;
 	}
 
 	a {
@@ -90,52 +191,42 @@ a.logo {
 	}
 }
 
+
 @media (min-width: 450px) {
 
-	.banner {
-		background: url(/app/images/homebackground.png) right bottom no-repeat;
-		background-size: 42% auto;
-		padding: 1em 0 2em 0;
+	.home-filters__stage {
+		width: percentage(1/4);
 	}
 
 }
 
 @media (min-width: 768px) {
 
-	.home {
-		padding: 1em 10px 7em 10px;
+	.home-header {
+		background: white url(/app/images/homebackground.png) right bottom no-repeat;
+		background-size: auto 124%;
 	}
 
-	.home-intro {
+	.home-start {
+		padding: 40px 0;
+	}
+
+	.home-search {
+		margin: 0 auto 50px auto;
+		width: 80%;
+	}
+
+	.home-search__input  {
 		width: 70%;
 	}
 
-	.search-input {
-		width: 70%;
+	.home-filters {
+		margin: 0 auto 50px auto;
 	}
 
-	.banner {
-		padding: 1em 0 0 0;
-	}
 
-	.logo {
-		background-size: 90px auto;
-		padding: 0 0 0 100px;
-		min-height: 90px;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		margin-bottom: 0;
-
-		h1 {
-			line-height: inherit;
-		}
-
-		&.logo--small {
-			background-size: 40px auto;
-			padding: 0 0 0 45px;
-			min-height: 38px;
-		}
+	.home-filters__stage {
+		width: percentage(1/7);
 	}
 
 }

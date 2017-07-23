@@ -1,0 +1,185 @@
+<div class="filter-bar"  ng-class="{'filter-bar--open' : overview.showFilters || overview.showAllFilters}">
+
+	<button class="filter__mobile-toggle" ng-click="overview.toggleMobileFilters()">
+		<span ng-if="!overview.showFilters">Filter services</span>
+		<span ng-if="overview.showFilters">Close filters</span>
+		<svg class="icon">
+			<use xlink:href="#icon-filter"></use>
+		</svg>
+	</button>
+
+	<div class="filter-bar__primary">
+
+		<div class="filter-bar__logo">
+			<h1><a ng-href="#/" class="logo">The Asylum Journey</a></h1>
+		</div>
+
+		<div class="filter-bar__section">
+			<div class="filter-bar__section-inner">
+
+				<button type="button" id="stageFilter" class="filter__toggle" ng-class="{ 'filter__toggle--active': overview.expandFilters.stages, 'filter__toggle--many': overview.currentFilters.stages.length > 1}" ng-click="overview.toggleFilter('stages')" aria-haspopup="true" aria-expanded="{{overview.expandFilters.stages}}">
+					<strong>Stage:</strong>
+					<span ng-if="overview.currentFilters.stages.length === overview.stages.length || overview.currentFilters.stages.length === 0">All</span>
+
+					<span ng-if="overview.currentFilters.stages.length !== overview.stages.length">
+						{{overview.currentFilters.stages[0].name}}
+						<span class="filter__more-count" ng-if="overview.currentFilters.stages.length > 1">+ {{overview.currentFilters.stages.length - 1}} more</span>
+					</span>
+
+					<svg class="icon">
+						<use xlink:href="#icon-arrow-down"></use>
+					</svg>
+				</button>
+				<ul class="filter__list" ng-show="overview.expandFilters.stages" aria-labelledby="stageFilter">
+					<li class="filter__list-item" ng-repeat="stage in overview.stages">
+						<button type="button" class="filter__button" ng-class="{ 'filter__button--active': stage.filtered}" ng-click="overview.filterServices(stage.id, 'stages')">
+							{{stage.name}}
+						</button>
+					</li>
+					<li>
+	          <button type="button"
+	          	class="filter__show-all-button"
+	          	ng-click="overview.resetFilterType('stages')"
+	          	ng-disabled="!overview.currentFilters.stages.length || overview.currentFilters.stages.length === overview.stages.length"
+	          >
+	            Show all stages
+	         	</button>
+          </li>
+
+				</ul>
+			</div>
+		</div>
+
+		<div class="filter-bar__section">
+			<div class="filter-bar__section-inner">
+			<button type="button" id="categoryFilter" class="filter__toggle toggle" ng-class="{ 'filter__toggle--active': overview.expandFilters.categories, 'filter__toggle--many': overview.currentFilters.categories.length > 1}" ng-click="overview.toggleFilter('categories')" aria-haspopup="true" aria-expanded="{{overview.expandFilters.categories}}">
+				<strong>Category:</strong>
+				<span ng-if="overview.currentFilters.categories.length === overview.categories.length || overview.currentFilters.categories.length === 0">All</span>
+
+				<span ng-if="overview.currentFilters.categories.length !== overview.categories.length">
+					{{overview.currentFilters.categories[0].name}}
+					<span class="filter__more-count" ng-if="overview.currentFilters.categories.length > 1">+ {{overview.currentFilters.categories.length - 1}} more</span>
+				</span>
+
+				<svg class="icon">
+					<use xlink:href="#icon-arrow-down"></use>
+				</svg>
+			</button>
+			<ul class="filter__list" ng-show="overview.expandFilters.categories" aria-labelledby="categoryFilter">
+				<li class="filter__list-item" ng-repeat="category in overview.categories">
+					<button type="button" class="filter__button" ng-class="{ 'filter__button--active': category.filtered}" ng-click="overview.filterServices(category.id, 'categories')">
+						{{category.name}}
+					</button>
+				</li>
+				<li>
+	          <button type="button"
+	          	class="filter__show-all-button"
+	          	ng-click="overview.resetFilterType('categories')"
+	          	ng-disabled="!overview.currentFilters.categories.length || overview.currentFilters.categories.length === overview.categories.length"
+	          >
+	            Show all categories
+	         	</button>
+          </li>
+			</ul>
+			</div>
+		</div>
+
+		<div class="filter-bar__section">
+			<div class="filter-bar__section-inner">
+				<button type="button" class="filter__toggle toggle" ng-class="{ 'filter__toggle--active': overview.currentFilters.provider, 'filter__toggle--many': overview.currentFilters.providers.length > 1}" ng-click="overview.toggleProviderFilters()">
+					<strong>Providers:</strong>
+						<span ng-if="overview.currentFilters.providers.length === overview.providers.length || overview.currentFilters.providers.length === 0">All</span>
+						<span ng-if="overview.currentFilters.providers.length !== overview.providers.length">
+						{{overview.currentFilters.providers[0].name}}
+						<span class="filter__more-count" ng-if="overview.currentFilters.providers.length > 1">+ {{overview.currentFilters.providers.length - 1}} more</span>
+					</span>
+						<svg class="icon">
+							<use xlink:href="#icon-arrow-down"></use>
+						</svg>
+				</button>
+			</div>
+		</div>
+
+		<div class="filter-bar__section filter-search">
+			<form class="filter-bar__section-inner" role="search">
+				<label class="filter-search__label" for="search">Search by keyword</label>
+				<input type="search" name="search" id="search" class="filter-search__input"  ng-model="overview.searchText" placeholder="Search" />
+				<button type="submit" ng-click="overview.doSearch()" class="filter-search__button">
+					<svg class="icon">
+						<use xlink:href="#icon-search"></use>
+					</svg>
+					<span>Search</span>
+				</button>
+			</form>
+		</div>
+
+		<div class="filter-bar__section filter-bar__section--short">
+			<button type="button" class="filter__toggle-button" ng-click="overview.showAll()">Show all</button>
+		</div>
+
+
+		<button type="button" class="filter-bar__more-btn" ng-click="overview.toggleSecondaryFilters()" ng-class="{'filter-bar__more-btn--active' : overview.showAllFilters}" aria-expanded="{{overview.showAllFilters}}" aria-controls="secondaryFilters">
+			More options
+			<svg class="icon">
+				<use xlink:href="#icon-arrow-down"></use>
+			</svg>
+		</button>
+	</div>
+
+	<div id="secondaryFilters" class="filter-bar__secondary">
+
+		<div class="filter-bar__section">
+		<div class="filter-bar__section-inner">
+			<button type="button" id="serviceUserFilters" class="filter__toggle toggle" ng-class="{ 'filter__toggle--active': overview.expandFilters.serviceUsers, 'filter__toggle--many': overview.currentFilters.serviceUsers.length > 1}" ng-click="overview.toggleFilter('serviceUsers')" aria-haspopup="true" aria-expanded="{{overview.expandFilters.serviceUsers}}">
+				<strong>Service user:</strong>
+				<span ng-if="overview.currentFilters.serviceUsers.length === overview.serviceUsers.length || overview.currentFilters.serviceUsers.length === 0">All</span>
+
+				<span ng-if="overview.currentFilters.serviceUsers.length !== overview.serviceUsers.length">
+					{{overview.currentFilters.serviceUsers[0].name}}
+					<span class="filter__more-count" ng-if="overview.currentFilters.serviceUsers.length > 1">+ {{overview.currentFilters.serviceUsers.length - 1}} more</span>
+				</span>
+
+				<svg class="icon">
+					<use xlink:href="#icon-arrow-down"></use>
+				</svg>
+
+			</button>
+			<ul class="filter__list" ng-show="overview.expandFilters.serviceUsers" aria-labelledby="serviceUserFilters">
+				<li class="filter__list-item" ng-repeat="serviceUser in overview.serviceUsers">
+					<button type="button" class="filter__button" ng-class="{ 'filter__button--active': serviceUser.filtered}" ng-click="overview.filterServices(serviceUser.id, 'serviceUsers')">
+						{{serviceUser.name}}
+					</button>
+				</li>
+				<li>
+	          <button type="button"
+	          	class="filter__show-all-button"
+	          	ng-click="overview.resetFilterType('serviceUsers')"
+	          	ng-disabled="!overview.currentFilters.serviceUsers.length || overview.currentFilters.serviceUsers.length === overview.serviceUsers.length"
+	          >
+	            Show all service users
+	         	</button>
+          </li>
+			</ul>
+			</div>
+		</div>
+
+
+
+		<div class="filter-bar__section">
+			<button type="button" class="filter__toggle-button filter__toggle-button--issues" ng-class="{ 'filter__toggle--active': overview.showIssues}" ng-click="overview.toggleIssues()">
+				<svg class="icon icon-warning">
+					<use xlink:href="#icon-warning"></use>
+				</svg>
+				Gaps/Issues
+			</button>
+		</div>
+
+		<div class="filter-bar__info">
+				<button ng-click="overview.openDialog()" class="button help">What do the stages mean?</button>
+				<a href="http://goo.gl/forms/3helLLSBgK5qRvpg1" target="_blank" class="feedback button help">Send us feedback</a>
+		</div>
+	</div>
+
+</div>
+
+<div class="filters__overlay" ng-show="overview.expandFilters.stages|| overview.expandFilters.categories || overview.expandFilters.serviceUsers || overview.expandFilters.providers" ng-click="overview.closeFilters()"></div>
