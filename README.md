@@ -20,9 +20,13 @@ gulp serve
 
 ## Deployment
 
+To deploy the current branch:
+
 ```
 gulp deploy
 ```
+
+This builds the gh-pages branch from the current branch and pushes it to GitHub.
 
 ## Running tests
 
@@ -36,4 +40,4 @@ https://github.com/johnpapa/angular-styleguide
 
 ## Contributing
 
-See [Issues](https://github.com/Sheffugees/asylumjourney-frontend/issues) for details of features, bugs etc.  Please target Pull Requests at the master branch.
+See [Issues](https://github.com/Sheffugees/asylumjourney-frontend/issues) for details of features, bugs etc.  Please target Pull Requests at the develop branch.
