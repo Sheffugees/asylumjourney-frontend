@@ -51,6 +51,21 @@ firebase deploy -P staging
 gulp test
 ````
 
+## Staging site
+
+http://sheffugees.amybdesign.co.uk/
+
+The staging site uses a fork of the main repo - https://github.com/amyvbenson/asylumjourney-frontend
+
+To deploy to staging, in the staging repo:
+
+* PR to master branch
+* Review & merge
+* Pull master
+* change the CNAME file to contain `sheffugees.amybdesign.co.uk`
+* gulp deploy
+* undo the CNAME change
+
 ## Style guide
 
 https://github.com/johnpapa/angular-styleguide

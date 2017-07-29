@@ -3,9 +3,9 @@
 
   angular
   .module('asylumjourneyFrontend')
-  .controller('OverviewController', OverviewController);
+  .controller('ToolController', ToolController);
 
-  function OverviewController(data, $route, $scope, ngDialog, $routeParams, $location) {
+  function ToolController(AuthService, data, $route, $scope, ngDialog, $routeParams, $location) {
     var vm = this;
     vm.services = [];
     vm.filtered = false;
@@ -17,6 +17,7 @@
     vm.searchText = $routeParams.q;
     vm.showAllFilters = false;
     vm.numStagesDisplayed = 0;
+    vm.authService = AuthService;
 
     vm.expandFilters = {
       stages: false,
@@ -317,8 +318,8 @@
       });
     };
 
-		// close all filters
-		vm.closeFilters = function() {
+    // close all filters
+    vm.closeFilters = function() {
       angular.forEach(vm.expandFilters, function (value, key) {
         vm.expandFilters[key] = false;
       });

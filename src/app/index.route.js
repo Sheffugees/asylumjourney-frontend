@@ -8,20 +8,20 @@
   function routeConfig($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'app/home/home.html',
+        templateUrl: 'app/components/home/home.html',
         controller: 'HomeController',
         controllerAs: 'home'
       })
       .when('/tool', {
-        templateUrl: 'app/main/main.html',
-        controller: 'MainController',
-        controllerAs: 'main',
+        templateUrl: 'app/components/tool/tool.html',
+        controller: 'ToolController',
+        controllerAs: 'tool',
         reloadOnSearch: false
       })
       .when('/service/:serviceId', {
-        templateUrl: 'app/main/main.html',
-        controller: 'MainController',
-        controllerAs: 'main'
+        templateUrl: 'app/components/tool/tool.html',
+        controller: 'ToolController',
+        controllerAs: 'tool'
       })
       .otherwise({
         redirectTo: '/'

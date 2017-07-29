@@ -12,7 +12,7 @@
 
   @each $stage, $color in $stages {
     &.card--#{$stage},
-    .overview-category__#{$stage} & {
+    .tool-category__#{$stage} & {
       border-color: $color;
     }
   }
@@ -53,14 +53,14 @@
     margin: $vr;
     line-height: $vr*3;
 
-    .overview-category__stage--cols-1 &, .overview-category__stage--cols-2 &, .overview-category__stage--cols-3 & {
+    .tool-category__stage--cols-1 &, .tool-category__stage--cols-2 &, .tool-category__stage--cols-3 & {
       padding: 10px 20px;
       height: 100%;
     }
   }
 
   .card__title {
-    .overview-category__stage--cols-1 &, .overview-category__stage--cols-2 &, .overview-category__stage--cols-3 & {
+    .tool-category__stage--cols-1 &, .tool-category__stage--cols-2 &, .tool-category__stage--cols-3 & {
       font-size: $font-size-base;
       font-weight: bold;
     }
@@ -68,10 +68,9 @@
 
   .card__description {
 
-    .overview-category__stage--cols-1 & , .overview-category__stage--cols-2 &, .overview-category__stage--cols-3 & {
+    .tool-category__stage--cols-1 & , .tool-category__stage--cols-2 &, .tool-category__stage--cols-3 & {
       display: block;
       font-size: $font-size-small;
-      // height: 32px;
       overflow: hidden;
     }
   }
