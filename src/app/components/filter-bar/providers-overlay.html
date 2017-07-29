@@ -4,16 +4,16 @@
   </h2>
 
   <ul class="filter__list filter__list--overlay">
-    <li class="filter__list-item" ng-repeat="provider in overview.providers | orderBy: 'name'">
-      <button type="button" class="filter__button" ng-class="{ 'filter__button--active': provider.filtered}" ng-click="overview.filterServices(provider.id, 'providers')">
+    <li class="filter__list-item" ng-repeat="provider in tool.providers | orderBy: 'name'">
+      <button type="button" class="filter__button" ng-class="{ 'filter__button--active': provider.filtered}" ng-click="tool.filterServices(provider.id, 'providers')">
         {{provider.name}}
       </button>
     </li>
     <li class="filter__list-item">
       <button type="button"
         class="filter__show-all-button"
-        ng-click="overview.resetFilterType('providers')"
-        ng-disabled="!overview.currentFilters.providers.length || overview.currentFilters.providers.length === overview.providers.length"
+        ng-click="tool.resetFilterType('providers')"
+        ng-disabled="!tool.currentFilters.providers.length || tool.currentFilters.providers.length === tool.providers.length"
       >
         Show all providers
       </button>

@@ -11,6 +11,8 @@
     vm.showCategories = false;
     vm.showLoader = true;
     vm.authService = AuthService;
+    vm.stages = [];
+    vm.categories = [];
 
     var filter = {};
 

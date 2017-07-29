@@ -16,6 +16,10 @@
 			AuthService.checkAuthentication();
 		});
 
+		if (typeof ga === 'undefined') {
+			return
+		}
+
 		if ($location.host() !== 'localhost') {
 			ga('create', 'UA-80488368-1', 'auto');
 
