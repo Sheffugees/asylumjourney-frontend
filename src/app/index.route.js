@@ -23,6 +23,12 @@
         controller: 'ToolController',
         controllerAs: 'tool'
       })
+      .when('/providers', {
+        templateUrl: 'app/components/providers/providers.html',
+        controller: 'ProvidersController',
+        controllerAs: 'providers',
+        authenticate: true
+      })
       .otherwise({
         redirectTo: '/'
       });
