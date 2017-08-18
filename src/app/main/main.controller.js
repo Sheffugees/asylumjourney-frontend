@@ -6,6 +6,8 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController() {
+  function MainController(AuthService) {
+    var vm = this;
+    vm.authService = AuthService;
   }
 })();
