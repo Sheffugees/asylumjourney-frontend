@@ -1,0 +1,27 @@
+<div class="login" ng-controller="AuthController as auth">
+
+  <h2>Log in</h2>
+
+  <p ng-if="auth.loginFailed">Login failed, please check your username and password and try again.</p>
+
+  <div ng-if="auth.authService.isAuthenticated">
+    <p>Successfully logged in</p>
+  </div>
+
+  <form name="login" ng-submit="auth.logIn()" ng-if="!auth.authService.isAuthenticated">
+    <p>
+      <label for="username">Username</label>
+      <input type="text" autocomplete="false" id="username" ng-model="auth.username" required />
+    </p>
+    <p>
+      <label for="password">Password</label>
+      <input type="password" id="password" ng-model="auth.password" required />
+    </p>
+    <p>
+      <button ng-if="!auth.saving" type="submit">Log in</button>
+      <span ng-if="auth.saving">Logging in....</span>
+    </p>
+
+  </form>
+
+</div>

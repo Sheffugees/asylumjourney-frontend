@@ -6,12 +6,13 @@
   .controller('HomeController', HomeController);
 
   /** @ngInject */
-  function HomeController(data, $location) {
+  function HomeController(AuthService, data, $location, $scope, ngDialog) {
     var vm = this;
     vm.showCategories = false;
     vm.showLoader = true;
+    vm.authService = AuthService;
 
-    var filter = {}
+    var filter = {};
 
     vm.doSearch = function () {
       $location.path('/tool').search({q: vm.searchText})
@@ -48,6 +49,13 @@
     function getCategories() {
       data.getCategories().then(function () {
         vm.categories  = data.categories;
+      });
+    }
+
+    vm.logIn = function () {
+      ngDialog.open({
+        template: 'app/components/auth/login-modal.html',
+        scope: $scope
       });
     }
 
