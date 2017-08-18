@@ -5,14 +5,12 @@
 		.module('asylumjourneyFrontend')
 		.service('data', data);
 
-	function data($q, $resource) {
-
-		var url = 'https://asylum-journey-dev.herokuapp.com/';
-		var categoriesResource = $resource(url + 'categories');
-		var providersResource = $resource(url + 'providers');
-		var servicesResource = $resource(url + 'services');
-		var serviceUsersResource = $resource(url + 'service-users');
-		var stagesResource = $resource(url + 'stages');
+	function data($q, $resource, config) {
+		var categoriesResource = $resource(config.apiUrl + 'categories');
+		var providersResource = $resource(config.apiUrl + 'providers');
+		var servicesResource = $resource(config.apiUrl + 'services');
+		var serviceUsersResource = $resource(config.apiUrl + 'service-users');
+		var stagesResource = $resource(config.apiUrl + 'stages');
 
 		var dataStore = {
 			getCategories: getCategories,

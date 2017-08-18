@@ -1,4 +1,6 @@
 <div>
+  <button ng-if="!home.authService.isAuthenticated" type="button" ng-click="home.logIn()">Log in</button>
+  <button ng-if="home.authService.isAuthenticated" type="button" ng-click="home.authService.logOut()">Log out</button>
 
   <header class="home-header">
     <div class="container">
@@ -58,7 +60,6 @@
       </div>
     </div>
   </div>
-
 
   <div class="home-info">
     <div class="container">
