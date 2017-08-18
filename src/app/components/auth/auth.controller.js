@@ -9,6 +9,7 @@
   function AuthController($timeout, AuthService, ngDialog) {
     var vm = this;
     vm.logIn = logIn;
+    vm.logInModal = logInModal;
     vm.authService = AuthService;
     vm.loginFailed = false;
     vm.saving = false;
@@ -24,6 +25,12 @@
       }, function () {
         vm.loginFailed = true;
         vm.saving = false;
+      });
+    }
+
+    function logInModal () {
+      ngDialog.open({
+        template: 'app/components/auth/login-modal.html'
       });
     }
   }
