@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>Providers</h1>
+
+  <ul>
+    <li ng-repeat="provider in providers.providers | orderBy: 'name'">
+      {{provider.name}}
+      <button type="button">Edit</button>
+      <button type="button">Delete</button>
+    </li>
+  </ul>
+
+</div>
