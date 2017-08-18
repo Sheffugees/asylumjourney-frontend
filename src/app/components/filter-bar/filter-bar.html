@@ -1,9 +1,6 @@
 <div class="filter-bar"  ng-class="{'filter-bar--open' : tool.showFilters || tool.showAllFilters}">
 
-	<div style="position: fixed; top: 0; z-index: 999999">
-	<button ng-if="!main.authService.isAuthenticated" type="button" ng-click="main.logIn()">Log in</button>
-	<button ng-if="main.authService.isAuthenticated" type="button" ng-click="main.authService.logOut()">Log out</button>
-	</div>
+	<auth-button></auth-button>
 
 	<button class="filter__mobile-toggle" ng-click="tool.toggleMobileFilters()">
 		<span ng-if="!tool.showFilters">Filter services</span>

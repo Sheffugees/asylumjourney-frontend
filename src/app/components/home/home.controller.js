@@ -6,21 +6,24 @@
   .controller('HomeController', HomeController);
 
   /** @ngInject */
-  function HomeController(AuthService, data, $location, $scope, ngDialog) {
+  function HomeController(AuthService, data, $location) {
     var vm = this;
     vm.showCategories = false;
     vm.showLoader = true;
     vm.authService = AuthService;
     vm.stages = [];
     vm.categories = [];
+    vm.selectStage = selectStage;
+    vm.doSearch = doSearch;
+    vm.go = go;
 
     var filter = {};
 
-    vm.doSearch = function () {
-      $location.path('/tool').search({q: vm.searchText})
+    function doSearch () {
+      $location.path('/tool').search({q: vm.searchText});
     }
 
-    vm.selectStage = function (selectedStage) {
+    function selectStage (selectedStage) {
       filter.stage = selectedStage;
       vm.showCategories = true;
 
@@ -33,7 +36,7 @@
       });
     }
 
-    vm.go = function (category) {
+    function go (category) {
       var params = {
         stages: filter.stage.id.toString(),
         categories: category ? category.id.toString() : 'all'
@@ -51,13 +54,6 @@
     function getCategories() {
       data.getCategories().then(function () {
         vm.categories  = data.categories;
-      });
-    }
-
-    vm.logIn = function () {
-      ngDialog.open({
-        template: 'app/components/auth/login-modal.html',
-        scope: $scope
       });
     }
 

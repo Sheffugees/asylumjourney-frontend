@@ -5,6 +5,7 @@
   .module('asylumjourneyFrontend')
   .controller('ToolController', ToolController);
 
+  /** @ngInject */
   function ToolController(AuthService, data, $route, $scope, ngDialog, $routeParams, $location) {
     var vm = this;
     vm.services = [];
