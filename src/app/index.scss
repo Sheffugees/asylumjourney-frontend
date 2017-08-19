@@ -5,7 +5,8 @@
 
 // variables
 
-// Greys
+// Monochrome
+$color-white: #fff;
 $grey-a: #333;
 $grey-b: #666;
 $grey-c: #999;
@@ -13,17 +14,28 @@ $grey-d: #ccc;
 $grey-e: #ddd;
 $grey-f: #fbfbfb;
 
+// Other colours
+$color-red: #ef5350;
+$color-orange: #e68344;
+$color-yellow: #e6c127;
+$color-green: #4caf50;
+$color-blue: #1692e0;
+$color-indigo: #846dce;
+$color-violet: #b200b2;
+
 // Aliases
 $color-text: $grey-a;
+$color-primary: $color-red;
+$color-secondary: $color-blue;
 
 // Stage colours
-$stage-1-color: #ef5350;
-$stage-2-color: #e68344;
-$stage-3-color: #e6c127;
-$stage-4-color: #4caf50;
-$stage-5-color: #1692e0;
-$stage-6-color: #846dce;
-$stage-7-color: #b200b2;
+$stage-1-color: $color-red;
+$stage-2-color: $color-orange;
+$stage-3-color: $color-yellow;
+$stage-4-color: $color-green;
+$stage-5-color: $color-blue;
+$stage-6-color: $color-indigo;
+$stage-7-color: $color-violet;
 
 $stages: (
 	stage-1: $stage-1-color,
@@ -35,8 +47,8 @@ $stages: (
 	stage-7: $stage-7-color
 );
 
-$color-success: #4caf50;
-$color-warning: #db2a2a;
+$color-success: $color-green;
+$color-warning: $color-red;
 
 // Dimensions
 $font-size-html: 100%;

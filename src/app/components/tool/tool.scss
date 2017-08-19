@@ -89,13 +89,14 @@ $numColumns: 8;
   align-items: center;
   display: flex;
   padding: $vr;
-  line-height: 1.2;
+  color: white;
   font-size: 12px;
-  overflow: hidden;
+  line-height: 1.2;
   font-weight: bold;
+  overflow: hidden;
+
   &.tool-stages__stage--1 {
     background: $stage-1-color;
-    color: white;
   }
   &.tool-stages__stage--2 {
     background: $stage-2-color;
@@ -105,18 +106,17 @@ $numColumns: 8;
   }
   &.tool-stages__stage--4 {
     background: $stage-4-color;
-    color: white;
   }
   &.tool-stages__stage--5 {
     background: $stage-5-color;
   }
   &.tool-stages__stage--6 {
     background: $stage-6-color;
-    color: white;
   }
   &.tool-stages__stage--7 {
     background: $stage-7-color;
   }
+
   &.brand {
     display: none;
 

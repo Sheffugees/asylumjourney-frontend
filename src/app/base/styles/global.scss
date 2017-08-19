@@ -38,3 +38,12 @@ img {
 strong {
 	font-weight: $font-weight-medium;
 }
+
+a {
+	color: $color-blue;
+
+	&:hover,
+	&:focus {
+		color: darken($color-blue, 10%);
+	}
+}
