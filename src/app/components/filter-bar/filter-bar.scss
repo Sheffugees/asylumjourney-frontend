@@ -6,8 +6,6 @@
 	display: block;
 }
 
-
-
 .filter-bar {
 	min-height: 44px;
 	background: white;
@@ -309,18 +307,18 @@
 
 .filter__button--active {
 	&:before {
-		border-color: $stage-3-color;
+		border-color: $color-green;
 	}
 
 	&:after {
-		content:"";
+		content: "";
 		display: block;
 		position: absolute;
 		left: 11px;
 		top: 15px;
 		width: 14px;
 		height: 14px;
-		background: $stage-3-color;
+		background: $color-green;
 
 		@media #{$BPD} {
 			left: 9px;
@@ -464,7 +462,7 @@
 	left: 0;
 	right: 0;
 	bottom: $vr*8;
-	background: #fff;
+	background: $color-white;
 	border-bottom: 1px solid $grey-d;
 	overflow: auto;
 

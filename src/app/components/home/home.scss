@@ -164,15 +164,6 @@
 		font-size: 1em;
 		margin-bottom: 16px;
 	}
-
-	a {
-		color: $stage-4-color;
-
-		&:hover, &:focus {
-			text-decoration: none;
-			color: darken($stage-4-color, 20%);
-		}
-	}
 }
 
 
