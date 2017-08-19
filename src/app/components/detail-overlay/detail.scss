@@ -69,8 +69,18 @@ body.ngdialog-open {
   display: flex;
   cursor: pointer;
   justify-content: space-between;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+  background: none;
+  width: 100%;
 }
 .details__provider-heading a {
+  text-decoration: underline;
+}
+.details__provider-indicator {
+  color: $stage-4-color;
   text-decoration: underline;
 }
 .tag-list {
