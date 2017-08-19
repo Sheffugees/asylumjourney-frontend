@@ -3,7 +3,10 @@
 * {
 	-webkit-tap-highlight-color: transparent;
 	word-wrap: break-word;
-	box-sizing: border-box;
+}
+
+*, :before, :after {
+	box-sizing: inherit;
 }
 
 html {
@@ -12,6 +15,7 @@ html {
 	-webkit-overflow-scrolling: touch;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	box-sizing: border-box;
 
 	// Disable iOS/WinMobile font size changes
 	@media screen and (max-device-width: 480px) {

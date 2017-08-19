@@ -19,8 +19,8 @@
 	background: url('/app/images/logo-basic.png') left center no-repeat;
 	background-size: 56px auto;
 	padding: 0 0 0 64px;
-  text-align: left;
-  float: left;
+    text-align: left;
+    float: left;
 
 	h1 {
 		line-height: 1;
@@ -33,31 +33,15 @@
 	text-align: center;
 	padding: 10px 0 20px 0;
 	background-size: 42% auto;
-
-	h2 {
-		font-weight: bold;
-		font-size: 1.3em;
-		margin-bottom: 0;
-	}
-
-	p {
-		margin-bottom: 6px;
-	}
 }
 
 .home-search {
 	margin: 0 auto 20px auto;
 	width: 100%;
-
-	input[type="search"] {
-		border: none;
-		box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
-	}
 }
 
 .home-search__input {
 	width: 55%;
-	padding: 10px;
 	margin-right: 10px;
 }
 

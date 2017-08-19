@@ -1,0 +1,48 @@
+[type="text"],
+[type="number"],
+[type="password"],
+[type="tel"],
+[type="email"],
+[type="search"] {
+	padding: 10px;
+	border: none;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+}
+
+label {
+	padding-right: 0.5em;
+}
+
+.form {
+	&__group,
+	&__actions {
+		margin: $vr*2 0;
+	}
+
+	&--inline {
+		display: flex;
+		flex-direction: column;
+
+		@media(min-width: $break-point-d-px) {
+			flex-direction: initial;
+			justify-content: center;
+			align-items: center;
+
+			> * + * {
+				margin-left: 1em;
+			}
+		}
+	}
+}
+
+.validation {
+	font-size: $font-size-small;
+
+	&--success {
+		color: green;
+	}
+
+	&--error {
+		color: $color-warning;
+	}
+}
