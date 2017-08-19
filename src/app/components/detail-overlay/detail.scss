@@ -65,6 +65,14 @@ body.ngdialog-open {
     border-bottom: 1px dotted #CCC;
     margin-bottom: $vr*2;
 }
+.details__provider-heading {
+  display: flex;
+  cursor: pointer;
+  justify-content: space-between;
+}
+.details__provider-heading a {
+  text-decoration: underline;
+}
 .tag-list {
     margin-bottom: $vr*2;
 }
