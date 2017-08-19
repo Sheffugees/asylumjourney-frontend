@@ -19,10 +19,10 @@
     <h3 class="details__sub-heading">Providers</h3>
 
     <div ng-repeat="provider in service._embedded.providers" class="details__provider">
-      <div class="details__provider-heading" ng-click="provider.show = !provider.show">
+      <button class="details__provider-heading" ng-click="provider.show = !provider.show">
         <h4 class="details__service-name">{{ provider.name }}</h4>
-        <a>{{ provider.show ? 'Hide' : 'Show' }}</a>
-      </div>
+        <span class="details__provider-indicator">{{ provider.show ? 'Hide' : 'Show' }}</span>
+      </button>
       <div ng-show="provider.show">
         <p>{{ provider.description }}</p>
         <p ng-if="provider.phone"><strong>Tel:</strong> {{ provider.phone }}</p>
