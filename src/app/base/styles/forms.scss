@@ -3,14 +3,39 @@
 [type="password"],
 [type="tel"],
 [type="email"],
-[type="search"] {
+[type="search"],
+[type="url"],
+textarea {
 	padding: 10px;
 	border: none;
 	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
 }
 
+[type="text"],
+[type="number"],
+[type="password"],
+[type="tel"],
+[type="email"],
+[type="url"],
+textarea {
+	width: 100%;
+
+	.form--inline & {
+		width: auto;
+	}
+}
+
+.textarea--large {
+	height: $vr*35;
+}
+
 label {
 	padding-right: 0.5em;
+	display: block;
+
+	.form--inline & {
+		display: inline;
+	}
 }
 
 .form {
@@ -44,5 +69,15 @@ label {
 
 	&--error {
 		color: $color-warning;
+	}
+}
+
+.form-page {
+	max-width: 600px;
+	margin: 0 auto;
+	padding: $vr*4 0;
+
+	h1 {
+		font-size: $font-size-large;
 	}
 }
