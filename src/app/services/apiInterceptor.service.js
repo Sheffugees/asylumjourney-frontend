@@ -18,7 +18,8 @@
       },
 
       'responseError': function(rejection) {
-        if (rejection.status === 401) {
+        var isLoginRequest = rejection.config.url.indexOf('login_check') !== -1;
+        if (rejection.status === 401 && !isLoginRequest) {
           $rootScope.$broadcast('logout')
         }
         return $q.reject(rejection);
