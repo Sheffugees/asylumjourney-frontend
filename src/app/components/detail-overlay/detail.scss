@@ -30,6 +30,8 @@ body.ngdialog-open {
     a {
         color: $color-secondary;
     }
+<<<<<<< HEAD
+=======
 
     &__heading {
         font-size: 20px;
@@ -67,38 +69,42 @@ body.ngdialog-open {
         border-bottom: 1px dotted #CCC;
         margin-bottom: $vr*2;
     }
-}
-.details__sub-heading {
-    font-size: 16px;
-    font-weight: bold;
-    border-top: 1px solid #CCC;
-    padding: $vr*2 0;
-}
-.details__service-name {
-    font-weight: bold;
-    margin-bottom: $vr*2;
-}
-.details__provider {
-    border-bottom: 1px dotted #CCC;
-    margin-bottom: $vr*2;
-}
-.details__provider-heading {
-  display: flex;
-  cursor: pointer;
-  justify-content: space-between;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: 0;
-  background: none;
-  width: 100%;
-}
-.details__provider-heading a {
-  text-decoration: underline;
-}
-.details__provider-indicator {
-  color: $stage-4-color;
-  text-decoration: underline;
+    &__heading {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: $vr*2;
+        display: flex;
+        border-bottom: 2px solid #666;
+    }
+    &__alert {
+        width: $vr*5;
+        height: $vr*5;
+        margin-right: $vr;
+        display: inline-block;
+        svg {
+            width: 100%;
+            height: 100%;
+            fill: $color-warning;
+        }
+        i {
+            position: absolute;
+            text-indent: -9999999px;
+        }
+    }
+    &__sub-heading {
+        font-size: 16px;
+        font-weight: bold;
+        border-top: 1px solid #CCC;
+        padding: $vr*2 0;
+    }
+    &__service-name {
+        font-weight: bold;
+        margin-bottom: $vr*2;
+    }
+    &__provider {
+        border-bottom: 1px dotted #CCC;
+        margin-bottom: $vr*2;
+    }
 }
 
 .tag-list {
