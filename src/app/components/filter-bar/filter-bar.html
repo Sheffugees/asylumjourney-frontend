@@ -118,6 +118,7 @@
 		</div>
 
 
+
 		<button type="button" class="filter-bar__more-btn" ng-click="tool.toggleSecondaryFilters()" ng-class="{'filter-bar__more-btn--active' : tool.showAllFilters}" aria-expanded="{{tool.showAllFilters}}" aria-controls="secondaryFilters">
 			More options
 			<svg class="icon">
@@ -178,7 +179,39 @@
 				<button ng-click="tool.openDialog()" class="button help">What do the stages mean?</button>
 				<a href="http://goo.gl/forms/3helLLSBgK5qRvpg1" target="_blank" class="feedback button help">Send us feedback</a>
 		</div>
-	</div>
+
+    <div class="filter-bar__admin-dropdown">
+      <button type="button" id="stageFilter" class="filter-bar__admin-btn"  ng-class="{'filter-bar__admin-btn--active'" ng-click="tool.toggleFilter('admin')" aria-haspopup="true" aria-expanded="{{tool.expandFilters.stages}}">
+        Admin
+        <svg class="icon">
+          <use xlink:href="#icon-arrow-down"></use>
+        </svg>
+      </button>
+      <ul class="dropdown__list" ng-show="tool.expandFilters.admin" aria-labelledby="stageFilter">
+        <li class="dropdown__list-item">
+          <a href="#">
+            Add service
+          </a>
+        </li>
+        <li class="dropdown__list-item">
+          <a href="#">
+            Add provider
+          </a>
+        </li>
+        <li class="dropdown__list-item">
+          <a href="#">
+            Manage providers
+          </a>
+        </li>
+        <li class="dropdown__list-item">
+          <a href="#">
+            Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
 
 </div>
 
