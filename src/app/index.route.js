@@ -29,6 +29,18 @@
         controllerAs: 'providers',
         authenticate: true
       })
+      .when('/providers/:id/edit', {
+        templateUrl: 'app/components/providers/edit-provider.html',
+        controller: 'ProviderEditController',
+        controllerAs: 'prov',
+        authenticate: true
+      })
+      .when('/providers/new', {
+        templateUrl: 'app/components/providers/edit-provider.html',
+        controller: 'ProviderEditController',
+        controllerAs: 'prov',
+        authenticate: true
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -1,11 +1,14 @@
+<admin-bar></admin-bar>
+
 <div class="container">
+
   <h1>Providers</h1>
 
   <ul class="providers">
     <li ng-repeat="provider in providers.providers | orderBy: 'name'">
       {{provider.name}}
-      <button type="button">Edit</button>
-      <button type="button">Delete</button>
+      <a ng-href="#/providers/{{provider.id}}/edit">Edit</a>
+      <button type="button" ng-click="providers.deleteProvider(provider.id)">Delete</button>
     </li>
   </ul>
 
