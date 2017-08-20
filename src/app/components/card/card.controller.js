@@ -5,8 +5,9 @@
   .module('asylumjourneyFrontend')
   .controller('CardController', CardController);
 
-    function CardController($scope, ngDialog, $routeParams, $rootScope) {
+    function CardController($scope, ngDialog, $routeParams, $rootScope, AuthService) {
         var vm = this;
+        vm.authService = AuthService;
         vm.service = $scope.service;
         angular.forEach($scope.service._embedded.providers, function(provider) {
           var googleMapsUrl = 'https://www.google.co.uk/maps/place/';
@@ -14,7 +15,6 @@
             .join(' ')
             .replace(new RegExp(/\s/g, 'g'), '+');
         });
-
 
 		vm.openDialog = openDialog;
 
