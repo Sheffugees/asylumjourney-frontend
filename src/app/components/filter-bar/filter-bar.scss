@@ -540,6 +540,8 @@
 }
 
 .dropdown__list {
+	font-size: $font-size-small;
+
 	@media #{$BPD} {
 		border: 1px solid #ccc;
 		position: absolute;
@@ -554,7 +556,21 @@
 
 .dropdown__list-item {
 	border-bottom: 1px solid $grey-d;
-	padding: 10px 0;
+
+	a, button {
+		padding: 12px;
+		display: block;
+		width: 100%;
+		text-decoration: none;
+		color: $color-text;
+		background: none;
+		border: none;
+		text-align: left;
+
+		&:hover, &:focus {
+			background: #eee;
+		}
+	}
 
 	@media #{$BPD} {
 		&:last-child {
@@ -563,20 +579,16 @@
 	}
 }
 
-.dropdown__list-item a {
-	padding: 12px;
-	display: block;
-	width: 100%;
-}
 
 .filter-bar__admin-btn {
 	border: 1px solid $grey-d;
 	height: 47px;
 	background: white;
-	padding: 0 12px;
+	padding: $vr*2 $vr*4 $vr*2 $vr*2;
 	width: 100%;
 	line-height: 1.2;
-
+	text-align: left;
+	position: relative;
 	@media #{$BPD} {
 		display: block;
 		position: absolute;
@@ -588,13 +600,25 @@
     line-height: 1;
     width: 66px;
     font-size: 14px;
+    text-align: center;
 	}
 
 	.icon {
+		position: absolute;
+    right: 8px;
+    top: 12px;
+    height: 20px;
+    width: 20px;
 		display: block;
-		width: 18px;
-		height: 18px;
-		margin: -2px auto 0 auto;
+
+		@media #{$BPD} {
+			position: relative;
+			margin: -2px auto 0 auto;
+			width: 18px;
+			height: 18px;
+			top: auto;
+			right: auto;
+		}
 	}
 
 	&.filter-bar__admin-btn--active {
@@ -606,12 +630,15 @@
 
 
 .filter-bar__admin-dropdown {
+	padding: 5px 10px;
+
 	@media #{$BPD} {
 		display: block;
 		position: absolute;
     right: 10px;
 		width: 66px;
-		padding-right: 0;
+		// padding-right: 0;
+		padding: 0;
 	}
 }
 
