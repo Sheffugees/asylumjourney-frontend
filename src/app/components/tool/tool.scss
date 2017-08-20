@@ -141,7 +141,7 @@ $numColumns: 8;
   position: relative;
   display: flex;
   border-top: 1px solid #CCC;
-  padding-top: $vr*6;
+  padding-top: $vr*8;
   margin-bottom: $vr*2;
 
   &:first-of-type {
@@ -154,6 +154,7 @@ $numColumns: 8;
   top: 0;
   padding: $vr;
   font-weight: 400;
+  font-size: $font-size-base;
 }
 
 @keyframes bcnloader {
@@ -191,8 +192,9 @@ $numColumns: 8;
   }
   .tool-category__heading {
     position: relative;
-    font-size: 16px;
-    padding: $vr*2 $vr;
+    // font-size: 16px;
+    padding: $vr $vr $vr*2 $vr;
+    margin: 0;
   }
 }
 
