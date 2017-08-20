@@ -1,8 +1,38 @@
 <div class="auth__toggle">
-  <button type="button" class="button-link" ng-if="!auth.authService.isAuthenticated" ng-click="auth.logInModal()"`>
+  <button type="button" class="auth__button" ng-if="!auth.authService.isAuthenticated" ng-click="auth.logInModal()"`>
   	Log in
   </button>
-  <button type="button" class="button-link" ng-if="auth.authService.isAuthenticated" ng-click="auth.authService.logOut()">
-  	Log out
-  </button>
+
+  <div ng-if="auth.authService.isAuthenticated" class="auth__menu-holder">
+
+    <button type="button" class="auth__button"
+      ng-click="options.show = !options.show"
+      ng-class="{'active': options.show}">
+    	Admin
+      <svg class="icon">
+        <use xlink:href="#icon-arrow-down"></use>
+      </svg>
+    </button>
+
+    <ul class="auth__menu" ng-show="options.show">
+      <li class="auth__menu-item">
+          <a href="#">
+            Add service
+          </a>
+        </li>
+        <li class="auth__menu-item">
+          <a href="#/providers/new">
+            Add provider
+          </a>
+        </li>
+        <li class="auth__menu-item">
+          <a href="#/providers">
+            Manage providers
+          </a>
+        </li>
+        <li class="auth__menu-item">
+          <button type="button" ng-click="tool.authService.logOut()">Log out</button>
+        </li>
+    </ul>
+  </div>
 </div>
