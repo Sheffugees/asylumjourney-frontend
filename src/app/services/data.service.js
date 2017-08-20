@@ -192,9 +192,7 @@
 			var deferred = $q.defer();
 			return servicesResource.delete({id: id}).$promise.then(function () {
 				var index = dataStore.services.map(function(x) {return x.id; }).indexOf(id);
-				console.log('index', index)
 				dataStore.services.splice(index, 1);
-				console.log('dataStore.services', dataStore.services)
 				deferred.resolve();
 				return deferred.promise;
 			});
@@ -238,7 +236,7 @@
 			return servicesResource.update(service).$promise.then(function () {
 				if (dataStore.services.length) {
 					var index = dataStore.services.map(function(x) {return x.id; }).indexOf(service.id);
-					dataStore.providers[index] = provider;
+					dataStore.service[index] = service;
 				}
 				deferred.resolve();
 				return deferred.promise;
