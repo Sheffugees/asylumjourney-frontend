@@ -166,15 +166,15 @@
 		.no-flexbox & {
 			float: left;
 		}
+
+		&.filter-bar__section--short {
+			width: 11%;
+		}
 	}
 
 	@media #{$BPE} {
 		&.filter-bar__section--short {
 			width: 8%;
-		}
-
-		&.filter-bar__section--medium {
-			width: 11%;
 		}
 
 		&.filter-search {
@@ -210,6 +210,7 @@
 	box-sizing: border-box!important;// TO DO sort this out
 	border: 1px solid $grey-d;
 	height: 47px;
+	box-shadow: none;
 }
 
 .filter-search__button {
