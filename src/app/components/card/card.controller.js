@@ -27,7 +27,6 @@
         }
 
         function deleteService () {
-            console.log('delete', vm.service.id)
             data.deleteService(vm.service.id).then(function () {
                 vm.deleted = true;
                 $rootScope.$broadcast('updateServices');
