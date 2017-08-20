@@ -30,7 +30,8 @@
 
     function logInModal () {
       ngDialog.open({
-        template: 'app/components/auth/login-modal.html'
+        template: 'app/components/auth/login-modal.html',
+        className: 'ngdialog-theme-default auth-modal'
       });
     }
   }

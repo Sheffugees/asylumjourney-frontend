@@ -6,7 +6,7 @@
   .controller('ToolController', ToolController);
 
   /** @ngInject */
-  function ToolController(AuthService, data, $route, $scope, ngDialog, $routeParams, $location) {
+  function ToolController(AuthService, data, $route, $scope, ngDialog, $rootScope, $routeParams, $location) {
     var vm = this;
     vm.services = [];
     vm.filtered = false;
@@ -361,6 +361,10 @@
       params[type] = 'all';
       $route.updateParams(params);
     }
+
+    $rootScope.$on('updateServices', function () {
+      getServices();
+    })
 
   }
 
