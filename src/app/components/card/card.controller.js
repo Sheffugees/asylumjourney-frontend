@@ -13,7 +13,7 @@
           var googleMapsUrl = 'https://www.google.co.uk/maps/place/';
           provider.addressUrl = googleMapsUrl + [provider.address, provider.postcode]
             .join(' ')
-            .replace(new RegExp(/\s/g, 'g'), '+');
+            .replace(/\s/g, '+');
         });
 
 		vm.openDialog = openDialog;
