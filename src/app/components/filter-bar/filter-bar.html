@@ -180,7 +180,7 @@
 				<a href="http://goo.gl/forms/3helLLSBgK5qRvpg1" target="_blank" class="feedback button help">Send us feedback</a>
 		</div>
 
-    <div class="filter-bar__admin-dropdown">
+    <div class="filter-bar__admin-dropdown" ng-if="tool.authService.isAuthenticated">
       <button type="button" id="stageFilter" class="filter-bar__admin-btn"  ng-class="{'filter-bar__admin-btn--active'" ng-click="tool.toggleFilter('admin')" aria-haspopup="true" aria-expanded="{{tool.expandFilters.stages}}">
         Admin
         <svg class="icon">
@@ -194,19 +194,17 @@
           </a>
         </li>
         <li class="dropdown__list-item">
-          <a href="#">
+          <a href="#/providers/new">
             Add provider
           </a>
         </li>
         <li class="dropdown__list-item">
-          <a href="#">
+          <a href="#/providers">
             Manage providers
           </a>
         </li>
         <li class="dropdown__list-item">
-          <a href="#">
-            Logout
-          </a>
+          <button type="button" ng-click="tool.authService.logOut()">Log out</button>
         </li>
       </ul>
     </div>
