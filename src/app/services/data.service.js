@@ -7,6 +7,7 @@
 
 	function data($http, $q, $resource, config) {
 		var categoriesResource = $resource(config.apiUrl + 'categories');
+		var issuesResource = $resource(config.apiUrl + 'issues');
 		var providersResource = $resource(config.apiUrl + 'providers/:id',
 			{id: '@id'},
 			{
@@ -25,22 +26,46 @@
 					method: 'PUT'
 				}
 			}
-			);
-		var servicesResource = $resource(config.apiUrl + 'services');
+		);
+		var servicesResource = $resource(config.apiUrl + 'services/:id',
+			{id: '@id'},
+			{
+				'save': {
+					method: 'POST',
+					interceptor: {
+						response: function (response) {
+							return response;
+						}
+					}
+				},
+				'delete': {
+					method: 'DELETE'
+				},
+				'update': {
+					method: 'PUT'
+				}
+			}
+		);
 		var serviceUsersResource = $resource(config.apiUrl + 'service-users');
 		var stagesResource = $resource(config.apiUrl + 'stages');
 
 		var dataStore = {
 			getCategories: getCategories,
+			getIssues: getIssues,
 			createProvider: createProvider,
 			deleteProvider: deleteProvider,
 			getProvider: getProvider,
 			getProviders: getProviders,
 			updateProvider: updateProvider,
+			createService: createService,
+			deleteService: deleteService,
+			getService: getService,
 			getServices: getServices,
+			updateService: updateService,
 			getServiceUsers: getServiceUsers,
 			getStages: getStages,
 			categories: [],
+			issues: [],
 			providers: [],
 			services: [],
 			serviceUsers: [],
@@ -58,6 +83,21 @@
 
 			return categoriesResource.get().$promise.then(function (response) {
 				dataStore.categories = angular.copy(response._embedded.categories);
+				deferred.resolve();
+				return deferred.promise;
+			});
+		}
+
+		function getIssues () {
+			var deferred = $q.defer();
+
+			if (this.issues.length) {
+				deferred.resolve();
+				return deferred.promise;
+			}
+
+			return issuesResource.get().$promise.then(function (response) {
+				dataStore.issues = angular.copy(response._embedded.issues);
 				deferred.resolve();
 				return deferred.promise;
 			});
@@ -133,6 +173,51 @@
 			});
 		}
 
+		function createService (service) {
+			var deferred = $q.defer();
+
+			return servicesResource.save(service).$promise.then(function (response) {
+				if (dataStore.services.length) {
+					var location = response.headers().location;
+					var id = location.split('/services/').pop();
+					service.id = id;
+					dataStore.services.push(service);
+				}
+				deferred.resolve();
+				return deferred.promise;
+			});
+		}
+
+		function deleteService (id) {
+			var deferred = $q.defer();
+			return servicesResource.delete({id: id}).$promise.then(function () {
+				var index = dataStore.services.map(function(x) {return x.id; }).indexOf(id);
+				console.log('index', index)
+				dataStore.services.splice(index, 1);
+				console.log('dataStore.services', dataStore.services)
+				deferred.resolve();
+				return deferred.promise;
+			});
+		}
+
+		function getService (id) {
+			var deferred = $q.defer();
+
+			var service = dataStore.services.filter(function(s) {
+				return s.id === id;
+			})[0];
+
+			if (service) {
+				deferred.resolve(service);
+				return deferred.promise;
+			}
+
+			return servicesResource.get({id: id}).$promise.then(function (response) {
+				deferred.resolve(response);
+				return deferred.promise;
+			});
+		}
+
 		function getServices () {
 			var deferred = $q.defer();
 
@@ -143,6 +228,18 @@
 
 			return servicesResource.get().$promise.then(function (response) {
 				dataStore.services = angular.copy(response._embedded.services);
+				deferred.resolve();
+				return deferred.promise;
+			});
+		}
+
+		function updateService (service) {
+			var deferred = $q.defer();
+			return servicesResource.update(service).$promise.then(function () {
+				if (dataStore.services.length) {
+					var index = dataStore.services.map(function(x) {return x.id; }).indexOf(service.id);
+					dataStore.providers[index] = provider;
+				}
 				deferred.resolve();
 				return deferred.promise;
 			});

@@ -1,0 +1,102 @@
+<admin-bar></admin-bar>
+<div class="container">
+
+  <div class="form-page">
+    <h1 ng-if="!service.isNew">Edit service</h1>
+    <h1 ng-if="service.isNew">New service</h1>
+
+    <div ng-if="service.saved">
+    Service saved
+    </div>
+
+    <form ng-submit="service.save()" ng-if="!service.saved">
+      <p>
+        <label for="name">Name *</label>
+        <input type="text" ng-model="service.service.name" id="name" required />
+      </p>
+
+      <p>
+        <label for="description">Description</label>
+        <textarea ng-model="service.service.description" id="description" class="textarea--large"></textarea>
+      </p>
+
+      <p>
+        <label for="endDate">End date</label>
+        <input type="text" ng-model="service.service.endDate" id="endDate" />
+      </p>
+
+      <p>
+        <label for="dataMaintainer">Data maintainer</label>
+        <input type="text" ng-model="service.service.dataMaintainer" id="dataMaintainer" />
+      </p>
+
+      <p>
+        <label for="categories">Categories *</label>
+        <ui-select multiple ng-model="service.service._embedded.categories" name="categories" id="categories">
+          <ui-select-match placeholder="Select categories">
+              <span ng-bind="$item.name"></span>
+          </ui-select-match>
+          <ui-select-choices repeat="item in (service.categories | filter: $select.search) track by item.id">
+              <span ng-bind="item.name"></span>
+          </ui-select-choices>
+        </ui-select>
+      </p>
+
+      <p>
+        <label for="providers">Providers</label>
+        <ui-select multiple ng-model="service.service._embedded.providers" name="providers" id="providers">
+          <ui-select-match placeholder="Select providers">
+              <span ng-bind="$item.name"></span>
+          </ui-select-match>
+          <ui-select-choices repeat="item in (service.providers | filter: $select.search) track by item.id">
+              <span ng-bind="item.name"></span>
+          </ui-select-choices>
+        </ui-select>
+      </p>
+
+      <p>
+        <label for="serviceUsers">Service Users *</label>
+        <ui-select multiple ng-model="service.service._embedded.serviceUsers" name="serviceUsers" id="serviceUsers">
+          <ui-select-match placeholder="Select service users">
+              <span ng-bind="$item.name"></span>
+          </ui-select-match>
+          <ui-select-choices repeat="item in (service.serviceUsers | filter: $select.search) track by item.id">
+              <span ng-bind="item.name"></span>
+          </ui-select-choices>
+        </ui-select>
+      </p>
+
+      <p>
+        <label for="stages">Stages *</label>
+        <ui-select multiple ng-model="service.service._embedded.stages" name="stages" id="stages">
+          <ui-select-match placeholder="Select stages">
+              <span ng-bind="$item.name"></span>
+          </ui-select-match>
+          <ui-select-choices repeat="item in (service.stages | filter: $select.search) track by item.id">
+              <span ng-bind="item.name"></span>
+          </ui-select-choices>
+        </ui-select>
+      </p>
+
+      <p>
+        <label for="issues">Issues</label>
+        <ui-select multiple ng-model="service.service._embedded.issues" name="issues" id="issues">
+          <ui-select-match placeholder="Select issues">
+              <span ng-bind="$item.name"></span>
+          </ui-select-match>
+          <ui-select-choices repeat="item in (service.issues | filter: $select.search) track by item.id">
+              <span ng-bind="item.name"></span>
+          </ui-select-choices>
+        </ui-select>
+      </p>
+
+      <p ng-if="service.showError">Error: Name, Categories, Service Users and Stages are all required.</p>
+
+
+      <button ng-if="!service.saving" type="submit">Save</button>
+      <span ng-if="service.saving">Saving....</span>
+
+      <a ng-href="#/tool">Cancel</a>
+    </form>
+  </div>
+</div>
