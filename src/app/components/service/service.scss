@@ -136,6 +136,23 @@ body.ngdialog-open {
     }
 }
 
+.permalink-container {
+    @media #{$BPD} {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.permalink {
+    width: 340px;
+    max-width: 100%;
+    box-shadow: none;
+    padding: 4px;
+
+    @media #{$BPD} {
+        margin-left: 10px;
+    }
+}
 
 @each $stage,
 $bgcolor in $stages {

@@ -23,7 +23,6 @@
     var id = parseInt($routeParams.id, 10);
     vm.isNew = id ? false : true;
 
-
     data.getCategories().then(function () {
       vm.categories = data.categories;
     });
@@ -83,11 +82,11 @@
       });
 
       if (vm.isNew) {
-        data.createService(vm.service).then(function () {
+        data.createService(vm.service).then(function (id) {
           vm.saving = false;
           vm.saved = true;
           $timeout(function () {
-            $location.path('tool');
+            $location.path('/service/' + id);
           }, 500);
         });
         return;
@@ -97,7 +96,7 @@
         vm.saving = false;
         vm.saved = true;
         $timeout(function () {
-          $location.path('tool');
+          $location.path('/service/' + vm.service.id);
         }, 500);
       });
     }

@@ -177,13 +177,13 @@
 			var deferred = $q.defer();
 
 			return servicesResource.save(service).$promise.then(function (response) {
+				var location = response.headers().location;
+				var id = location.split('/services/').pop();
+				service.id = id;
 				if (dataStore.services.length) {
-					var location = response.headers().location;
-					var id = location.split('/services/').pop();
-					service.id = id;
 					dataStore.services.push(service);
 				}
-				deferred.resolve();
+				deferred.resolve(id);
 				return deferred.promise;
 			});
 		}
