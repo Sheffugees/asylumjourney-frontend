@@ -20,10 +20,10 @@
         <textarea ng-model="service.service.description" id="description" class="textarea--large"></textarea>
       </p>
 
-      <p>
-        <label for="endDate">End date</label>
+      <label for="endDate">End date</label>
+      <datepicker date-format="dd MMM yyyy">
         <input type="text" ng-model="service.service.endDate" id="endDate" />
-      </p>
+      </datepicker>
 
       <p>
         <label for="dataMaintainer">Data maintainer</label>

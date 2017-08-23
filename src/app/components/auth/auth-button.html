@@ -16,17 +16,17 @@
 
     <ul class="auth__menu" ng-show="options.show">
       <li class="auth__menu-item">
-          <a href="#/service/new">
+          <a href="#/service/new" ng-click="options.show = false">
             Add service
           </a>
         </li>
         <li class="auth__menu-item">
-          <a href="#/providers/new">
+          <a href="#/providers/new" ng-click="options.show = false">
             Add provider
           </a>
         </li>
         <li class="auth__menu-item">
-          <a href="#/providers">
+          <a href="#/providers" ng-click="options.show = false">
             Manage providers
           </a>
         </li>
