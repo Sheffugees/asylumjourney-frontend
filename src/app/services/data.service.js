@@ -236,7 +236,7 @@
 			return servicesResource.update(service).$promise.then(function () {
 				if (dataStore.services.length) {
 					var index = dataStore.services.map(function(x) {return x.id; }).indexOf(service.id);
-					dataStore.service[index] = service;
+					dataStore.services[index] = service;
 				}
 				deferred.resolve();
 				return deferred.promise;

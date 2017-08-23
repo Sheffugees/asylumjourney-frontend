@@ -6,7 +6,7 @@
     .service('AuthService', AuthService);
 
   /** @ngInject */
-  function AuthService($http, $httpParamSerializer, $log, $window, config) {
+  function AuthService($http, $httpParamSerializer, $location, $log, $window, config) {
 
     function storeUser (token) {
       try {
@@ -51,6 +51,7 @@
     function logOut () {
       delete $window.localStorage.ajToken;
       auth.isAuthenticated =  false;
+      $location.path('/');
     }
 
     var auth = {
