@@ -19,13 +19,14 @@
     vm.showAllFilters = false;
     vm.numStagesDisplayed = 0;
     vm.authService = AuthService;
+    vm.showService = showService;
 
     vm.expandFilters = {
       stages: false,
       categories: false,
       serviceUsers: false,
       providers: false
-    }
+    };
 
     vm.currentFilters = {
       stages: [],
@@ -42,6 +43,14 @@
       getStages();
       getCategories();
       getServiceUsers();
+    }
+
+    function checkRoute () {
+      var id = $routeParams.serviceId;
+      if (id) {
+        showService(id);
+        $location.search('');
+      }
     }
 
     function filterFromRouteParams (type, item) {
@@ -88,6 +97,7 @@
         if (vm.searchText) {
           vm.doSearch();
         }
+        checkRoute();
         vm.showLoader = false;
       });
     }
@@ -160,7 +170,7 @@
         item.display = true;
         item.filtered = false;
       });
-    }
+    };
 
     function addToQS (qs, item, type) {
       var qsArray = [];
@@ -252,7 +262,7 @@
         });
         vm.numStagesDisplayed = displayedStages.length;
       }
-    }
+    };
 
     vm.toggleIssues = function () {
       vm.showIssues = !vm.showIssues;
@@ -293,7 +303,7 @@
     vm.toggleSecondaryFilters = function () {
       vm.showAllFilters = !vm.showAllFilters;
       vm.closeFilters();
-    }
+    };
 
     vm.toggleFilter = function (type) {
       vm.expandFilters[type] = !vm.expandFilters[type];
@@ -302,7 +312,7 @@
           vm.expandFilters[key] = false;
         }
       });
-    }
+    };
 
     // toggle Provider filter
     vm.toggleProviderFilters = function() {
@@ -360,11 +370,22 @@
       var params = {};
       params[type] = 'all';
       $route.updateParams(params);
+    };
+
+    function showService (id) {
+      var data = {id: id};
+      ngDialog.open({
+          template: 'app/components/service/service.html',
+          data: angular.toJson(data),
+          controller: 'ServiceController',
+          controllerAs: 'service'
+      });
     }
 
-    $rootScope.$on('updateServices', function () {
+    var updateEvent = $rootScope.$on('updateServices', function () {
       getServices();
-    })
+    });
+    $rootScope.$on('$destroy', updateEvent);
 
   }
 

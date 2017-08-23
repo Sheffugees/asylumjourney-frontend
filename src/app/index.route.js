@@ -18,11 +18,6 @@
         controllerAs: 'tool',
         reloadOnSearch: false
       })
-      // .when('/service/:serviceId', {
-      //   templateUrl: 'app/components/tool/tool.html',
-      //   controller: 'ToolController',
-      //   controllerAs: 'tool'
-      // })
       .when('/providers', {
         templateUrl: 'app/components/providers/providers.html',
         controller: 'ProvidersController',
@@ -41,14 +36,17 @@
         controllerAs: 'prov',
         authenticate: true
       })
-      .when('/service/:id/edit', {
-        templateUrl: 'app/components/service/edit-service.html',
+      .when('/service/:serviceId', {
+        redirectTo: '/tool'
+      })
+      .when('/services/:id/edit', {
+        templateUrl: 'app/components/service/service-edit.html',
         controller: 'ServiceEditController',
         controllerAs: 'service',
         authenticate: true
       })
-      .when('/service/new', {
-        templateUrl: 'app/components/service/edit-service.html',
+      .when('/services/new', {
+        templateUrl: 'app/components/service/service-edit.html',
         controller: 'ServiceEditController',
         controllerAs: 'service',
         authenticate: true
