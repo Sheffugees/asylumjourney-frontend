@@ -4,8 +4,8 @@ body.ngdialog-open {
     height: initial;
 }
 .ngdialog.ngdialog-theme-default .ngdialog-content {
-    width: 92%;
-    max-width: 1200px;
+    width: 90%;
+    max-width: 800px;
     font-family: freight-sans-pro, sans-serif;
 
     .touch & {
@@ -24,6 +24,10 @@ body.ngdialog-open {
     top: 6px;
 }
 
+.ngdialog.ngdialog-theme-default.service-modal .ngdialog-content {
+    width: 92%;
+    max-width: 1200px;
+}
 
 .details {
     font-size: $font-size-base;

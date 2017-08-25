@@ -34,11 +34,44 @@ input[type="search"] {
 }
 
 label {
-	padding-right: 0.5em;
 	display: block;
 
 	.form--inline & {
 		display: inline;
+		padding-right: 0.5em;
+	}
+}
+
+.has-field-info {
+	display: flex;
+	justify-content: space-between;
+}
+
+.field-info {
+	background: none;
+	-webkit-appearance: none;
+	border: none;
+	padding: 0;
+	width: 16px;
+	height: 16px;
+
+	svg {
+		width: 100%;
+		height: 100%;
+		fill: $color-blue;
+		vertical-align: middle;
+	}
+
+	&:hover, &:focus {
+		svg {
+			fill: #666;
+		}
+	}
+
+	span {
+		position: absolute;
+		left: -9999999px;
+		top: -9999999px;
 	}
 }
 
