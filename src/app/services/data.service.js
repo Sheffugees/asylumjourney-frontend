@@ -133,6 +133,9 @@
 			return providersResource.get({id: id}).$promise.then(function (response) {
 				deferred.resolve(response);
 				return deferred.promise;
+			}, function (error) {
+				deferred.reject(error);
+				return deferred.promise;
 			});
 		}
 
@@ -144,6 +147,9 @@
 					dataStore.providers[index] = provider;
 				}
 				deferred.resolve();
+				return deferred.promise;
+			}, function (error) {
+				deferred.reject(error);
 				return deferred.promise;
 			});
 		}
@@ -160,6 +166,9 @@
 				}
 				deferred.resolve();
 				return deferred.promise;
+			}, function (error) {
+				deferred.reject(error);
+				return deferred.promise;
 			});
 		}
 
@@ -169,6 +178,9 @@
 				var index = dataStore.providers.map(function(x) {return x.id; }).indexOf(id);
 				dataStore.providers.splice(index, 1);
 				deferred.resolve();
+				return deferred.promise;
+			}, function (error) {
+				deferred.reject(error);
 				return deferred.promise;
 			});
 		}
@@ -185,6 +197,9 @@
 				}
 				deferred.resolve(id);
 				return deferred.promise;
+			}, function (error) {
+				deferred.reject(error);
+				return deferred.promise;
 			});
 		}
 
@@ -194,6 +209,9 @@
 				var index = dataStore.services.map(function(x) {return x.id; }).indexOf(id);
 				dataStore.services.splice(index, 1);
 				deferred.resolve();
+				return deferred.promise;
+			}, function (error) {
+				deferred.reject(error);
 				return deferred.promise;
 			});
 		}
@@ -213,6 +231,9 @@
 			return servicesResource.get({id: id}).$promise.then(function (response) {
 				deferred.resolve(response);
 				return deferred.promise;
+			}, function (error) {
+				deferred.reject(error);
+				return deferred.promise;
 			});
 		}
 
@@ -228,6 +249,9 @@
 				dataStore.services = angular.copy(response._embedded.services);
 				deferred.resolve();
 				return deferred.promise;
+			}, function (error) {
+				deferred.reject(error);
+				return deferred.promise;
 			});
 		}
 
@@ -239,6 +263,9 @@
 					dataStore.services[index] = service;
 				}
 				deferred.resolve();
+				return deferred.promise;
+			}, function (error) {
+				deferred.reject(error);
 				return deferred.promise;
 			});
 		}
@@ -255,6 +282,9 @@
 				dataStore.serviceUsers = angular.copy(response._embedded.serviceUsers);
 				deferred.resolve();
 				return deferred.promise;
+			}, function (error) {
+				deferred.reject(error);
+				return deferred.promise;
 			});
 		}
 
@@ -269,6 +299,9 @@
 			return stagesResource.get().$promise.then(function (response) {
 				dataStore.stages = angular.copy(response._embedded.stages);
 				deferred.resolve();
+				return deferred.promise;
+			}, function (error) {
+				deferred.reject(error);
 				return deferred.promise;
 			});
 		}

@@ -1,12 +1,16 @@
 <admin-bar></admin-bar>
-<div class="container">
+<div class="container admin">
 
-  <div class="form-page">
-    <h1 ng-if="!prov.isNew">Edit provider</h1>
-    <h1 ng-if="prov.isNew">New provider</h1>
-
-    <div ng-if="prov.saved">
-    Provider saved
+  <div class="admin__form">
+    <div class="admin__heading">
+      <h1 ng-if="!prov.isNew">Edit provider</h1>
+      <h1 ng-if="prov.isNew">New provider</h1>
+    </div>
+    <div ng-if="prov.saved" class="admin-success">
+      <svg class="icon">
+        <use xlink:href="#icon-checkmark"></use>
+      </svg>
+      <h2>Provider saved</h2>
     </div>
 
     <form ng-submit="prov.save()" ng-if="!prov.saved">
@@ -50,10 +54,14 @@
         <input type="text" ng-model="prov.provider.postcode" id="postcode" />
       </p>
 
-      <button ng-if="!prov.saving" type="submit">Save</button>
-      <span ng-if="prov.saving">Saving....</span>
+      <p ng-if="prov.errorMessage !== ''" class="validation--error">{{prov.errorMessage}}</p>
 
-      <a ng-href="#/providers">Cancel</a>
+      <div class="buttons-container">
+        <button ng-disabled="prov.saving" type="submit" class="button button--primary button--large">
+          <span ng-if="!prov.saving">Save</span>
+          <span ng-if="prov.saving">Saving...</span>
+        </button>
+      </div>
     </form>
   </div>
 </div>

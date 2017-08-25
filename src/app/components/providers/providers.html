@@ -1,14 +1,19 @@
 <admin-bar></admin-bar>
 
-<div class="container">
+<div class="container admin">
 
-  <h1>Providers</h1>
+  <div class="admin__heading">
+    <h1>Manage providers</h1>
+    <a ng-href="#/providers/new" class="button button--secondary">Add new</a>
+  </div>
 
-  <ul class="providers">
+  <ul class="admin__list">
     <li ng-repeat="provider in providers.providers | orderBy: 'name'">
       {{provider.name}}
-      <a ng-href="#/providers/{{provider.id}}/edit">Edit</a>
-      <button type="button" ng-click="providers.deleteProvider(provider.id)">Delete</button>
+      <div class="admin__list-actions">
+        <a ng-href="#/providers/{{provider.id}}/edit" class="button button--primary">Edit</a>
+        <button type="button" ng-click="providers.confirmDelete(provider.id)" class="button button--primary">Delete</button>
+      </div>
     </li>
   </ul>
 

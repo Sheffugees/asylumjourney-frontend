@@ -13,7 +13,7 @@
     vm.save = save;
     vm.saving = false;
     vm.saved = false;
-    vm.showError = false;
+    vm.errorMessage = '';
     vm.categories = [];
     vm.issues = [];
     vm.providers = [];
@@ -52,7 +52,7 @@
         || !vm.service._embedded.stages || !vm.service._embedded.stages.length
         || !vm.service._embedded.serviceUsers || !vm.service._embedded.serviceUsers.length) {
         vm.saving = false;
-        vm.showError = true;
+        vm.errorMessage = 'Error: Name, Categories, Service Users and Stages are all required.';
         return;
       }
 
@@ -85,9 +85,12 @@
         data.createService(vm.service).then(function (id) {
           vm.saving = false;
           vm.saved = true;
+          vm.errorMessage = '';
           $timeout(function () {
             $location.path('/service/' + id);
           }, 500);
+        }, function () {
+          vm.errorMessage = 'Sorry there was a problem saving the service.'
         });
         return;
       }
@@ -95,9 +98,13 @@
       data.updateService(vm.service).then(function () {
         vm.saving = false;
         vm.saved = true;
+        vm.errorMessage = '';
         $timeout(function () {
           $location.path('/service/' + vm.service.id);
         }, 500);
+      }, function () {
+        vm.errorMessage = 'Sorry there was a problem saving the service.'
+        vm.saving = false;
       });
     }
 

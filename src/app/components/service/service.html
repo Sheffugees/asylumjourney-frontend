@@ -12,8 +12,15 @@
     </h2>
 
     <div ng-if="service.authService.isAuthenticated">
-    <a ng-href="#/services/{{service.details.id}}/edit"  class="button">Edit</a>
-    <button type="button" class="button" ng-click="service.deleteService()">Delete</button>
+      <div ng-if="!service.showDeleteConfirmation">
+        <a ng-href="#/services/{{service.details.id}}/edit"  class="button">Edit</a>
+        <button type="button" class="button" ng-click="service.confirmDelete()">Delete</button>
+      </div>
+      <div class="details__confirm" ng-if="service.showDeleteConfirmation">
+        <strong>Are you sure?</strong>
+        <button type="button" class="button button--primary" ng-click="service.deleteService(service.id)">Yes, delete it</button>
+        <button type="button" class="button" ng-click="service.cancelDelete()">No</button>
+      </div>
     </div>
 
     <div class="details__inner">

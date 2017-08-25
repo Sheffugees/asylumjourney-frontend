@@ -94,6 +94,15 @@ body.ngdialog-open {
         margin-left: 6px;
     }
 
+    &__confirm {
+        display: flex;
+        align-items: center;
+
+        .button {
+            margin: 0 5px;
+        }
+    }
+
     @media #{$BPD} {
         &__inner {
             display: flex;

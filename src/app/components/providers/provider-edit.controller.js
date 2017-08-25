@@ -12,6 +12,7 @@
     vm.save = save;
     vm.saving = false;
     vm.saved = false;
+    vm.errorMessage = '';
 
     var id = parseInt($routeParams.id, 10);
     vm.isNew = id ? false : true;
@@ -32,7 +33,10 @@
           $timeout(function () {
             $location.path('providers');
           }, 500);
-        });
+        }, function () {
+        vm.errorMessage = 'Sorry there was a problem saving the service.'
+        vm.saving = false;
+      });
         return;
       }
 
@@ -42,6 +46,9 @@
         $timeout(function () {
           $location.path('providers');
         }, 500);
+      }, function () {
+        vm.errorMessage = 'Sorry there was a problem saving the service.'
+        vm.saving = false;
       });
     }
 
