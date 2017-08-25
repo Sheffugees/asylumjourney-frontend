@@ -25,6 +25,10 @@ textarea {
 	}
 }
 
+input[type="search"] {
+	box-sizing: border-box; // to override normaliser
+}
+
 .textarea--large {
 	height: $vr*35;
 }
@@ -61,7 +65,6 @@ label {
 }
 
 .validation {
-	font-size: $font-size-small;
 
 	&--success {
 		color: green;
@@ -69,15 +72,8 @@ label {
 
 	&--error {
 		color: $color-warning;
+		font-weight: bold;
+		margin: $vr*2 0;
 	}
 }
 
-.form-page {
-	max-width: 600px;
-	margin: 0 auto;
-	padding: $vr*4 0;
-
-	h1 {
-		font-size: $font-size-large;
-	}
-}

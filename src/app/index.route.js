@@ -25,13 +25,13 @@
         authenticate: true
       })
       .when('/providers/:id/edit', {
-        templateUrl: 'app/components/providers/edit-provider.html',
+        templateUrl: 'app/components/providers/provider-edit.html',
         controller: 'ProviderEditController',
         controllerAs: 'prov',
         authenticate: true
       })
       .when('/providers/new', {
-        templateUrl: 'app/components/providers/edit-provider.html',
+        templateUrl: 'app/components/providers/provider-edit.html',
         controller: 'ProviderEditController',
         controllerAs: 'prov',
         authenticate: true
