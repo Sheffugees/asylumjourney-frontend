@@ -378,7 +378,8 @@
           template: 'app/components/service/service.html',
           data: angular.toJson(data),
           controller: 'ServiceController',
-          controllerAs: 'service'
+          controllerAs: 'service',
+          className: 'ngdialog-theme-default service-modal'
       });
     }
 

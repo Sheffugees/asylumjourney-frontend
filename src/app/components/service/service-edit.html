@@ -36,7 +36,14 @@
       </p>
 
       <p>
-        <label for="categories">Categories *</label>
+        <label for="categories" class="has-field-info">Categories *
+          <button type="button" class="field-info" ng-click="service.categoriesInfo()">
+            <svg class="icon">
+              <use xlink:href="#icon-info"></use>
+            </svg>
+            <span class="sr-only">Info</span>
+          </button>
+        </label>
         <ui-select multiple ng-model="service.service._embedded.categories" name="categories" id="categories">
           <ui-select-match placeholder="Select categories">
               <span ng-bind="$item.name"></span>
@@ -72,7 +79,13 @@
       </p>
 
       <p>
-        <label for="stages">Stages *</label>
+        <label for="stages" class="has-field-info">Stages *
+          <button type="button" class="field-info" ng-click="service.stagesInfo()">
+            <svg class="icon">
+              <use xlink:href="#icon-info"></use>
+            </svg>
+            <span class="sr-only">Info</span>
+          </button></label>
         <ui-select multiple ng-model="service.service._embedded.stages" name="stages" id="stages">
           <ui-select-match placeholder="Select stages">
               <span ng-bind="$item.name"></span>

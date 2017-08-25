@@ -6,7 +6,7 @@
   .controller('ServiceEditController', ServiceEditController);
 
   /** @ngInject */
-  function ServiceEditController($location, $rootScope, $routeParams, $scope, $timeout, data) {
+  function ServiceEditController($location, $rootScope, $routeParams, $scope, $timeout, data, ngDialog) {
     var vm = this;
     vm.service = {};
     vm.service._embedded = {};
@@ -19,6 +19,8 @@
     vm.providers = [];
     vm.serviceUsers = [];
     vm.stages = [];
+    vm.categoriesInfo = categoriesInfo;
+    vm.stagesInfo = stagesInfo;
 
     var id = parseInt($routeParams.id, 10);
     vm.isNew = id ? false : true;
@@ -42,6 +44,18 @@
     if (!vm.isNew) {
       data.getService(id).then(function (service) {
         vm.service = angular.copy(service);
+      });
+    }
+
+    function categoriesInfo () {
+      ngDialog.open({
+        template: 'app/components/info-overlay/categories.html'
+      });
+    }
+
+    function stagesInfo () {
+      ngDialog.open({
+        template: 'app/components/info-overlay/stages.html'
       });
     }
 
