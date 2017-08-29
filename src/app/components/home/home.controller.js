@@ -44,10 +44,19 @@
       $location.path('/tool').search(params);
     }
 
+    var numStagesRequests = 0;
     function getStages() {
+      numStagesRequests += 1;
       data.getStages().then(function () {
         vm.stages = angular.copy(data.stages);
         vm.showLoader = false;
+        getCategories();
+      }, function (error) {
+        // Unauthorized as JWT has expired
+        // retry once
+        if (error.status === 401 && numStagesRequests === 1) {
+          getStages();
+        }
       });
     }
 
@@ -58,7 +67,5 @@
     }
 
     getStages();
-    getCategories();
-
   }
 })();
