@@ -105,6 +105,7 @@
           }, 500);
         }, function () {
           vm.errorMessage = 'Sorry there was a problem saving the service.'
+          vm.saving = false;
         });
         return;
       }
