@@ -166,11 +166,34 @@
 	}
 }
 
+.home-logos {
+	margin: 16px 0;
+	display: flex;
+	align-items: center;
+
+	li {
+		display: inline-block;
+		width: 120px;
+		margin-right: 20px;
+	}
+
+	img {
+		max-width: 100%;
+	}
+}
+
 
 @media (min-width: 450px) {
 
 	.home-filters__stage {
 		width: percentage(1/4);
+	}
+
+	.home-logos {
+		// li {
+		// 	width: 120px;
+		// 	margin-right: 20px;
+		// }
 	}
 
 }
