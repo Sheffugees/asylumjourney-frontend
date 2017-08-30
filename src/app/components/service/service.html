@@ -25,21 +25,26 @@
 
     <div class="details__inner">
 
-      <div class="details__section">
+      <div class="details__block">
 
-        <p ng-bind-html="service.details.description | linky"></p>
+        <div class="details__section" ng-bind-html="service.details.description | linky"></div>
         <p ng-if="service.details.endDate"><strong>End Date:</strong> {{ service.details.endDate | date }}</p>
 
-        <div ng-if="service.details._embedded.issues">
+        <div class="details__section" ng-if="service.details._embedded.issues">
           <h3 class="details__sub-heading">Gaps or issues</h3>
           <p ng-repeat="issue in service.details._embedded.issues">{{ issue.name }}</p>
         </div>
 
       </div>
 
-      <div class="details__section">
+      <div class="details__block">
 
-        <div ng-if="service.details._embedded.providers">
+        <div class="details__section" ng-if="service.details.events">
+          <h3 class="details__sub-heading">Classes &amp; Events</h3>
+          <div ng-bind-html="service.details.events | linky"></div>
+        </div>
+
+        <div class="details__section" ng-if="service.details._embedded.providers">
           <h3 class="details__sub-heading details__sub-heading--providers">Providers</h3>
 
           <div ng-repeat="provider in service.details._embedded.providers" class="details__provider">
@@ -62,8 +67,16 @@
           </div>
         </div>
 
-
+        <div class="details__section" ng-if="service.details.resources.length">
+          <h3 class="details__sub-heading">Printable resources</h3>
+          <ul>
+          <li ng-repeat="resource in service.details.resources">
+            <a href="{{resource.url}}" target="_blank">{{resource.name}}</a>
+          </li>
+          </ul>
+        </div>
       </div>
+
     </div>
     <div class="details__bottom">
       <ul class="tag-list">
