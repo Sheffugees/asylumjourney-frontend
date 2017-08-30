@@ -1,0 +1,30 @@
+.ui-select-container {
+  position: relative;
+  background: #eee;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+}
+
+.ui-select-choices {
+  background: white;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+}
+
+.ui-select-multiple.ui-select-bootstrap {
+  padding: 0;
+}
+
+.ui-select-multiple.ui-select-bootstrap input.ui-select-search {
+  height: auto;
+  box-shadow: none;
+  background: white!important;
+  width: 100%!important;
+  margin-bottom: 0;
+}
+
+.ui-select-bootstrap .ui-select-choices-row>span {
+  padding: 5px 10px;
+}
+
+.ui-select-multiple.ui-select-bootstrap .ui-select-match-item {
+  display: inline-block;
+}

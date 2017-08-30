@@ -1,0 +1,112 @@
+[type="text"],
+[type="number"],
+[type="password"],
+[type="tel"],
+[type="email"],
+[type="search"],
+[type="url"],
+textarea {
+	padding: 10px;
+	border: none;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+}
+
+[type="text"],
+[type="number"],
+[type="password"],
+[type="tel"],
+[type="email"],
+[type="url"],
+textarea {
+	width: 100%;
+
+	.form--inline & {
+		width: auto;
+	}
+}
+
+input[type="search"] {
+	box-sizing: border-box; // to override normaliser
+}
+
+.textarea--large {
+	height: $vr*35;
+}
+
+label {
+	display: block;
+
+	.form--inline & {
+		display: inline;
+		padding-right: 0.5em;
+	}
+}
+
+.has-field-info {
+	display: flex;
+	justify-content: space-between;
+}
+
+.field-info {
+	background: none;
+	-webkit-appearance: none;
+	border: none;
+	padding: 0;
+	width: 16px;
+	height: 16px;
+
+	svg {
+		width: 100%;
+		height: 100%;
+		fill: $color-blue;
+		vertical-align: middle;
+	}
+
+	&:hover, &:focus {
+		svg {
+			fill: #666;
+		}
+	}
+
+	span {
+		position: absolute;
+		left: -9999999px;
+		top: -9999999px;
+	}
+}
+
+.form {
+	&__group,
+	&__actions {
+		margin: $vr*2 0;
+	}
+
+	&--inline {
+		display: flex;
+		flex-direction: column;
+
+		@media(min-width: $break-point-d-px) {
+			flex-direction: initial;
+			justify-content: center;
+			align-items: center;
+
+			> * + * {
+				margin-left: 1em;
+			}
+		}
+	}
+}
+
+.validation {
+
+	&--success {
+		color: green;
+	}
+
+	&--error {
+		color: $color-warning;
+		font-weight: bold;
+		margin: $vr*2 0;
+	}
+}
+

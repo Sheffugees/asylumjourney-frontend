@@ -1,0 +1,29 @@
+<div class="tool" ng-class="{'show-issues': tool.showIssues, 'filters-open': tool.showAllFilters}">
+
+  <filter-bar></filter-bar>
+
+  <ul class="tool-stages tool-stages--cols-{{tool.numStagesDisplayed}}">
+    <li class="tool-stages__stage brand">
+    </li>
+    <li ng-if="stage.display" ng-repeat="stage in tool.stages" class="tool-stages__stage tool-stages__stage--{{stage.id}}">
+      <span>{{stage.name}}</span>
+    </li>
+  </ul>
+
+  <div ng-if="tool.showLoader" class="tool__loader">
+    <img ng-src="/app/images/loader-logo.svg" alt="Loading" />
+    Loading...
+  </div>
+
+  <div ng-if="category.display && !tool.showLoader" ng-repeat="category in tool.categories" class="tool-category">
+
+    <h2 class="tool-category__heading">{{category.name}}</h2>
+    <ul ng-if="stage.display" class="tool-category__stage tool-category__stage-{{stage.id}} tool-category__stage--cols-{{tool.numStagesDisplayed}}" ng-repeat="stage in tool.stages">
+      <li ng-repeat="service in tool.services | category: category.id | stage: stage.id | serviceUser: tool.filteredServiceUsers | provider: tool.filteredProviders" ng-if="service.display">
+        <service-card details="service"></service-card>
+      </li>
+    </ul>
+
+  </div>
+
+</div>

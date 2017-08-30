@@ -1,0 +1,32 @@
+<div class="auth" ng-controller="AuthController as auth">
+
+  <h2 class="auth__heading">Log in</h2>
+
+  <form name="login" class="auth__form" ng-submit="auth.logIn()" ng-if="!auth.authService.isAuthenticated">
+
+    <div class="form--inline">
+      <div class="form__group">
+        <label for="username">Username</label>
+        <input type="text" autocomplete="false" id="username" ng-model="auth.username" required />
+      </div>
+      <div class="form__group">
+        <label for="password">Password</label>
+        <input type="password" id="password" ng-model="auth.password" required />
+      </div>
+
+      <div class="form__actions">
+        <button ng-if="!auth.saving" type="submit" class="button-link">Log in</button>
+        <span ng-if="auth.saving">Logging in…</span>
+      </div>
+
+    </div>
+  </form>
+
+  <small ng-if="auth.loginFailed" class="validation validation--error">
+    Log in failed. Please check your username and password and try again.
+  </small>
+  <small ng-if="auth.authService.isAuthenticated" class="validation validation--success">
+    Successfully logged in.
+  </small>
+
+</div>

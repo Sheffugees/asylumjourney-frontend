@@ -8,20 +8,48 @@
   function routeConfig($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'app/home/home.html',
+        templateUrl: 'app/components/home/home.html',
         controller: 'HomeController',
         controllerAs: 'home'
       })
       .when('/tool', {
-        templateUrl: 'app/main/main.html',
-        controller: 'MainController',
-        controllerAs: 'main',
+        templateUrl: 'app/components/tool/tool.html',
+        controller: 'ToolController',
+        controllerAs: 'tool',
         reloadOnSearch: false
       })
+      .when('/providers', {
+        templateUrl: 'app/components/providers/providers.html',
+        controller: 'ProvidersController',
+        controllerAs: 'providers',
+        authenticate: true
+      })
+      .when('/providers/:id/edit', {
+        templateUrl: 'app/components/providers/provider-edit.html',
+        controller: 'ProviderEditController',
+        controllerAs: 'prov',
+        authenticate: true
+      })
+      .when('/providers/new', {
+        templateUrl: 'app/components/providers/provider-edit.html',
+        controller: 'ProviderEditController',
+        controllerAs: 'prov',
+        authenticate: true
+      })
       .when('/service/:serviceId', {
-        templateUrl: 'app/main/main.html',
-        controller: 'MainController',
-        controllerAs: 'main'
+        redirectTo: '/tool'
+      })
+      .when('/services/:id/edit', {
+        templateUrl: 'app/components/service/service-edit.html',
+        controller: 'ServiceEditController',
+        controllerAs: 'service',
+        authenticate: true
+      })
+      .when('/services/new', {
+        templateUrl: 'app/components/service/service-edit.html',
+        controller: 'ServiceEditController',
+        controllerAs: 'service',
+        authenticate: true
       })
       .otherwise({
         redirectTo: '/'

@@ -5,7 +5,8 @@
 
 // variables
 
-// Greys
+// Monochrome
+$color-white: #fff;
 $grey-a: #333;
 $grey-b: #666;
 $grey-c: #999;
@@ -13,17 +14,28 @@ $grey-d: #ccc;
 $grey-e: #ddd;
 $grey-f: #fbfbfb;
 
+// Other colours
+$color-red: #ef5350;
+$color-orange: #e68344;
+$color-yellow: #e6c127;
+$color-green: #4caf50;
+$color-blue: #1692e0;
+$color-indigo: #846dce;
+$color-violet: #b200b2;
+
 // Aliases
 $color-text: $grey-a;
+$color-primary: $color-red;
+$color-secondary: $color-blue;
 
 // Stage colours
-$stage-1-color: #ef5350;
-$stage-2-color: #F5DF65;
-$stage-3-color: #4CAF50;
-$stage-4-color: #1692e0;
-$stage-5-color: #CCC;
-$stage-6-color: #846dce;
-$stage-7-color: #f898a9;
+$stage-1-color: $color-red;
+$stage-2-color: $color-orange;
+$stage-3-color: $color-yellow;
+$stage-4-color: $color-green;
+$stage-5-color: $color-blue;
+$stage-6-color: $color-indigo;
+$stage-7-color: $color-violet;
 
 $stages: (
 	stage-1: $stage-1-color,
@@ -35,7 +47,8 @@ $stages: (
 	stage-7: $stage-7-color
 );
 
-$color-warning: #db2a2a;
+$color-success: $color-green;
+$color-warning: $color-red;
 
 // Dimensions
 $font-size-html: 100%;
@@ -49,6 +62,7 @@ $font-family-mono: 'Anonymous Pro', 'Droid Sans Mono', 'DejaVu Sans Mono', Monac
 $font-family-base: $font-family-sans-serif;
 
 // Font Sizing
+$font-size-x-large: 30px;
 $font-size-large: 21px;
 $font-size-base: 16px;
 $font-size-small: 14px;
