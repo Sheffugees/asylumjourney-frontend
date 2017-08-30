@@ -37,6 +37,9 @@ body.ngdialog-open {
         margin-bottom: $vr*2;
         white-space: pre-line;
 
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 
     a {
@@ -64,11 +67,14 @@ body.ngdialog-open {
             text-indent: -9999999px;
         }
     }
+    &__section {
+        border-top: 1px solid #CCC;
+        padding: $vr*2 0;
+    }
     &__sub-heading {
         font-size: 16px;
         font-weight: bold;
-        border-top: 1px solid #CCC;
-        padding: $vr*2 0;
+        padding: 0 0 $vr*2 0;
     }
     &__service-name {
         font-weight: bold;
@@ -76,7 +82,14 @@ body.ngdialog-open {
     }
     &__provider {
         border-bottom: 1px dotted #CCC;
-        margin-bottom: $vr*2;
+
+        &:last-of-type {
+            border-bottom: none;
+        }
+
+        p:last-child {
+            margin-bottom: $vr*2;
+        }
     }
     &__provider-heading {
         font-weight: 600;
@@ -112,14 +125,24 @@ body.ngdialog-open {
             display: flex;
         }
 
-        &__section {
+        &__block {
             width: 60%;
             padding-right: 20px;
 
-            &+ .details__section {
+            &+ .details__block {
                 width: 40%;
                 padding-left: 20px;
                 padding-right: 0;
+            }
+
+
+        }
+
+        &__section:first-of-type {
+            border-top: none;
+
+            .details__sub-heading {
+                padding-top: 0;
             }
         }
 
@@ -127,10 +150,6 @@ body.ngdialog-open {
             border-top: 1px solid #ccc;
         }
 
-        &__sub-heading.details__sub-heading--providers {
-            border-top: none;
-            padding-top: $vr;
-        }
     }
 }
 

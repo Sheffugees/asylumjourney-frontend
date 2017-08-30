@@ -36,6 +36,28 @@
       </p>
 
       <p>
+        <label for="events">Classes &amp; Events</label>
+        <textarea ng-model="service.service.events" id="events" class="textarea--large" required=""></textarea>
+      </p>
+
+      <div class="form-section">
+        <label for="resources">Printable resources</label>
+        <div class="inline-fields" ng-repeat="resource in service.service.resources">
+          <div>
+            <label for="resourceName-{{$index}}" class="sr-only">Name</label>
+            <input type="text" id="resourceName-{{$index}}" ng-model="resource.name" placeholder="Name" />
+          </div>
+          <div>
+            <label for="resourceUrl-{{$index}}" class="sr-only">Url</label>
+            <input type="text" id="resourceUrl-{{$index}}" ng-model="resource.url" placeholder="URL" ng-required="resource.name" />
+          </div>
+          <button type="button" ng-click="service.removeResource($index)">Remove</button>
+        </div>
+
+        <button type="button" class="button button--secondary" ng-click="service.addResource()">Add new</button>
+      </div>
+
+      <p>
         <label for="categories" class="has-field-info">Categories *
           <button type="button" class="field-info" ng-click="service.categoriesInfo()">
             <svg class="icon">

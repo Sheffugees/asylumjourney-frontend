@@ -21,6 +21,8 @@
     vm.stages = [];
     vm.categoriesInfo = categoriesInfo;
     vm.stagesInfo = stagesInfo;
+    vm.addResource = addResource;
+    vm.removeResource = removeResource;
 
     var id = parseInt($routeParams.id, 10);
     vm.isNew = id ? false : true;
@@ -47,6 +49,14 @@
       });
     }
 
+    function addResource () {
+      vm.service.resources.push({name: '', url: ''})
+    }
+
+    function removeResource (index) {
+      vm.service.resources.splice(index, 1);
+    }
+
     function categoriesInfo () {
       ngDialog.open({
         template: 'app/components/info-overlay/categories.html'
@@ -61,6 +71,8 @@
 
     function save () {
       vm.saving = true;
+
+      console.log(vm.service.resources)
 
       if (!vm.service._embedded.categories || !vm.service._embedded.categories.length
         || !vm.service._embedded.stages || !vm.service._embedded.stages.length
