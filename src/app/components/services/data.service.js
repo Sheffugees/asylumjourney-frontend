@@ -7,7 +7,7 @@
 
 	function data($q, $resource) {
 
-		var url = 'http://asylum-journey-dev.herokuapp.com/';
+		var url = 'https://asylum-journey-dev.herokuapp.com/';
 		var categoriesResource = $resource(url + 'categories');
 		var providersResource = $resource(url + 'providers');
 		var servicesResource = $resource(url + 'services');
