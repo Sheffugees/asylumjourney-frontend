@@ -10,6 +10,7 @@
     var vm = this;
     vm.service = {};
     vm.service._embedded = {};
+    vm.service.resources = [];
     vm.save = save;
     vm.saving = false;
     vm.saved = false;
@@ -72,8 +73,6 @@
     function save () {
       vm.saving = true;
 
-      console.log(vm.service.resources)
-
       if (!vm.service._embedded.categories || !vm.service._embedded.categories.length
         || !vm.service._embedded.stages || !vm.service._embedded.stages.length
         || !vm.service._embedded.serviceUsers || !vm.service._embedded.serviceUsers.length) {
@@ -105,6 +104,12 @@
       vm.service.stages = [];
       angular.forEach(vm.service._embedded.stages, function (stage) {
         vm.service.stages.push(stage.id);
+      });
+
+      angular.forEach(vm.service.resources, function (resource, i) {
+        if (resource.name === '' || resource.url === '') {
+          vm.service.resources.splice(i, 1)
+        }
       });
 
       if (vm.isNew) {

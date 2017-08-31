@@ -27,7 +27,7 @@
 
       <div class="details__block">
 
-        <div class="details__section" ng-bind-html="service.details.description | linky"></div>
+        <p class="details__section" ng-bind-html="service.details.description | linky"></p>
         <p ng-if="service.details.endDate"><strong>End Date:</strong> {{ service.details.endDate | date }}</p>
 
         <div class="details__section" ng-if="service.details._embedded.issues">
@@ -41,7 +41,7 @@
 
         <div class="details__section" ng-if="service.details.events">
           <h3 class="details__sub-heading">Classes &amp; Events</h3>
-          <div ng-bind-html="service.details.events | linky"></div>
+          <p ng-bind-html="service.details.events | linky"></p>
         </div>
 
         <div class="details__section" ng-if="service.details._embedded.providers">
