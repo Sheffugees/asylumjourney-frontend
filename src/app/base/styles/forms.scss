@@ -110,3 +110,25 @@ label {
 	}
 }
 
+.form-section, datepicker {
+	margin: $vr 0 $vr*2 0;
+}
+
+.inline-fields {
+	display: flex;
+	align-items: flex-end;
+	margin-bottom: $vr*2;
+
+	div {
+		width: 100%;
+		margin-right: 10px;
+	}
+
+	button {
+		width: 56px;
+		height: 40px;
+		flex-shrink: 0;
+		font-size: 14px;
+		padding: 0;
+	}
+}

@@ -10,6 +10,7 @@
     var vm = this;
     vm.service = {};
     vm.service._embedded = {};
+    vm.service.resources = [];
     vm.save = save;
     vm.saving = false;
     vm.saved = false;
@@ -21,6 +22,8 @@
     vm.stages = [];
     vm.categoriesInfo = categoriesInfo;
     vm.stagesInfo = stagesInfo;
+    vm.addResource = addResource;
+    vm.removeResource = removeResource;
 
     var id = parseInt($routeParams.id, 10);
     vm.isNew = id ? false : true;
@@ -45,6 +48,14 @@
       data.getService(id).then(function (service) {
         vm.service = angular.copy(service);
       });
+    }
+
+    function addResource () {
+      vm.service.resources.push({name: '', url: ''})
+    }
+
+    function removeResource (index) {
+      vm.service.resources.splice(index, 1);
     }
 
     function categoriesInfo () {
@@ -93,6 +104,12 @@
       vm.service.stages = [];
       angular.forEach(vm.service._embedded.stages, function (stage) {
         vm.service.stages.push(stage.id);
+      });
+
+      angular.forEach(vm.service.resources, function (resource, i) {
+        if (resource.name === '' || resource.url === '') {
+          vm.service.resources.splice(i, 1)
+        }
       });
 
       if (vm.isNew) {

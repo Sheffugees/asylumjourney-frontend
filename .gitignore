@@ -7,3 +7,4 @@ coverage/
 .publish/
 dist/
 *.log
+*.DS_Store
