@@ -13,16 +13,17 @@
 				ngDialog.closeAll();
 				$rootScope.dialogOpen = false;
 			}
-			AuthService.checkAuthentication();
-			if (next && next.authenticate && !AuthService.isAuthenticated) {
-				$location.path('/');
-        event.preventDefault();
-        return;
-			}
+			AuthService.checkAuthentication().then(function (){
+				if (next && next.authenticate && !AuthService.isAuthenticated) {
+					$location.path('/');
+	        event.preventDefault();
+	        return;
+				}
+			});
 		});
 
 		if (typeof ga === 'undefined') {
-			return
+			return;
 		}
 
 		if ($location.host() !== 'localhost') {
@@ -33,13 +34,7 @@
 			});
 		}
 
-		var logOutEvent = $rootScope.$on('logout', function () {
-			$location.path('/');
-			AuthService.logOut();
-		})
-
 		$rootScope.$on('$destroy', deregistrationCallback);
-		$rootScope.$on('$destroy', logOutEvent);
 	}
 
 })();

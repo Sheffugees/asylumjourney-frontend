@@ -6,7 +6,9 @@
     .factory('APIInterceptor', APIInterceptor);
 
   /** @ngInject */
-  function APIInterceptor ($q, $rootScope, $window, config) {
+  function APIInterceptor ($injector, $q, $rootScope, $timeout, $window, config) {
+    var isReAuthenticating = false;
+    var reAuthenticationFailed = false;
 
     return {
       request: function(request) {
@@ -18,12 +20,37 @@
       },
 
       'responseError': function(rejection) {
-        var isLoginRequest = rejection.config.url.indexOf('login_check') !== -1;
-        if (rejection.status === 401 && !isLoginRequest) {
-          $rootScope.$broadcast('logout')
+        if (rejection.status === 401 && rejection.data.message === 'Invalid JWT Token') {
+          var $http = $injector.get('$http');
+
+          if (!isReAuthenticating) {
+            isReAuthenticating = true;
+
+            return $injector.get('AuthService').refreshToken().then(function () {
+              isReAuthenticating = false;
+
+              return $http(rejection.config);
+            }, function () {
+              isReAuthenticating = false;
+              $timeout.cancel(retryTimeout);
+              reAuthenticationFailed = true;
+              $rootScope.$broadcast('logout');
+              $injector.get('AuthService').logOut();
+              return $q.reject(rejection);
+            });
+          }
+
+          var retryTimeout = $timeout(function () {
+            if (!isReAuthenticating && !reAuthenticationFailed) {
+              return $http(rejection.config);
+            }
+          }, 500);
+          return retryTimeout;
         }
+
         return $q.reject(rejection);
       }
     };
   }
 })();
+

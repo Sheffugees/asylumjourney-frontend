@@ -6,7 +6,7 @@
   .controller('HomeController', HomeController);
 
   /** @ngInject */
-  function HomeController(AuthService, data, $location) {
+  function HomeController(AuthService, data, $location, $rootScope) {
     var vm = this;
     vm.showCategories = false;
     vm.showLoader = true;
@@ -16,7 +16,6 @@
     vm.selectStage = selectStage;
     vm.doSearch = doSearch;
     vm.go = go;
-
     var filter = {};
 
     function doSearch () {
@@ -44,19 +43,10 @@
       $location.path('/tool').search(params);
     }
 
-    var numStagesRequests = 0;
     function getStages() {
-      numStagesRequests += 1;
       data.getStages().then(function () {
         vm.stages = angular.copy(data.stages);
         vm.showLoader = false;
-        getCategories();
-      }, function (error) {
-        // Unauthorized as JWT has expired
-        // retry once
-        if (error.status === 401 && numStagesRequests === 1) {
-          getStages();
-        }
       });
     }
 
@@ -67,5 +57,12 @@
     }
 
     getStages();
+    getCategories();
+
+    var logOutEvent = $rootScope.$on('logout', function () {
+      getStages();
+      getCategories();
+    });
+    $rootScope.$on('$destroy', logOutEvent);
   }
 })();
