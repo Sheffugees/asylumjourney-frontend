@@ -41,7 +41,7 @@
           }
 
           var retryTimeout = $timeout(function () {
-            if (!isReAuthenticating && !reAuthenticationFailed) {
+            if (!reAuthenticationFailed) {
               return $http(rejection.config);
             }
           }, 500);
