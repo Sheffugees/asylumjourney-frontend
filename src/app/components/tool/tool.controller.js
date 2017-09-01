@@ -342,8 +342,9 @@
       angular.forEach(vm.services, function(item) {
         var name = item.name.toLowerCase();
         var description = item.description ? item.description.toLowerCase() : '';
+        var events = item.events ? item.events.toLowerCase() : '';
 
-        if (name.indexOf(searchText) !== -1 || description.indexOf(searchText) !== -1) {
+        if (name.indexOf(searchText) !== -1 || description.indexOf(searchText) !== -1 || events.indexOf(searchText) !== -1) {
           updateFilteredItem(item, true);
           return;
         }
