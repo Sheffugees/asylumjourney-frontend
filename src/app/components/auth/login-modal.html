@@ -1,8 +1,7 @@
 <div class="auth" ng-controller="AuthController as auth">
 
-  <h2 class="auth__heading">Log in</h2>
-
   <form name="login" class="auth__form" ng-submit="auth.logIn()" ng-if="!auth.authService.isAuthenticated">
+    <h2 class="auth__heading">Log in</h2>
 
     <div class="form--inline">
       <div class="form__group">
@@ -25,8 +24,12 @@
   <small ng-if="auth.loginFailed" class="validation validation--error">
     Log in failed. Please check your username and password and try again.
   </small>
-  <small ng-if="auth.authService.isAuthenticated" class="validation validation--success">
-    Successfully logged in.
-  </small>
+
+  <div ng-if="auth.authService.isAuthenticated" class="admin-success">
+    <svg class="icon" aria-hidden="true">
+      <use xlink:href="#icon-checkmark"></use>
+    </svg>
+    <h2>Logged in</h2>
+  </div>
 
 </div>
