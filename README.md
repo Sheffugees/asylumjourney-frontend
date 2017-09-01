@@ -20,13 +20,30 @@ gulp serve
 
 ## Deployment
 
-To deploy the current branch:
+You will need to have access to the Firebase projects and install the CLI `npm install -g firebase-tools` to deploy.
+
+Before deploying you need to run `gulp build` to build the latest version to the dist folder.
+
+### Deploying to production
+
+In the master branch
 
 ```
-gulp deploy
+gulp build
+
+firebase deploy
 ```
 
-This builds the gh-pages branch from the current branch and pushes it to GitHub.
+### Deploying to staging
+
+In the develop branch
+
+```
+gulp build
+
+firebase deploy --project aj-staging
+```
+
 
 ## Running tests
 
