@@ -85,6 +85,9 @@
 				dataStore.categories = angular.copy(response._embedded.categories);
 				deferred.resolve();
 				return deferred.promise;
+			}, function (error) {
+				deferred.reject(error);
+				return deferred.promise;
 			});
 		}
 
