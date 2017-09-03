@@ -1,3 +1,4 @@
+ /* global moment:false */
 (function () {
   'use strict';
 
@@ -24,7 +25,7 @@
         return true;
       }
       var base64 = base64Url.replace('-', '+').replace('_', '/');
-      var parsedToken = JSON.parse($window.atob(base64));
+      var parsedToken = angular.fromJson($window.atob(base64))
       var expiry = moment.unix(parsedToken.exp);
       var current = moment();
       var hasExpired = expiry.isBefore(current);

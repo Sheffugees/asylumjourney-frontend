@@ -2,8 +2,8 @@
 	'use strict';
 
 	angular
-		.module('asylumjourneyFrontend')
-		.run(runBlock);
+	.module('asylumjourneyFrontend')
+	.run(runBlock);
 
 	/** @ngInject */
 	function runBlock(ngDialog, $rootScope, $location, AuthService) {
@@ -16,8 +16,8 @@
 			AuthService.checkAuthentication().then(function (){
 				if (next && next.authenticate && !AuthService.isAuthenticated) {
 					$location.path('/');
-	        event.preventDefault();
-	        return;
+					event.preventDefault();
+					return;
 				}
 			});
 		});
