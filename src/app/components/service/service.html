@@ -44,6 +44,15 @@
           <p ng-bind-html="service.details.events | linky"></p>
         </div>
 
+        <div class="details__section" ng-if="service.details.resources.length">
+          <h3 class="details__sub-heading">Printable resources</h3>
+          <ul>
+          <li ng-repeat="resource in service.details.resources">
+            <a href="{{resource.url}}" target="_blank">{{resource.name}}</a>
+          </li>
+          </ul>
+        </div>
+
         <div class="details__section" ng-if="service.details._embedded.providers">
           <h3 class="details__sub-heading details__sub-heading--providers">Providers</h3>
 
@@ -65,15 +74,6 @@
               <p ng-if="service.authService.isAuthenticated"><a ng-href="#/providers/{{provider.id}}/edit" class="button">Edit</a></p>
             </div>
           </div>
-        </div>
-
-        <div class="details__section" ng-if="service.details.resources.length">
-          <h3 class="details__sub-heading">Printable resources</h3>
-          <ul>
-          <li ng-repeat="resource in service.details.resources">
-            <a href="{{resource.url}}" target="_blank">{{resource.name}}</a>
-          </li>
-          </ul>
         </div>
       </div>
 
