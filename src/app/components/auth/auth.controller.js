@@ -6,13 +6,16 @@
   .controller('AuthController', AuthController);
 
   /** @ngInject */
-  function AuthController($timeout, AuthService, ngDialog) {
+  function AuthController($scope, $timeout, AuthService, ngDialog) {
     var vm = this;
     vm.logIn = logIn;
     vm.logInModal = logInModal;
     vm.authService = AuthService;
     vm.loginFailed = false;
     vm.saving = false;
+    vm.options = {
+      show: false
+    }
 
     function logIn () {
       vm.saving = true;
@@ -34,6 +37,10 @@
         className: 'ngdialog-theme-default auth-modal'
       });
     }
+
+    $scope.$on('$routeChangeStart', function(next, current) {
+      vm.options.show = false;
+    });
   }
 
 })();
