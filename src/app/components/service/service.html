@@ -11,16 +11,22 @@
       {{ service.details.name }}
     </h2>
 
-    <div ng-if="service.authService.isAuthenticated">
-      <div ng-if="!service.showDeleteConfirmation">
+    <div class="details__admin">
+
+    <span ng-if="service.authService.isAuthenticated">
+      <span ng-if="!service.showDeleteConfirmation">
         <a ng-href="#/services/{{service.details.id}}/edit"  class="button">Edit</a>
         <button type="button" class="button" ng-click="service.confirmDelete()">Delete</button>
-      </div>
-      <div class="details__confirm" ng-if="service.showDeleteConfirmation">
+
+      </span>
+      <span class="details__confirm" ng-if="service.showDeleteConfirmation">
         <strong>Are you sure?</strong>
         <button type="button" class="button button--primary" ng-click="service.deleteService(service.id)">Yes, delete it</button>
         <button type="button" class="button" ng-click="service.cancelDelete()">No</button>
-      </div>
+      </span>
+    </span>
+
+      <button type="button" class="button details__print" ng-if="!service.showDeleteConfirmation" ng-click="service.print()">Print</button>
     </div>
 
     <div class="details__inner">
@@ -63,7 +69,7 @@
                 <span class="details__provider-indicator">{{ provider.show ? 'Hide' : 'Show' }}</span>
               </button>
             </h4>
-            <div ng-show="provider.show">
+            <div class="details__provider-content" ng-show="provider.show">
               <p>{{ provider.description }}</p>
               <p ng-if="provider.phone"><strong>Tel:</strong> {{ provider.phone }}</p>
               <p ng-if="provider.email"><strong>Email:</strong> <a href="mailto:{{ provider.email }}">{{ provider.email }}</a></p>
@@ -71,7 +77,7 @@
               <p ng-if="provider.address"><strong>Address:</strong>
                 <a href="{{ provider.addressUrl }}" target="_blank">{{ provider.address }}, {{ provider.postcode }}</a>
               </p>
-              <p ng-if="service.authService.isAuthenticated"><a ng-href="#/providers/{{provider.id}}/edit" class="button">Edit</a></p>
+              <p ng-if="service.authService.isAuthenticated"><a ng-href="#/providers/{{provider.id}}/edit" class="button details__edit-provider">Edit</a></p>
             </div>
           </div>
         </div>

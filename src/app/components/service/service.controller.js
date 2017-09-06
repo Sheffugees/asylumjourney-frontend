@@ -6,7 +6,7 @@
   .controller('ServiceController', ServiceController);
 
   /** @ngInject */
-  function ServiceController($location, $rootScope, $scope, $timeout, AuthService, data, ngDialog) {
+  function ServiceController($location, $rootScope, $scope, $timeout, $window, AuthService, data, ngDialog) {
     var vm = this;
     vm.id = $scope.ngDialogData.id;
     vm.authService = AuthService;
@@ -14,10 +14,8 @@
     vm.confirmDelete = confirmDelete;
     vm.deleteService = deleteService;
     vm.showDeleteConfirmation = false;
+    vm.print = print;
     vm.path = $location.protocol() + '://' + $location.host();
-    if ($location.port()) {
-      vm.path += ':' + $location.port();
-    }
 
     data.getService(vm.id).then(function (response) {
       vm.details = response;
@@ -50,6 +48,10 @@
         .replace(/\s/g, '+');
       });
       return providers;
+    }
+
+    function print () {
+      $window.print();
     }
 
   }

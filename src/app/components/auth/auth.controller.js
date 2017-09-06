@@ -38,7 +38,7 @@
       });
     }
 
-    $scope.$on('$routeChangeStart', function(next, current) {
+    $scope.$on('$routeChangeStart', function() {
       vm.options.show = false;
     });
   }

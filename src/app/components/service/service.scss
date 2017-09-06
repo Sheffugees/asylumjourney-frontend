@@ -83,10 +83,6 @@ body.ngdialog-open {
     &__provider {
         border-bottom: 1px dotted #CCC;
 
-        &:last-of-type {
-            border-bottom: none;
-        }
-
         p:last-child {
             margin-bottom: $vr*2;
         }
@@ -190,5 +186,26 @@ $bgcolor in $stages {
     .tag-list__tag--#{$stage} {
         background: $bgcolor;
         color: $color-text;
+    }
+}
+
+@media print {
+    html.ngdialog-open, body.ngdialog-open {
+        height: 100%!important;
+    }
+    .ngdialog {
+        position: absolute!important;
+        overflow: visible!important;
+        padding: 0!important;
+    }
+    .ngdialog.ngdialog-theme-default .ngdialog-content {
+        width: 100%!important;
+        max-width: 100%!important;
+    }
+    .details__provider-content.ng-hide {
+        display: block!important;
+    }
+    .details__admin, .details__edit-provider, .details__provider-indicator, .ngdialog-close, .details__print {
+        display: none!important;
     }
 }
