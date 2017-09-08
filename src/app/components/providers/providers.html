@@ -4,14 +4,14 @@
 
   <div class="admin__heading">
     <h1>Manage providers</h1>
-    <a ng-href="#/providers/new" class="button button--secondary">Add new</a>
+    <a ng-href="/providers/new" class="button button--secondary">Add new</a>
   </div>
 
   <ul class="admin__list">
     <li ng-repeat="provider in providers.providers | orderBy: 'name'">
       {{provider.name}}
       <div class="admin__list-actions">
-        <a ng-href="#/providers/{{provider.id}}/edit" class="button button--primary">Edit</a>
+        <a ng-href="/providers/{{provider.id}}/edit" class="button button--primary">Edit</a>
         <button type="button" ng-click="providers.confirmDelete(provider.id)" class="button button--primary">Delete</button>
       </div>
     </li>

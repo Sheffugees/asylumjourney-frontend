@@ -204,7 +204,7 @@
 	height: 0;
 }
 
-.filter-search__input {
+input[type="search"].filter-search__input {
 	width: 100%;
 	padding: 12px 40px 12px 12px;
 	border: 1px solid $grey-d;

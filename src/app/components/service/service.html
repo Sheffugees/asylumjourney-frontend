@@ -15,7 +15,7 @@
 
     <span ng-if="service.authService.isAuthenticated">
       <span ng-if="!service.showDeleteConfirmation">
-        <a ng-href="#/services/{{service.details.id}}/edit"  class="button">Edit</a>
+        <a ng-href="/services/{{service.details.id}}/edit"  class="button">Edit</a>
         <button type="button" class="button" ng-click="service.confirmDelete()">Delete</button>
 
       </span>
@@ -77,7 +77,7 @@
               <p ng-if="provider.address"><strong>Address:</strong>
                 <a href="{{ provider.addressUrl }}" target="_blank">{{ provider.address }}, {{ provider.postcode }}</a>
               </p>
-              <p ng-if="service.authService.isAuthenticated"><a ng-href="#/providers/{{provider.id}}/edit" class="button details__edit-provider">Edit</a></p>
+              <p ng-if="service.authService.isAuthenticated"><a ng-href="/providers/{{provider.id}}/edit" class="button details__edit-provider">Edit</a></p>
             </div>
           </div>
         </div>
@@ -93,7 +93,7 @@
 
       <p class="permalink-container">
         <span>Permanent link:</span>
-        <input type="text" disabled value="{{service.path}}/#/service/{{service.details.id}}" class="permalink" />
+        <input type="text" disabled value="{{service.path}}/service/{{service.details.id}}" class="permalink" />
       </p>
     </div>
   </article>
