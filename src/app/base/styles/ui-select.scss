@@ -28,3 +28,8 @@
 .ui-select-multiple.ui-select-bootstrap .ui-select-match-item {
   display: inline-block;
 }
+
+.ui-select-multiple.ui-select-bootstrap .ui-select-match .close {
+  vertical-align: text-bottom;
+  cursor: pointer;
+}
