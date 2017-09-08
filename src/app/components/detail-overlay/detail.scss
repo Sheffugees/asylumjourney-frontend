@@ -6,7 +6,7 @@ body.ngdialog-open {
 .ngdialog.ngdialog-theme-default .ngdialog-content {
     width: 90%;
     max-width: 800px;
-    font-family: freight-sans-pro;
+    font-family: $font-family-base;
 
     .touch & {
         height: auto;

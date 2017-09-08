@@ -43,7 +43,7 @@ $vertical-rhythm: 6px; // use $vr*X to maintain vertical consistency
 $vr: $vertical-rhythm; // Alias
 
 // Typography
-$font-family-sans-serif: freight-sans-pro, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family-sans-serif: 'Source Sans Pro', sans-serif;
 $font-family-serif: 'Georgia Pro', Georgia, Times, serif;
 $font-family-mono: 'Anonymous Pro', 'Droid Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, 'Lucida Console', Courier, monospace;
 $font-family-base: $font-family-sans-serif;
@@ -51,7 +51,7 @@ $font-family-base: $font-family-sans-serif;
 // Font Sizing
 $font-size-large: 21px;
 $font-size-base: 16px;
-$font-size-small: 14px;
+$font-size-small: 13px;
 $font-size-xsmall: 12px;
 $line-height-base: 1.5; // 24px
 $line-height-small: $vr*3; // 18px
