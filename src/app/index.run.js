@@ -26,7 +26,7 @@
 			return;
 		}
 
-		if ($location.host() !== 'localhost') {
+		if ($location.host() !== 'localhost' && $location.host() !== 'aj-staging.firebaseapp.com') {
 			ga('create', 'UA-80488368-1', 'auto');
 
 			deregistrationCallback = $rootScope.$on('$routeChangeSuccess', function() {
