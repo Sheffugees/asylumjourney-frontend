@@ -31,7 +31,7 @@ In the master branch
 ```
 gulp build
 
-firebase deploy
+firebase deploy -P production
 ```
 
 ### Deploying to staging
@@ -41,7 +41,7 @@ In the develop branch
 ```
 gulp build
 
-firebase deploy --project aj-staging
+firebase deploy -P staging
 ```
 
 

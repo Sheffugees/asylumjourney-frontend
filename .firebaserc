@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "asylum-journey-production"
+    "default": "aj-production",
+    "production": "aj-production",
+    "staging": "aj-staging"
   }
 }
