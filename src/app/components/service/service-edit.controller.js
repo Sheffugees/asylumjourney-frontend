@@ -16,9 +16,7 @@
     vm.saved = false;
     vm.errorMessage = '';
     vm.categories = [];
-    vm.issues = [];
     vm.providers = [];
-    vm.serviceUsers = [];
     vm.stages = [];
     vm.categoriesInfo = categoriesInfo;
     vm.stagesInfo = stagesInfo;
@@ -31,14 +29,8 @@
     data.getCategories().then(function () {
       vm.categories = data.categories;
     });
-    data.getIssues().then(function () {
-      vm.issues = data.issues;
-    });
     data.getProviders().then(function () {
       vm.providers = data.providers;
-    });
-    data.getServiceUsers().then(function () {
-      vm.serviceUsers = data.serviceUsers;
     });
     data.getStages().then(function () {
       vm.stages = data.stages;
@@ -74,8 +66,7 @@
       vm.saving = true;
 
       if (!vm.service._embedded.categories || !vm.service._embedded.categories.length
-        || !vm.service._embedded.stages || !vm.service._embedded.stages.length
-        || !vm.service._embedded.serviceUsers || !vm.service._embedded.serviceUsers.length) {
+        || !vm.service._embedded.stages || !vm.service._embedded.stages.length) {
         vm.saving = false;
         vm.errorMessage = 'Error: Name, Categories, Service Users and Stages are all required.';
         return;
@@ -86,19 +77,9 @@
         vm.service.categories.push(cat.id);
       });
 
-      vm.service.issues = [];
-      angular.forEach(vm.service._embedded.issues, function (issue) {
-        vm.service.issues.push(issue.id);
-      });
-
       vm.service.providers = [];
       angular.forEach(vm.service._embedded.providers, function (provider) {
         vm.service.providers.push(provider.id);
-      });
-
-      vm.service.serviceUsers = [];
-      angular.forEach(vm.service._embedded.serviceUsers, function (user) {
-        vm.service.serviceUsers.push(user.id);
       });
 
       vm.service.stages = [];

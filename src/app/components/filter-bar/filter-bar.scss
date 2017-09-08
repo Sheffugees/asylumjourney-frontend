@@ -67,11 +67,6 @@
 }
 
 .filter-bar__info {
-	@media #{$BPD} {
-		width: 54%;
-		justify-content: flex-end;
-	}
-
 	.button {
 		@media #{$BPD} {
 			margin: 0 5px;
@@ -386,26 +381,9 @@ input[type="search"].filter-search__input {
 	}
 }
 
-.filter__toggle-button--issues {
-	.icon {
-		fill: red;
-	}
-}
-
-
 .filter__toggle--active {
 	.icon {
 		transform: rotate(180deg);
-	}
-
-	&.filter__toggle-button--issues {
-		background: red;
-		color: white;
-		.icon {
-			transform: none;
-			fill: white;
-
-		}
 	}
 }
 

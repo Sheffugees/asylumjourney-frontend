@@ -7,7 +7,6 @@
 
 	function data($http, $q, $resource, config) {
 		var categoriesResource = $resource(config.apiUrl + 'categories');
-		var issuesResource = $resource(config.apiUrl + 'issues');
 		var providersResource = $resource(config.apiUrl + 'providers/:id',
 			{id: '@id'},
 			{
@@ -46,12 +45,10 @@
 				}
 			}
 		);
-		var serviceUsersResource = $resource(config.apiUrl + 'service-users');
 		var stagesResource = $resource(config.apiUrl + 'stages');
 
 		var dataStore = {
 			getCategories: getCategories,
-			getIssues: getIssues,
 			createProvider: createProvider,
 			deleteProvider: deleteProvider,
 			getProvider: getProvider,
@@ -62,13 +59,10 @@
 			getService: getService,
 			getServices: getServices,
 			updateService: updateService,
-			getServiceUsers: getServiceUsers,
 			getStages: getStages,
 			categories: [],
-			issues: [],
 			providers: [],
 			services: [],
-			serviceUsers: [],
 			stages: []
 		};
 		return dataStore;
@@ -87,21 +81,6 @@
 				return deferred.promise;
 			}, function (error) {
 				deferred.reject(error);
-				return deferred.promise;
-			});
-		}
-
-		function getIssues () {
-			var deferred = $q.defer();
-
-			if (this.issues.length) {
-				deferred.resolve();
-				return deferred.promise;
-			}
-
-			return issuesResource.get().$promise.then(function (response) {
-				dataStore.issues = angular.copy(response._embedded.issues);
-				deferred.resolve();
 				return deferred.promise;
 			});
 		}
@@ -265,24 +244,6 @@
 					var index = dataStore.services.map(function(x) {return x.id; }).indexOf(service.id);
 					dataStore.services[index] = service;
 				}
-				deferred.resolve();
-				return deferred.promise;
-			}, function (error) {
-				deferred.reject(error);
-				return deferred.promise;
-			});
-		}
-
-		function getServiceUsers () {
-			var deferred = $q.defer();
-
-			if (this.serviceUsers.length) {
-				deferred.resolve();
-				return deferred.promise;
-			}
-
-			return serviceUsersResource.get().$promise.then(function (response) {
-				dataStore.serviceUsers = angular.copy(response._embedded.serviceUsers);
 				deferred.resolve();
 				return deferred.promise;
 			}, function (error) {

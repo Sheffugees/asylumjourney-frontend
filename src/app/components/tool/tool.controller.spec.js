@@ -3,7 +3,7 @@
 
   describe('Tool controller', function () {
 
-    var $location, mockCategories, mockData, mockNgDialog, mockProviders, mockServices, mockServiceUsers, mockStages, scope, vm;
+    var $location, mockCategories, mockData, mockNgDialog, mockProviders, mockServices, mockStages, scope, vm;
 
     mockCategories = [
       {
@@ -49,20 +49,6 @@
         events: 'here I am'
       }
     ];
-    mockServiceUsers = [
-      {
-        id: 1,
-        name: 'service user 1'
-      },
-      {
-        id: 2,
-        name: 'service user 2'
-      },
-      {
-        id: 3,
-        name: 'service user 3'
-      }
-    ];
     mockStages = [
       {
         id: 1,
@@ -84,12 +70,10 @@
         getServices: function () {},
         getCategories: function () {},
         getProviders: function () {},
-        getServiceUsers: function () {},
         getStages: function () {},
         categories: mockCategories,
         providers: mockProviders,
         services: mockServices,
-        serviceUsers: mockServiceUsers,
         stages: mockStages
       }
 
@@ -110,7 +94,6 @@
         scope = $rootScope.$new();
         $location = _$location_;
         spyOn(mockData, 'getProviders').and.returnValue($q.when());
-        spyOn(mockData, 'getServiceUsers').and.returnValue($q.when());
         spyOn(mockData, 'getServices').and.returnValue($q.when());
         spyOn(mockData, 'getStages').and.returnValue($q.when());
         spyOn(mockData, 'getCategories').and.returnValue($q.when())
@@ -173,16 +156,6 @@
           }
           expect(vm.providers).toEqual(updatedProviders);
         });
-
-        it('should load the service users and set display to true on each', function() {
-          expect(mockData.getServiceUsers).toHaveBeenCalled();
-          var updatedServiceUsers = angular.fromJson(angular.toJson(mockServiceUsers));
-          for(var i = 0; i < updatedServiceUsers.length; i++) {
-            updatedServiceUsers[i].display = true;
-          }
-          expect(vm.serviceUsers).toEqual(updatedServiceUsers);
-        });
-
       });
 
       describe('Filtering', function () {
@@ -408,118 +381,30 @@
 
         });
 
-        describe('Filtering by service user', function () {
-
-          describe('Adding a filter', function () {
-
-            it('should set the display and filtered flags on the serviceUser to true', function () {
-              vm.filterServices(2, 'serviceUsers');
-              expect(vm.serviceUsers[1].display).toBe(true);
-              expect(vm.serviceUsers[1].filtered).toBe(true);
-            });
-
-            it('should add the serviceUser to the current filters', function () {
-              vm.filterServices(2, 'serviceUsers');
-               expect(vm.currentFilters.serviceUsers).toEqual([{id: 2, name: 'service user 2'}]);
-               expect(vm.filteredServiceUsers).toEqual([2]);
-            });
-
-            it('should add the serviceUser to the query string', function () {
-              vm.filterServices(2, 'serviceUsers');
-              expect($location.search()).toEqual({serviceUsers: 2});
-            });
-
-            it('should filter by multiple serviceUsers', function () {
-              vm.filterServices(2, 'serviceUsers');
-              expect($location.search()).toEqual({serviceUsers: 2});
-              scope.$apply();
-              vm.filterServices(3, 'serviceUsers');
-              expect(vm.currentFilters.serviceUsers).toEqual([{id: 2, name: 'service user 2'}, {id: 3, name: 'service user 3'}])
-              expect($location.search()).toEqual({ serviceUsers: '2,3' })
-            });
-
-          });
-
-          describe('Removing a filter', function () {
-            it('should set the display and filtered flags on the serviceUser to false', function () {
-              vm.filterServices(2, 'serviceUsers');
-              scope.$apply();
-              vm.filterServices(3, 'serviceUsers');
-              scope.$apply();
-              vm.filterServices(2, 'serviceUsers');
-              expect(vm.serviceUsers[1].display).toBe(false);
-              expect(vm.serviceUsers[1].filtered).toBe(false);
-            });
-
-            it('should set the display to true on all serviceUsers and filtered to false if removing the last filter of type', function () {
-              vm.filterServices(2, 'serviceUsers');
-              scope.$apply();
-              vm.filterServices(2, 'serviceUsers');
-              expect(vm.serviceUsers[0].display).toBe(true);
-              expect(vm.serviceUsers[1].display).toBe(true);
-              expect(vm.serviceUsers[2].display).toBe(true);
-              expect(vm.serviceUsers[1].filtered).toBe(false);
-            });
-
-            it('should remove the serviceUser from the current filters', function () {
-             vm.filterServices(2, 'serviceUsers');
-              scope.$apply();
-              vm.filterServices(2, 'serviceUsers');
-              expect(vm.currentFilters.serviceUsers).toEqual([]);
-              expect(vm.filteredServiceUsers).toEqual([]);
-            });
-
-            it('should remove the serviceUser from the query string', function () {
-              vm.filterServices(2, 'serviceUsers');
-              scope.$apply();
-              vm.filterServices(2, 'serviceUsers');
-              expect($location.search()).toEqual({serviceUsers: ''});
-            });
-          });
-
-        });
-
-        describe('Filter by services with issues', function () {
-
-          it('should', function () {
-            vm.toggleIssues();
-            expect(vm.showIssues).toBe(true);
-          })
-
-        });
-
         describe('Reset all filters', function () {
 
           beforeEach(function () {
             vm.filterServices(1, 'stages');
             vm.filterServices(3, 'providers');
-            vm.filterServices(2, 'serviceUsers');
             scope.$apply();
             vm.showAll();
           });
 
           it('should close all filters', function () {
-            expect(vm.expandFilters).toEqual({stages: false, categories: false, serviceUsers: false, providers: false});
+            expect(vm.expandFilters).toEqual({stages: false, categories: false, providers: false});
           });
 
           it('should reset each type of filter', function () {
             expect(vm.numStagesDisplayed).toEqual(mockStages.length);
             expect(vm.filteredProviders).toEqual([]);
-            expect(vm.filteredServiceUsers).toEqual([]);
             expect(vm.currentFilters.stages).toEqual([]);
             expect(vm.currentFilters.categories).toEqual([]);
-            expect(vm.currentFilters.serviceUsers).toEqual([]);
             expect(vm.currentFilters.providers).toEqual([]);
           });
 
           it('should clear the query string', function () {
             expect($location.search()).toEqual({});
           });
-
-          it('should not filter by issues', function () {
-            expect(vm.showIssues).toBe(false);
-          })
-
         });
 
         describe('Reset a filter type', function () {
@@ -550,15 +435,6 @@
             vm.resetFilterType('providers');
             expect(vm.currentFilters.providers).toEqual([]);
             expect($location.search()).toEqual({providers: 'all'})
-          });
-
-          it('should reset service users filters', function () {
-            vm.filterServices(2, 'serviceUsers');
-            vm.filterServices(3, 'serviceUsers');
-            scope.$apply();
-            vm.resetFilterType('serviceUsers');
-            expect(vm.currentFilters.serviceUsers).toEqual([]);
-            expect($location.search()).toEqual({serviceUsers: 'all'})
           });
         });
 
@@ -595,14 +471,10 @@
         expect(vm.providers[0].display).toBe(true);
         expect(vm.providers[1].display).toBe(true);
         expect(vm.providers[2].display).toBe(true);
-
-        expect(vm.serviceUsers[0].display).toBe(true);
-        expect(vm.serviceUsers[1].display).toBe(true);
-        expect(vm.serviceUsers[2].display).toBe(true);
       });
 
       it('should update the currentFilters', function () {
-        expect(vm.currentFilters).toEqual({stages: [{ id: 1, name: 'stage 1' }], categories: [{ id: 2, name: 'category 2' }], serviceUsers: [], providers: []})
+        expect(vm.currentFilters).toEqual({stages: [{ id: 1, name: 'stage 1' }], categories: [{ id: 2, name: 'category 2' }], providers: []})
       });
 
     });

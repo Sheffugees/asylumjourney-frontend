@@ -89,18 +89,6 @@
       </p>
 
       <p>
-        <label for="serviceUsers">Service Users *</label>
-        <ui-select multiple ng-model="service.service._embedded.serviceUsers" name="serviceUsers" id="serviceUsers">
-          <ui-select-match placeholder="Select service users">
-              <span ng-bind="$item.name"></span>
-          </ui-select-match>
-          <ui-select-choices repeat="item in (service.serviceUsers | filter: $select.search | orderBy: 'name') track by item.id">
-              <span ng-bind="item.name"></span>
-          </ui-select-choices>
-        </ui-select>
-      </p>
-
-      <p>
         <label for="stages" class="has-field-info">Stages *
           <button type="button" class="field-info" ng-click="service.stagesInfo()">
             <svg class="icon">
@@ -113,18 +101,6 @@
               <span ng-bind="$item.name"></span>
           </ui-select-match>
           <ui-select-choices repeat="item in (service.stages | filter: $select.search) track by item.id">
-              <span ng-bind="item.name"></span>
-          </ui-select-choices>
-        </ui-select>
-      </p>
-
-      <p>
-        <label for="issues">Issues</label>
-        <ui-select multiple ng-model="service.service._embedded.issues" name="issues" id="issues">
-          <ui-select-match placeholder="Select issues">
-              <span ng-bind="$item.name"></span>
-          </ui-select-match>
-          <ui-select-choices repeat="item in (service.issues | filter: $select.search | orderBy: 'name') track by item.id">
               <span ng-bind="item.name"></span>
           </ui-select-choices>
         </ui-select>

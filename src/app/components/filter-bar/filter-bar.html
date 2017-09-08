@@ -129,52 +129,6 @@
 
 	<div id="secondaryFilters" class="filter-bar__secondary">
 
-		<div class="filter-bar__section">
-		<div class="filter-bar__section-inner">
-			<button type="button" id="serviceUserFilters" class="filter__toggle toggle" ng-class="{ 'filter__toggle--active': tool.expandFilters.serviceUsers, 'filter__toggle--many': tool.currentFilters.serviceUsers.length > 1}" ng-click="tool.toggleFilter('serviceUsers')" aria-haspopup="true" aria-expanded="{{tool.expandFilters.serviceUsers}}">
-				<strong>Service user:</strong>
-				<span ng-if="tool.currentFilters.serviceUsers.length === tool.serviceUsers.length || tool.currentFilters.serviceUsers.length === 0">All</span>
-
-				<span ng-if="tool.currentFilters.serviceUsers.length !== tool.serviceUsers.length">
-					{{tool.currentFilters.serviceUsers[0].name}}
-					<span class="filter__more-count" ng-if="tool.currentFilters.serviceUsers.length > 1">+ {{tool.currentFilters.serviceUsers.length - 1}} more</span>
-				</span>
-
-				<svg class="icon">
-					<use xlink:href="#icon-arrow-down"></use>
-				</svg>
-
-			</button>
-			<ul class="filter__list" ng-show="tool.expandFilters.serviceUsers" aria-labelledby="serviceUserFilters">
-				<li class="filter__list-item" ng-repeat="serviceUser in tool.serviceUsers">
-					<button type="button" class="filter__button" ng-class="{ 'filter__button--active': serviceUser.filtered}" ng-click="tool.filterServices(serviceUser.id, 'serviceUsers')">
-						{{serviceUser.name}}
-					</button>
-				</li>
-				<li>
-	          <button type="button"
-	          	class="filter__show-all-button"
-	          	ng-click="tool.resetFilterType('serviceUsers')"
-	          	ng-disabled="!tool.currentFilters.serviceUsers.length || tool.currentFilters.serviceUsers.length === tool.serviceUsers.length"
-	          >
-	            Show all service users
-	         	</button>
-          </li>
-			</ul>
-			</div>
-		</div>
-
-
-
-		<div class="filter-bar__section">
-			<button type="button" class="filter__toggle-button filter__toggle-button--issues" ng-class="{ 'filter__toggle--active': tool.showIssues}" ng-click="tool.toggleIssues()">
-				<svg class="icon icon-warning">
-					<use xlink:href="#icon-warning"></use>
-				</svg>
-				Gaps/Issues
-			</button>
-		</div>
-
 		<div class="filter-bar__info">
 				<button ng-click="tool.openDialog()" class="button help">What do the stages mean?</button>
 				<a href="mailto:admin@sheffield.cityofsanctuary.org?subject=Asylum Journey Feedback" class="feedback button help">Send us feedback</a>
@@ -184,4 +138,4 @@
 
 </div>
 
-<div class="filters__overlay" ng-show="tool.expandFilters.stages|| tool.expandFilters.categories || tool.expandFilters.serviceUsers || tool.expandFilters.providers" ng-click="tool.closeFilters()"></div>
+<div class="filters__overlay" ng-show="tool.expandFilters.stages|| tool.expandFilters.categories || tool.expandFilters.providers" ng-click="tool.closeFilters()"></div>

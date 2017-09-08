@@ -1,7 +1,4 @@
-<a href="/service/{{service.id}}" ng-click="$event.preventDefault(); tool.showService(service.id)" class="card" ng-class="{'card--has-issue': service._embedded.issues.length}">
-  <svg class="icon icon-warning" ng-if="service._embedded.issues.length">
-    <use xlink:href="#icon-warning"></use>
-  </svg>
+<a href="/service/{{service.id}}" ng-click="$event.preventDefault(); tool.showService(service.id)" class="card">
   <h3 class="card__title">{{ service.name }}</h3>
   <p class="card__description">{{ service.description | limitTo: 80 }}...</p>
 </a>

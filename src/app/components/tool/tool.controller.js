@@ -11,9 +11,7 @@
     vm.services = [];
     vm.filtered = false;
     vm.showLoader = true;
-    vm.showIssues = false;
     vm.showFilters = false;
-    vm.filteredServiceUsers = [];
     vm.filteredProviders = [];
     vm.searchText = $routeParams.q;
     vm.showAllFilters = false;
@@ -24,14 +22,12 @@
     vm.expandFilters = {
       stages: false,
       categories: false,
-      serviceUsers: false,
       providers: false
     };
 
     vm.currentFilters = {
       stages: [],
       categories: [],
-      serviceUsers: [],
       providers: []
     };
 
@@ -42,7 +38,6 @@
       getProviders();
       getStages();
       getCategories();
-      getServiceUsers();
     }
 
     function checkRoute () {
@@ -120,13 +115,6 @@
       data.getCategories().then(function() {
         vm.categories = angular.copy(data.categories);
         updateDisplay('categories');
-      });
-    }
-
-    function getServiceUsers() {
-      data.getServiceUsers().then(function() {
-        vm.serviceUsers = angular.copy(data.serviceUsers);
-        updateDisplay('serviceUsers');
       });
     }
 
@@ -220,9 +208,6 @@
         vm.currentFilters[type].push({id: filterId, name: selectedFilter.name});
         addToQS($routeParams[type], filterId, type);
 
-        if (type === 'serviceUsers') {
-          vm.filteredServiceUsers.push(filterId);
-        }
         if (type === 'providers') {
           vm.filteredProviders.push(filterId);
         }
@@ -238,11 +223,6 @@
 
       if (!vm.currentFilters[type].length) {
         resetFilter(vm[type]);
-      }
-
-      if (type === 'serviceUsers') {
-        var index = vm.filteredServiceUsers.indexOf(filterId);
-        vm.filteredServiceUsers.splice(index, 1);
       }
 
       if (type === 'providers') {
@@ -264,10 +244,6 @@
       }
     };
 
-    vm.toggleIssues = function () {
-      vm.showIssues = !vm.showIssues;
-    };
-
     // for mobile
     vm.toggleMobileFilters = function () {
       vm.showFilters = !vm.showFilters;
@@ -284,17 +260,13 @@
       vm.closeFilters();
       resetFilter(vm.stages);
       resetFilter(vm.categories);
-      resetFilter(vm.serviceUsers);
       resetFilter(vm.providers);
       vm.resetSearch();
       vm.numStagesDisplayed = vm.stages.length;
-      vm.filteredServiceUsers = [];
       vm.filteredProviders = [];
-      vm.showIssues = false;
       vm.currentFilters = {
         stages: [],
         categories: [],
-        serviceUsers: [],
         providers: []
       };
       $location.search({});
@@ -359,9 +331,6 @@
       resetFilter(vm[type]);
       if (type === 'stages') {
         vm.numStagesDisplayed = vm.stages.length;
-      }
-      if (type === 'serviceUsers') {
-        vm.filteredServiceUsers = [];
       }
       if (type === 'providers') {
         vm.filteredProviders = [];

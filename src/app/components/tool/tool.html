@@ -1,4 +1,4 @@
-<div class="tool" ng-class="{'show-issues': tool.showIssues, 'filters-open': tool.showAllFilters}">
+<div class="tool" ng-class="{'filters-open': tool.showAllFilters}">
 
   <filter-bar></filter-bar>
 
@@ -19,7 +19,7 @@
 
     <h2 class="tool-category__heading">{{category.name}}</h2>
     <ul ng-if="stage.display" class="tool-category__stage tool-category__stage-{{stage.id}} tool-category__stage--cols-{{tool.numStagesDisplayed}}" ng-repeat="stage in tool.stages">
-      <li ng-repeat="service in tool.services | category: category.id | stage: stage.id | serviceUser: tool.filteredServiceUsers | provider: tool.filteredProviders" ng-if="service.display">
+      <li ng-repeat="service in tool.services | category: category.id | stage: stage.id | provider: tool.filteredProviders" ng-if="service.display">
         <service-card details="service"></service-card>
       </li>
     </ul>
