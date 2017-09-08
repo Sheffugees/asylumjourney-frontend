@@ -8,7 +8,7 @@
 	/** @ngInject */
 	function runBlock(ngDialog, $rootScope, $location, AuthService) {
 		$rootScope.env = ($location.host() === 'localhost' || $location.host() === 'aj-staging.firebaseapp.com') ? 'dev' : 'prod';
-		$rootScope.robots = $rootScope.env !== 'dev' ? 'noindex, nofollow' : 'index, follow';
+		$rootScope.robots = $rootScope.env === 'dev' ? 'noindex, nofollow' : 'index, follow';
 
 		var deregistrationCallback = $rootScope.$on('$routeChangeStart', function(event, next, current) {
 			if (next !== current) {
