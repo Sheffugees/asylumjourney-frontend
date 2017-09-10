@@ -68,7 +68,7 @@
               <p ng-if="provider.address"><strong>Address:</strong>
                 <a href="{{ provider.addressUrl }}" target="_blank">{{ provider.address }}, {{ provider.postcode }}</a>
               </p>
-              <p ng-if="service.authService.isAuthenticated"><a ng-href="/providers/{{provider.id}}/edit" class="button details__edit-provider">Edit</a></p>
+              <p ng-if="service.authService.isAuthenticated"><a ng-href="/providers/{{provider.id}}/edit?service={{service.details.id}}" class="button details__edit-provider">Edit</a></p>
             </div>
           </div>
         </div>

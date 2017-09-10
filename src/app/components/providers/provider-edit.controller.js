@@ -23,6 +23,9 @@
       });
     }
 
+    var returnToService = $routeParams.service;
+    console.log('returnToService', returnToService)
+
     function save () {
       vm.saving = true;
 
@@ -44,6 +47,11 @@
         vm.saving = false;
         vm.saved = true;
         $timeout(function () {
+
+          if (returnToService) {
+            $location.path('/service/' + returnToService);
+            return;
+          }
           $location.path('providers');
         }, 500);
       }, function () {
