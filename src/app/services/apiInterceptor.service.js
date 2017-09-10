@@ -20,7 +20,9 @@
       },
 
       'responseError': function(rejection) {
-        if (rejection.status === 401 && rejection.data.message === 'Invalid JWT Token') {
+        var count = 0;
+        var retryTimeout;
+        if (rejection.status === 401 && rejection.config.url.indexOf('login_check') === -1) {
           var $http = $injector.get('$http');
 
           if (!isReAuthenticating) {
@@ -28,24 +30,28 @@
 
             return $injector.get('AuthService').refreshToken().then(function () {
               isReAuthenticating = false;
-
               return $http(rejection.config);
             }, function () {
               isReAuthenticating = false;
-              $timeout.cancel(retryTimeout);
               reAuthenticationFailed = true;
+              $timeout.cancel(retryTimeout);
               $rootScope.$broadcast('logout');
               $injector.get('AuthService').logOut();
               return $q.reject(rejection);
             });
           }
 
-          var retryTimeout = $timeout(function () {
-            if (!reAuthenticationFailed) {
-              return $http(rejection.config);
-            }
-          }, 500);
-          return retryTimeout;
+          if (count < 5) {
+            count++;
+            retryTimeout = $timeout(function () {
+              if (!reAuthenticationFailed) {
+                return $http(rejection.config);
+              }
+            }, 500);
+
+            return retryTimeout;
+          }
+          return $q.reject(rejection);
         }
 
         return $q.reject(rejection);
