@@ -4,23 +4,23 @@
   </div>
   <article class="details" ng-if="!service.deleted">
     <h2 class="details__heading">
+      <span ng-if="service.errors.show">{{service.errors.message}}</span>
       {{ service.details.name }}
     </h2>
 
     <div class="details__admin">
+      <span ng-if="service.authService.isAuthenticated">
+        <span ng-if="!service.showDeleteConfirmation">
+          <a ng-href="/services/{{service.details.id}}/edit"  class="button">Edit</a>
+          <button type="button" class="button" ng-click="service.confirmDelete()">Delete</button>
 
-    <span ng-if="service.authService.isAuthenticated">
-      <span ng-if="!service.showDeleteConfirmation">
-        <a ng-href="/services/{{service.details.id}}/edit"  class="button">Edit</a>
-        <button type="button" class="button" ng-click="service.confirmDelete()">Delete</button>
-
+        </span>
+        <span class="details__confirm" ng-if="service.showDeleteConfirmation">
+          <strong>Are you sure?</strong>
+          <button type="button" class="button button--primary" ng-click="service.deleteService(service.id)">Yes, delete it</button>
+          <button type="button" class="button" ng-click="service.cancelDelete()">No</button>
+        </span>
       </span>
-      <span class="details__confirm" ng-if="service.showDeleteConfirmation">
-        <strong>Are you sure?</strong>
-        <button type="button" class="button button--primary" ng-click="service.deleteService(service.id)">Yes, delete it</button>
-        <button type="button" class="button" ng-click="service.cancelDelete()">No</button>
-      </span>
-    </span>
 
       <button type="button" class="button details__print" ng-if="!service.showDeleteConfirmation" ng-click="service.print()">Print</button>
     </div>

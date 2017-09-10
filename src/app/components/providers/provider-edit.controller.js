@@ -24,7 +24,6 @@
     }
 
     var returnToService = $routeParams.service;
-    console.log('returnToService', returnToService)
 
     function save () {
       vm.saving = true;

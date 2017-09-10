@@ -16,10 +16,17 @@
     vm.showDeleteConfirmation = false;
     vm.print = print;
     vm.path = $location.protocol() + '://' + $location.host();
+    vm.errors = {
+      show: false,
+      message: ''
+    }
 
     data.getService(vm.id).then(function (response) {
       vm.details = response;
       formatMapLinks(vm.details._embedded.providers);
+    }, function (error) {
+      vm.errors.show = true;
+      vm.errors.message = error.data.message ? error.data.message : 'There was a problem loading this service';
     });
 
     function cancelDelete () {
