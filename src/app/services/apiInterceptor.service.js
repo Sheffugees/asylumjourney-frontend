@@ -7,8 +7,17 @@
 
   /** @ngInject */
   function APIInterceptor ($injector, $q, $rootScope, $timeout, $window, config) {
-    var isReAuthenticating = false;
-    var reAuthenticationFailed = false;
+
+    function retryHttpRequest(config, deferred) {
+      function successCallback(response){
+        deferred.resolve(response);
+      }
+      function errorCallback(response){
+        deferred.reject(response);
+      }
+      var $http = $injector.get('$http');
+      $http(config).then(successCallback, errorCallback);
+    }
 
     return {
       request: function(request) {
@@ -20,38 +29,19 @@
       },
 
       'responseError': function(rejection) {
-        var count = 0;
-        var retryTimeout;
-        if (rejection.status === 401 && rejection.config.url.indexOf('login_check') === -1) {
-          var $http = $injector.get('$http');
+        if (rejection.status === 401 && rejection.config.url.indexOf('login_check') === -1
+            && rejection.config.url.indexOf('token/refresh') === -1) {
+          var deferred = $q.defer();
 
-          if (!isReAuthenticating) {
-            isReAuthenticating = true;
+          $injector.get('AuthService').refreshToken().then(function () {
+            retryHttpRequest(rejection.config, deferred)
+          }, function () {
+            $rootScope.$broadcast('logout');
+            $injector.get('AuthService').logOut();
+            deferred.reject(rejection);
+          });
 
-            return $injector.get('AuthService').refreshToken().then(function () {
-              isReAuthenticating = false;
-              return $http(rejection.config);
-            }, function () {
-              isReAuthenticating = false;
-              reAuthenticationFailed = true;
-              $timeout.cancel(retryTimeout);
-              $rootScope.$broadcast('logout');
-              $injector.get('AuthService').logOut();
-              return $q.reject(rejection);
-            });
-          }
-
-          if (count < 5) {
-            count++;
-            retryTimeout = $timeout(function () {
-              if (!reAuthenticationFailed) {
-                return $http(rejection.config);
-              }
-            }, 500);
-
-            return retryTimeout;
-          }
-          return $q.reject(rejection);
+          return deferred.promise;
         }
 
         return $q.reject(rejection);
