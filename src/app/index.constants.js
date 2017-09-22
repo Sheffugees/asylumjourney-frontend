@@ -2,13 +2,14 @@
 (function() {
   'use strict';
 
+  var staging = 'https://asylum-journey-staging.herokuapp.com/';
+  var production = 'https://asylum-journey-dev.herokuapp.com/';
+
   angular
     .module('asylumjourneyFrontend')
     .constant('moment', moment)
     .constant('config', {
-      apiUrl: 'https://asylum-journey-staging.herokuapp.com/'
+      apiUrl: staging
     });
 
 })();
-
-// var url = 'https://asylum-journey-dev.herokuapp.com/api';
