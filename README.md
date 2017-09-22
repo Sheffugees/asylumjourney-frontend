@@ -26,7 +26,7 @@ Before deploying you need to run `gulp build` to build the latest version to the
 
 ### Deploying to production
 
-In the master branch
+In the master branch. Make sure the api url in index.constants.js is set to `production`
 
 ```
 gulp build
