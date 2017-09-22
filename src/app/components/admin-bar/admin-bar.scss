@@ -2,21 +2,19 @@
   min-height: 48px;
   background: white;
   width: 100%;
-  // position: fixed;
   left: 0;
   top: 0;
   z-index: 11;
   box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2);
-  // padding-top: 44px;
   margin-bottom: $vr*2;
-  padding: 0 0 0 50px;
+  padding: 8px 0 8px 54px;
 
   @media #{$BPD} {
-    padding: 0 80px 0 60px;
-  }
+    padding: 8px 80px 8px 78px;
 
-  .button-link {
-    margin: $vr $vr $vr $vr*4;
+    .button + .button {
+      margin-left: 8px;
+    }
   }
 }
 
