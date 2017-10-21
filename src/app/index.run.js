@@ -31,7 +31,7 @@
 
 			ga('create', 'UA-80488368-1', 'auto');
 			deregistrationCallback = $rootScope.$on('$routeChangeSuccess', function() {
-				ga('send', 'pageview', $location.path());
+				ga('send', 'pageview', $location.url());
 			});
 		}
 

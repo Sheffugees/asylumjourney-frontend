@@ -325,6 +325,7 @@
       });
 
       $location.search('q', vm.searchText);
+      ga('send', 'pageview', $location.url());
     };
 
     vm.resetFilterType = function (type) {
