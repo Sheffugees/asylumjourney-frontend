@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "dependencies": {},
   "scripts": {
-    "postinstall": "bower install"
+    "postinstall": "bower install",
+    "deploy-staging": "gulp build && firebase deploy -P staging",
+    "deploy-production": "gulp build && firebase deploy -P production"
   },
   "devDependencies": {
     "browser-sync": "~2.9.11",
