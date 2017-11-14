@@ -9,6 +9,7 @@
     "angular": true,
     "inject": true,
     "ga": true,
-    "module": true
+    "module": true,
+    "window": true
   }
 }
