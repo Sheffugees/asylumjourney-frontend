@@ -22,26 +22,20 @@ gulp serve
 
 You will need to have access to the Firebase projects and install the CLI `npm install -g firebase-tools` to deploy.
 
-Before deploying you need to run `gulp build` to build the latest version to the dist folder.
-
 ### Deploying to production
 
-In the master branch. Make sure the api url in index.constants.js is set to `production`
+In the **master branch**
 
 ```
-gulp build
-
-firebase deploy -P production
+npm run deploy-production
 ```
 
 ### Deploying to staging
 
-In the develop branch
+In the **develop branch**
 
 ```
-gulp build
-
-firebase deploy -P staging
+npm run deploy-staging
 ```
 
 ## Running tests
