@@ -31,7 +31,7 @@
 
       <div class="details__block">
 
-        <p class="details__section" ng-bind-html="service.details.description | linky"></p>
+        <p class="details__section" ng-bind-html="service.details.description | linky:'_blank'"></p>
         <p ng-if="service.details.endDate"><strong>End Date:</strong> {{ service.details.endDate | date }}</p>
 
       </div>
@@ -40,7 +40,7 @@
 
         <div class="details__section" ng-if="service.details.events">
           <h3 class="details__sub-heading">Classes &amp; Events</h3>
-          <p ng-bind-html="service.details.events | linky"></p>
+          <p ng-bind-html="service.details.events | linky:'_blank'"></p>
         </div>
 
         <div class="details__section" ng-if="service.details.resources.length">
@@ -63,10 +63,10 @@
               </button>
             </h4>
             <div class="details__provider-content" ng-show="provider.show">
-              <p>{{ provider.description }}</p>
+              <p ng-bind-html="provider.description | linky:'_blank'"></p>
               <p ng-if="provider.phone"><strong>Tel:</strong> {{ provider.phone }}</p>
               <p ng-if="provider.email"><strong>Email:</strong> <a href="mailto:{{ provider.email }}">{{ provider.email }}</a></p>
-              <p ng-if="provider.website"><strong>Website:</strong> <a href="{{ provider.website }}">{{ provider.website }}</a></p>
+              <p ng-if="provider.website"><strong>Website:</strong> <a href="{{ provider.website }}" target="_blank">{{ provider.website }}</a></p>
               <p ng-if="provider.address"><strong>Address:</strong>
                 <a href="{{ provider.addressUrl }}" target="_blank">{{ provider.address }}, {{ provider.postcode }}</a>
               </p>
