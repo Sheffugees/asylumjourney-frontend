@@ -46,7 +46,7 @@
         <div class="details__section" ng-if="service.details.resources.length">
           <h3 class="details__sub-heading">Printable resources</h3>
           <ul>
-          <li ng-repeat="resource in service.details.resources">
+          <li ng-repeat="resource in service.details.resources | orderBy: 'name'">
             <a href="{{resource.url}}" target="_blank">{{resource.name}}</a>
           </li>
           </ul>
