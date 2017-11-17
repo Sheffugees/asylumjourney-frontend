@@ -6,7 +6,7 @@
   .controller('ToolController', ToolController);
 
   /** @ngInject */
-  function ToolController(AuthService, data, $route, $scope, ngDialog, $rootScope, $routeParams, $location) {
+  function ToolController(AuthService, data, $route, $scope, ngDialog, $rootScope, $routeParams, $location, $filter) {
     var vm = this;
     vm.services = [];
     vm.filtered = false;
@@ -84,6 +84,7 @@
     function getServices() {
       data.getServices().then(function () {
         vm.services = angular.copy(data.services);
+        vm.services = $filter('orderBy')(vm.services, 'name');
 
         angular.forEach(vm.services, function(item) {
           item.display = true;
