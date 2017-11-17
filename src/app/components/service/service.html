@@ -55,7 +55,7 @@
         <div class="details__section" ng-if="service.details._embedded.providers">
           <h3 class="details__sub-heading details__sub-heading--providers">Providers</h3>
 
-          <div ng-repeat="provider in service.details._embedded.providers" class="details__provider">
+          <div ng-repeat="provider in service.details._embedded.providers | orderBy: 'name'" class="details__provider">
             <h4>
               <button class="details__provider-heading" ng-click="provider.show = !provider.show">
                 {{ provider.name }}
