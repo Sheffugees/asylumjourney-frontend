@@ -24,6 +24,9 @@
     data.getService(vm.id).then(function (response) {
       vm.details = response;
       formatMapLinks(vm.details._embedded.providers);
+      if (vm.details.resources.length) {
+        formatResources(vm.details.resources);
+      }
     }, function (error) {
       vm.errors.show = true;
       vm.errors.message = error.data.message ? error.data.message : 'There was a problem loading this service';
@@ -44,6 +47,21 @@
         $timeout(function () {
           ngDialog.close();
         }, 1000);
+      });
+    }
+
+    function formatResources (resources) {
+      angular.forEach(resources, function(resource) {
+        if (!resource.expiryDate) {
+          return;
+        }
+        var now = new Date();
+        var expiry = new Date(resource.expiryDate);
+        console.log('expiry', expiry)
+        if (expiry < now) {
+          console.log('is expired', resource.name)
+          resource.expired = true;
+        }
       });
     }
 

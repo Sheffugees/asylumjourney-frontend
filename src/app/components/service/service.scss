@@ -177,6 +177,13 @@ body.ngdialog-open {
     }
 }
 
+.expired-icon {
+    width: $vr*3;
+    height: $vr*3;
+    vertical-align: middle;
+    fill: red;
+}
+
 @each $stage,
 $bgcolor in $stages {
     .tag-list__tag--#{$stage} {

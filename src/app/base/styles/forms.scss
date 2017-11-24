@@ -117,15 +117,13 @@ label {
 	margin: $vr 0 $vr*2 0;
 }
 
-.inline-fields {
-	display: flex;
-	align-items: flex-end;
-	margin-bottom: $vr*2;
+.form-section--sub {
+	border-bottom: 1px solid #ccc;
+	padding-bottom: $vr*2;
+}
 
-	div {
-		width: 100%;
-		margin-right: 10px;
-	}
+.inline-fields {
+	margin-bottom: $vr*2;
 
 	button {
 		width: 56px;
@@ -134,4 +132,31 @@ label {
 		font-size: 14px;
 		padding: 0;
 	}
+}
+
+.inline-fields__field {
+	margin: 0 0 $vr 0;
+
+	datepicker {
+		margin: 0;
+	}
+}
+
+datepicker {
+	font-size: inherit;
+	font-family: inherit;
+}
+
+
+@media(min-width: $break-point-b-px) {
+
+	.inline-fields {
+		display: flex;
+		align-items: flex-end;
+	}
+
+	.inline-fields__field {
+		margin: 0 10px 0 0;
+	}
+
 }

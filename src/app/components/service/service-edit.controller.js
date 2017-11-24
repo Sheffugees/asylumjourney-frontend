@@ -6,7 +6,7 @@
   .controller('ServiceEditController', ServiceEditController);
 
   /** @ngInject */
-  function ServiceEditController($location, $rootScope, $routeParams, $scope, $timeout, data, ngDialog) {
+  function ServiceEditController($filter, $location, $rootScope, $routeParams, $scope, $timeout, data, ngDialog) {
     var vm = this;
     vm.service = {};
     vm.service._embedded = {};
@@ -36,14 +36,28 @@
       vm.stages = data.stages;
     });
 
+    function formatResources (resources) {
+      angular.forEach(resources, function (resource) {
+        if (!resource.expiryDate) {
+          return;
+        }
+        resource.expiryDate = $filter('date')(resource.expiryDate, 'dd MMM yyyy')
+      });
+      return resources;
+    }
+
     if (!vm.isNew) {
       data.getService(id).then(function (service) {
         vm.service = angular.copy(service);
+
+        if (vm.service.resources.length) {
+          formatResources(vm.service.resources);
+        }
       });
     }
 
     function addResource () {
-      vm.service.resources.push({name: '', url: ''})
+      vm.service.resources.push({name: '', url: '', expiryDate: '', comments: ''})
     }
 
     function removeResource (index) {
