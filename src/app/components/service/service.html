@@ -67,6 +67,8 @@
               <p ng-if="provider.phone"><strong>Tel:</strong> {{ provider.phone }}</p>
               <p ng-if="provider.email"><strong>Email:</strong> <a href="mailto:{{ provider.email }}">{{ provider.email }}</a></p>
               <p ng-if="provider.website"><strong>Website:</strong> <a href="{{ provider.website }}" target="_blank">{{ provider.website }}</a></p>
+              <p ng-if="provider.facebook"><strong>Facebook:</strong> <a href="{{ provider.facebook }}" target="_blank">{{ provider.facebook }}</a></p>
+              <p ng-if="provider.twitter"><strong>Twitter:</strong> <a href="{{ provider.twitter }}" target="_blank">{{ provider.twitter }}</a></p>
               <p ng-if="provider.address"><strong>Address:</strong>
                 <a href="{{ provider.addressUrl }}" target="_blank">{{ provider.address }}, {{ provider.postcode }}</a>
               </p>
