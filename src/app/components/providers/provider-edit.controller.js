@@ -6,7 +6,7 @@
   .controller('ProviderEditController', ProviderEditController);
 
   /** @ngInject */
-  function ProviderEditController($location, $rootScope, $routeParams, $timeout, data) {
+  function ProviderEditController($filter, $location, $rootScope, $routeParams, $timeout, data) {
     var vm = this;
     vm.provider = {};
     vm.save = save;
@@ -20,13 +20,24 @@
     if (!vm.isNew) {
       data.getProvider(id).then(function (provider) {
         vm.provider = angular.copy(provider);
+        formatDates(vm.provider);
       });
     }
 
     var returnToService = $routeParams.service;
 
+    function formatDates (provider) {
+      var dateFields = ['lastReviewDate', 'nextReviewDate'];
+      angular.forEach(dateFields, function (field) {
+        provider[field] = $filter('date')(provider[field], 'dd MMM yyyy')
+      });
+      return provider;
+    }
+
     function save () {
       vm.saving = true;
+
+      vm.provider.lastReviewDate = new Date(vm.provider.lastReviewDate);
 
       if (vm.isNew) {
         data.createProvider(vm.provider).then(function () {

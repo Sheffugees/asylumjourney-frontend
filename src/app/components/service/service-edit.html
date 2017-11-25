@@ -1,5 +1,6 @@
 <admin-bar></admin-bar>
-<div class="container admin">
+<form ng-submit="service.save()" ng-if="!service.saved">
+<div class="container admin-form-container">
 
   <div class="admin__form">
     <div class="admin__heading">
@@ -14,7 +15,6 @@
       <h2>Service saved</h2>
     </div>
 
-    <form ng-submit="service.save()" ng-if="!service.saved">
       <p>
         <label for="name">Name *</label>
         <input type="text" ng-model="service.service.name" id="name" required />
@@ -41,7 +41,7 @@
       </p>
 
       <div class="form-section">
-        <label for="resources">Printable resources</label>
+        <p>Printable resources</p>
 
         <div ng-repeat="resource in service.service.resources" class="form-section form-section--sub">
           <div class="inline-fields">
@@ -68,14 +68,7 @@
       </div>
 
       <p>
-        <label for="categories" class="has-field-info">Categories *
-          <button type="button" class="field-info" ng-click="service.categoriesInfo()">
-            <svg class="icon">
-              <use xlink:href="#icon-info"></use>
-            </svg>
-            <span class="sr-only">Info</span>
-          </button>
-        </label>
+        <label for="categories" class="has-field-info">Categories *</label>
         <ui-select multiple ng-model="service.service._embedded.categories" name="categories" id="categories">
           <ui-select-match placeholder="Select categories">
               <span ng-bind="$item.name"></span>
@@ -116,14 +109,49 @@
         </ui-select>
       </p>
 
-      <p ng-if="service.errorMessage !== ''" class="validation--error">{{service.errorMessage}}</p>
-
-      <div class="buttons-container">
-        <button ng-disabled="service.saving" type="submit" class="button button--primary button--large">
-          <span ng-if="!service.saving">Save</span>
-          <span ng-if="service.saving">Saving...</span>
-        </button>
-      </div>
-    </form>
   </div>
+
+  <div class="admin__secondary">
+    <div class="form-section">
+        <h2>Review information</h2>
+
+        <label for="lastReviewDate">Last review date</label>
+        <datepicker date-format="dd MMM yyyy">
+          <input type="text" ng-model="service.service.lastReviewDate" id="lastReviewDate" />
+        </datepicker>
+
+        <p>
+          <label for="lastReviewedBy">Last reviewed by</label>
+          <input type="text" ng-model="service.service.lastReviewedBy" id="lastReviewedBy" />
+        </p>
+
+        <p>
+          <label for="lastReviewComments">Last review comments</label>
+          <textarea ng-model="service.service.lastReviewComments" id="lastReviewComments"></textarea>
+        </p>
+
+        <label for="nextReviewDate">Next review date</label>
+        <datepicker date-format="dd MMM yyyy">
+          <input type="text" ng-model="service.service.nextReviewDate" id="nextReviewDate" />
+        </datepicker>
+
+        <p>
+          <label for="nextReviewComments">Next review comments</label>
+          <textarea ng-model="service.service.nextReviewComments" id="nextReviewComments"></textarea>
+        </p>
+      </div>
+  </div>
+
+  <div class="admin__actions">
+    <p ng-if="service.errorMessage !== ''" class="validation--error">{{service.errorMessage}}</p>
+
+    <div class="buttons-container">
+      <button ng-disabled="service.saving" type="submit" class="button button--primary button--large">
+        <span ng-if="!service.saving">Save</span>
+        <span ng-if="service.saving">Saving...</span>
+      </button>
+    </div>
+  </div>
+
 </div>
+</form>

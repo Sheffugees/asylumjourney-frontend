@@ -34,6 +34,14 @@
         <p class="details__section" ng-bind-html="service.details.description | linky:'_blank'"></p>
         <p ng-if="service.details.endDate"><strong>End Date:</strong> {{ service.details.endDate | date }}</p>
 
+        <div class="details__section details__section--review" ng-if="service.authService.isAuthenticated">
+          <p>Last reviewed: {{service.details.lastReviewDate | date: 'dd MMM yyyy'}}
+          <span ng-if="service.details.lastReviewedBy"> by {{service.details.lastReviewedBy}}</span>
+          <span ng-if="service.details.lastReviewComments"><br>Comments: {{service.details.lastReviewComments}}</span></p>
+          <p>Next review date: {{service.details.nextReviewDate | date: 'dd MMM yyyy'}}
+          <span ng-if="service.details.nextReviewComments"><br>Comments: {{service.details.nextReviewComments}}</span></p>
+        </div>
+
       </div>
 
       <div class="details__block">
@@ -80,9 +88,19 @@
                 <a href="{{ provider.addressUrl }}" target="_blank">{{ provider.address }}, {{ provider.postcode }}</a>
               </p>
               <p ng-if="service.authService.isAuthenticated"><a ng-href="/providers/{{provider.id}}/edit?service={{service.details.id}}" class="button details__edit-provider">Edit</a></p>
+              <div class="details__section details__section--review" ng-if="service.authService.isAuthenticated">
+                  <p>Last reviewed: {{provider.lastReviewDate | date: 'dd MMM yyyy'}}
+                    <span ng-if="provider.lastReviewedBy"> by {{provider.lastReviewedBy}}</span>
+                  <span ng-if="provider.lastReviewComments"><br>Comments: {{provider.lastReviewComments}}</span></p>
+                  <p>Next review date: {{provider.nextReviewDate | date: 'dd MMM yyyy'}}
+                  <span ng-if="provider.nextReviewComments"><br>Comments: {{provider.nextReviewComments}}</span></p>
+              </div>
             </div>
           </div>
         </div>
+
+
+
       </div>
 
     </div>

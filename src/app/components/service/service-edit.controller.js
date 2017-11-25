@@ -36,24 +36,34 @@
       vm.stages = data.stages;
     });
 
-    function formatResources (resources) {
-      angular.forEach(resources, function (resource) {
-        if (!resource.expiryDate) {
-          return;
-        }
-        resource.expiryDate = $filter('date')(resource.expiryDate, 'dd MMM yyyy')
-      });
-      return resources;
-    }
-
     if (!vm.isNew) {
       data.getService(id).then(function (service) {
         vm.service = angular.copy(service);
 
         if (vm.service.resources.length) {
-          formatResources(vm.service.resources);
+          formatDates(vm.service);
         }
       });
+    }
+
+    function formatDate (date) {
+      if (date) {
+        return $filter('date')(date, 'dd MMM yyyy')
+      }
+    }
+
+    function formatDates (service) {
+      if (service.resources.length) {
+        angular.forEach(service.resources, function (resource) {
+          resource.expiryDate = formatDate(resource.expiryDate);
+        });
+      }
+
+      var dateFields = ['endDate', 'lastReviewDate', 'nextReviewDate'];
+      angular.forEach(dateFields, function (field) {
+        service[field] = formatDate(service[field]);
+      });
+      return service;
     }
 
     function addResource () {
@@ -82,7 +92,7 @@
       if (!vm.service._embedded.categories || !vm.service._embedded.categories.length
         || !vm.service._embedded.stages || !vm.service._embedded.stages.length) {
         vm.saving = false;
-        vm.errorMessage = 'Error: Name, Categories, Service Users and Stages are all required.';
+        vm.errorMessage = 'Error: Name, Categories and Stages are all required.';
         return;
       }
 

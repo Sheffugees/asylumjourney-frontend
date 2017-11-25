@@ -113,7 +113,7 @@ label {
 	}
 }
 
-.form-section, datepicker {
+.form-section {
 	margin: $vr 0 $vr*2 0;
 }
 
@@ -145,8 +145,13 @@ label {
 datepicker {
 	font-size: inherit;
 	font-family: inherit;
+	margin: 0 0 $vr*2 0;
 }
 
+._720kb-datepicker-calendar {
+	right: 0;
+	max-width: 300px;
+}
 
 @media(min-width: $break-point-b-px) {
 
@@ -157,6 +162,10 @@ datepicker {
 
 	.inline-fields__field {
 		margin: 0 10px 0 0;
+	}
+
+	._720kb-datepicker-calendar {
+		width: 300px;
 	}
 
 }

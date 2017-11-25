@@ -1,5 +1,6 @@
 <admin-bar></admin-bar>
-<div class="container admin">
+<form ng-submit="prov.save()" ng-if="!prov.saved">
+<div class="container admin-form-container">
 
   <div class="admin__form">
     <div class="admin__heading">
@@ -13,7 +14,7 @@
       <h2>Provider saved</h2>
     </div>
 
-    <form ng-submit="prov.save()" ng-if="!prov.saved">
+
       <p>
         <label for="name">Name</label>
         <input type="text" ng-model="prov.provider.name" id="name" required />
@@ -64,7 +65,43 @@
         <input type="text" ng-model="prov.provider.postcode" id="postcode" />
       </p>
 
-      <p ng-if="prov.errorMessage !== ''" class="validation--error">{{prov.errorMessage}}</p>
+
+
+  </div>
+
+  <div class="admin__secondary">
+    <div class="form-section">
+        <h2>Review information</h2>
+
+        <label for="lastReviewDate">Last review date</label>
+        <datepicker date-format="dd MMM yyyy">
+          <input type="text" ng-model="prov.provider.lastReviewDate" id="lastReviewDate" />
+        </datepicker>
+
+        <p>
+          <label for="lastReviewedBy">Last reviewed by</label>
+          <input type="text" ng-model="prov.provider.lastReviewedBy" id="lastReviewedBy" />
+        </p>
+
+        <p>
+          <label for="lastReviewComments">Last review comments</label>
+          <textarea ng-model="prov.provider.lastReviewComments" id="lastReviewComments"></textarea>
+        </p>
+
+        <label for="nextReviewDate">Next review date</label>
+        <datepicker date-format="dd MMM yyyy">
+          <input type="text" ng-model="prov.provider.nextReviewDate" id="nextReviewDate" />
+        </datepicker>
+
+        <p>
+          <label for="nextReviewComments">Next review comments</label>
+          <textarea ng-model="prov.provider.nextReviewComments" id="nextReviewComments"></textarea>
+        </p>
+      </div>
+  </div>
+
+  <div class="admin__actions">
+    <p ng-if="prov.errorMessage !== ''" class="validation--error">{{prov.errorMessage}}</p>
 
       <div class="buttons-container">
         <button ng-disabled="prov.saving" type="submit" class="button button--primary button--large">
@@ -72,6 +109,6 @@
           <span ng-if="prov.saving">Saving...</span>
         </button>
       </div>
-    </form>
   </div>
 </div>
+</form>
