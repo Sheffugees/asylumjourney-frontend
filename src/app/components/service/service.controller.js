@@ -20,12 +20,11 @@
       show: false,
       message: ''
     }
-
     data.getService(vm.id).then(function (response) {
       vm.details = response;
       formatMapLinks(vm.details._embedded.providers);
       if (vm.details.resources.length) {
-        formatResources(vm.details.resources);
+        formatResources(vm.details);
       }
     }, function (error) {
       vm.errors.show = true;
@@ -50,19 +49,23 @@
       });
     }
 
-    function formatResources (resources) {
-      angular.forEach(resources, function(resource) {
+    function formatResources (details) {
+      var numExpired = 0;
+      angular.forEach(details.resources, function(resource) {
         if (!resource.expiryDate) {
           return;
         }
         var now = new Date();
         var expiry = new Date(resource.expiryDate);
-        console.log('expiry', expiry)
         if (expiry < now) {
-          console.log('is expired', resource.name)
           resource.expired = true;
+          numExpired += 1;
         }
       });
+      if (numExpired === details.resources.length) {
+        details.hideResources = true;
+      }
+      // return details;
     }
 
     function formatMapLinks (providers) {

@@ -51,7 +51,7 @@
           <p ng-bind-html="service.details.events | linky:'_blank'"></p>
         </div>
 
-        <div class="details__section" ng-if="service.details.resources.length">
+        <div class="details__section" ng-if="(service.details.resources.length && !service.details.hideResources) || (service.authService.isAuthenticated && service.details.resources.length)">
           <h3 class="details__sub-heading">Printable resources</h3>
           <ul>
             <li ng-repeat="resource in service.details.resources | orderBy: 'name'">
