@@ -6,7 +6,7 @@
   .controller('ToolController', ToolController);
 
   /** @ngInject */
-  function ToolController(AuthService, data, $route, $scope, ngDialog, $rootScope, $routeParams, $location, $filter) {
+  function ToolController(AuthService, data, $route, $scope, ngDialog, $rootScope, $routeParams, $location, $filter, $window) {
     var vm = this;
     vm.services = [];
     vm.filtered = false;
@@ -62,7 +62,6 @@
       angular.forEach(selected, function(selectedItem) {
 
         if (item.id === parseInt(selectedItem, 10)) {
-          // item.display = true;
           item.display = setItemDisplay(item);
 
           updateActiveFilters(item.id, type);
@@ -87,7 +86,6 @@
           return;
         }
         item.display = setItemDisplay(item);
-        // item.display = true;
       });
     }
 
@@ -98,7 +96,6 @@
 
         angular.forEach(vm.services, function(item) {
           item.display = setItemDisplay(item);
-          // item.display = true;
         });
 
         if (vm.searchText) {
@@ -168,7 +165,6 @@
       $location.search('q', null);
       angular.forEach(vm.services, function(item) {
         item.display = setItemDisplay(item);
-        // item.display = true;
         item.filtered = false;
       });
     };
@@ -330,7 +326,7 @@
         var events = item.events ? item.events.toLowerCase() : '';
 
         if (name.indexOf(searchText) !== -1 || description.indexOf(searchText) !== -1 || events.indexOf(searchText) !== -1) {
-          updateFilteredItem(item, true);
+          updateFilteredItem(item, setItemDisplay(item));
           return;
         }
         updateFilteredItem(item, false);
@@ -338,7 +334,9 @@
       });
 
       $location.search('q', vm.searchText);
-      ga('send', 'pageview', $location.url());
+      if (angular.isDefined($window.ga)) {
+        ga('send', 'pageview', $location.url());
+      }
     };
 
     vm.resetFilterType = function (type) {

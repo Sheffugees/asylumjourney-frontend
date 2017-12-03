@@ -3,7 +3,7 @@
 
   describe('Tool controller', function () {
 
-    var $location, mockCategories, mockData, mockNgDialog, mockProviders, mockServices, mockStages, scope, vm;
+    var $location, mockAuthService, mockCategories, mockData, mockNgDialog, mockProviders, mockServices, mockStages, scope, vm;
 
     mockCategories = [
       {
@@ -46,7 +46,8 @@
       {
         id: 3,
         name: 'service 3',
-        events: 'here I am'
+        events: 'here I am',
+        hidden: false
       }
     ];
     mockStages = [
@@ -82,14 +83,24 @@
         closeAll: function () {}
       }
 
+      mockAuthService = {
+        checkAuthentication: function () {}
+      };
+
       module('asylumjourneyFrontend', function($provide) {
         $provide.value('data', mockData);
         $provide.value('ngDialog', mockNgDialog);
+        $provide.value('AuthService', mockAuthService);
       });
 
     });
 
-    function setUpController (params) {
+    function setUpController (params, hideService, isAuthenticated) {
+
+      if (hideService) {
+        mockServices[2].hidden = true;
+      }
+
       inject(function($controller, $q, $rootScope, _$location_) {
         scope = $rootScope.$new();
         $location = _$location_;
@@ -100,6 +111,7 @@
         spyOn($location, 'path').and.callThrough();
         spyOn($location, 'search').and.callThrough();
         spyOn(mockNgDialog, 'open').and.callThrough();
+        spyOn(mockAuthService, 'checkAuthentication').and.returnValue($q.when());
 
         var ctrlParams = {
           $scope: scope
@@ -107,6 +119,8 @@
         if (params) {
           ctrlParams.$routeParams = params;
         }
+
+        mockAuthService.isAuthenticated = isAuthenticated ? isAuthenticated : false;
 
         vm = $controller('ToolController', ctrlParams);
         scope.$apply();
@@ -139,9 +153,10 @@
           expect(vm.categories).toEqual(updatedCategories);
         });
 
-        it('should load the services and set display to true on each', function() {
+        it('should load the services, set display to true on each and order ny name', function() {
           expect(mockData.getServices).toHaveBeenCalled();
-          var updatedServices = angular.fromJson(angular.toJson(mockServices));
+          var orderedServices = [mockServices[1], mockServices[2], mockServices[0]];
+          var updatedServices = angular.fromJson(angular.toJson(orderedServices));
           for(var i = 0; i < updatedServices.length; i++) {
             updatedServices[i].display = true;
           }
@@ -490,6 +505,18 @@
         it('should find and show services that have the search term in the name', function () {
           vm.searchText = 'this one';
           vm.doSearch();
+          expect(vm.services[2].display).toBe(true);
+          expect(vm.services[2].filtered).toBe(true);
+
+          expect(vm.services[0].display).toBe(false);
+          expect(vm.services[0].filtered).toBe(false);
+          expect(vm.services[1].display).toBe(false);
+          expect(vm.services[1].filtered).toBe(false);
+        });
+
+        it('should find and show services that have the search term in the description', function () {
+          vm.searchText = 'find me';
+          vm.doSearch();
 
           expect(vm.services[0].display).toBe(true);
           expect(vm.services[0].filtered).toBe(true);
@@ -500,8 +527,8 @@
           expect(vm.services[2].filtered).toBe(false);
         });
 
-        it('should find and show services that have the search term in the description', function () {
-          vm.searchText = 'find me';
+        it('should find and show services that have the search term in the events', function () {
+          vm.searchText = 'here I am';
           vm.doSearch();
 
           expect(vm.services[1].display).toBe(true);
@@ -511,19 +538,6 @@
           expect(vm.services[0].filtered).toBe(false);
           expect(vm.services[2].display).toBe(false);
           expect(vm.services[2].filtered).toBe(false);
-        });
-
-        it('should find and show services that have the search term in the events', function () {
-          vm.searchText = 'here I am';
-          vm.doSearch();
-
-          expect(vm.services[2].display).toBe(true);
-          expect(vm.services[2].filtered).toBe(true);
-
-          expect(vm.services[0].display).toBe(false);
-          expect(vm.services[0].filtered).toBe(false);
-          expect(vm.services[1].display).toBe(false);
-          expect(vm.services[1].filtered).toBe(false);
         });
 
         it('should update the querystring with the search term', function () {
@@ -541,11 +555,11 @@
         });
 
         it('should find and show services that match the search term in the querystrong', function () {
-          expect(vm.services[1].display).toBe(true);
-          expect(vm.services[1].filtered).toBe(true);
+          expect(vm.services[0].display).toBe(true);
+          expect(vm.services[0].filtered).toBe(true);
 
-          expect(vm.services[0].display).toBe(false);
-          expect(vm.services[0].filtered).toBe(false);
+          expect(vm.services[1].display).toBe(false);
+          expect(vm.services[1].filtered).toBe(false);
           expect(vm.services[2].display).toBe(false);
           expect(vm.services[2].filtered).toBe(false);
         });
@@ -569,6 +583,82 @@
           className: 'ngdialog-theme-default service-modal'
         };
         expect(mockNgDialog.open).toHaveBeenCalledWith(dialogParams)
+      });
+
+    });
+
+    describe('Hidden services', function () {
+
+      describe('as a standard user', function () {
+
+        beforeEach(function () {
+          setUpController({}, true, false);
+        });
+
+        it('should set display to false on hidden services', function() {
+          expect(mockData.getServices).toHaveBeenCalled();
+
+          var orderedServices = [mockServices[1], mockServices[2], mockServices[0]];
+          var updatedServices = angular.fromJson(angular.toJson(orderedServices));
+          updatedServices[0].display = true;
+          updatedServices[1].display = false;
+          updatedServices[2].display = true;
+          expect(vm.services).toEqual(updatedServices);
+        });
+
+        it('should set display to false on hidden services when match search term', function () {
+          vm.searchText = 'here I am';
+          vm.doSearch();
+
+          expect(vm.services[1].display).toBe(false);
+          expect(vm.services[0].display).toBe(false);
+          expect(vm.services[2].display).toBe(false);
+        });
+
+        it('should set display to false on hidden services when reset search', function () {
+          vm.resetSearch();
+
+          expect(vm.services[1].display).toBe(false);
+          expect(vm.services[0].display).toBe(true);
+          expect(vm.services[2].display).toBe(true);
+        });
+
+      });
+
+      describe('as a standard user', function () {
+
+        beforeEach(function () {
+          setUpController({}, true, true);
+        });
+
+        it('should not set display to false on hidden services', function() {
+          expect(mockData.getServices).toHaveBeenCalled();
+
+          var orderedServices = [mockServices[1], mockServices[2], mockServices[0]];
+          var updatedServices = angular.fromJson(angular.toJson(orderedServices));
+          updatedServices[0].display = true;
+          updatedServices[1].display = true;
+          updatedServices[2].display = true;
+          expect(vm.services).toEqual(updatedServices);
+        });
+
+        it('should not set display to false on hidden services when match search term', function () {
+          vm.searchText = 'here I am';
+          vm.doSearch();
+
+          expect(vm.services[1].display).toBe(true);
+          expect(vm.services[0].display).toBe(false);
+          expect(vm.services[2].display).toBe(false);
+        });
+
+        it('should not  display to false on hidden services when reset search', function () {
+          vm.resetSearch();
+
+          expect(vm.services[1].display).toBe(true);
+          expect(vm.services[0].display).toBe(true);
+          expect(vm.services[2].display).toBe(true);
+        });
+
       });
 
     });
