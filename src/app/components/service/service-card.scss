@@ -22,6 +22,11 @@
   }
 }
 
+.card--hidden {
+  background: #EEE;
+  opacity: 0.8;
+}
+
 .card__title {
   font-size: $font-size-small;
   line-height: $vr*3;

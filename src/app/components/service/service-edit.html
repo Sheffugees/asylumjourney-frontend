@@ -113,33 +113,38 @@
 
   <div class="admin__secondary">
     <div class="form-section">
-        <h2>Review information</h2>
+      <h2>Review information</h2>
 
-        <label for="lastReviewDate">Last review date</label>
-        <datepicker date-format="dd MMM yyyy">
-          <input type="text" ng-model="service.service.lastReviewDate" id="lastReviewDate" />
-        </datepicker>
+      <label for="lastReviewDate">Last review date</label>
+      <datepicker date-format="dd MMM yyyy">
+        <input type="text" ng-model="service.service.lastReviewDate" id="lastReviewDate" />
+      </datepicker>
 
-        <p>
-          <label for="lastReviewedBy">Last reviewed by</label>
-          <input type="text" ng-model="service.service.lastReviewedBy" id="lastReviewedBy" />
-        </p>
+      <p>
+        <label for="lastReviewedBy">Last reviewed by</label>
+        <input type="text" ng-model="service.service.lastReviewedBy" id="lastReviewedBy" />
+      </p>
 
-        <p>
-          <label for="lastReviewComments">Last review comments</label>
-          <textarea ng-model="service.service.lastReviewComments" id="lastReviewComments"></textarea>
-        </p>
+      <p>
+        <label for="lastReviewComments">Last review comments</label>
+        <textarea ng-model="service.service.lastReviewComments" id="lastReviewComments"></textarea>
+      </p>
 
-        <label for="nextReviewDate">Next review date</label>
-        <datepicker date-format="dd MMM yyyy">
-          <input type="text" ng-model="service.service.nextReviewDate" id="nextReviewDate" />
-        </datepicker>
+      <label for="nextReviewDate">Next review date</label>
+      <datepicker date-format="dd MMM yyyy">
+        <input type="text" ng-model="service.service.nextReviewDate" id="nextReviewDate" />
+      </datepicker>
 
-        <p>
-          <label for="nextReviewComments">Next review comments</label>
-          <textarea ng-model="service.service.nextReviewComments" id="nextReviewComments"></textarea>
-        </p>
-      </div>
+      <p>
+        <label for="nextReviewComments">Next review comments</label>
+        <textarea ng-model="service.service.nextReviewComments" id="nextReviewComments"></textarea>
+      </p>
+    </div>
+    <div class="form-section">
+      <label>Hide this service?
+      <input type="checkbox" id="hidden" ng-model="service.service.hidden" />
+    </label>
+    </div>
   </div>
 
   <div class="admin__actions">

@@ -5,6 +5,7 @@
   <article class="details" ng-if="!service.deleted">
     <h2 class="details__heading">
       <span ng-if="service.errors.show">{{service.errors.message}}</span>
+      <strong ng-if="service.details.hidden">DRAFT:&nbsp;</strong>
       {{ service.details.name }}
     </h2>
 

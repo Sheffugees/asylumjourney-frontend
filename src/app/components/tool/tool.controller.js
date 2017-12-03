@@ -48,13 +48,22 @@
       }
     }
 
+    function setItemDisplay (item) {
+      if (!AuthService.isAuthenticated && item.hidden) {
+        return false;
+      }
+
+      return true;
+    }
+
     function filterFromRouteParams (type, item) {
       var selected = $routeParams[type].split(',');
 
       angular.forEach(selected, function(selectedItem) {
 
         if (item.id === parseInt(selectedItem, 10)) {
-          item.display = true;
+          // item.display = true;
+          item.display = setItemDisplay(item);
 
           updateActiveFilters(item.id, type);
           updateCurrentFilter(item.id, type);
@@ -77,7 +86,8 @@
           filterFromRouteParams(type, item);
           return;
         }
-        item.display = true;
+        item.display = setItemDisplay(item);
+        // item.display = true;
       });
     }
 
@@ -87,7 +97,8 @@
         vm.services = $filter('orderBy')(vm.services, 'name');
 
         angular.forEach(vm.services, function(item) {
-          item.display = true;
+          item.display = setItemDisplay(item);
+          // item.display = true;
         });
 
         if (vm.searchText) {
@@ -156,7 +167,8 @@
       vm.searchText = '';
       $location.search('q', null);
       angular.forEach(vm.services, function(item) {
-        item.display = true;
+        item.display = setItemDisplay(item);
+        // item.display = true;
         item.filtered = false;
       });
     };
