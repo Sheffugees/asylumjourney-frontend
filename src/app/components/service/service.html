@@ -25,7 +25,7 @@
 
       <button type="button" class="button details__print" ng-if="!service.showDeleteConfirmation" ng-click="service.print()">Print</button>
 
-      <a href="mailto:admin@sheffield.cityofsanctuary.org?subject=Asylum Journey Service Feedback: {{service.details.name}}" class="feedback button help">Send us feedback</a>
+      <a href="mailto:admin@sheffield.cityofsanctuary.org?subject=Asylum Journey Service Feedback: {{service.details.name}}" class="feedback button help" ng-if="!service.showDeleteConfirmation">Send us feedback</a>
     </div>
 
     <div class="details__inner">
