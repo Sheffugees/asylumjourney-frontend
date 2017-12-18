@@ -1,5 +1,10 @@
 .container.admin {
   padding-bottom: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.container.admin-form-container {
+  padding-bottom: 80px;
 }
 .admin__heading {
   padding: $vr*2 0 $vr 0;
@@ -13,12 +18,6 @@
     font-size: $font-size-x-large;
   }
 }
-
-.admin__form {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
 
 .admin__list {
   li {
@@ -64,4 +63,32 @@
 .ngdialog.ngdialog-theme-default.confirm-modal .ngdialog-content {
   text-align: center;
   max-width: 400px;
+}
+
+@media(min-width: $break-point-c-px) {
+
+  .container.admin-form-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+    grid-row-gap: 20px;
+    max-width: 1000px;
+  }
+
+  .admin__form, .admin__actions {
+    grid-column: 1/3;
+  }
+
+  .admin__secondary {
+    grid-column: 3/3;
+  }
+
+}
+
+@media(min-width: $break-point-d-px) {
+
+  .container.admin-form-container {
+    grid-column-gap: 60px;
+  }
+
 }

@@ -20,10 +20,12 @@
       show: false,
       message: ''
     }
-
     data.getService(vm.id).then(function (response) {
       vm.details = response;
       formatMapLinks(vm.details._embedded.providers);
+      if (vm.details.resources.length) {
+        formatResources(vm.details);
+      }
     }, function (error) {
       vm.errors.show = true;
       vm.errors.message = error.data.message ? error.data.message : 'There was a problem loading this service';
@@ -45,6 +47,25 @@
           ngDialog.close();
         }, 1000);
       });
+    }
+
+    function formatResources (details) {
+      var numExpired = 0;
+      angular.forEach(details.resources, function(resource) {
+        if (!resource.expiryDate) {
+          return;
+        }
+        var now = new Date();
+        var expiry = new Date(resource.expiryDate);
+        if (expiry < now) {
+          resource.expired = true;
+          numExpired += 1;
+        }
+      });
+      if (numExpired === details.resources.length) {
+        details.hideResources = true;
+      }
+      // return details;
     }
 
     function formatMapLinks (providers) {

@@ -6,7 +6,7 @@
   .controller('ServiceEditController', ServiceEditController);
 
   /** @ngInject */
-  function ServiceEditController($location, $rootScope, $routeParams, $scope, $timeout, data, ngDialog) {
+  function ServiceEditController($filter, $location, $rootScope, $routeParams, $scope, $timeout, data, ngDialog) {
     var vm = this;
     vm.service = {};
     vm.service._embedded = {};
@@ -39,11 +39,35 @@
     if (!vm.isNew) {
       data.getService(id).then(function (service) {
         vm.service = angular.copy(service);
+
+        if (vm.service.resources.length) {
+          formatDates(vm.service);
+        }
       });
     }
 
+    function formatDate (date) {
+      if (date) {
+        return $filter('date')(date, 'dd MMM yyyy')
+      }
+    }
+
+    function formatDates (service) {
+      if (service.resources.length) {
+        angular.forEach(service.resources, function (resource) {
+          resource.expiryDate = formatDate(resource.expiryDate);
+        });
+      }
+
+      var dateFields = ['endDate', 'lastReviewDate', 'nextReviewDate'];
+      angular.forEach(dateFields, function (field) {
+        service[field] = formatDate(service[field]);
+      });
+      return service;
+    }
+
     function addResource () {
-      vm.service.resources.push({name: '', url: ''})
+      vm.service.resources.push({name: '', url: '', expiryDate: '', comments: ''})
     }
 
     function removeResource (index) {
@@ -68,7 +92,7 @@
       if (!vm.service._embedded.categories || !vm.service._embedded.categories.length
         || !vm.service._embedded.stages || !vm.service._embedded.stages.length) {
         vm.saving = false;
-        vm.errorMessage = 'Error: Name, Categories, Service Users and Stages are all required.';
+        vm.errorMessage = 'Error: Name, Categories and Stages are all required.';
         return;
       }
 

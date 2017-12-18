@@ -67,6 +67,28 @@ body.ngdialog-open {
         border-top: 1px solid #CCC;
         padding: $vr*2 0;
     }
+    &__section--review {
+        background: white;
+        padding: $vr;
+        border: none;
+        margin-bottom: $vr*2;
+
+
+        p {
+            font-size: 14px;
+            white-space: normal;
+
+            &:first-of-type {
+                margin-top: 0;
+            }
+
+        }
+        .details__provider & {
+            p:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
     &__sub-heading {
         font-size: 16px;
         font-weight: bold;
@@ -175,6 +197,13 @@ body.ngdialog-open {
     @media #{$BPD} {
         margin-left: 10px;
     }
+}
+
+.expired-icon {
+    width: $vr*3;
+    height: $vr*3;
+    vertical-align: middle;
+    fill: red;
 }
 
 @each $stage,

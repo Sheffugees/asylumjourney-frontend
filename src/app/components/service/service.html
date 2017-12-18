@@ -5,6 +5,7 @@
   <article class="details" ng-if="!service.deleted">
     <h2 class="details__heading">
       <span ng-if="service.errors.show">{{service.errors.message}}</span>
+      <strong ng-if="service.details.hidden">DRAFT:&nbsp;</strong>
       {{ service.details.name }}
     </h2>
 
@@ -24,7 +25,7 @@
 
       <button type="button" class="button details__print" ng-if="!service.showDeleteConfirmation" ng-click="service.print()">Print</button>
 
-      <a href="mailto:admin@sheffield.cityofsanctuary.org?subject=Asylum Journey Service Feedback: {{service.details.name}}" class="feedback button help">Send us feedback</a>
+      <a href="mailto:admin@sheffield.cityofsanctuary.org?subject=Asylum Journey Service Feedback: {{service.details.name}}" class="feedback button help" ng-if="!service.showDeleteConfirmation">Send us feedback</a>
     </div>
 
     <div class="details__inner">
@@ -33,6 +34,14 @@
 
         <p class="details__section" ng-bind-html="service.details.description | linky:'_blank'"></p>
         <p ng-if="service.details.endDate"><strong>End Date:</strong> {{ service.details.endDate | date }}</p>
+
+        <div class="details__section details__section--review" ng-if="service.authService.isAuthenticated">
+          <p>Last reviewed: {{service.details.lastReviewDate | date: 'dd MMM yyyy'}}
+          <span ng-if="service.details.lastReviewedBy"> by {{service.details.lastReviewedBy}}</span>
+          <span ng-if="service.details.lastReviewComments"><br>Comments: {{service.details.lastReviewComments}}</span></p>
+          <p>Next review date: {{service.details.nextReviewDate | date: 'dd MMM yyyy'}}
+          <span ng-if="service.details.nextReviewComments"><br>Comments: {{service.details.nextReviewComments}}</span></p>
+        </div>
 
       </div>
 
@@ -43,12 +52,19 @@
           <p ng-bind-html="service.details.events | linky:'_blank'"></p>
         </div>
 
-        <div class="details__section" ng-if="service.details.resources.length">
+        <div class="details__section" ng-if="(service.details.resources.length && !service.details.hideResources) || (service.authService.isAuthenticated && service.details.resources.length)">
           <h3 class="details__sub-heading">Printable resources</h3>
           <ul>
-          <li ng-repeat="resource in service.details.resources | orderBy: 'name'">
-            <a href="{{resource.url}}" target="_blank">{{resource.name}}</a>
-          </li>
+            <li ng-repeat="resource in service.details.resources | orderBy: 'name'">
+              <a href="{{resource.url}}" target="_blank" ng-if="!resource.expired">{{resource.name}}</a>
+              <span ng-if="resource.expired && service.authService.isAuthenticated">
+                <svg class="icon expired-icon">
+                  <use xlink:href="#icon-warning"></use>
+                </svg>
+                <a href="{{resource.url}}" target="_blank" >{{resource.name}}</a>
+                <strong>Expired: {{ resource.expiryDate | date }}</strong>
+              </span>
+            </li>
           </ul>
         </div>
 
@@ -67,13 +83,25 @@
               <p ng-if="provider.phone"><strong>Tel:</strong> {{ provider.phone }}</p>
               <p ng-if="provider.email"><strong>Email:</strong> <a href="mailto:{{ provider.email }}">{{ provider.email }}</a></p>
               <p ng-if="provider.website"><strong>Website:</strong> <a href="{{ provider.website }}" target="_blank">{{ provider.website }}</a></p>
+              <p ng-if="provider.facebook"><strong>Facebook:</strong> <a href="{{ provider.facebook }}" target="_blank">{{ provider.facebook }}</a></p>
+              <p ng-if="provider.twitter"><strong>Twitter:</strong> <a href="{{ provider.twitter }}" target="_blank">{{ provider.twitter }}</a></p>
               <p ng-if="provider.address"><strong>Address:</strong>
                 <a href="{{ provider.addressUrl }}" target="_blank">{{ provider.address }}, {{ provider.postcode }}</a>
               </p>
               <p ng-if="service.authService.isAuthenticated"><a ng-href="/providers/{{provider.id}}/edit?service={{service.details.id}}" class="button details__edit-provider">Edit</a></p>
+              <div class="details__section details__section--review" ng-if="service.authService.isAuthenticated">
+                  <p>Last reviewed: {{provider.lastReviewDate | date: 'dd MMM yyyy'}}
+                    <span ng-if="provider.lastReviewedBy"> by {{provider.lastReviewedBy}}</span>
+                  <span ng-if="provider.lastReviewComments"><br>Comments: {{provider.lastReviewComments}}</span></p>
+                  <p>Next review date: {{provider.nextReviewDate | date: 'dd MMM yyyy'}}
+                  <span ng-if="provider.nextReviewComments"><br>Comments: {{provider.nextReviewComments}}</span></p>
+              </div>
             </div>
           </div>
         </div>
+
+
+
       </div>
 
     </div>
