@@ -19,8 +19,8 @@
     "normalize-css": "^3.0.3",
     "angular-ui-select": "^0.19.8",
     "angularjs-datepicker": "^2.1.23",
-    "angular-ui-tinymce": "latest",
-    "Autolinker.js": "^1.6.2"
+    "Autolinker.js": "^1.6.2",
+    "textAngular": "^1.5.16"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.2"

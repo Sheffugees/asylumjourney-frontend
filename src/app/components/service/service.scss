@@ -42,8 +42,17 @@ body.ngdialog-open {
         }
     }
 
-    em {
+    b {
+        font-weight: bold;
+    }
+
+    em, i {
         font-style: italic;
+    }
+
+    ul {
+        list-style: disc;
+        margin: 0 0 12px 20px;
     }
 
     .format-text {

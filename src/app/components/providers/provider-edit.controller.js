@@ -26,18 +26,6 @@
 
     var returnToService = $routeParams.service;
 
-    // Configure tinymce editor
-    $scope.tinymceOptions = {
-      inline: false,
-      plugins : 'link',
-      skin: 'lightgray',
-      theme : 'modern',
-      menu: {},
-      min_height: 300,
-      statusbar: false,
-      toolbar: 'bold italic | link'
-    };
-
     function formatDates (provider) {
       var dateFields = ['lastReviewDate', 'nextReviewDate'];
       angular.forEach(dateFields, function (field) {

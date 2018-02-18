@@ -46,18 +46,6 @@
       });
     }
 
-    // Configure tinymce editor
-    $scope.tinymceOptions = {
-      inline: false,
-      plugins : 'link',
-      skin: 'lightgray',
-      theme : 'modern',
-      menu: {},
-      min_height: 300,
-      statusbar: false,
-      toolbar: 'bold italic | link'
-    };
-
     function formatDate (date) {
       if (date) {
         return $filter('date')(date, 'dd MMM yyyy')
