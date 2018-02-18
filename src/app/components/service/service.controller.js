@@ -6,7 +6,7 @@
   .controller('ServiceController', ServiceController);
 
   /** @ngInject */
-  function ServiceController($location, $rootScope, $scope, $timeout, $window, AuthService, data, ngDialog) {
+  function ServiceController($filter, $location, $rootScope, $scope, $timeout, $window, AuthService, data, ngDialog) {
     var vm = this;
     vm.id = $scope.ngDialogData.id;
     vm.authService = AuthService;
@@ -14,6 +14,8 @@
     vm.confirmDelete = confirmDelete;
     vm.deleteService = deleteService;
     vm.showDeleteConfirmation = false;
+    vm.formatDescription = false;
+    vm.formatEvents = false;
     vm.print = print;
     vm.path = $location.protocol() + '://' + $location.host();
     vm.errors = {
@@ -26,6 +28,22 @@
       if (vm.details.resources.length) {
         formatResources(vm.details);
       }
+
+      // Check if fields are formatted HTML, if not use var to add class to format whitespace
+      if (vm.details.description && vm.details.description.substr(0,3) !== '<p>') {
+        vm.formatDescription = true;
+      }
+      if (vm.details.events && vm.details.events.substr(0,3) !== '<p>') {
+        vm.formatEvents = true;
+      }
+      // Auto link unlinked urls
+      vm.details.description = Autolinker.link(vm.details.description, "_blank");
+      vm.details.events = Autolinker.link(vm.details.events, "_blank");
+
+      if (vm.details._embedded.providers) {
+        formatProviders(vm.details);
+      }
+
     }, function (error) {
       vm.errors.show = true;
       vm.errors.message = error.data.message ? error.data.message : 'There was a problem loading this service';
@@ -46,6 +64,17 @@
         $timeout(function () {
           ngDialog.close();
         }, 1000);
+      });
+    }
+
+    function formatProviders (details) {
+      angular.forEach(details._embedded.providers, function (provider) {
+        // Check if fields are formatted HTML, if not use var to add class to format whitespace
+        if (provider.description && provider.description.substr(0,3) !== '<p>') {
+          provider.formatDescription = true;
+        }
+        // Auto link unlinked urls
+        provider.description = Autolinker.link(provider.description, "_blank");
       });
     }
 

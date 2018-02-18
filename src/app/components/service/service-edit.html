@@ -22,7 +22,7 @@
 
       <p>
         <label for="description">Description *</label>
-        <textarea ng-model="service.service.description" id="description" class="textarea--large" required=""></textarea>
+        <textarea ui-tinymce="tinymceOptions" ng-model="service.service.description"></textarea>
       </p>
 
       <label for="endDate">End date</label>
@@ -37,7 +37,7 @@
 
       <p>
         <label for="events">Classes &amp; Events</label>
-        <textarea ng-model="service.service.events" id="events" class="textarea--large"></textarea>
+        <textarea ui-tinymce="tinymceOptions" ng-model="service.service.events"></textarea>
       </p>
 
       <div class="form-section">
