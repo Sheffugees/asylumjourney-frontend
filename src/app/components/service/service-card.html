@@ -1,4 +1,4 @@
 <a href="/service/{{service.id}}" ng-click="$event.preventDefault(); tool.showService(service.id)" class="card"  ng-class="{'card--hidden': service.hidden}">
   <h3 class="card__title">{{ service.name }}</h3>
-  <p class="card__description">{{ service.description | limitTo: 80 }}...</p>
+  <div class="card__description">{{ service.description | stripHTML | limitTo: 80}}...</div>
 </a>

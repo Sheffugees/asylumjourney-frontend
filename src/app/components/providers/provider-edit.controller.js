@@ -6,7 +6,7 @@
   .controller('ProviderEditController', ProviderEditController);
 
   /** @ngInject */
-  function ProviderEditController($filter, $location, $rootScope, $routeParams, $timeout, data) {
+  function ProviderEditController($filter, $location, $rootScope, $routeParams, $scope, $timeout, data) {
     var vm = this;
     vm.provider = {};
     vm.save = save;
