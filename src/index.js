@@ -2,6 +2,7 @@ import angular from 'angular';
 import 'angular-ui-router';
 import ngSanitize from 'angular-sanitize';
 import ngDialog from 'ng-dialog';
+import textAngular from 'textAngular';
 import APIInterceptor from './app/services/apiInterceptor';
 import {AuthService} from './app/services/auth';
 import {DataService} from './app/services/data';
@@ -24,10 +25,20 @@ import runBlock from './runBlock';
 import './index.scss';
 
 angular
-  .module('asylumJourney', ['ui.router', ngDialog, ngSanitize])
+  .module('asylumJourney', ['ui.router', ngDialog, ngSanitize, textAngular])
   .config(routesConfig)
   .config(($httpProvider) =>
     $httpProvider.interceptors.push('APIInterceptor')
+  )
+  .config(($provide) => 
+    /**
+     * Use angular-sanitize instead of textAngular's own version
+     * https://github.com/textAngular/textAngular/issues/842
+     */
+    $provide.decorator('taOptions', ['taRegisterTool', '$delegate', function(taRegisterTool, taOptions) {
+      taOptions.forceTextAngularSanitize = false;
+      return taOptions;
+    }])
   )
   .run(runBlock)
   .service('APIInterceptor', APIInterceptor)
