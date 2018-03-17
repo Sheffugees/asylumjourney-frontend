@@ -23,6 +23,8 @@ import serviceCard from './app/components/service/serviceCard';
 import ServiceController from './app/components/service/service';
 import {start} from './app/components/start/start';
 import {tool} from './app/components/tool/tool';
+import decorators from './decorators';
+import interceptors from './interceptors';
 import routesConfig from './routes';
 import runBlock from './runBlock';
 import './index.scss';
@@ -30,19 +32,8 @@ import './index.scss';
 angular
   .module('asylumJourney', ['ui.router', '720kb.datepicker', ngDialog, ngSanitize, textAngular, uiselect])
   .config(routesConfig)
-  .config(($httpProvider) =>
-    $httpProvider.interceptors.push('APIInterceptor')
-  )
-  .config(($provide) => 
-    /**
-     * Use angular-sanitize instead of textAngular's own version
-     * https://github.com/textAngular/textAngular/issues/842
-     */
-    $provide.decorator('taOptions', ['taRegisterTool', '$delegate', function(taRegisterTool, taOptions) {
-      taOptions.forceTextAngularSanitize = false;
-      return taOptions;
-    }])
-  )
+  .config(interceptors)
+  .config(decorators)
   .run(runBlock)
   .service('APIInterceptor', APIInterceptor)
   .service('AuthService', AuthService)
