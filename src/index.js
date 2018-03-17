@@ -9,9 +9,12 @@ import categoryFilter from './app/filters/category';
 import providerFilter from './app/filters/provider';
 import stageFilter from './app/filters/stage';
 import stripHTML from './app/filters/stripHTML';
+import adminBar from './app/components/adminBar/adminBar';
 import authButton from './app/components/auth/authButton';
 import AuthController from './app/components/auth/auth';
 import filterBar from './app/components/filterBar/filterBar';
+import {providerEdit} from './app/components/providers/providerEdit';
+import {providers} from './app/components/providers/providers';
 import serviceCard from './app/components/service/serviceCard';
 import ServiceController from './app/components/service/service';
 import {start} from './app/components/start/start';
@@ -34,11 +37,14 @@ angular
   .filter('providerFilter', providerFilter)
   .filter('stageFilter', stageFilter)
   .filter('stripHTML', stripHTML)
+  .directive('adminBar', adminBar)
   .directive('authButton', authButton)
   .directive('filterBar', filterBar)
   .directive('serviceCard', serviceCard)
   .controller('AuthController', AuthController)
   .controller('ServiceController', ServiceController)
+  .component('providers', providers)
+  .component('providerEdit', providerEdit)
   .component('start', start)
   .component('tool', tool);
   

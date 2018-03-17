@@ -6,7 +6,8 @@
     "autolinker": "^1.6.2",
     "install": "^0.10.4",
     "moment": "^2.20.1",
-    "ng-dialog": "^1.4.0"
+    "ng-dialog": "^1.4.0",
+    "textangular": "^1.5.16"
   },
   "devDependencies": {
     "@types/angular": "^1.6.6",
