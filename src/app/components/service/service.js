@@ -1,3 +1,4 @@
+import './service.scss';
 const Autolinker = require('autolinker');
 
 class ServiceController {

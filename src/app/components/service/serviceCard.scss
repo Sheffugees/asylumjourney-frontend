@@ -1,0 +1,66 @@
+@import '../../../theme.scss';
+.card {
+  display: block;
+  color: $color-text;
+  text-decoration: none;
+  border-bottom: 4px solid $color-text;
+  padding: $vr;
+  margin: 0 2px;
+  background: $color-white;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
+  height: 100%;
+
+  // to do stage colours on cards
+
+  .icon {
+    height: 20px;
+    width: 20px;
+  }
+}
+
+.card--hidden {
+  background: #EEE;
+  opacity: 0.8;
+}
+
+.card__title {
+  font-size: $font-size-small;
+  line-height: $vr*3;
+  font-weight: normal;
+}
+
+.card__description {
+  display: none;
+}
+
+@media(min-width: $break-point-e) {
+  .card {
+    font-size: $font-size-base;
+    padding: $vr;
+    margin: $vr;
+    line-height: $vr*3;
+
+    .tool-category__stage--cols-1 &, .tool-category__stage--cols-2 &, .tool-category__stage--cols-3 & {
+      padding: 10px 20px;
+      height: 100%;
+    }
+  }
+
+  .card__title {
+    .tool-category__stage--cols-1 &, .tool-category__stage--cols-2 &, .tool-category__stage--cols-3 & {
+      font-size: $font-size-base;
+      font-weight: bold;
+    }
+  }
+
+  .card__description {
+
+    .tool-category__stage--cols-1 & , .tool-category__stage--cols-2 &, .tool-category__stage--cols-3 & {
+      display: block;
+      font-size: $font-size-small;
+      overflow: hidden;
+    }
+  }
+
+}
+
