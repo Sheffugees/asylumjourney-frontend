@@ -2,6 +2,7 @@ import angular from 'angular';
 import 'angular-ui-router';
 import ngSanitize from 'angular-sanitize';
 import ngDialog from 'ng-dialog';
+import APIInterceptor from './app/services/apiInterceptor';
 import {AuthService} from './app/services/auth';
 import {DataService} from './app/services/data';
 import categoryFilter from './app/filters/category';
@@ -22,7 +23,11 @@ import './index.scss';
 angular
   .module('asylumJourney', ['ui.router', ngDialog, ngSanitize])
   .config(routesConfig)
+  .config(($httpProvider) =>
+    $httpProvider.interceptors.push('APIInterceptor')
+  )
   .run(runBlock)
+  .service('APIInterceptor', APIInterceptor)
   .service('AuthService', AuthService)
   .service('DataService', DataService)
   .filter('categoryFilter', categoryFilter)
@@ -36,3 +41,4 @@ angular
   .controller('ServiceController', ServiceController)
   .component('start', start)
   .component('tool', tool);
+  
