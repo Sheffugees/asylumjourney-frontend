@@ -1,25 +1,25 @@
-<div class="tool" ng-class="{'filters-open': tool.showAllFilters}">
+<div class="tool" ng-class="{'filters-open': $ctrl.showAllFilters}">
 
   <filter-bar></filter-bar>
 
-  <ul class="tool-stages tool-stages--cols-{{tool.numStagesDisplayed}}">
+  <ul class="tool-stages tool-stages--cols-{{$ctrl.numStagesDisplayed}}">
     <li class="tool-stages__stage brand">
     </li>
-    <li ng-if="stage.display" ng-repeat="stage in tool.stages" class="tool-stages__stage tool-stages__stage--{{stage.id}}">
+    <li ng-if="stage.display" ng-repeat="stage in $ctrl.stages" class="tool-stages__stage tool-stages__stage--{{stage.id}}">
       <span>{{stage.name}}</span>
     </li>
   </ul>
 
-  <div ng-if="tool.showLoader" class="tool__loader">
+  <div ng-if="$ctrl.showLoader" class="tool__loader">
     <img ng-src="/app/images/loader-logo.svg" alt="Loading" />
     Loading...
   </div>
 
-  <div ng-if="category.display && !tool.showLoader" ng-repeat="category in tool.categories" class="tool-category">
+  <div ng-if="category.display && !$ctrl.showLoader" ng-repeat="category in $ctrl.categories" class="tool-category">
 
     <h2 class="tool-category__heading">{{category.name}}</h2>
-    <ul ng-if="stage.display" class="tool-category__stage tool-category__stage-{{stage.id}} tool-category__stage--cols-{{tool.numStagesDisplayed}}" ng-repeat="stage in tool.stages">
-      <li ng-repeat="service in tool.services | category: category.id | stage: stage.id | provider: tool.filteredProviders" ng-if="service.display">
+    <ul ng-if="stage.display" class="tool-category__stage tool-category__stage-{{stage.id}} tool-category__stage--cols-{{$ctrl.numStagesDisplayed}}" ng-repeat="stage in $ctrl.stages">
+      <li ng-repeat="service in $ctrl.services | categoryFilter: category.id | stageFilter: stage.id | providerFilter: $ctrl.filteredProviders" ng-if="service.display">
         <service-card details="service"></service-card>
       </li>
     </ul>

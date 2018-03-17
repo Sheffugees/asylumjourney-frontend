@@ -1,0 +1,69 @@
+$break-point-b: 480px;
+$break-point-c: 600px;
+$break-point-d: 768px;
+$break-point-e: 980px;
+$break-point-f: 1200px;
+$grey-a: #333;
+$grey-d: #ccc;
+$font-size-small: 13px;
+$vr: 6px;
+$color-red: #d11713;
+$color-green: #4caf50;
+$color-warning: $color-red;
+$color-text: $grey-a;
+
+
+// Monochrome
+$color-white: #fff;
+$grey-a: #333;
+$grey-b: #666;
+$grey-c: #999;
+$grey-d: #ccc;
+$grey-e: #ddd;
+$grey-f: #fbfbfb;
+
+// Other colours
+$color-red: #d11713;
+$color-orange: #e68344;
+$color-yellow: #e6c127;
+$color-green: #4caf50;
+$color-blue: #1692e0;
+$color-indigo: #846dce;
+$color-violet: #b200b2;
+
+// Aliases
+$color-text: $grey-a;
+$color-primary: $color-red;
+$color-secondary: $color-blue;
+
+
+// Stage colours
+$stage-1-color: $color-red;
+$stage-2-color: $color-orange;
+$stage-3-color: $color-yellow;
+$stage-4-color: $color-green;
+$stage-5-color: $color-blue;
+$stage-6-color: $color-indigo;
+$stage-7-color: $color-violet;
+
+
+
+// Typography
+$font-family-sans-serif: 'Source Sans Pro', sans-serif;
+$font-family-serif: 'Georgia Pro', Georgia, Times, serif;
+$font-family-mono: 'Anonymous Pro', 'Droid Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, 'Lucida Console', Courier, monospace;
+$font-family-base: $font-family-sans-serif;
+
+// Font Sizing
+$font-size-x-large: 30px;
+$font-size-large: 21px;
+$font-size-base: 16px;
+$font-size-small: 13px;
+$font-size-xsmall: 12px;
+$line-height-base: 1.5; // 24px
+$line-height-small: $vr*3; // 18px
+
+$font-weight-bold: 700; // 700 when not using $font-face
+$font-weight-medium: 600; // 600 when not using $font-face
+$font-weight-regular: 400; // 400 when not using $font-face
+$font-weight-light: 100; // 100 when not using $font-face

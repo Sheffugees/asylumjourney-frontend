@@ -1,102 +1,15 @@
 <!doctype html>
-<html ng-app="asylumjourneyFrontend" lang="en">
+<html>
+  <head>
+    <base href="/">
+    <meta charset="utf-8">
+    <title>FountainJS</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="http://fountainjs.io/assets/imgs/fountain.png" />
+  </head>
 
-<head>
-	<meta charset="utf-8">
-	<meta name="robots" content="{{robots}}">
-	<title>Asylum Journey Sheffield</title>
-	<meta name="description" content="The Asylum Journey: information about services and resources for asylum seekers and refugees in Sheffield.">
-	<meta name="viewport" content="width=device-width">
-	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
-	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-	<link rel="manifest" href="/manifest.json">
-	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-	<meta name="theme-color" content="#ffffff">
-	<base href="/">
-	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
-	<!-- build:css({.tmp/serve,src}) styles/vendor.css -->
-	<!-- bower:css -->
-	<!-- run `gulp inject` to automatically populate bower styles dependencies -->
-	<!-- endbower -->
-	<!-- endbuild -->
-
-	<!-- build:css({.tmp/serve,src}) styles/app.css -->
-	<!-- inject:css -->
-	<!-- css files will be automatically insert here -->
-	<!-- endinject -->
-	<!-- endbuild -->
-</head>
-
-<body>
-	<svg style="position: absolute; width: 0; height: 0;" width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-		<defs>
-			<symbol id="icon-warning" viewBox="0 0 24 24">
-				<title>warning</title>
-				<path class="path1" d="M12.984 14.016v-4.031h-1.969v4.031h1.969zM12.984 18v-2.016h-1.969v2.016h1.969zM0.984 21l11.016-18.984 11.016 18.984h-22.031z"></path>
-			</symbol>
-			<symbol id="icon-filter" viewBox="0 0 25 32">
-				<title>filter</title>
-				<path class="path1" d="M25.054 5.268q0.304 0.732-0.25 1.25l-8.804 8.804v13.25q0 0.75-0.696 1.054-0.232 0.089-0.446 0.089-0.482 0-0.804-0.339l-4.571-4.571q-0.339-0.339-0.339-0.804v-8.679l-8.804-8.804q-0.554-0.518-0.25-1.25 0.304-0.696 1.054-0.696h22.857q0.75 0 1.054 0.696z"></path>
-			</symbol>
-			<symbol id="icon-search" viewBox="0 0 16 16">
-				<title>search</title>
-				<path class="path1" d="M6.344 9.344q1.25 0 2.125-0.875t0.875-2.125-0.875-2.125-2.125-0.875-2.125 0.875-0.875 2.125 0.875 2.125 2.125 0.875zM10.344 9.344l3.313 3.313-1 1-3.313-3.313v-0.531l-0.188-0.188q-1.188 1.031-2.813 1.031-1.813 0-3.078-1.25t-1.266-3.063 1.266-3.078 3.078-1.266 3.063 1.266 1.25 3.078q0 1.625-1.031 2.813l0.188 0.188h0.531z"></path>
-			</symbol>
-			<symbol id="icon-arrow-down" viewBox="0 0 32 32">
-				<title>arrow-down</title>
-				<path d="M26.2 11.7c0 0.4-0.2 0.6-0.3 0.7l-8.4 8.4c-0.4 0.4-0.9 0.6-1.5 0.6s-1.1-0.2-1.5-0.6l-8.4-8.4c-0.2-0.2-0.3-0.4-0.3-0.7s0.1-0.5 0.3-0.7c0.2-0.2 0.4-0.3 0.7-0.3s0.5 0.1 0.7 0.3l8.4 8.4c0 0 0 0 0 0s0 0 0.1 0 0.1 0 0.2 0l8.3-8.4c0.4-0.4 1-0.4 1.4 0 0.1 0.1 0.3 0.3 0.3 0.7z"></path>
-				</symbol>
-				<symbol id="icon-checkmark" viewBox="0 0 32 32">
-				<title>checkmark</title>
-				<path d="M16 0c-8.836 0-16 7.164-16 16s7.164 16 16 16 16-7.164 16-16-7.164-16-16-16zM13.52 23.383l-7.362-7.363 2.828-2.828 4.533 4.535 9.617-9.617 2.828 2.828-12.444 12.445z"></path>
-				</symbol>
-        <symbol id="icon-info" viewBox="0 0 32 32">
-				<title>info</title>
-				<path d="M14 9.5c0-0.825 0.675-1.5 1.5-1.5h1c0.825 0 1.5 0.675 1.5 1.5v1c0 0.825-0.675 1.5-1.5 1.5h-1c-0.825 0-1.5-0.675-1.5-1.5v-1z"></path>
-				<path d="M20 24h-8v-2h2v-6h-2v-2h6v8h2z"></path>
-				<path d="M16 0c-8.837 0-16 7.163-16 16s7.163 16 16 16 16-7.163 16-16-7.163-16-16-16zM16 29c-7.18 0-13-5.82-13-13s5.82-13 13-13 13 5.82 13 13-5.82 13-13 13z"></path>
-				</symbol>
-		</defs>
-	</svg>
-	<!--[if lt IE 10]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-
-	<div ng-view></div>
-	<auth-button></auth-button>
-
-	<!-- build:js(src) scripts/vendor.js -->
-	<!-- bower:js -->
-	<!-- run `gulp inject` to automatically populate bower script dependencies -->
-	<!-- endbower -->
-	<!-- endbuild -->
-
-	<!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
-	<!-- inject:js -->
-	<!-- js files will be automatically insert here -->
-	<!-- endinject -->
-
-	<!-- inject:partials -->
-	<!-- angular templates will be automatically converted in js and inserted here -->
-	<!-- endinject -->
-	<!-- endbuild -->
-
-	<script>
-		(function(i, s, o, g, r, a, m) {
-			i['GoogleAnalyticsObject'] = r;
-			i[r] = i[r] || function() {
-				(i[r].q = i[r].q || []).push(arguments)
-			}, i[r].l = 1 * new Date();
-			a = s.createElement(o),
-				m = s.getElementsByTagName(o)[0];
-			a.async = 1;
-			a.src = g;
-			m.parentNode.insertBefore(a, m)
-		})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-	</script>
-</body>
-
+  <body ng-app="asylumJourney">
+    <ui-view></ui-view>
+  </body>
 </html>
