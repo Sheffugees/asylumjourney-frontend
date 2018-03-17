@@ -10,7 +10,7 @@
     </h2>
 
     <div class="details__admin">
-      <span ng-if="$ctrl.auth$ctrl.isAuthenticated">
+      <span ng-if="$ctrl.AuthService.isAuthenticated">
         <span ng-if="!$ctrl.showDeleteConfirmation">
           <a ng-href="/services/{{$ctrl.details.id}}/edit"  class="button">Edit</a>
           <button type="button" class="button" ng-click="$ctrl.confirmDelete()">Delete</button>
@@ -36,7 +36,7 @@
 
         <p ng-if="$ctrl.details.endDate"><strong>End Date:</strong> {{ $ctrl.details.endDate | date }}</p>
 
-        <div class="details__section details__section--review" ng-if="$ctrl.auth$ctrl.isAuthenticated">
+        <div class="details__section details__section--review" ng-if="$ctrl.AuthService.isAuthenticated">
           <p>Last reviewed: {{$ctrl.details.lastReviewDate | date: 'dd MMM yyyy'}}
           <span ng-if="$ctrl.details.lastReviewedBy"> by {{$ctrl.details.lastReviewedBy}}</span>
           <span ng-if="$ctrl.details.lastReviewComments"><br>Comments: {{$ctrl.details.lastReviewComments}}</span></p>
@@ -53,12 +53,12 @@
           <div ng-class="{'format-text' : $ctrl.formatDescription}" ng-bind-html="$ctrl.details.events"></div>
         </div>
 
-        <div class="details__section" ng-if="($ctrl.details.resources.length && !$ctrl.details.hideResources) || ($ctrl.auth$ctrl.isAuthenticated && $ctrl.details.resources.length)">
+        <div class="details__section" ng-if="($ctrl.details.resources.length && !$ctrl.details.hideResources) || ($ctrl.AuthService.isAuthenticated && $ctrl.details.resources.length)">
           <h3 class="details__sub-heading">Printable resources</h3>
           <ul>
             <li ng-repeat="resource in $ctrl.details.resources | orderBy: 'name'">
               <a href="{{resource.url}}" target="_blank" ng-if="!resource.expired">{{resource.name}}</a>
-              <span ng-if="resource.expired && $ctrl.auth$ctrl.isAuthenticated">
+              <span ng-if="resource.expired && $ctrl.AuthService.isAuthenticated">
                 <svg class="icon expired-icon">
                   <use xlink:href="#icon-warning"></use>
                 </svg>
@@ -89,8 +89,8 @@
               <p ng-if="provider.address"><strong>Address:</strong>
                 <a href="{{ provider.addressUrl }}" target="_blank">{{ provider.address }}, {{ provider.postcode }}</a>
               </p>
-              <p ng-if="$ctrl.auth$ctrl.isAuthenticated"><a ng-href="/providers/{{provider.id}}/edit?service={{$ctrl.details.id}}" class="button details__edit-provider">Edit</a></p>
-              <div class="details__section details__section--review" ng-if="$ctrl.auth$ctrl.isAuthenticated">
+              <p ng-if="$ctrl.AuthService.isAuthenticated"><a ng-href="/providers/{{provider.id}}/edit?service={{$ctrl.details.id}}" class="button details__edit-provider">Edit</a></p>
+              <div class="details__section details__section--review" ng-if="$ctrl.AuthService.isAuthenticated">
                   <p>Last reviewed: {{provider.lastReviewDate | date: 'dd MMM yyyy'}}
                     <span ng-if="provider.lastReviewedBy"> by {{provider.lastReviewedBy}}</span>
                   <span ng-if="provider.lastReviewComments"><br>Comments: {{provider.lastReviewComments}}</span></p>

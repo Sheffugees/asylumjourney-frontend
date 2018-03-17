@@ -64,14 +64,14 @@ export class DataService {
 function createItem (item, type) {
   const deferred = this.$q.defer();
   return this.$http.post(`https://asylum-journey-staging.herokuapp.com/${type}`, item).then((response) => {
-  
+    const location = response.headers().location;
+    const id = location.split(`/${type}/`).pop();
+    this.$log.log('data id', id);
     if (this.dataStore[type].length) {
-      const location = response.headers().location;
-      const id = location.split(`/${type}/`).pop();
       item.id = id;
       this.dataStore[type].push(item);
     }
-    deferred.resolve();
+    deferred.resolve(item.id);
     return deferred.promise;
   }, error => {
     deferred.reject(error);

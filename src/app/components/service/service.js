@@ -3,9 +3,10 @@ const Autolinker = require('autolinker');
 
 class ServiceController {
   /** @ngInject */
-  constructor(AuthService, DataService, $location, $log, $rootScope, $scope, $timeout, $window) {
-    this.authService = AuthService;
+  constructor(AuthService, DataService, ngDialog, $location, $log, $rootScope, $scope, $timeout, $window) {
+    this.AuthService = AuthService;
     this.DataService = DataService;
+    this.ngDialog = ngDialog;
     this.id = $scope.ngDialogData.id;
     this.$rootScope = $rootScope;
     this.$timeout = $timeout;
@@ -68,7 +69,7 @@ class ServiceController {
     this.DataService.deleteService(this.id).then(() => {
       this.deleted = true;
       this.$rootScope.$broadcast('updateServices');
-      this.$timeout(function () {
+      this.$timeout( () => {
         this.ngDialog.close();
       }, 1000);
     });

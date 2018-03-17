@@ -1,0 +1,164 @@
+<admin-bar></admin-bar>
+<form ng-submit="$ctrl.save()" ng-if="!$ctrl.saved">
+<div class="container admin-form-container">
+
+  <div class="admin__form">
+    <div class="admin__heading">
+      <h1 ng-if="!$ctrl.isNew">Edit service</h1>
+      <h1 ng-if="$ctrl.isNew">New service</h1>
+    </div>
+
+    <div ng-if="$ctrl.saved" class="admin-success">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-checkmark"></use>
+      </svg>
+      <h2>Service saved</h2>
+    </div>
+
+      <p>
+        <label for="name">Name *</label>
+        <input type="text" ng-model="$ctrl.service.name" id="name" required />
+      </p>
+
+      <p>
+        <label for="description">Description *</label>
+        <text-angular ng-model="$ctrl.service.description" ta-toolbar="[['bold','italics', 'ul', 'insertLink']]"></text-angular>
+      </p>
+
+      <label for="endDate">End date</label>
+      <datepicker date-format="dd MMM yyyy">
+        <input type="text" ng-model="$ctrl.service.endDate" id="endDate" />
+      </datepicker>
+
+      <p>
+        <label for="dataMaintainer">Data maintainer</label>
+        <input type="text" ng-model="$ctrl.service.dataMaintainer" id="dataMaintainer" />
+      </p>
+
+      <p>
+        <label for="events">Classes &amp; Events</label>
+        <text-angular ng-model="$ctrl.service.events" ta-toolbar="[['bold','italics', 'ul','insertLink']]"></text-angular>
+      </p>
+
+      <div class="form-section">
+        <p>Printable resources</p>
+
+        <div ng-repeat="resource in $ctrl.service.resources" class="form-section form-section--sub">
+          <div class="inline-fields">
+            <div class="inline-fields__field">
+              <label for="resourceName-{{$index}}">Name</label>
+              <input type="text" id="resourceName-{{$index}}" ng-model="resource.name" />
+            </div>
+            <div class="inline-fields__field">
+              <label for="resourceUrl-{{$index}}">Url</label>
+              <input type="url" id="resourceUrl-{{$index}}" ng-model="resource.url" ng-required="resource.name" />
+            </div>
+            <div class="inline-fields__field">
+              <label for="expiryDate">Expiry date</label>
+              <datepicker date-format="dd MMM yyyy">
+                <input type="text" ng-model="resource.expiryDate" id="expiryDate" />
+              </datepicker>
+            </div>
+            <button type="button" ng-click="$ctrl.removeResource($index)">Remove</button>
+          </div>
+          <label for="resourceComments-{{$index}}">Comments</label>
+          <textarea ng-model="resource.comments" id="resourceComments-{{$index}}"></textarea>
+        </div>
+        <button type="button" class="button button--secondary" ng-click="$ctrl.addResource()">Add new resource</button>
+      </div>
+
+      <p>
+        <label for="categories" class="has-field-info">Categories *</label>
+        <ui-select multiple ng-model="$ctrl.service._embedded.categories" name="categories" id="categories">
+          <ui-select-match placeholder="Select categories">
+              <span ng-bind="$item.name"></span>
+          </ui-select-match>
+          <ui-select-choices repeat="item in ($ctrl.categories | filter: $select.search | orderBy: 'name') track by item.id">
+              <span ng-bind="item.name"></span>
+          </ui-select-choices>
+        </ui-select>
+      </p>
+
+      <p>
+        <label for="providers">Providers</label>
+        <ui-select multiple ng-model="$ctrl.service._embedded.providers" name="providers" id="providers">
+          <ui-select-match placeholder="Select providers">
+              <span ng-bind="$item.name"></span>
+          </ui-select-match>
+          <ui-select-choices repeat="item in ($ctrl.providers | filter: {name: $select.search} | orderBy: 'name') track by item.id">
+              <span ng-bind="item.name"></span>
+          </ui-select-choices>
+        </ui-select>
+      </p>
+
+      <p>
+        <label for="stages" class="has-field-info">Stages *
+          <button type="button" class="field-info" ng-click="$ctrl.stagesInfo()">
+            <svg class="icon">
+              <use xlink:href="#icon-info"></use>
+            </svg>
+            <span class="sr-only">Info</span>
+          </button></label>
+        <ui-select multiple ng-model="$ctrl.service._embedded.stages" name="stages" id="stages">
+          <ui-select-match placeholder="Select stages">
+              <span ng-bind="$item.name"></span>
+          </ui-select-match>
+          <ui-select-choices repeat="item in ($ctrl.stages | filter: $select.search) track by item.id">
+              <span ng-bind="item.name"></span>
+          </ui-select-choices>
+        </ui-select>
+      </p>
+
+  </div>
+
+  <div class="admin__secondary">
+    <div class="form-section">
+      <h2>Review information</h2>
+
+      <label for="lastReviewDate">Last review date</label>
+      <datepicker date-format="dd MMM yyyy">
+        <input type="text" ng-model="$ctrl.service.lastReviewDate" id="lastReviewDate" />
+      </datepicker>
+
+      <p>
+        <label for="lastReviewedBy">Last reviewed by</label>
+        <input type="text" ng-model="$ctrl.service.lastReviewedBy" id="lastReviewedBy" />
+      </p>
+
+      <p>
+        <label for="lastReviewComments">Last review comments</label>
+        <textarea ng-model="$ctrl.service.lastReviewComments" id="lastReviewComments"></textarea>
+      </p>
+
+      <label for="nextReviewDate">Next review date</label>
+      <datepicker date-format="dd MMM yyyy">
+        <input type="text" ng-model="$ctrl.service.nextReviewDate" id="nextReviewDate" />
+      </datepicker>
+
+      <p>
+        <label for="nextReviewComments">Next review comments</label>
+        <textarea ng-model="$ctrl.service.nextReviewComments" id="nextReviewComments"></textarea>
+      </p>
+    </div>
+    <div class="form-section">
+      <h2>Status</h2>
+      <label>
+        <input type="checkbox" id="hidden" ng-model="$ctrl.service.hidden" />
+        Draft (will be hidden from non-admin users)
+      </label>
+    </div>
+  </div>
+
+  <div class="admin__actions">
+    <p ng-if="$ctrl.errorMessage !== ''" class="validation--error">{{$ctrl.errorMessage}}</p>
+
+    <div class="buttons-container">
+      <button ng-disabled="$ctrl.saving" type="submit" class="button button--primary button--large">
+        <span ng-if="!$ctrl.saving">Save</span>
+        <span ng-if="$ctrl.saving">Saving...</span>
+      </button>
+    </div>
+  </div>
+
+</div>
+</form>

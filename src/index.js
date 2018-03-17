@@ -4,6 +4,7 @@ import ngSanitize from 'angular-sanitize';
 import ngDialog from 'ng-dialog';
 import textAngular from 'textAngular';
 import 'angularjs-datepicker';
+import uiselect from 'ui-select';
 import APIInterceptor from './app/services/apiInterceptor';
 import {AuthService} from './app/services/auth';
 import {DataService} from './app/services/data';
@@ -17,6 +18,7 @@ import AuthController from './app/components/auth/auth';
 import filterBar from './app/components/filterBar/filterBar';
 import {providerEdit} from './app/components/providers/providerEdit';
 import {providers} from './app/components/providers/providers';
+import {serviceEdit} from './app/components/service/serviceEdit';
 import serviceCard from './app/components/service/serviceCard';
 import ServiceController from './app/components/service/service';
 import {start} from './app/components/start/start';
@@ -26,7 +28,7 @@ import runBlock from './runBlock';
 import './index.scss';
 
 angular
-  .module('asylumJourney', ['ui.router', '720kb.datepicker', ngDialog, ngSanitize, textAngular])
+  .module('asylumJourney', ['ui.router', '720kb.datepicker', ngDialog, ngSanitize, textAngular, uiselect])
   .config(routesConfig)
   .config(($httpProvider) =>
     $httpProvider.interceptors.push('APIInterceptor')
@@ -57,6 +59,7 @@ angular
   .controller('ServiceController', ServiceController)
   .component('providers', providers)
   .component('providerEdit', providerEdit)
+  .component('serviceEdit', serviceEdit)
   .component('start', start)
   .component('tool', tool);
   

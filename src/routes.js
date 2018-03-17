@@ -25,12 +25,22 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       component: 'providerEdit',
       authenticate: true
     })
-    .state('tool', {
-      url: '/tool?stages&categories&providers&q',
-      component: 'tool'
-    })
     .state('service', {
       url: '/service/:serviceId',
+      component: 'tool'
+    })
+    .state('serviceEdit', {
+      url: '/services/:serviceId/edit',
+      component: 'serviceEdit',
+      authenticate: true
+    })
+    .state('serviceNew', {
+      url: '/services/new',
+      component: 'serviceEdit',
+      authenticate: true
+    })
+    .state('tool', {
+      url: '/tool?stages&categories&providers&q',
       component: 'tool'
     });
 }
