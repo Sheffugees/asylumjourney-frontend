@@ -3,8 +3,8 @@
     "angular": "^1.6.2",
     "angular-sanitize": "^1.6.9",
     "angular-ui-router": "1.0.0-beta.3",
+    "angularjs-datepicker": "^2.1.23",
     "autolinker": "^1.6.2",
-    "install": "^0.10.4",
     "moment": "^2.20.1",
     "ng-dialog": "^1.4.0",
     "textangular": "^1.5.16"

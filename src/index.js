@@ -3,6 +3,7 @@ import 'angular-ui-router';
 import ngSanitize from 'angular-sanitize';
 import ngDialog from 'ng-dialog';
 import textAngular from 'textAngular';
+import 'angularjs-datepicker';
 import APIInterceptor from './app/services/apiInterceptor';
 import {AuthService} from './app/services/auth';
 import {DataService} from './app/services/data';
@@ -25,7 +26,7 @@ import runBlock from './runBlock';
 import './index.scss';
 
 angular
-  .module('asylumJourney', ['ui.router', ngDialog, ngSanitize, textAngular])
+  .module('asylumJourney', ['ui.router', '720kb.datepicker', ngDialog, ngSanitize, textAngular])
   .config(routesConfig)
   .config(($httpProvider) =>
     $httpProvider.interceptors.push('APIInterceptor')
