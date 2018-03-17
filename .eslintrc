@@ -1,9 +1,11 @@
 {
   "extends": "eslint:recommended",
+  "parser": "babel-eslint",
   "plugins": ["angular"],
   "env": {
     "browser": true,
-    "jasmine": true
+    "jasmine": true,
+    "amd": true
   },
   "globals": {
     "angular": true,
