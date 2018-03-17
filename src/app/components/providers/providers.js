@@ -31,7 +31,7 @@ class providersController {
     this.DataService.deleteProvider(this.idToDelete).then( () => {
       this.providers = angular.copy(this.DataService.dataStore.providers);
       this.showDeleteSuccess = true;
-      this.$timeout(function () {
+      this.$timeout( () => {
         this.ngDialog.close();
         this.showDeleteSuccess = false;
       }, 1000);

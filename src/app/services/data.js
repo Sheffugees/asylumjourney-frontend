@@ -12,179 +12,135 @@ export class DataService {
     };
   }
 
-  deleteService(id) {
-    const deferred = this.$q.defer();
-    return this.$http.delete('https://asylum-journey-staging.herokuapp.com/services/', {id}).then(() => {
-      const index = this.dataStore.services.map(x => {
-        return x.id;
-      }).indexOf(id);
-      this.dataStore.services.splice(index, 1);
-      deferred.resolve();
-      return deferred.promise;
-    }, error => {
-      deferred.reject(error);
-      return deferred.promise;
-    });
-  }
-
   getCategories() {
-    const deferred = this.$q.defer();
-
-    if (this.dataStore.categories.length) {
-      deferred.resolve();
-      return deferred.promise;
-    }
-
-    return this.$http.get('https://asylum-journey-staging.herokuapp.com/categories').then(response => {
-      this.dataStore.categories = angular.copy(response.data._embedded.categories);
-      deferred.resolve();
-      return deferred.promise;
-    }, error => {
-      deferred.reject(error);
-      return deferred.promise;
-    });
+    return getItems.bind(this)('categories');
   }
 
   createProvider (provider) {
-    const deferred = this.$q.defer();
-    return this.$http.post('https://asylum-journey-staging.herokuapp.com/providers', provider).then((response) => {
-    this.$log.log('response', response);
-    
-      if (this.dataStore.providers.length) {
-        const location = response.headers().location;
-        this.$log.log('response location', location);
-        const id = location.split('/providers/').pop();
-        provider.id = id;
-        this.dataStore.providers.push(provider);
-      }
-      deferred.resolve();
-      return deferred.promise;
-    }, error => {
-      deferred.reject(error);
-      return deferred.promise;
-    });
+    return createItem.bind(this)(provider, 'providers');
   }
 
   deleteProvider (id) {
-    const deferred = this.$q.defer();
-    return this.$http.delete(`https://asylum-journey-staging.herokuapp.com/providers/${id}`).then(() => {
-      const index = this.dataStore.providers.map((x) => {return x.id; }).indexOf(id);
-      this.dataStore.providers.splice(index, 1);
-      deferred.resolve();
-      return deferred.promise;
-    }, error => {
-      deferred.reject(error);
-      return deferred.promise;
-    });
+    return deleteItem.bind(this)(id, 'providers');
   }
 
   getProvider(id) {
-    const deferred = this.$q.defer();
-    const provider = this.dataStore.providers.filter(s => {
-      return s.id === id;
-    })[0];
-
-    if (provider) {
-      deferred.resolve(provider);
-      return deferred.promise;
-    }
-
-    return this.$http.get(`https://asylum-journey-staging.herokuapp.com/providers/${id}`).then(response => {
-      deferred.resolve(response.data);
-      return deferred.promise;
-    }, error => {
-      deferred.reject(error);
-      return deferred.promise;
-    });
+    return getItem.bind(this)(id, 'providers');
   }
 
   getProviders() {
-    const deferred = this.$q.defer();
-
-    if (this.dataStore.providers.length) {
-      deferred.resolve();
-      return deferred.promise;
-    }
-
-    return this.$http.get('https://asylum-journey-staging.herokuapp.com/providers').then(response => {
-      this.dataStore.providers = angular.copy(response.data._embedded.providers);
-      deferred.resolve();
-      return deferred.promise;
-    }, error => {
-      deferred.reject(error);
-      return deferred.promise;
-    });
+    return getItems.bind(this)('providers');
   }
 
   updateProvider (provider) {
-    const deferred = this.$q.defer();
-    return this.$http.put(`https://asylum-journey-staging.herokuapp.com/providers/${provider.id}`, provider).then(() => {
-    if (this.dataStore.providers.length) {
-        const index = this.dataStore.providers.map((x) => {return x.id; }).indexOf(provider.id);
-        this.dataStore.providers[index] = provider;
-      }
-      deferred.resolve();
-      return deferred.promise;
-    }, error => {
-      deferred.reject(error);
-      return deferred.promise;
-    });
+    return updateItem.bind(this)(provider, 'providers');
+  }
+
+  createService (service) {
+    return createItem.bind(this)(service, 'services');
+  }
+
+  deleteService(id) {
+    return deleteItem.bind(this)(id, 'services');
   }
 
   getService(id) {
-    const deferred = this.$q.defer();
-    const service = this.dataStore.services.filter(s => {
-      return s.id === id;
-    })[0];
-
-    if (service) {
-      deferred.resolve(service);
-      return deferred.promise;
-    }
-
-    return this.$http.get('https://asylum-journey-staging.herokuapp.com/services/' + id).then(response => {
-      deferred.resolve(response.data);
-      return deferred.promise;
-    }, error => {
-      deferred.reject(error);
-      return deferred.promise;
-    });
+    return getItem.bind(this)(id, 'services');
   }
 
   getServices() {
-    const deferred = this.$q.defer();
+    return getItems.bind(this)('services');
+  }
 
-    if (this.dataStore.services.length) {
-      deferred.resolve();
-      return deferred.promise;
-    }
-
-    return this.$http.get('https://asylum-journey-staging.herokuapp.com/services').then(response => {
-      this.dataStore.services = angular.copy(response.data._embedded.services);
-      deferred.resolve();
-      return deferred.promise;
-    }, error => {
-      deferred.reject(error);
-      return deferred.promise;
-    });
+  updateService (service) {
+    return updateItem.bind(this)(service, 'services');
   }
 
   getStages() {
-    const deferred = this.$q.defer();
-
-    if (this.dataStore.stages.length) {
-      deferred.resolve();
-      return deferred.promise;
-    }
-
-    return this.$http.get('https://asylum-journey-staging.herokuapp.com/stages').then(response => {
-      this.$log.log(response.data._embedded.stages);
-      this.dataStore.stages = angular.copy(response.data._embedded.stages);
-      deferred.resolve();
-      return deferred.promise;
-    }, error => {
-      deferred.reject(error);
-      return deferred.promise;
-    });
+    return getItems.bind(this)('stages');
   }
+}
+
+function createItem (item, type) {
+  const deferred = this.$q.defer();
+  return this.$http.post(`https://asylum-journey-staging.herokuapp.com/${type}`, item).then((response) => {
+  
+    if (this.dataStore[type].length) {
+      const location = response.headers().location;
+      const id = location.split(`/${type}/`).pop();
+      item.id = id;
+      this.dataStore[type].push(item);
+    }
+    deferred.resolve();
+    return deferred.promise;
+  }, error => {
+    deferred.reject(error);
+    return deferred.promise;
+  });
+}
+
+function deleteItem (id, type) {
+  const deferred = this.$q.defer();
+  return this.$http.delete(`https://asylum-journey-staging.herokuapp.com/${type}/${id}`).then(() => {
+    const index = this.dataStore[type].map((x) => {return x.id; }).indexOf(id);
+    this.dataStore[type].splice(index, 1);
+    deferred.resolve();
+    return deferred.promise;
+  }, error => {
+    deferred.reject(error);
+    return deferred.promise;
+  });
+}
+
+function getItem (id, type) {
+  const deferred = this.$q.defer();
+  const item = this.dataStore[type].filter(s => {
+    return s.id === id;
+  })[0];
+
+  if (item) {
+    deferred.resolve(item);
+    return deferred.promise;
+  }
+
+  return this.$http.get(`https://asylum-journey-staging.herokuapp.com/${type}/${id}`).then(response => {
+    deferred.resolve(response.data);
+    return deferred.promise;
+  }, error => {
+    deferred.reject(error);
+    return deferred.promise;
+  });
+}
+
+function getItems (type) {
+  const deferred = this.$q.defer();
+
+  if (this.dataStore[type].length) {
+    deferred.resolve();
+    return deferred.promise;
+  }
+
+  return this.$http.get(`https://asylum-journey-staging.herokuapp.com/${type}`).then(response => {
+    this.dataStore[type] = angular.copy(response.data._embedded[type]);
+    deferred.resolve();
+    return deferred.promise;
+  }, error => {
+    deferred.reject(error);
+    return deferred.promise;
+  });
+} 
+
+function updateItem (item, type) {
+  const deferred = this.$q.defer();
+  return this.$http.put(`https://asylum-journey-staging.herokuapp.com/${type}/${item.id}`, item).then(() => {
+  if (this.dataStore[type].length) {
+      const index = this.dataStore[type].map((x) => {return x.id; }).indexOf(item.id);
+      this.dataStore[type][index] = item;
+    }
+    deferred.resolve();
+    return deferred.promise;
+  }, error => {
+    deferred.reject(error);
+    return deferred.promise;
+  });
 }
