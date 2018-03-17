@@ -28,7 +28,9 @@ class ServiceController {
     this.DataService.getService(this.id).then(response => {
       this.details = response;
       this.$log.log('details', this.details);
-      formatMapLinks.bind(this)(this.details._embedded.providers);
+      if (this.details._embedded.providers) {
+        formatMapLinks.bind(this)(this.details._embedded.providers);
+      }
       if (this.details.resources.length) {
         formatResources.bind(this)(this.details);
       }

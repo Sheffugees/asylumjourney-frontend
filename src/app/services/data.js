@@ -76,7 +76,7 @@ export class DataService {
     }
 
     return this.$http.get('https://asylum-journey-staging.herokuapp.com/services/' + id).then(response => {
-      deferred.resolve(response);
+      deferred.resolve(response.data);
       return deferred.promise;
     }, error => {
       deferred.reject(error);

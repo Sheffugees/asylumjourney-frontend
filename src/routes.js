@@ -14,5 +14,9 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/tool?stages&categories&providers&q',
       component: 'tool',
       // authenticate: true
+    })
+    .state('service', {
+      url: '/service/:serviceId',
+      component: 'tool'
     });
 }

@@ -3,9 +3,8 @@ import './tool.scss';
 
 class toolController {
   /** @ngInject */
-  constructor(AuthService, DataService, ngDialog, $filter, $location, $rootScope, $scope, $state, $window) {
+  constructor(AuthService, DataService, ngDialog, $filter, $location, $rootScope, $scope, $state, $window, $log) {
     this.DataService = DataService;
-    // console.log('ngDialog', ngDialog)
     this.ngDialog = ngDialog;
     this.$filter = $filter;
     this.$scope = $scope;
@@ -35,12 +34,14 @@ class toolController {
       providers: []
     };
 
+    this.$log = $log;
+
     this.getServices();
     this.getProviders();
     this.getStages();
     this.getCategories();
 
-    // TO DO
+    // TO DO check this works
     const updateEvent = $rootScope.$on('updateServices', () => {
       this.getServices();
     });
@@ -136,6 +137,7 @@ class toolController {
   }
 
   showService(id) {
+    this.$log.log('showservice', id);
     const data = {id};
     this.ngDialog.open({
       template: 'app/components/service/service.html',
@@ -239,11 +241,16 @@ function addToQS(qs, item, type) {
   }
 }
 
+/**
+ * Check route for direct access to service, e.g. /service/100
+ * Open service modal and change url to /tool if service id is present.
+ */
 function checkRoute() {
   const id = this.$state.params.serviceId;
   if (id) {
     this.showService(id);
     this.$location.search('');
+    this.$location.path('/tool');
   }
 }
 
