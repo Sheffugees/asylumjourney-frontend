@@ -1,4 +1,5 @@
 import './auth.scss';
+import loginModal from './login-modal.html';
 class AuthController {
   /** @ngInject */
   constructor(AuthService, ngDialog, $scope, $log) {
@@ -29,7 +30,8 @@ class AuthController {
 
   logInModal () {
     this.ngDialog.open({
-      template: 'app/components/auth/login-modal.html',
+      plain: true,
+      template: loginModal,
       className: 'ngdialog-theme-default auth-modal'
     });
   }

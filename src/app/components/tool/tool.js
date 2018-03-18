@@ -1,5 +1,8 @@
  /* global ga:false */
 import './tool.scss';
+import serviceModalTemplate from '../service/service.html';
+import infoModal from '../infoOverlay/info.html';
+import providersModal from '../filterBar/providers-overlay.html';
 
 class toolController {
   /** @ngInject */
@@ -140,10 +143,9 @@ class toolController {
     this.$log.log('showservice', id);
     const data = {id};
     this.ngDialog.open({
-      template: 'app/components/service/service.html',
+      plain: true,
+      template: serviceModalTemplate,
       data: angular.toJson(data),
-      // controller: 'ServiceController',
-      // controllerAs: 'service',
       className: 'ngdialog-theme-default service-modal'
     });
   }
@@ -165,14 +167,16 @@ class toolController {
   // toggle Provider filter
   toggleProviderFilters() {
     this.ngDialog.open({
-      template: 'app/components/filterBar/providers-overlay.html',
+      plain: true,
+      template: providersModal,
       scope: this.$scope
     });
   }
-
+  
   openDialog() {
     this.ngDialog.open({
-      template: 'app/components/infoOverlay/info.html',
+      plain: true,
+      template: infoModal,
       scope: this.$scope
     });
   }

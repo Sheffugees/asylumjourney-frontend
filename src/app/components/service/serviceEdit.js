@@ -1,3 +1,6 @@
+import categoriesModal from '../infoOverlay/categories.html';
+import stagesModal from '../infoOverlay/stages.html';
+
 class serviceEditController {
   /** @ngInject */
   constructor (DataService, ngDialog, $filter, $location, $state, $timeout, $log) {
@@ -54,16 +57,19 @@ class serviceEditController {
   removeResource (index) {
     this.service.resources.splice(index, 1);
   }
-
+  
+  // TO DO add these modals
   categoriesInfo () {
     this.ngDialog.open({
-      template: 'app/components/info-overlay/categories.html'
+      plain: true,
+      template: categoriesModal
     });
   }
 
   stagesInfo () {
     this.ngDialog.open({
-      template: 'app/components/info-overlay/stages.html'
+      plain: true,
+      template: stagesModal
     });
   }
 

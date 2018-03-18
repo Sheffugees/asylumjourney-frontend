@@ -1,3 +1,4 @@
+import providersModal from './confirm-modal.html';
 class providersController {
   /** @ngInject */
   constructor (DataService, ngDialog, $scope, $timeout, $log) {
@@ -21,7 +22,8 @@ class providersController {
   confirmDelete (id) {
     this.idToDelete = id;
     this.ngDialog.open({
-      template: 'app/components/providers/confirm-modal.html',
+      plain: true,
+      template: providersModal,
       scope: this.$scope,
       className: 'ngdialog-theme-default confirm-modal'
     });
