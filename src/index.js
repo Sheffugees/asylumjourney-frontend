@@ -1,5 +1,5 @@
 import angular from 'angular';
-import 'angular-ui-router';
+import uiRouter from '@uirouter/angularjs';
 import ngSanitize from 'angular-sanitize';
 import ngDialog from 'ng-dialog';
 import textAngular from 'textAngular';
@@ -30,7 +30,7 @@ import runBlock from './runBlock';
 import './index.scss';
 
 angular
-  .module('asylumJourney', ['ui.router', '720kb.datepicker', ngDialog, ngSanitize, textAngular, uiselect])
+  .module('asylumJourney', [uiRouter, '720kb.datepicker', ngDialog, ngSanitize, textAngular, uiselect])
   .config(routesConfig)
   .config(interceptors)
   .config(decorators)
