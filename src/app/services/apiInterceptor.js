@@ -5,11 +5,10 @@ import { apiUrl } from '../../constants';
 
 class APIInterceptor {
   /** @ngInject */
-  constructor ($injector, $q, $rootScope, $window, $log) {
+  constructor ($injector, $q, $rootScope, $window) {
     this.$injector = $injector;
     this.$q = $q;
     this.$rootScope = $rootScope;
-    this.$log = $log;
     this.$window = $window;
 
     return {
@@ -37,7 +36,6 @@ class APIInterceptor {
    * @param {object} rejection 
    */
   responseError (rejection) {
-    this.$log.log('rejection', rejection);
     if (rejection.status === 401 && rejection.config.url.indexOf('login_check') === -1
         && rejection.config.url.indexOf('token/refresh') === -1) {
       const deferred = this.$q.defer();

@@ -1,11 +1,10 @@
 class providerEditController {
   /** @ngInject */
-  constructor (DataService, $filter, $location, $rootScope, $scope, $state, $timeout, $log) {
+  constructor (DataService, $filter, $location, $rootScope, $scope, $state, $timeout) {
     this.DataService = DataService;
     this.$filter = $filter;
     this.$location = $location;
     this.$rootScope = $rootScope;
-    // // this.$routeParams = $state.params;
     this.$scope = $scope;
     this.$timeout = $timeout;
     this.provider = {};
@@ -13,7 +12,6 @@ class providerEditController {
     this.saved = false;
     this.errorMessage = '';
 
-    $log.log('state', $state);
     const id = parseInt($state.params.id, 10);
     this.isNew = id ? false : true;
 

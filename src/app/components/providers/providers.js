@@ -1,7 +1,7 @@
 import providersModal from './confirmModal.html';
 class providersController {
   /** @ngInject */
-  constructor (DataService, ngDialog, $scope, $timeout, $log) {
+  constructor (DataService, ngDialog, $scope, $timeout) {
     this.DataService = DataService;
     this.ngDialog = ngDialog;
     this.$scope = $scope;
@@ -9,8 +9,6 @@ class providersController {
     this.providers = [];
     this.showDeleteSuccess = false;
     this.idToDelete = 0;
-    this.$log = $log;
-
     getProviders.bind(this)();
   }
 

@@ -2,11 +2,9 @@ import { apiUrl } from '../../constants';
 
 export default class DataService {
   /** @ngInject */
-  constructor($http, $q, $log) {
-    $log.log('apiUrl ', apiUrl);
+  constructor($http, $q) {
     this.$http = $http;
     this.$q = $q;
-    this.$log = $log;
     this.dataStore = {
       categories: [],
       providers: [],
@@ -69,7 +67,6 @@ function createItem (item, type) {
   return this.$http.post(`${apiUrl}${type}`, item).then((response) => {
     const location = response.headers().location;
     const id = location.split(`/${type}/`).pop();
-    this.$log.log('data id', id);
     if (this.dataStore[type].length) {
       item.id = id;
       this.dataStore[type].push(item);

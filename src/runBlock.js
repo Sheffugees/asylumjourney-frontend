@@ -1,15 +1,11 @@
 import { stagingUrl } from './constants';
 
 /** @ngInject */
-function runBlock(AuthService, ngDialog, $location, $rootScope, $transitions, $log) {
+function runBlock(AuthService, ngDialog, $location, $rootScope, $transitions) {
   $rootScope.env = ($location.host() === 'localhost' || $location.host() === stagingUrl) ? 'dev' : 'prod';
   $rootScope.robots = $rootScope.env === 'dev' ? 'noindex, nofollow' : 'index, follow';
   
-  $log.log('env', $rootScope.env);
-
   $transitions.onStart({}, (transition) => {
-    $log.log('onStartt', transition.to().authenticate);
-
     //make sure modals close 
     ngDialog.closeAll();
     $rootScope.dialogOpen = false;

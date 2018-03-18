@@ -1,8 +1,7 @@
 import './start.scss';
 class startController {
   /** @ngInject */
-  constructor($location, $log, $rootScope, AuthService, DataService) {
-    this.$log = $log;
+  constructor($location, $rootScope, AuthService, DataService) {
     this.$location = $location;
     this.DataService = DataService;
     this.showCategories = false;

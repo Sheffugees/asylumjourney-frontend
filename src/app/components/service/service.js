@@ -3,7 +3,7 @@ const Autolinker = require('autolinker');
 
 class ServiceController {
   /** @ngInject */
-  constructor(AuthService, DataService, ngDialog, $location, $log, $rootScope, $scope, $timeout, $window) {
+  constructor(AuthService, DataService, ngDialog, $location, $rootScope, $scope, $timeout, $window) {
     this.AuthService = AuthService;
     this.DataService = DataService;
     this.ngDialog = ngDialog;
@@ -11,8 +11,6 @@ class ServiceController {
     this.$rootScope = $rootScope;
     this.$timeout = $timeout;
     this.$window = $window;
-    this.$log = $log;
-    $log.log('id', this.id);
     this.showDeleteConfirmation = false;
     this.formatDescription = false;
     this.formatEvents = false;
@@ -27,7 +25,6 @@ class ServiceController {
   getService() {
     this.DataService.getService(this.id).then(response => {
       this.details = response;
-      this.$log.log('details', this.details);
       if (this.details._embedded.providers) {
         formatMapLinks.bind(this)(this.details._embedded.providers);
       }

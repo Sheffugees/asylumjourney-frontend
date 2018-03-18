@@ -6,7 +6,7 @@ import providersModal from '../filterBar/providersOverlay.html';
 
 class toolController {
   /** @ngInject */
-  constructor(AuthService, DataService, ngDialog, $filter, $location, $rootScope, $scope, $state, $window, $log) {
+  constructor(AuthService, DataService, ngDialog, $filter, $location, $rootScope, $scope, $state, $window) {
     this.DataService = DataService;
     this.ngDialog = ngDialog;
     this.$filter = $filter;
@@ -36,8 +36,6 @@ class toolController {
       categories: [],
       providers: []
     };
-
-    this.$log = $log;
 
     this.getServices();
     this.getProviders();
@@ -140,7 +138,6 @@ class toolController {
   }
 
   showService(id) {
-    this.$log.log('showservice', id);
     const data = {id};
     this.ngDialog.open({
       plain: true,

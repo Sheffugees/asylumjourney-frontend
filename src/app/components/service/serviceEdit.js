@@ -3,12 +3,11 @@ import stagesModal from '../infoOverlay/stages.html';
 
 class serviceEditController {
   /** @ngInject */
-  constructor (DataService, ngDialog, $filter, $location, $state, $timeout, $log) {
+  constructor (DataService, ngDialog, $filter, $location, $state, $timeout) {
     this.DataService = DataService;
     this.ngDialog = ngDialog;
     this.$filter = $filter;
     this.$location = $location;
-    // this.$state = $state;
     this.$timeout = $timeout;
     this.service = {};
     this.service._embedded = {};
@@ -19,14 +18,9 @@ class serviceEditController {
     this.categories = [];
     this.providers = [];
     this.stages = [];
-    this.$log = $log;
-    $log.log($state.params)
     const id = parseInt($state.params.serviceId, 10);
 
     this.isNew = id ? false : true;
-    $log.log('id', id);
-    // this.isNew = angular.isDefined(id) ? false : true;
-    $log.log('isNew', this.isNew);
     DataService.getCategories().then( () => {
       this.categories = angular.copy(this.DataService.dataStore.categories);
     });
@@ -38,10 +32,8 @@ class serviceEditController {
     });
 
     if (!this.isNew) {
-      $log.log('get service');
       DataService.getService(id).then(service => {
         this.service = angular.copy(service);
-        $log.log('get service', this.service);
         if (this.service.resources.length) {
           formatDates.bind(this)(this.service);
         }
@@ -58,7 +50,6 @@ class serviceEditController {
     this.service.resources.splice(index, 1);
   }
   
-  // TO DO add these modals
   categoriesInfo () {
     this.ngDialog.open({
       plain: true,
@@ -75,8 +66,6 @@ class serviceEditController {
 
   save () {
     this.saving = true;
-
-    this.$log.log('save', this.service);
 
     if (!this.service._embedded.categories || !this.service._embedded.categories.length
       || !this.service._embedded.stages || !this.service._embedded.stages.length) {
@@ -107,14 +96,11 @@ class serviceEditController {
     });
 
     if (this.isNew) {
-      this.$log.log('is New');
       this.DataService.createService(this.service).then(id => {
-        this.$log.log('created id', id);
         this.saving = false;
         this.saved = true;
         this.errorMessage = '';
         this.$timeout( () => {
-          // this.$state.go(`service${id}`);
           this.$location.path('/service/' + id);
         }, 500);
       }, () => {
@@ -123,7 +109,6 @@ class serviceEditController {
       });
       return;
     }
-    this.$log.log('update');
     this.DataService.updateService(this.service).then( () => {
       this.saving = false;
       this.saved = true;

@@ -120,7 +120,6 @@ function tokenExpired(token) {
   const parsedToken = angular.fromJson(this.$window.atob(base64));
   const expiry = moment.unix(parsedToken.exp);
   const current = moment();
-  this.$log.log('expiry', expiry);
   const hasExpired = expiry.isBefore(current);
   return hasExpired;
 }
