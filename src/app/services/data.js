@@ -1,6 +1,9 @@
+import { apiUrl } from '../../constants';
+
 export class DataService {
   /** @ngInject */
   constructor($http, $q, $log) {
+    $log.log('apiUrl ', apiUrl);
     this.$http = $http;
     this.$q = $q;
     this.$log = $log;
@@ -63,7 +66,7 @@ export class DataService {
 
 function createItem (item, type) {
   const deferred = this.$q.defer();
-  return this.$http.post(`https://asylum-journey-staging.herokuapp.com/${type}`, item).then((response) => {
+  return this.$http.post(`${apiUrl}${type}`, item).then((response) => {
     const location = response.headers().location;
     const id = location.split(`/${type}/`).pop();
     this.$log.log('data id', id);
@@ -81,7 +84,7 @@ function createItem (item, type) {
 
 function deleteItem (id, type) {
   const deferred = this.$q.defer();
-  return this.$http.delete(`https://asylum-journey-staging.herokuapp.com/${type}/${id}`).then(() => {
+  return this.$http.delete(`${apiUrl}${type}/${id}`).then(() => {
     const index = this.dataStore[type].map((x) => {return x.id; }).indexOf(id);
     this.dataStore[type].splice(index, 1);
     deferred.resolve();
@@ -103,7 +106,7 @@ function getItem (id, type) {
     return deferred.promise;
   }
 
-  return this.$http.get(`https://asylum-journey-staging.herokuapp.com/${type}/${id}`).then(response => {
+  return this.$http.get(`${apiUrl}${type}/${id}`).then(response => {
     deferred.resolve(response.data);
     return deferred.promise;
   }, error => {
@@ -120,7 +123,7 @@ function getItems (type) {
     return deferred.promise;
   }
 
-  return this.$http.get(`https://asylum-journey-staging.herokuapp.com/${type}`).then(response => {
+  return this.$http.get(`${apiUrl}${type}`).then(response => {
     this.dataStore[type] = angular.copy(response.data._embedded[type]);
     deferred.resolve();
     return deferred.promise;
@@ -132,7 +135,7 @@ function getItems (type) {
 
 function updateItem (item, type) {
   const deferred = this.$q.defer();
-  return this.$http.put(`https://asylum-journey-staging.herokuapp.com/${type}/${item.id}`, item).then(() => {
+  return this.$http.put(`${apiUrl}${type}/${item.id}`, item).then(() => {
   if (this.dataStore[type].length) {
       const index = this.dataStore[type].map((x) => {return x.id; }).indexOf(item.id);
       this.dataStore[type][index] = item;

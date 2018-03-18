@@ -1,6 +1,8 @@
 /**
  * API Interceptor - handles adding auth token to requests and refreshing it.
  */
+import { apiUrl } from '../../constants';
+
 class APIInterceptor {
   /** @ngInject */
   constructor ($injector, $q, $rootScope, $window, $log) {
@@ -23,7 +25,7 @@ class APIInterceptor {
   request (request) {
     const token = this.$window.localStorage.getItem('ajToken');
     // to do get url from config
-    if (token && request.url.indexOf('https://asylum-journey-staging.herokuapp.com/') != -1) {
+    if (token && request.url.indexOf(apiUrl) != -1) {
       request.headers.Authorization = 'Bearer ' + token;
     }
     return request;

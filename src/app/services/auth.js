@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { apiUrl } from '../../constants';
 
 export class AuthService {
   /** @ngInject */
@@ -9,11 +10,6 @@ export class AuthService {
     this.$log = $log;
     this.$q = $q;
     this.$window = $window;
-    // TO DO real config
-    this.config = {
-      apiUrl: 'https://asylum-journey-staging.herokuapp.com/'
-    };
-
     this.isAuthenticated = false;
   }
 
@@ -50,7 +46,7 @@ export class AuthService {
 
     const req = {
       method: 'POST',
-      url: this.config.apiUrl + 'api/login_check',
+      url: apiUrl + 'api/login_check',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
@@ -85,7 +81,7 @@ export class AuthService {
     formDataObj['refresh_token'] = token; // eslint-disable-line
     const req = {
       method: 'POST',
-      url: this.config.apiUrl + 'api/token/refresh',
+      url: apiUrl + 'api/token/refresh',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
