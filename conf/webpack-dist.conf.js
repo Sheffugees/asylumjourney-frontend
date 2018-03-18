@@ -24,7 +24,7 @@ module.exports = {
         enforce: 'pre'
       },
       {
-        test: /\.(jpg|png|svg)$/,
+        test: /\.(jpg|png|svg|pdf)$/,
         loaders: ['file-loader']
       },
       {
