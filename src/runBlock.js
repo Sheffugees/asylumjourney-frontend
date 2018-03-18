@@ -21,15 +21,14 @@ function runBlock(AuthService, ngDialog, $location, $rootScope, $transitions) {
   });
  
   // Initialise Google Analytics on production
-  if ($rootScope.env === 'prod') {
-    if (angular.isUndefined(typeof ga)) {
-      return;
+  if ($rootScope.env === 'prod') { 
+    if (angular.isDefined(window.ga)) {//eslint-disable-line
+      ga('create', 'UA-80488368-1', 'auto');
+      $transitions.onSuccess({}, () => {
+        ga('send', 'pageview', $location.url());
+      });
+      return
     }
-
-    ga('create', 'UA-80488368-1', 'auto');
-    $transitions.onSuccess({}, () => {
-      ga('send', 'pageview', $location.url());
-    });
   }
 
 }
