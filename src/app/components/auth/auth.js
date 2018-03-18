@@ -1,21 +1,28 @@
 import './auth.scss';
 import loginModal from './login-modal.html';
+
 class AuthController {
   /** @ngInject */
-  constructor(AuthService, ngDialog, $scope, $log) {
-    $log.log('authcontroller');
+  constructor(AuthService, ngDialog, $transitions) {
     this.AuthService = AuthService;
     this.ngDialog = ngDialog;
     this.loginFailed = false;
     this.saving = false;
     this.options = {
       show: false
-    }
-    $scope.$on('$routeChangeStart', function() {
+    };
+
+    /**
+     * Close admin menu on route change
+     */
+    $transitions.onStart({}, () => {
       this.options.show = false;
     });
   }
 
+  /**
+   * Login using the Auth Service
+   */
   logIn () {
     this.saving = true;
     this.AuthService.logIn(this.username, this.password).then(() => {
@@ -28,6 +35,9 @@ class AuthController {
     });
   }
 
+  /**
+   * Show login modal
+   */
   logInModal () {
     this.ngDialog.open({
       plain: true,
