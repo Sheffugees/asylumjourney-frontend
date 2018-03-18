@@ -42,7 +42,9 @@ class toolController {
     this.getStages();
     this.getCategories();
 
-    // TO DO check this works
+    /**
+     * Update services in tool after one is deleted.
+     */
     const updateEvent = $rootScope.$on('updateServices', () => {
       this.getServices();
     });

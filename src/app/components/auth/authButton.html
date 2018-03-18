@@ -6,15 +6,15 @@
   <div ng-if="$ctrl.AuthService.isAuthenticated" class="auth__menu-holder">
 
     <button type="button" class="auth__button"
-      ng-click="$ctrl.options.show = !$ctrl.options.show"
-      ng-class="{'active': $ctrl.options.show}">
+      ng-click="$ctrl.showMenu = !$ctrl.showMenu"
+      ng-class="{'active': $ctrl.showMenu}">
     	Admin
       <svg class="icon">
         <use xlink:href="#icon-arrow-down"></use>
       </svg>
     </button>
 
-    <ul class="auth__menu" ng-show="$ctrl.options.show">
+    <ul class="auth__menu" ng-show="$ctrl.showMenu">
       <li class="auth__menu-item">
           <a href="/services/new">
             Add service

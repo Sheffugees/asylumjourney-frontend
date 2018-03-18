@@ -23,7 +23,6 @@ class APIInterceptor {
    */
   request (request) {
     const token = this.$window.localStorage.getItem('ajToken');
-    // to do get url from config
     if (token && request.url.indexOf(apiUrl) != -1) {
       request.headers.Authorization = 'Bearer ' + token;
     }

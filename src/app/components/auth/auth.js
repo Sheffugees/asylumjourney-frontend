@@ -8,17 +8,13 @@ class AuthController {
     this.ngDialog = ngDialog;
     this.loginFailed = false;
     this.saving = false;
-    
-    // TO DO does this need to be an object?
-    this.options = {
-      show: false
-    };
+    this.showMenu = false;
 
     /**
      * Close admin menu on route change
      */
     $transitions.onStart({}, () => {
-      this.options.show = false;
+      this.showMenu = false;
     });
   }
 
