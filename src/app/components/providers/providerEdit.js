@@ -72,7 +72,8 @@ function formatDates (provider) {
   return provider;
 }
 
-export const providerEdit = {
+const providerEdit = {
   template: require('./providerEdit.html'),
   controller: providerEditController
 }
+export default providerEdit;

@@ -378,7 +378,8 @@ function updateFilteredItem(item, filter) {
   item.filtered = filter;
 }
 
-export const tool = {
+const tool = {
   template: require('./tool.html'),
   controller: toolController
 };
+export default tool;

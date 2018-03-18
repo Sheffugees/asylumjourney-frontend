@@ -158,7 +158,8 @@ function formatDates (service) {
   return service;
 }
 
-export const serviceEdit = {
+const serviceEdit = {
   template: require('./serviceEdit.html'),
   controller: serviceEditController
 }
+export default serviceEdit;

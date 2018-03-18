@@ -1,6 +1,6 @@
 import { apiUrl } from '../../constants';
 
-export class DataService {
+export default class DataService {
   /** @ngInject */
   constructor($http, $q, $log) {
     $log.log('apiUrl ', apiUrl);

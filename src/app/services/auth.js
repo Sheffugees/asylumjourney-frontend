@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { apiUrl } from '../../constants';
 
-export class AuthService {
+export default class AuthService {
   /** @ngInject */
   constructor($http, $httpParamSerializer, $location, $log, $q, $window) { // eslint-disable-line
     this.$http = $http;

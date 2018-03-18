@@ -47,7 +47,8 @@ function getProviders () {
   });
 }
 
-export const providers = {
+const providers = {
   template: require('./providers.html'),
   controller: providersController
 };
+export default providers;

@@ -62,7 +62,8 @@ function getCategories() {
   });
 }
 
-export const start = {
+const start = {
   template: require('./start.html'),
   controller: startController
 };
+export default start;
