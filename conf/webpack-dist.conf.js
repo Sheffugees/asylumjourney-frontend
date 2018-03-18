@@ -24,6 +24,10 @@ module.exports = {
         enforce: 'pre'
       },
       {
+        test: /\.(jpg|png|svg)$/,
+        loaders: ['file-loader']
+      },
+      {
         test: /\.(css|scss)$/,
         loaders: ExtractTextPlugin.extract({
           fallback: 'style-loader',
