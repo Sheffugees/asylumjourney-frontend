@@ -1,5 +1,5 @@
 import './auth.scss';
-import loginModal from './login-modal.html';
+import loginModal from './loginModal.html';
 
 class AuthController {
   /** @ngInject */
@@ -8,6 +8,8 @@ class AuthController {
     this.ngDialog = ngDialog;
     this.loginFailed = false;
     this.saving = false;
+    
+    // TO DO does this need to be an object?
     this.options = {
       show: false
     };

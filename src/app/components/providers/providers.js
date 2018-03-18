@@ -1,4 +1,4 @@
-import providersModal from './confirm-modal.html';
+import providersModal from './confirmModal.html';
 class providersController {
   /** @ngInject */
   constructor (DataService, ngDialog, $scope, $timeout, $log) {

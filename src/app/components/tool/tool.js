@@ -2,7 +2,7 @@
 import './tool.scss';
 import serviceModalTemplate from '../service/service.html';
 import infoModal from '../infoOverlay/info.html';
-import providersModal from '../filterBar/providers-overlay.html';
+import providersModal from '../filterBar/providersOverlay.html';
 
 class toolController {
   /** @ngInject */
