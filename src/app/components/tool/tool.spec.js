@@ -469,7 +469,8 @@ describe('tool component', () => {
 
     it('should open the service modal and pass it the service id', () => {
       const dialogParams = {
-        template: 'app/components/service/service.html',
+        plain: true,
+        template: jasmine.any(String),
         data: '{"id":1}',
         className: 'ngdialog-theme-default service-modal'
       };
