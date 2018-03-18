@@ -1,4 +1,4 @@
-import {start} from './start';
+import start from './start';
 import {mockCategories, mockStages} from '../../../../fixtures/data';
 
 describe('start component', () => {

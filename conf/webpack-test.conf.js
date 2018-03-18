@@ -29,6 +29,10 @@ module.exports = {
         ]
       },
       {
+        test: /\.(jpg|png|svg|pdf)$/,
+        loaders: ['ignore-loader']
+      },
+      {
         test:/\.(s*)css$/,
         loader: 'ignore-loader'
       }

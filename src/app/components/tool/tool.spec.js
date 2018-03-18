@@ -1,4 +1,4 @@
-import {tool} from './tool';
+import tool from './tool';
 import {mockCategories, mockProviders, mockServices, mockStages} from '../../../../fixtures/data';
 
 describe('tool component', () => {
