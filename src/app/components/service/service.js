@@ -16,7 +16,6 @@ class ServiceController {
     this.showDeleteConfirmation = false;
     this.formatDescription = false;
     this.formatEvents = false;
-    this.print = print;
     this.path = $location.protocol() + '://' + $location.host();
     this.errors = {
       show: false,
@@ -65,7 +64,6 @@ class ServiceController {
   }
 
   deleteService() {
-    // TO DO - add to service
     this.DataService.deleteService(this.id).then(() => {
       this.deleted = true;
       this.$rootScope.$broadcast('updateServices');
