@@ -1,6 +1,8 @@
+import { stagingUrl } from './constants';
+
 /** @ngInject */
 function runBlock(AuthService, ngDialog, $location, $rootScope, $transitions, $log) {
-  $rootScope.env = ($location.host() === 'localhost' || $location.host() === 'aj-staging.firebaseapp.com') ? 'dev' : 'prod';
+  $rootScope.env = ($location.host() === 'localhost' || $location.host() === stagingUrl) ? 'dev' : 'prod';
   $rootScope.robots = $rootScope.env === 'dev' ? 'noindex, nofollow' : 'index, follow';
   
   $log.log('env', $rootScope.env);

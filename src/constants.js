@@ -12,3 +12,4 @@ const getApiUrl = () => {
 }
 
 export const apiUrl = getApiUrl();
+export const stagingUrl = 'aj-staging.firebaseapp.com';
