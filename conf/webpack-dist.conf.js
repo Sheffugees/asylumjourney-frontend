@@ -50,10 +50,6 @@ module.exports = {
     ]
   },
   plugins: [
-    // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
-    // Ignore all locale files of moment.js
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
