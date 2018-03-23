@@ -1,4 +1,4 @@
-@import '../../../theme.scss';
+@import '../../../theme/variables.scss';
 
 .logo {
   background: url('../../images/logo-basic.png') left center no-repeat;
@@ -470,6 +470,11 @@ input[type="search"].filter-search__input {
     bottom: 0;
     z-index: 5;
   }
+}
+
+.details ul.filter__list {
+  list-style: none;
+  margin: 0;
 }
 
 .filter__list {

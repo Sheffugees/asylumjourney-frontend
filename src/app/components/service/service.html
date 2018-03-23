@@ -108,7 +108,7 @@
     </div>
     <div class="details__bottom">
       <ul class="tag-list">
-        <li ng-repeat="stage in $ctrl.details._embedded.stages" class="tag-list__tag tag-list__tag--stage-{{ stage.id }}">{{ stage.name }}</li>
+        <li ng-repeat="stage in $ctrl.details._embedded.stages" class="tag-list__tag bg-stage-{{ stage.id }}">{{ stage.name }}</li>
         <li ng-repeat="category in $ctrl.details._embedded.categories" class="tag-list__tag">{{ category.name }}</li>
       </ul>
 

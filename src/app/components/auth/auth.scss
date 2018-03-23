@@ -1,4 +1,4 @@
-@import '../../../theme.scss';
+@import '../../../theme/variables.scss';
 
 .ngdialog.ngdialog-theme-default.auth-modal .ngdialog-content {
   max-width: 740px;
@@ -73,6 +73,7 @@
       }
 
       button {
+          color: white;
           background: none;
           border: none;
           -webkit-appearance: none;
@@ -114,7 +115,7 @@
       }
 
       &__menu {
-          bottom: 32px;
+          bottom: 28px;
           left: auto;
       }
 
