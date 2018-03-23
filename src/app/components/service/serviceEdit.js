@@ -138,7 +138,7 @@ function formatDates (service) {
 
   const dateFields = ['endDate', 'lastReviewDate', 'nextReviewDate'];
   angular.forEach(dateFields, field => {
-    service[field] = formatDate(service[field]);
+    service[field] = formatDate.bind(this)(service[field]);
   });
   return service;
 }
