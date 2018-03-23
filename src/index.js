@@ -2,7 +2,7 @@ import angular from 'angular';
 import uiRouter from '@uirouter/angularjs';
 import ngSanitize from 'angular-sanitize';
 import ngDialog from 'ng-dialog';
-import textAngular from 'textAngular';
+import textAngular from 'textangular';
 import 'angularjs-datepicker';
 import uiselect from 'ui-select';
 import APIInterceptor from './app/services/apiInterceptor';
@@ -53,4 +53,3 @@ angular
   .component('serviceEdit', serviceEdit)
   .component('start', start)
   .component('tool', tool);
-  

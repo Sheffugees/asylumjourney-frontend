@@ -1,4 +1,3 @@
-import moment from 'moment';
 import { apiUrl } from '../../constants';
 
 export default class AuthService {
@@ -118,8 +117,8 @@ function tokenExpired(token) {
   }
   const base64 = base64Url.replace('-', '+').replace('_', '/');
   const parsedToken = angular.fromJson(this.$window.atob(base64));
-  const expiry = moment.unix(parsedToken.exp);
-  const current = moment();
-  const hasExpired = expiry.isBefore(current);
+  const expiry = new Date(parsedToken.exp * 1000);
+  const current = new Date();
+  const hasExpired = expiry < current;
   return hasExpired;
 }
