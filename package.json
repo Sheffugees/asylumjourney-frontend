@@ -79,5 +79,9 @@
     "extends": [
       "xo-space/esnext"
     ]
-  }
+  },
+  "browserslist": [
+    "last 2 versions",
+    "iOS 8"
+  ]   
 }
