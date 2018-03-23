@@ -50,9 +50,7 @@ describe('tool component', () => {
   }));
 
   function setupController(params, hideService, isAuthenticated) {
-    if (hideService) {
-      mockServices[2].hidden = true;
-    }
+    mockServices[2].hidden = hideService ? true : false;
     MockAuthService.prototype.isAuthenticated = isAuthenticated;
     angular.mock.inject(($compile, $componentController, _$location_, $q, $rootScope, $state) => {
       state = $state;
@@ -66,7 +64,6 @@ describe('tool component', () => {
       spyOn($location, 'search').and.callThrough();
       spyOn(mockNgDialog, 'open').and.callThrough();
       component = $componentController('toolComponent');
-      // component.ngDialog = mockNgDialog;
       $rootScope.$digest();
     });
   }
@@ -98,7 +95,7 @@ describe('tool component', () => {
       expect(component.categories).toEqual(updatedCategories);
     });
 
-    it('should load the services, set display to true on each and order ny name', () => {
+    it('should load the services, set display to true on each and order by name', () => {
       expect(MockDataService.prototype.getServices).toHaveBeenCalled();
       const orderedServices = [mockServices[1], mockServices[2], mockServices[0]];
       const updatedServices = angular.fromJson(angular.toJson(orderedServices));
