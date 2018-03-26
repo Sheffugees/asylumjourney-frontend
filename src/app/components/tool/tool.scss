@@ -1,10 +1,12 @@
+@import '../../../theme/variables.scss';
+
 $numColumnsSmall: 7;
 $numColumns: 8;
 .tool {
   padding: 44px 0 $vr*9 0;
   transform: padding 0.3s ease;
 
-  @media #{$BPD} {
+  @media(min-width: $break-point-d) {
     padding-top: 80px;
   }
 
@@ -12,7 +14,7 @@ $numColumns: 8;
   &.filters-open {
     padding-top: 202px;
 
-    @media #{$BPD} {
+    @media(min-width: $break-point-d) {
       padding-top: 148px;
     }
 
@@ -57,7 +59,7 @@ $numColumns: 8;
       width: 50%;
       margin-bottom: 10px;
 
-      @media #{$BPD} {
+      @media(min-width: $break-point-d) {
         width: 20%;
       }
     }
@@ -70,7 +72,7 @@ $numColumns: 8;
   width: percentage(1/$numColumnsSmall);
   flex: none;
 
-  @media #{$BPE} {
+  @media(min-width: $break-point-e) {
     width: percentage(1/$numColumns);
   }
 }
@@ -79,7 +81,7 @@ $numColumns: 8;
 .tool-category__heading {
   flex: none;
 
-  @media #{$BPE} {
+  @media(min-width: $break-point-e) {
     width: percentage(1/$numColumns);
   }
 }
@@ -120,7 +122,7 @@ $numColumns: 8;
   &.brand {
     display: none;
 
-    @media #{$BPE}{
+    @media(min-width: $break-point-e) {
       display: block;
     }
     h1 {
@@ -184,7 +186,7 @@ $numColumns: 8;
   }
 }
 
-@media(min-width: $break-point-e-px) {
+@media(min-width: $break-point-e) {
   .tool-stages__stage {
   }
   .tool-category {
@@ -198,7 +200,7 @@ $numColumns: 8;
   }
 }
 
-@media(min-width: $break-point-f-px) {
+@media(min-width: $break-point-f) {
   .tool {
     padding-top: $vr*13
   }

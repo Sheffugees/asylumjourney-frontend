@@ -1,0 +1,45 @@
+@import '../../../theme/variables.scss';
+
+.admin-bar {
+  min-height: 48px;
+  background: white;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 11;
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2);
+  margin-bottom: $vr*2;
+  padding: 8px 0 8px 54px;
+
+  @media(min-width: $break-point-d) {
+    padding: 8px 80px 8px 78px;
+
+    .button + .button {
+      margin-left: 8px;
+    }
+  }
+}
+
+
+.admin-bar__logo {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  left: 10px;
+  top: 8px;
+
+  h1 {
+    height: 100%;
+  }
+
+   @media(min-width: $break-point-d) {
+    height: 47px;
+    width: 47px;
+    left: 5px;
+    top: 4px;
+  }
+
+  @media(min-width: $break-point-e) {
+    left: 10px;
+  }
+}

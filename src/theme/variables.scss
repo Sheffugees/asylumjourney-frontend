@@ -1,0 +1,102 @@
+$vr: 6px;
+
+
+$font-family-base: 'Source Sans Pro', sans-serif;
+
+$font-size-small: 13px;
+$font-size-base: 16px;
+$font-size-large: 21px;
+$font-size-x-large: 30px;
+
+$font-weight-medium: 600;
+
+$line-height-small: $vr*3;
+$line-height-base: 1.5;
+
+$color-green: #4caf50;
+$color-white: #fff;
+$color-blue: #1692e0;
+$color-red: #d11713;
+$color-warning: $color-red;
+$grey-a: #333;
+$grey-b: #666;
+$grey-d: #ccc;
+$grey-e: #ddd;
+$grey-f: #fbfbfb;
+
+$color-primary: $color-red;
+$color-secondary: $color-blue;
+$color-text: $grey-a;
+
+$color-orange: #e68344;
+$color-yellow: #e6c127;
+$color-green: #4caf50;
+$color-blue: #1692e0;
+$color-indigo: #846dce;
+$color-violet: #b200b2;
+
+// Stage colours
+$stage-1-color: $color-red;
+$stage-2-color: $color-orange;
+$stage-3-color: $color-yellow;
+$stage-4-color: $color-green;
+$stage-5-color: $color-blue;
+$stage-6-color: $color-indigo;
+$stage-7-color: $color-violet;
+
+/**
+ * TO DO use sass each loops for these and get rid of importants.
+ * Need to fix webpack so loops don't break it.
+ */
+
+.bg-stage-1 {
+  background: $stage-1-color;
+}
+.bg-stage-2 {
+  background: $stage-2-color;
+}
+.bg-stage-3 {
+  background: $stage-3-color;
+}
+.bg-stage-4 {
+  background: $stage-4-color;
+}
+.bg-stage-5 {
+  background: $stage-5-color;
+}
+.bg-stage-6 {
+  background: $stage-6-color;
+}
+.bg-stage-7 {
+  background: $stage-7-color;
+}
+
+.border-stage-1 {
+  border-color: $stage-1-color !important;
+}
+.border-stage-2 {
+  border-color: $stage-2-color !important;
+}
+.border-stage-3 {
+  border-color: $stage-3-color !important;
+}
+.border-stage-4 {
+  border-color: $stage-4-color !important;
+}
+.border-stage-5 {
+  border-color: $stage-5-color !important;
+}
+.border-stage-6 {
+  border-color: $stage-6-color !important;
+}
+.border-stage-7 {
+  border-color: $stage-7-color !important;
+}
+
+
+
+$break-point-b: 480px;
+$break-point-c: 600px;
+$break-point-d: 768px;
+$break-point-e: 980px;
+$break-point-f: 1200px;

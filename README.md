@@ -4,18 +4,28 @@ Angular frontend for the Asylum Journey project, http://asylumjourney.sheffugees
 
 Please note that this project, and the data it uses, are a work in progress.
 
+## Dependencies
+
+- Node, https://nodejs.org/en/download/
+- Gulp, https://gulpjs.com/
+
 ## Getting Started
 
 ```
 npm install
-
-gulp
 ````
 
 ## Running locally
 
 ```
-gulp serve
+npm run serve
+```
+
+## Testing the production build locally
+
+```
+npm run build
+npm run serve:dist
 ```
 
 ## Deployment
@@ -41,13 +51,9 @@ npm run deploy-staging
 ## Running tests
 
 ```
-gulp test
+npm test
 ````
 
-## Style guide
+## Browser support
 
-https://github.com/johnpapa/angular-styleguide
-
-## Contributing
-
-See [Issues](https://github.com/Sheffugees/asylumjourney-frontend/issues) for details of features, bugs etc.  Please target Pull Requests at the develop branch.
+IE10+

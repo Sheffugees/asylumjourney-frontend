@@ -1,0 +1,113 @@
+<admin-bar></admin-bar>
+<form ng-submit="$ctrl.save()" ng-if="!$ctrl.saved">
+<div class="container admin-form-container">
+
+  <div class="admin__form">
+    <div class="admin__heading">
+      <h1 ng-if="!$ctrl.isNew">Edit provider</h1>
+      <h1 ng-if="$ctrl.isNew">New provider</h1>
+    </div>
+    <div ng-if="$ctrl.saved" class="admin-success">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-checkmark"></use>
+      </svg>
+      <h2>Provider saved</h2>
+    </div>
+
+      <p>
+        <label for="name">Name</label>
+        <input type="text" ng-model="$ctrl.provider.name" id="name" required />
+      </p>
+
+      <p>
+        <label for="description">Description</label>
+        <text-angular ng-model="$ctrl.provider.description" ta-toolbar="[['bold','italics', 'ul', 'insertLink']]"></text-angular>
+      </p>
+
+      <p>
+        <label for="phone">Phone</label>
+        <input type="text" ng-model="$ctrl.provider.phone" id="phone" />
+      </p>
+
+      <p>
+        <label for="email">Email</label>
+        <input type="email" ng-model="$ctrl.provider.email" id="email" />
+      </p>
+
+      <p>
+        <label for="website">Website</label>
+        <input type="url" ng-model="$ctrl.provider.website" id="website" />
+      </p>
+
+      <p>
+        <label for="facebook">Facebook</label>
+        <input type="text" ng-model="$ctrl.provider.facebook" id="facebook" />
+      </p>
+
+      <p>
+        <label for="twitter">Twitter</label>
+        <input type="text" ng-model="$ctrl.provider.twitter" id="twitter" />
+      </p>
+
+      <p>
+        <label for="contactName">Contact Name</label>
+        <input type="text" ng-model="$ctrl.provider.contactName" id="contactName" />
+      </p>
+
+      <p>
+        <label for="address">Address</label>
+        <textarea ng-model="$ctrl.provider.address" id="address"></textarea>
+      </p>
+
+      <p>
+        <label for="postcode">Postcode</label>
+        <input type="text" ng-model="$ctrl.provider.postcode" id="postcode" />
+      </p>
+
+
+
+  </div>
+
+  <div class="admin__secondary">
+    <div class="form-section">
+        <h2>Review information</h2>
+
+        <label for="lastReviewDate">Last review date</label>
+        <datepicker date-format="dd MMM yyyy">
+          <input type="text" ng-model="$ctrl.provider.lastReviewDate" id="lastReviewDate" />
+        </datepicker>
+
+        <p>
+          <label for="lastReviewedBy">Last reviewed by</label>
+          <input type="text" ng-model="$ctrl.provider.lastReviewedBy" id="lastReviewedBy" />
+        </p>
+
+        <p>
+          <label for="lastReviewComments">Last review comments</label>
+          <textarea ng-model="$ctrl.provider.lastReviewComments" id="lastReviewComments"></textarea>
+        </p>
+
+        <label for="nextReviewDate">Next review date</label>
+        <datepicker date-format="dd MMM yyyy">
+          <input type="text" ng-model="$ctrl.provider.nextReviewDate" id="nextReviewDate" />
+        </datepicker>
+
+        <p>
+          <label for="nextReviewComments">Next review comments</label>
+          <textarea ng-model="$ctrl.provider.nextReviewComments" id="nextReviewComments"></textarea>
+        </p>
+      </div>
+  </div>
+
+  <div class="admin__actions">
+    <p ng-if="$ctrl.errorMessage !== ''" class="validation--error">{{$ctrl.errorMessage}}</p>
+
+      <div class="buttons-container">
+        <button ng-disabled="$ctrl.saving" type="submit" class="button button--primary button--large">
+          <span ng-if="!$ctrl.saving">Save</span>
+          <span ng-if="$ctrl.saving">Saving...</span>
+        </button>
+      </div>
+  </div>
+</div>
+</form>

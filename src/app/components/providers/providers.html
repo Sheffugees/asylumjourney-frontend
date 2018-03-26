@@ -8,11 +8,11 @@
   </div>
 
   <ul class="admin__list">
-    <li ng-repeat="provider in providers.providers | orderBy: 'name'">
+    <li ng-repeat="provider in $ctrl.providers | orderBy: 'name'">
       {{provider.name}}
       <div class="admin__list-actions">
         <a ng-href="/providers/{{provider.id}}/edit" class="button button--primary">Edit</a>
-        <button type="button" ng-click="providers.confirmDelete(provider.id)" class="button button--primary">Delete</button>
+        <button type="button" ng-click="$ctrl.confirmDelete(provider.id)" class="button button--primary">Delete</button>
       </div>
     </li>
   </ul>

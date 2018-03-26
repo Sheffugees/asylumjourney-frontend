@@ -1,0 +1,35 @@
+<div class="auth" ng-controller="AuthController as $ctrl">
+
+  <form name="login" class="auth__form" ng-submit="$ctrl.logIn()" ng-if="!$ctrl.authService.isAuthenticated">
+    <h2 class="auth__heading">Log in</h2>
+
+    <div class="form--inline">
+      <div class="form__group">
+        <label for="username">Username</label>
+        <input type="text" autocomplete="false" id="username" ng-model="$ctrl.username" required />
+      </div>
+      <div class="form__group">
+        <label for="password">Password</label>
+        <input type="password" id="password" ng-model="$ctrl.password" required />
+      </div>
+
+      <div class="form__actions">
+        <button ng-if="!$ctrl.saving" type="submit" class="button-link">Log in</button>
+        <span ng-if="$ctrl.saving">Logging in…</span>
+      </div>
+
+    </div>
+  </form>
+
+  <small ng-if="$ctrl.loginFailed" class="validation validation--error">
+    Log in failed. Please check your username and password and try again.
+  </small>
+
+  <div ng-if="$ctrl.authService.isAuthenticated" class="admin-success">
+    <svg class="icon" aria-hidden="true">
+      <use xlink:href="#icon-checkmark"></use>
+    </svg>
+    <h2>Logged in</h2>
+  </div>
+
+</div>
