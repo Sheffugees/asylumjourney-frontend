@@ -3,6 +3,7 @@ import './tool.scss';
 import serviceModalTemplate from '../service/service.html';
 import infoModal from '../infoOverlay/info.html';
 import providersModal from '../filterBar/providersOverlay.html';
+import searchModalTemplate from '../search/search.html';
 
 class toolController {
   /** @ngInject */
@@ -21,7 +22,7 @@ class toolController {
     this.showLoader = true;
     this.showFilters = false;
     this.filteredProviders = [];
-    this.searchText = $state.params.q;
+    this.searchText = '';
     this.showAllFilters = false;
     this.numStagesDisplayed = 0;
     this.AuthService = AuthService;
@@ -30,13 +31,7 @@ class toolController {
       categories: false,
       providers: false
     };
-
-    this.currentFilters = {
-      stages: [],
-      categories: [],
-      providers: []
-    };
-
+    this.currentFilters = this.DataService.dataStore.currentFilters;
     this.getServices();
     this.getProviders();
     this.getStages();
@@ -48,7 +43,15 @@ class toolController {
     const updateEvent = $rootScope.$on('updateServices', () => {
       this.getServices();
     });
-    $rootScope.$on('$destroy', updateEvent);
+    $scope.$on('$destroy', updateEvent);
+
+    /**
+     * Show Service event - called when search results clicked.
+     */
+    const showServiceEvent = $rootScope.$on('showService', (event, params) => {
+      this.showService(params.serviceId);
+    })
+    $scope.$on('$destroy', showServiceEvent);
   }
 
   filterServices(filterId, type) {
@@ -71,7 +74,7 @@ class toolController {
 
   resetFilters(array, list, type) {
     resetFilter(list);
-    this.currentFilters[type] = [];
+    this.DataService.dataStore.currentFilters[type] = [];
     array = [];
     this.numStagesDisplayed = this.stages.length;
   }
@@ -81,14 +84,9 @@ class toolController {
     resetFilter(this.stages);
     resetFilter(this.categories);
     resetFilter(this.providers);
-    this.resetSearch();
     this.numStagesDisplayed = this.stages.length;
     this.filteredProviders = [];
-    this.currentFilters = {
-      stages: [],
-      categories: [],
-      providers: []
-    };
+    this.currentFilters = this.DataService.resetCurrentFilters();
     this.$location.search({});
   }
 
@@ -101,9 +99,6 @@ class toolController {
         item.display = setItemDisplay.bind(this)(item);
       });
 
-      if (this.searchText) {
-        this.doSearch();
-      }
       checkRoute.bind(this)();
       this.showLoader = false;
     });
@@ -127,15 +122,6 @@ class toolController {
     this.DataService.getCategories().then(() => {
       this.categories = angular.copy(this.DataService.dataStore.categories);
       updateDisplay.bind(this)('categories');
-    });
-  }
-
-  resetSearch() {
-    this.searchText = '';
-    this.$location.search('q', null);
-    angular.forEach(this.services, item => {
-      item.display = setItemDisplay.bind(this)(item);
-      item.filtered = false;
     });
   }
 
@@ -188,24 +174,24 @@ class toolController {
   }
 
   doSearch() {
-    const searchText = this.searchText.toLowerCase();
-
-    angular.forEach(this.services, item => {
-      const name = item.name.toLowerCase();
-      const description = item.description ? item.description.toLowerCase() : '';
-      const events = item.events ? item.events.toLowerCase() : '';
-
-      if (name.indexOf(searchText) !== -1 || description.indexOf(searchText) !== -1 || events.indexOf(searchText) !== -1) {
-        updateFilteredItem(item, setItemDisplay.bind(this)(item));
-        return;
-      }
-      updateFilteredItem(item, false);
-    });
-
-    this.$location.search('q', this.searchText);
-    if (angular.isDefined(this.$window.ga)) {
-      ga('send', 'pageview', this.$location.url());
+    if (!this.searchText.length) {
+      return;
     }
+    const searchData = { searchTerm: this.searchText.toLowerCase() };
+    const searchModal = this.ngDialog.open({
+      plain: true,
+      template: searchModalTemplate,
+      data: angular.toJson(searchData),
+      className: 'ngdialog-theme-default service-modal'
+    });
+    updateRoute.bind(this)(this.searchText);
+    sendGAEvent.bind(this)(this.searchText);
+
+    // Clear search form when close result modal
+    searchModal.closePromise.then(() => {
+      this.searchText = '';
+      removeSearchFromRoute.bind(this)();
+    });
   }
 
   resetFilterType(type) {
@@ -216,11 +202,27 @@ class toolController {
     if (type === 'providers') {
       this.filteredProviders = [];
     }
-    this.currentFilters[type] = [];
+    this.DataService.dataStore.currentFilters[type] = [];
 
     const params = this.$state.params;
     params[type] = 'all';
     this.$location.search(params);
+  }
+}
+
+function updateRoute (searchTerm) {
+  this.$location.search('q', searchTerm);
+}
+
+function removeSearchFromRoute () {
+  const params = this.$state.params;
+  delete params.q;
+  this.$location.search(params);
+}
+
+function sendGAEvent () {
+  if (angular.isDefined(this.$window.ga)) {
+    ga('send', 'pageview', this.$location.url());
   }
 }
 
@@ -247,13 +249,20 @@ function addToQS(qs, item, type) {
 /**
  * Check route for direct access to service, e.g. /service/100
  * Open service modal and change url to /tool if service id is present.
+ * Also checks for search term and shows search results if present.
  */
 function checkRoute() {
   const id = this.$state.params.serviceId;
+  const searchTerm = this.$state.params.q;
   if (id) {
     this.showService(id);
     this.$location.search('');
     this.$location.path('/tool');
+    return;
+  }
+  if (searchTerm) {
+    this.searchText = searchTerm;
+    this.doSearch();
   }
 }
 
@@ -309,7 +318,7 @@ function setItemDisplay(item) {
 // Updates active filters in dropdown
 function updateActiveFilters(filterId, type) {
   angular.forEach(this[type], item => {
-    const isFiltered = this.currentFilters[type].filter(filteredItem => {
+    const isFiltered = this.DataService.dataStore.currentFilters[type].filter(filteredItem => {
       return filteredItem.id === item.id;
     })[0];
     const isCurrentlyFiltered = isFiltered;
@@ -327,31 +336,33 @@ function updateActiveFilters(filterId, type) {
 }
 
 function updateCurrentFilter(filterId, type) {
-  const currentlyFiltered = this.currentFilters[type].filter(item => {
+  const currentlyFiltered = this.DataService.dataStore.currentFilters[type].filter(item => {
     return item.id === filterId;
   })[0];
+  
 
   // adding filter
   if (!currentlyFiltered) {
     const selectedFilter = this[type].filter(item => {
       return item.id === filterId;
     })[0];
-    this.currentFilters[type].push({id: filterId, name: selectedFilter.name});
+    this.DataService.dataStore.currentFilters[type].push({id: filterId, name: selectedFilter.name});
     addToQS.bind(this)(this.$state.params[type], filterId, type);
 
     if (type === 'providers') {
       this.filteredProviders.push(filterId);
     }
+
     return;
   }
   // removing filter
-  this.currentFilters[type] = this.currentFilters[type].filter(obj => {
+  this.DataService.dataStore.currentFilters[type] = this.DataService.dataStore.currentFilters[type].filter(obj => {
     return obj.id !== filterId;
   });
 
   removeFromQS.bind(this)(this.$state.params[type], filterId, type);
 
-  if (!this.currentFilters[type].length) {
+  if (!this.DataService.dataStore.currentFilters[type].length) {
     resetFilter(this[type]);
   }
 
@@ -359,6 +370,7 @@ function updateCurrentFilter(filterId, type) {
     const providerIndex = this.filteredProviders.indexOf(filterId);
     this.filteredProviders.splice(providerIndex, 1);
   }
+  
 }
 
 function updateDisplay(type) {

@@ -195,6 +195,10 @@ ul.tag-list {
   margin: $vr*2 0;
 }
 
+ul.tag-list--search-result {
+  margin: 0;
+}
+
 .tag-list__tag {
   display: inline-block;
   font-size: $font-size-small;

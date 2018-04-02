@@ -9,6 +9,7 @@ import APIInterceptor from './app/services/apiInterceptor';
 import AuthService from './app/services/auth';
 import DataService from './app/services/data';
 import categoryFilter from './app/filters/category';
+import categoriesFilter from './app/filters/categoriesFilter';
 import providerFilter from './app/filters/provider';
 import stageFilter from './app/filters/stage';
 import stripHTML from './app/filters/stripHTML';
@@ -21,6 +22,9 @@ import providers from './app/components/providers/providers';
 import serviceEdit from './app/components/service/serviceEdit';
 import serviceCard from './app/components/service/serviceCard';
 import ServiceController from './app/components/service/service';
+import serviceDetails from './app/components/service/serviceDetails';
+// import servicePage from './app/components/service/servicePage';
+import SearchController from './app/components/search/search';
 import start from './app/components/start/start';
 import tool from './app/components/tool/tool';
 import decorators from './decorators';
@@ -39,6 +43,7 @@ angular
   .service('AuthService', AuthService)
   .service('DataService', DataService)
   .filter('categoryFilter', categoryFilter)
+  .filter('categoriesFilter', categoriesFilter)
   .filter('providerFilter', providerFilter)
   .filter('stageFilter', stageFilter)
   .filter('stripHTML', stripHTML)
@@ -46,10 +51,14 @@ angular
   .directive('authButton', authButton)
   .directive('filterBar', filterBar)
   .directive('serviceCard', serviceCard)
+  .directive('serviceDetails', serviceDetails)
   .controller('AuthController', AuthController)
   .controller('ServiceController', ServiceController)
+  .controller('SearchController', SearchController)
   .component('providers', providers)
   .component('providerEdit', providerEdit)
   .component('serviceEdit', serviceEdit)
+  // .component('search', search)
+  // .component('servicePage', servicePage)
   .component('start', start)
   .component('tool', tool);

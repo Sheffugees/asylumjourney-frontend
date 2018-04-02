@@ -9,7 +9,12 @@ export default class DataService {
       categories: [],
       providers: [],
       services: [],
-      stages: []
+      stages: [],
+      currentFilters: {
+        stages: [],
+        categories: [],
+        providers: []
+      }
     };
   }
 
@@ -59,6 +64,28 @@ export default class DataService {
 
   getStages() {
     return getItems.bind(this)('stages');
+  }
+
+  resetCurrentFilters() {
+    return this.dataStore.currentFilters = {
+      stages: [],
+      categories: [],
+      providers: []
+    }
+  }
+
+  getNonEmptyFilters() {
+    const nonEmptyFilters = {};
+    if (this.dataStore.currentFilters.stages.length) {
+      nonEmptyFilters.stages = angular.copy(this.dataStore.currentFilters.stages);
+    }
+    if (this.dataStore.currentFilters.categories.length) {
+      nonEmptyFilters.categories = angular.copy(this.dataStore.currentFilters.categories);
+    }
+    if (this.dataStore.currentFilters.providers.length) {
+      nonEmptyFilters.providers = angular.copy(this.dataStore.currentFilters.providers);
+    }
+    return nonEmptyFilters;
   }
 }
 

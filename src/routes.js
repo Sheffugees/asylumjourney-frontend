@@ -25,6 +25,13 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       component: 'providerEdit',
       authenticate: true
     })
+    .state('search', {
+      url: '/search?q',
+      component: 'search',
+      params: {
+        searchTerm: ''
+      }
+    })
     .state('service', {
       url: '/service/:serviceId',
       component: 'tool'
@@ -41,6 +48,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('tool', {
       url: '/tool?stages&categories&providers&q',
-      component: 'tool'
+      component: 'tool',
+      reloadOnSearch: false
     });
 }

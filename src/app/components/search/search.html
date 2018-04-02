@@ -1,0 +1,21 @@
+<div ng-controller="SearchController as $ctrl">
+  <h2>Search results for "{{ $ctrl.searchTerm }}" ({{ $ctrl.searchResults.length }} results)</h2>
+
+  <div ng-if="$ctrl.showLoader" class="tool__loader">
+    <img ng-src="/app/images/loader-logo.svg" alt="Loading" />
+    Loading...
+  </div>
+
+  <ul ng-if="!$ctrl.showLoader">
+    <li ng-repeat="item in $ctrl.searchResults" class="search-result">
+      <button ng-click="$ctrl.showService(item.id)" class="search-result__title">
+        <strong ng-if="item.hidden">DRAFT:&nbsp;</strong>{{ item.name }}
+      </button>
+      <span class="search-result__description">{{ item.description | stripHTML | limitTo: 200}}...</span>
+      <ul class="tag-list tag-list--search-result">
+        <li ng-repeat="stage in item._embedded.stages" class="tag-list__tag bg-stage-{{ stage.id }}">{{ stage.name }}</li>
+        <li ng-repeat="category in item._embedded.categories" class="tag-list__tag">{{ category.name }}</li>
+      </ul>
+    </li>
+  </ul>
+</div>
