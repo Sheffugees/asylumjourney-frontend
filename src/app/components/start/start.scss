@@ -172,6 +172,17 @@
   }
 }
 
+.home-info__cta {
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+  text-align: center;
+  padding: $vr*4;
+  margin: $vr*3 0;
+
+  h3 {
+    padding-top: 0;
+  }
+}
+
 .home-logos {
   margin: 16px 0;
   display: flex;
@@ -221,9 +232,18 @@
     margin: 0 auto 50px auto;
   }
 
-
   .home-filters__stage {
     width: percentage(1/7);
+  }
+
+  .home-info-container {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-gap: 20px;
+  }
+
+  .home-info__cta {
+    margin: 0;
   }
 
 }
