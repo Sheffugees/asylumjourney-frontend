@@ -56,15 +56,12 @@
         <div class="details__section" ng-if="($ctrl.details.resources.length && !$ctrl.details.hideResources) || ($ctrl.AuthService.isAuthenticated && $ctrl.details.resources.length)">
           <h3 class="details__sub-heading">Printable resources</h3>
           <ul>
-            <li ng-repeat="resource in $ctrl.details.resources | orderBy: 'name'" ng-if="!resource.expired">
+            <li ng-repeat="resource in $ctrl.details.resources | orderBy: 'name'" ng-if="!resource.expired || resource.expired && $ctrl.AuthService.isAuthenticated">
+              <svg class="icon expired-icon" ng-if="resource.expired && $ctrl.AuthService.isAuthenticated">
+                <use xlink:href="#icon-warning"></use>
+              </svg>
               <a href="{{resource.url}}" target="_blank">{{resource.name}}</a>
-              <span ng-if="resource.expired && $ctrl.AuthService.isAuthenticated">
-                <svg class="icon expired-icon">
-                  <use xlink:href="#icon-warning"></use>
-                </svg>
-                <a href="{{resource.url}}" target="_blank" >{{resource.name}}</a>
-                <strong>Expired: {{ resource.expiryDate | date }}</strong>
-              </span>
+              <strong ng-if="resource.expired && $ctrl.AuthService.isAuthenticated">Expired: {{ resource.expiryDate | date }}</strong>
             </li>
           </ul>
         </div>
