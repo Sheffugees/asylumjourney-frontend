@@ -18,7 +18,7 @@ npm install
 ## Running locally
 
 ```
-npm run serve
+npm start
 ```
 
 ## Testing the production build locally
