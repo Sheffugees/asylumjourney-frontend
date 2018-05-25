@@ -22,8 +22,6 @@ import providers from './app/components/providers/providers';
 import serviceEdit from './app/components/service/serviceEdit';
 import serviceCard from './app/components/service/serviceCard';
 import ServiceController from './app/components/service/service';
-import serviceDetails from './app/components/service/serviceDetails';
-// import servicePage from './app/components/service/servicePage';
 import SearchController from './app/components/search/search';
 import start from './app/components/start/start';
 import tool from './app/components/tool/tool';
@@ -51,14 +49,11 @@ angular
   .directive('authButton', authButton)
   .directive('filterBar', filterBar)
   .directive('serviceCard', serviceCard)
-  .directive('serviceDetails', serviceDetails)
   .controller('AuthController', AuthController)
   .controller('ServiceController', ServiceController)
   .controller('SearchController', SearchController)
   .component('providers', providers)
   .component('providerEdit', providerEdit)
   .component('serviceEdit', serviceEdit)
-  // .component('search', search)
-  // .component('servicePage', servicePage)
   .component('start', start)
   .component('tool', tool);
