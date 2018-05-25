@@ -25,13 +25,6 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       component: 'providerEdit',
       authenticate: true
     })
-    .state('search', {
-      url: '/search?q',
-      component: 'search',
-      params: {
-        searchTerm: ''
-      }
-    })
     .state('service', {
       url: '/service/:serviceId',
       component: 'tool'
