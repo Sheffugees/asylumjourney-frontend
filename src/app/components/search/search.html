@@ -12,10 +12,6 @@
         <strong ng-if="item.hidden">DRAFT:&nbsp;</strong>{{ item.name }}
       </button>
       <span class="search-result__description">{{ item.description | stripHTML | limitTo: 200}}...</span>
-      <ul class="tag-list tag-list--search-result">
-        <li ng-repeat="stage in item._embedded.stages" class="tag-list__tag bg-stage-{{ stage.id }}">{{ stage.name }}</li>
-        <li ng-repeat="category in item._embedded.categories" class="tag-list__tag">{{ category.name }}</li>
-      </ul>
     </li>
   </ul>
 </div>

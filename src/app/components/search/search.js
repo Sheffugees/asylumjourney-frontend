@@ -24,19 +24,12 @@ class SearchController {
     this.DataService.getServices().then(() => {
       this.services = angular.copy(this.DataService.dataStore.services);
 
-      const nonEmptyFilters = this.DataService.getNonEmptyFilters();
-
       angular.forEach(this.services, item => {
 
         if (!shouldShowService.bind(this)(item)) {
           return;
         }
         
-        // Don't include in results if isn't in filtered categories.
-        if (!this.$filter('categoriesFilter')(item, nonEmptyFilters)) {
-          return;
-        }
-
         if (searchTermInName(item, searchTerm)) {
           item.priority = 1;
           this.searchResults.push(item);
