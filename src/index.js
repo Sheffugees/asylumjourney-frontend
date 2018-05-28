@@ -9,7 +9,6 @@ import APIInterceptor from './app/services/apiInterceptor';
 import AuthService from './app/services/auth';
 import DataService from './app/services/data';
 import categoryFilter from './app/filters/category';
-import categoriesFilter from './app/filters/categoriesFilter';
 import providerFilter from './app/filters/provider';
 import stageFilter from './app/filters/stage';
 import stripHTML from './app/filters/stripHTML';
@@ -41,7 +40,6 @@ angular
   .service('AuthService', AuthService)
   .service('DataService', DataService)
   .filter('categoryFilter', categoryFilter)
-  .filter('categoriesFilter', categoriesFilter)
   .filter('providerFilter', providerFilter)
   .filter('stageFilter', stageFilter)
   .filter('stripHTML', stripHTML)
