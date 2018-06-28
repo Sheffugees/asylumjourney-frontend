@@ -21,6 +21,7 @@ import providers from './app/components/providers/providers';
 import serviceEdit from './app/components/service/serviceEdit';
 import serviceCard from './app/components/service/serviceCard';
 import ServiceController from './app/components/service/service';
+import SearchController from './app/components/search/search';
 import start from './app/components/start/start';
 import tool from './app/components/tool/tool';
 import decorators from './decorators';
@@ -48,6 +49,7 @@ angular
   .directive('serviceCard', serviceCard)
   .controller('AuthController', AuthController)
   .controller('ServiceController', ServiceController)
+  .controller('SearchController', SearchController)
   .component('providers', providers)
   .component('providerEdit', providerEdit)
   .component('serviceEdit', serviceEdit)

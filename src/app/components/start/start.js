@@ -1,7 +1,7 @@
 import './start.scss';
 class startController {
   /** @ngInject */
-  constructor($location, $rootScope, AuthService, DataService) {
+  constructor($location, $rootScope, $scope, AuthService, DataService) {
     this.$location = $location;
     this.DataService = DataService;
     this.showCategories = false;
@@ -18,7 +18,7 @@ class startController {
       getStages.bind(this)();
       getCategories.bind(this)();
     });
-    $rootScope.$on('$destroy', logOutEvent);
+    $scope.$on('$destroy', logOutEvent);
   }
 
   doSearch() {

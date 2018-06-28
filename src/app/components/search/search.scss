@@ -1,0 +1,25 @@
+@import '../../../theme/variables.scss';
+
+.search-result {
+  border-bottom: 1px solid $grey-d;
+  margin-bottom: $vr*2;
+  padding-bottom: $vr*2;
+}
+
+.search-result__title {
+  background: none;
+  border: 0;
+  -webkit-appearance: none;
+  color: $color-blue;
+  padding: 0;
+  cursor: pointer;
+  
+  &:hover, &:focus {
+    text-decoration: underline;
+  }
+}
+
+.search-result__description {
+  display: block;
+  font-size: $font-size-small;
+}

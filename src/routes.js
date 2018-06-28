@@ -41,6 +41,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('tool', {
       url: '/tool?stages&categories&providers&q',
-      component: 'tool'
+      component: 'tool',
+      reloadOnSearch: false
     });
 }
