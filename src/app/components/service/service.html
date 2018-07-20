@@ -42,6 +42,7 @@
           <span ng-if="$ctrl.details.lastReviewComments"><br>Comments: {{$ctrl.details.lastReviewComments}}</span></p>
           <p>Next review date: {{$ctrl.details.nextReviewDate | date: 'dd MMM yyyy'}}
           <span ng-if="$ctrl.details.nextReviewComments"><br>Comments: {{$ctrl.details.nextReviewComments}}</span></p>
+          <p ng-if="$ctrl.details.externalReviews">External reviews: {{$ctrl.details.externalReviews}}</p>
         </div>
 
       </div>
