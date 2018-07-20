@@ -94,6 +94,7 @@
                   <span ng-if="provider.lastReviewComments"><br>Comments: {{provider.lastReviewComments}}</span></p>
                   <p>Next review date: {{provider.nextReviewDate | date: 'dd MMM yyyy'}}
                   <span ng-if="provider.nextReviewComments"><br>Comments: {{provider.nextReviewComments}}</span></p>
+                  <p ng-if="provider.providerContact"><br>Provider contact: {{provider.providerContact}}</p>
               </div>
             </div>
           </div>
