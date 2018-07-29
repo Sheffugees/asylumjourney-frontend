@@ -1,4 +1,4 @@
-class providerEditController {
+class resourceEditController {
   /** @ngInject */
   constructor (DataService, $filter, $location, $rootScope, $scope, $state, $timeout) {
     this.DataService = DataService;
@@ -7,7 +7,7 @@ class providerEditController {
     this.$rootScope = $rootScope;
     this.$scope = $scope;
     this.$timeout = $timeout;
-    this.provider = {};
+    this.resource = {};
     this.saving = false;
     this.saved = false;
     this.errorMessage = '';
@@ -16,9 +16,9 @@ class providerEditController {
     this.isNew = id ? false : true;
 
     if (!this.isNew) {
-      DataService.getProvider(id).then( (provider)  => {
-        this.provider = angular.copy(provider);
-        formatDates.bind(this)(this.provider);
+      DataService.getResource(id).then( (resource)  => {
+        this.resource = angular.copy(resource);
+        formatDates.bind(this)(this.resource);
       });
     }
 
@@ -28,14 +28,14 @@ class providerEditController {
   save () {
     this.saving = true;
 
-    this.provider.lastReviewDate = new Date(this.provider.lastReviewDate);
+    this.resource.lastReviewDate = new Date(this.resource.lastReviewDate);
 
     if (this.isNew) {
-      this.DataService.createProvider(this.provider).then( () => {
+      this.DataService.createResource(this.resource).then( () => {
         this.saving = false;
         this.saved = true;
         this.$timeout( () => {
-          this.$location.path('providers');
+          this.$location.path('resources');
         }, 500);
       }, () => {
       this.errorMessage = 'Sorry there was a problem saving the provider.'
@@ -44,7 +44,7 @@ class providerEditController {
       return;
     }
 
-    this.DataService.updateProvider(this.provider).then( () => {
+    this.DataService.updateResource(this.resource).then( () => {
       this.saving = false;
       this.saved = true;
       this.$timeout( () => {
@@ -53,25 +53,25 @@ class providerEditController {
           this.$location.path('/service/' + this.returnToService);
           return;
         }
-        this.$location.path('providers');
+        this.$location.path('resources');
       }, 500);
     }, () => {
-      this.errorMessage = 'Sorry there was a problem saving the provider.'
+      this.errorMessage = 'Sorry there was a problem saving the resource.'
       this.saving = false;
     });
   }
 }
 
-function formatDates (provider) {
-  const dateFields = ['lastReviewDate', 'nextReviewDate'];
+function formatDates (resource) {
+  const dateFields = ['expiryDate'];
   angular.forEach(dateFields, (field) => {
-    provider[field] = this.$filter('date')(provider[field], 'dd MMM yyyy')
+    resource[field] = this.$filter('date')(resource[field], 'dd MMM yyyy')
   });
-  return provider;
+  return resource;
 }
 
-const providerEdit = {
-  template: require('./providerEdit.html'),
-  controller: providerEditController
+const resourceEdit = {
+  template: require('./resourceEdit.html'),
+  controller: resourceEditController
 }
-export default providerEdit;
+export default resourceEdit;

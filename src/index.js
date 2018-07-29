@@ -18,6 +18,8 @@ import AuthController from './app/components/auth/auth';
 import filterBar from './app/components/filterBar/filterBar';
 import providerEdit from './app/components/providers/providerEdit';
 import providers from './app/components/providers/providers';
+import resources from './app/components/resources/resources';
+import resourceEdit from './app/components/resources/resourceEdit';
 import serviceEdit from './app/components/service/serviceEdit';
 import serviceCard from './app/components/service/serviceCard';
 import ServiceController from './app/components/service/service';
@@ -52,6 +54,8 @@ angular
   .controller('SearchController', SearchController)
   .component('providers', providers)
   .component('providerEdit', providerEdit)
+  .component('resources', resources)
+  .component('resourceEdit', resourceEdit)
   .component('serviceEdit', serviceEdit)
   .component('start', start)
   .component('tool', tool);

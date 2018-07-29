@@ -17,6 +17,7 @@ class serviceEditController {
     this.errorMessage = '';
     this.categories = [];
     this.providers = [];
+    this.resources = [];
     this.stages = [];
     const id = parseInt($state.params.serviceId, 10);
 
@@ -27,6 +28,9 @@ class serviceEditController {
     DataService.getProviders().then( () => {
       this.providers = angular.copy(this.DataService.dataStore.providers);
     });
+    DataService.getResources().then( () => {
+      this.resources = angular.copy(this.DataService.dataStore.resources);
+    });
     DataService.getStages().then( () => {
       this.stages = angular.copy(this.DataService.dataStore.stages);
     });
@@ -34,20 +38,12 @@ class serviceEditController {
     if (!this.isNew) {
       DataService.getService(id).then(service => {
         this.service = angular.copy(service);
-        if (this.service.resources.length) {
+        // if (this.service.resources.length) {
           formatDates.bind(this)(this.service);
-        }
+        // }
       });
     }
 
-  }
-
-  addResource () {
-    this.service.resources.push({name: '', url: '', expiryDate: '', comments: ''})
-  }
-
-  removeResource (index) {
-    this.service.resources.splice(index, 1);
   }
   
   categoriesInfo () {
@@ -84,15 +80,14 @@ class serviceEditController {
       this.service.providers.push(provider.id);
     });
 
+    this.service.resources = [];
+    angular.forEach(this.service._embedded.resources, resource => {
+      this.service.resources.push(resource.id);
+    });
+
     this.service.stages = [];
     angular.forEach(this.service._embedded.stages, stage => {
       this.service.stages.push(stage.id);
-    });
-
-    angular.forEach(this.service.resources, (resource, i) => {
-      if (resource.name === '' || resource.url === '') {
-        this.service.resources.splice(i, 1)
-      }
     });
 
     if (this.isNew) {
@@ -130,11 +125,6 @@ function formatDate (date) {
 }
 
 function formatDates (service) {
-  if (service.resources.length) {
-    angular.forEach(service.resources, resource => {
-      resource.expiryDate = formatDate.bind(this)(resource.expiryDate);
-    });
-  }
 
   const dateFields = ['endDate', 'lastReviewDate', 'nextReviewDate'];
   angular.forEach(dateFields, field => {

@@ -28,10 +28,9 @@ class ServiceController {
       if (this.details._embedded.providers) {
         formatMapLinks.bind(this)(this.details._embedded.providers);
       }
-      if (this.details.resources.length) {
+      if (this.details._embedded.resources) {
         formatResources.bind(this)(this.details);
       }
-
       // Check if fields are formatted HTML, if not use var to add class to format whitespace
       if (this.details.description && this.details.description.substr(0, 3) !== '<p>') {
         this.formatDescription = true;
@@ -88,7 +87,7 @@ function formatProviders(details) {
 
 function formatResources(details) {
   let numExpired = 0;
-  angular.forEach(details.resources, resource => {
+  angular.forEach(details._embedded.resources, resource => {
     if (!resource.expiryDate) {
       return;
     }
@@ -99,7 +98,7 @@ function formatResources(details) {
       numExpired += 1;
     }
   });
-  if (numExpired === details.resources.length) {
+  if (numExpired === details._embedded.resources.length) {
     details.hideResources = true;
   }
 }

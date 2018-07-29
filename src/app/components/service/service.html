@@ -54,15 +54,20 @@
           <div ng-class="{'format-text' : $ctrl.formatDescription}" ng-bind-html="$ctrl.details.events"></div>
         </div>
 
-        <div class="details__section" ng-if="($ctrl.details.resources.length && !$ctrl.details.hideResources) || ($ctrl.AuthService.isAuthenticated && $ctrl.details.resources.length)">
+        <div class="details__section" ng-if="($ctrl.details._embedded.resources.length && !$ctrl.details.hideResources) || ($ctrl.AuthService.isAuthenticated && $ctrl.details._embedded.resources.length)">
           <h3 class="details__sub-heading">Printable resources</h3>
           <ul>
-            <li ng-repeat="resource in $ctrl.details.resources | orderBy: 'name'" ng-if="!resource.expired || resource.expired && $ctrl.AuthService.isAuthenticated">
+            <li ng-repeat="resource in $ctrl.details._embedded.resources | orderBy: 'name'" ng-if="!resource.expired || resource.expired && $ctrl.AuthService.isAuthenticated">
               <svg class="icon expired-icon" ng-if="resource.expired && $ctrl.AuthService.isAuthenticated">
                 <use xlink:href="#icon-warning"></use>
               </svg>
               <a href="{{resource.url}}" target="_blank">{{resource.name}}</a>
-              <strong ng-if="resource.expired && $ctrl.AuthService.isAuthenticated">Expired: {{ resource.expiryDate | date }}</strong>
+              <div ng-if="$ctrl.AuthService.isAuthenticated">
+                  <span><a ng-href="/resources/{{resource.id}}/edit?service={{$ctrl.details.id}}" class="button details__edit-provider">Edit</a></span>
+                <strong ng-if="resource.expired">Expired: {{ resource.expiryDate | date }}</strong>
+              </div>
+              
+              
             </li>
           </ul>
         </div>
@@ -94,14 +99,11 @@
                   <span ng-if="provider.lastReviewComments"><br>Comments: {{provider.lastReviewComments}}</span></p>
                   <p>Next review date: {{provider.nextReviewDate | date: 'dd MMM yyyy'}}
                   <span ng-if="provider.nextReviewComments"><br>Comments: {{provider.nextReviewComments}}</span></p>
-                  <p ng-if="provider.providerContact"><br>Provider contact: {{provider.providerContact}}</p>
+                  <p ng-if="provider.providerContact">Provider contact: {{provider.providerContact}}</p>
               </div>
             </div>
           </div>
         </div>
-
-
-
       </div>
 
     </div>

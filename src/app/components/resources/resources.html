@@ -1,0 +1,20 @@
+<admin-bar></admin-bar>
+
+<div class="container admin">
+
+  <div class="admin__heading">
+    <h1>Manage resources</h1>
+    <a ng-href="/resources/new" class="button button--secondary">Add new</a>
+  </div>
+
+  <ul class="admin__list">
+    <li ng-repeat="resource in $ctrl.resources | orderBy: 'name'">
+      {{resource.name}}
+      <div class="admin__list-actions">
+        <a ng-href="/resources/{{resource.id}}/edit" class="button button--primary">Edit</a>
+        <button type="button" ng-click="$ctrl.confirmDelete(resource.id)" class="button button--primary">Delete</button>
+      </div>
+    </li>
+  </ul>
+
+</div>
