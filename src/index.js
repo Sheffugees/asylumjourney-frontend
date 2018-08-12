@@ -10,6 +10,7 @@ import AuthService from './app/services/auth';
 import DataService from './app/services/data';
 import categoryFilter from './app/filters/category';
 import providerFilter from './app/filters/provider';
+import resourceFilter from './app/filters/resource';
 import stageFilter from './app/filters/stage';
 import stripHTML from './app/filters/stripHTML';
 import adminBar from './app/components/adminBar/adminBar';
@@ -43,6 +44,7 @@ angular
   .service('DataService', DataService)
   .filter('categoryFilter', categoryFilter)
   .filter('providerFilter', providerFilter)
+  .filter('resourceFilter', resourceFilter)
   .filter('stageFilter', stageFilter)
   .filter('stripHTML', stripHTML)
   .directive('adminBar', adminBar)

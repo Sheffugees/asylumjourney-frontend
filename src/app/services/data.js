@@ -14,7 +14,8 @@ export default class DataService {
       currentFilters: {
         stages: [],
         categories: [],
-        providers: []
+        providers: [],
+        resources: []
       }
     };
   }
@@ -91,7 +92,8 @@ export default class DataService {
     return this.dataStore.currentFilters = {
       stages: [],
       categories: [],
-      providers: []
+      providers: [],
+      resources: []
     }
   }
 
@@ -105,6 +107,9 @@ export default class DataService {
     }
     if (this.dataStore.currentFilters.providers.length) {
       nonEmptyFilters.providers = angular.copy(this.dataStore.currentFilters.providers);
+    }
+    if (this.dataStore.currentFilters.resources.length) {
+      nonEmptyFilters.resources = angular.copy(this.dataStore.currentFilters.resources);
     }
     return nonEmptyFilters;
   }

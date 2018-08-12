@@ -1,0 +1,24 @@
+<article class="details">
+    <h2 class="details__heading">
+      Resources
+    </h2>
+  
+    <ul class="filter__list filter__list--overlay">
+      <li class="filter__list-item" ng-repeat="resource in $ctrl.resources | orderBy: 'name'"
+      ng-if="!resource.expired || resource.expired && $ctrl.AuthService.isAuthenticated">
+        <button type="button" class="filter__button" ng-class="{ 'filter__button--active': resource.filtered}" ng-click="$ctrl.filterServices(resource.id, 'resources')">
+          {{resource.name}} {{resource.expired}}
+        </button>
+      </li>
+      <li class="filter__list-item">
+        <button type="button"
+          class="filter__show-all-button"
+          ng-click="$ctrl.resetFilterType('resources')"
+          ng-disabled="!$ctrl.currentFilters.resources.length || $ctrl.currentFilters.resources.length === $ctrl.resources.length"
+        >
+          Show all resources
+        </button>
+      </li>
+  </ul>
+  </article>
+  

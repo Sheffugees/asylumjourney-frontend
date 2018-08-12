@@ -55,7 +55,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       authenticate: true
     })
     .state('tool', {
-      url: '/tool?stages&categories&providers&q',
+      url: '/tool?stages&categories&providers&resources&q',
       component: 'tool',
       reloadOnSearch: false
     });
