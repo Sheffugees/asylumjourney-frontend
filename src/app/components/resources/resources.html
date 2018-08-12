@@ -6,11 +6,21 @@
     <h1>Manage resources</h1>
     <a ng-href="/resources/new" class="button button--secondary">Add new</a>
   </div>
+  
+  <button ng-click="$ctrl.toggleShowExpiredOnly()" class="button button--secondary">
+    <span ng-if="!$ctrl.showExpiredOnly">Show expired only</span>
+    <span ng-if="$ctrl.showExpiredOnly">Show all</span>
+  </button>
 
   <ul class="admin__list">
-    <li ng-repeat="resource in $ctrl.resources | orderBy: 'name'">
+    <li ng-repeat="resource in $ctrl.resources | orderBy:$ctrl.order" ng-if="!$ctrl.showExpiredOnly || $ctrl.showExpiredOnly && resource.expired">
       {{resource.name}}
       <div class="admin__list-actions">
+        <span class="admin__list-expiry" ng-class="{'admin__list-expiry--expired': resource.expired}">
+          <span ng-if="resource.expired">Expired: </span>
+          <span ng-if="!resource.expired && resource.expiryDate">Expires: </span>
+          <span>{{resource.displayExpiryDate}}</span>
+      </span>
         <a ng-href="/resources/{{resource.id}}/edit" class="button button--primary">Edit</a>
         <button type="button" ng-click="$ctrl.confirmDelete(resource.id)" class="button button--primary">Delete</button>
       </div>

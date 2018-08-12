@@ -1,14 +1,17 @@
 import resourcesModal from './confirmModal.html';
 class resourcesController {
   /** @ngInject */
-  constructor (DataService, ngDialog, $scope, $timeout) {
+  constructor (DataService, ngDialog, $filter, $scope, $timeout) {
     this.DataService = DataService;
     this.ngDialog = ngDialog;
+    this.$filter = $filter;
     this.$scope = $scope;
     this.$timeout = $timeout;
     this.resources = [];
     this.showDeleteSuccess = false;
     this.idToDelete = 0;
+    this.showExpiredOnly = false;
+    this.order = 'name';
     getResources.bind(this)();
   }
 
@@ -37,11 +40,27 @@ class resourcesController {
       }, 1000);
     });
   }
+
+  toggleShowExpiredOnly () {
+    this.showExpiredOnly = !this.showExpiredOnly;
+    this.order = this.order === 'name' ? 'expiryDate' : 'name';
+  }
 }
 
 function getResources () {
   this.DataService.getResources().then( () => {
     this.resources = angular.copy(this.DataService.dataStore.resources);
+    angular.forEach(this.resources, resource => {
+      if (!resource.expiryDate) {
+        return;
+      }
+      const now = new Date();
+      const expiry = new Date(resource.expiryDate);
+      if (expiry < now) {
+        resource.expired = true;
+      }
+      resource.displayExpiryDate = this.$filter('date')(resource.expiryDate, 'dd MMM yyyy')
+    });
   });
 }
 
