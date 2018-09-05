@@ -19,7 +19,7 @@
 
     <h2 class="tool-category__heading">{{category.name}}</h2>
     <ul ng-if="stage.display" class="tool-category__stage tool-category__stage-{{stage.id}} tool-category__stage--cols-{{$ctrl.numStagesDisplayed}}" ng-repeat="stage in $ctrl.stages">
-      <li ng-repeat="service in $ctrl.services | categoryFilter: category.id | stageFilter: stage.id | providerFilter: $ctrl.filteredProviders" ng-if="service.display">
+      <li ng-repeat="service in $ctrl.services | categoryFilter: category.id | stageFilter: stage.id | providerFilter: $ctrl.filteredProviders | resourceFilter: $ctrl.filteredResources" ng-if="service.display">
         <service-card details="service"></service-card>
       </li>
     </ul>

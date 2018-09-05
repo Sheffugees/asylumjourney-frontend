@@ -10,6 +10,7 @@ import AuthService from './app/services/auth';
 import DataService from './app/services/data';
 import categoryFilter from './app/filters/category';
 import providerFilter from './app/filters/provider';
+import resourceFilter from './app/filters/resource';
 import stageFilter from './app/filters/stage';
 import stripHTML from './app/filters/stripHTML';
 import adminBar from './app/components/adminBar/adminBar';
@@ -18,6 +19,8 @@ import AuthController from './app/components/auth/auth';
 import filterBar from './app/components/filterBar/filterBar';
 import providerEdit from './app/components/providers/providerEdit';
 import providers from './app/components/providers/providers';
+import resources from './app/components/resources/resources';
+import resourceEdit from './app/components/resources/resourceEdit';
 import serviceEdit from './app/components/service/serviceEdit';
 import serviceCard from './app/components/service/serviceCard';
 import ServiceController from './app/components/service/service';
@@ -41,6 +44,7 @@ angular
   .service('DataService', DataService)
   .filter('categoryFilter', categoryFilter)
   .filter('providerFilter', providerFilter)
+  .filter('resourceFilter', resourceFilter)
   .filter('stageFilter', stageFilter)
   .filter('stripHTML', stripHTML)
   .directive('adminBar', adminBar)
@@ -52,6 +56,8 @@ angular
   .controller('SearchController', SearchController)
   .component('providers', providers)
   .component('providerEdit', providerEdit)
+  .component('resources', resources)
+  .component('resourceEdit', resourceEdit)
   .component('serviceEdit', serviceEdit)
   .component('start', start)
   .component('tool', tool);

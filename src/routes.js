@@ -25,6 +25,21 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       component: 'providerEdit',
       authenticate: true
     })
+    .state('resources', {
+      url: '/resources',
+      component: 'resources',
+      authenticate: true
+    })
+    .state('resourceEdit', {
+      url: '/resources/:id/edit',
+      component: 'resourceEdit',
+      authenticate: true
+    })
+    .state('resourceNew', {
+      url: '/resources/new',
+      component: 'resourceEdit',
+      authenticate: true
+    })
     .state('service', {
       url: '/service/:serviceId',
       component: 'tool'
@@ -40,7 +55,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       authenticate: true
     })
     .state('tool', {
-      url: '/tool?stages&categories&providers&q',
+      url: '/tool?stages&categories&providers&resources&q',
       component: 'tool',
       reloadOnSearch: false
     });

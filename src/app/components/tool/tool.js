@@ -3,6 +3,7 @@ import './tool.scss';
 import serviceModalTemplate from '../service/service.html';
 import infoModal from '../infoOverlay/info.html';
 import providersModal from '../filterBar/providersOverlay.html';
+import resourcesModal from '../filterBar/resourcesOverlay.html';
 import searchModalTemplate from '../search/search.html';
 
 class toolController {
@@ -22,6 +23,7 @@ class toolController {
     this.showLoader = true;
     this.showFilters = false;
     this.filteredProviders = [];
+    this.filteredResources = [];
     this.searchText = '';
     this.showAllFilters = false;
     this.numStagesDisplayed = 0;
@@ -29,13 +31,15 @@ class toolController {
     this.expandFilters = {
       stages: false,
       categories: false,
-      providers: false
+      providers: false,
+      resources: false
     };
     this.currentFilters = this.DataService.dataStore.currentFilters;
     this.getServices();
     this.getProviders();
     this.getStages();
     this.getCategories();
+    this.getResources();
 
     /**
      * Update services in tool after one is deleted.
@@ -86,6 +90,7 @@ class toolController {
     resetFilter(this.providers);
     this.numStagesDisplayed = this.stages.length;
     this.filteredProviders = [];
+    this.filteredResources = [];
     this.currentFilters = this.DataService.resetCurrentFilters();
     this.$location.search({});
   }
@@ -108,6 +113,23 @@ class toolController {
     this.DataService.getProviders().then(() => {
       this.providers = angular.copy(this.DataService.dataStore.providers);
       updateDisplay.bind(this)('providers');
+    });
+  }
+
+  getResources() {
+    this.DataService.getResources().then(() => {
+      this.resources = angular.copy(this.DataService.dataStore.resources);
+      angular.forEach(this.resources, resource => {
+        if (!resource.expiryDate) {
+          return;
+        }
+        const now = new Date();
+        const expiry = new Date(resource.expiryDate);
+        if (expiry < now) {
+          resource.expired = true;
+        }
+      });
+      updateDisplay.bind(this)('resources');
     });
   }
 
@@ -157,6 +179,15 @@ class toolController {
       scope: this.$scope
     });
   }
+
+  // toggle Resources filter
+  toggleResourcesFilters() {
+    this.ngDialog.open({
+      plain: true,
+      template: resourcesModal,
+      scope: this.$scope
+    });
+  }
   
   openDialog() {
     this.ngDialog.open({
@@ -201,6 +232,9 @@ class toolController {
     }
     if (type === 'providers') {
       this.filteredProviders = [];
+    }
+    if (type === 'resources') {
+      this.filteredResources = [];
     }
     this.DataService.dataStore.currentFilters[type] = [];
 
@@ -353,6 +387,10 @@ function updateCurrentFilter(filterId, type) {
       this.filteredProviders.push(filterId);
     }
 
+    if (type === 'resources') {
+      this.filteredResources.push(filterId);
+    }
+
     return;
   }
   // removing filter
@@ -369,6 +407,11 @@ function updateCurrentFilter(filterId, type) {
   if (type === 'providers') {
     const providerIndex = this.filteredProviders.indexOf(filterId);
     this.filteredProviders.splice(providerIndex, 1);
+  }
+
+  if (type === 'resources') {
+    const resourceIndex = this.filteredResources.indexOf(filterId);
+    this.filteredResources.splice(resourceIndex, 1);
   }
   
 }

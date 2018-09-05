@@ -1,0 +1,15 @@
+<div class="admin-confirm">
+  <div ng-if="!$ctrl.showDeleteSuccess">
+    <h2>Are you sure you want to delete this resource</h2>
+    <div class="buttons-container">
+      <button type="button" ng-click="$ctrl.deleteResource(resource.id)" class="button button--primary button--medium">Yes</button>
+      <button type="button" ng-click="$ctrl.cancelDelete()" class="button button--medium ">No</button>
+    </div>
+  </div>
+  <div ng-if="$ctrl.showDeleteSuccess" class="admin-success">
+    <svg class="icon">
+        <use xlink:href="#icon-checkmark"></use>
+      </svg>
+      <h2>Resource deleted</h2>
+  </div>
+</div>

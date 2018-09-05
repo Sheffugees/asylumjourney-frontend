@@ -1,0 +1,50 @@
+<admin-bar></admin-bar>
+<form ng-submit="$ctrl.save()" ng-if="!$ctrl.saved">
+<div class="container admin-form-container">
+
+  <div class="admin__form">
+    <div class="admin__heading">
+      <h1 ng-if="!$ctrl.isNew">Edit resource</h1>
+      <h1 ng-if="$ctrl.isNew">New resource</h1>
+    </div>
+    <div ng-if="$ctrl.saved" class="admin-success">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-checkmark"></use>
+      </svg>
+      <h2>Resource saved</h2>
+    </div>
+
+      <p>
+        <label for="name">Name *</label>
+        <input type="text" ng-model="$ctrl.resource.name" id="name" required />
+      </p>
+
+      <p>
+        <label for="url">URL *</label>
+        <input type="text" ng-model="$ctrl.resource.url" id="url" required />
+      </p>
+
+      <label for="date">Expiry date</label>
+      <datepicker date-format="dd MMM yyyy">
+        <input type="text" ng-model="$ctrl.resource.expiryDate" id="expiryDate" autocomplete="off" />
+      </datepicker>
+
+      <p>
+        <label for="comments">Comments</label>
+        <textarea ng-model="$ctrl.resource.comments" id="comments"></textarea>
+      </p>
+
+  </div>
+
+  <div class="admin__actions">
+    <p ng-if="$ctrl.errorMessage !== ''" class="validation--error">{{$ctrl.errorMessage}}</p>
+
+      <div class="buttons-container">
+        <button ng-disabled="$ctrl.saving" type="submit" class="button button--primary button--large">
+          <span ng-if="!$ctrl.saving">Save</span>
+          <span ng-if="$ctrl.saving">Saving...</span>
+        </button>
+      </div>
+  </div>
+</div>
+</form>

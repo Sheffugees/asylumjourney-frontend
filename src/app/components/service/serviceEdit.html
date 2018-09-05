@@ -40,32 +40,17 @@
         <text-angular ng-model="$ctrl.service.events" ta-toolbar="[['bold','italics', 'ul','insertLink']]"></text-angular>
       </p>
 
-      <div class="form-section">
-        <p>Printable resources</p>
-
-        <div ng-repeat="resource in $ctrl.service.resources" class="form-section form-section--sub">
-          <div class="inline-fields">
-            <div class="inline-fields__field">
-              <label for="resourceName-{{$index}}">Name</label>
-              <input type="text" id="resourceName-{{$index}}" ng-model="resource.name" />
-            </div>
-            <div class="inline-fields__field">
-              <label for="resourceUrl-{{$index}}">Url</label>
-              <input type="url" id="resourceUrl-{{$index}}" ng-model="resource.url" ng-required="resource.name" />
-            </div>
-            <div class="inline-fields__field">
-              <label for="expiryDate">Expiry date</label>
-              <datepicker date-format="dd MMM yyyy">
-                <input type="text" ng-model="resource.expiryDate" id="expiryDate" />
-              </datepicker>
-            </div>
-            <button type="button" ng-click="$ctrl.removeResource($index)">Remove</button>
-          </div>
-          <label for="resourceComments-{{$index}}">Comments</label>
-          <textarea ng-model="resource.comments" id="resourceComments-{{$index}}"></textarea>
-        </div>
-        <button type="button" class="button button--secondary" ng-click="$ctrl.addResource()">Add new resource</button>
-      </div>
+      <p>
+        <label for="resources">Printable resources</label>
+        <ui-select multiple ng-model="$ctrl.service._embedded.resources" name="resources" id="resources">
+          <ui-select-match placeholder="Select resources">
+              <span ng-bind="$item.name"></span>
+          </ui-select-match>
+          <ui-select-choices repeat="item in ($ctrl.resources | filter: {name: $select.search} | orderBy: 'name') track by item.id">
+              <span ng-bind="item.name"></span>
+          </ui-select-choices>
+        </ui-select>
+      </p>
 
       <p>
         <label for="categories" class="has-field-info">Categories *</label>
@@ -138,6 +123,11 @@
       <p>
         <label for="nextReviewComments">Next review comments</label>
         <textarea ng-model="$ctrl.service.nextReviewComments" id="nextReviewComments"></textarea>
+      </p>
+
+      <p>
+        <label for="externalReviews">External reviews </label>
+        <textarea ng-model="$ctrl.service.externalReviews" id="externalReviews" class="textarea--large"></textarea>
       </p>
     </div>
     <div class="form-section">

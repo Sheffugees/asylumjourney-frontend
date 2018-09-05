@@ -127,6 +127,22 @@
 
   <div id="secondaryFilters" class="filter-bar__secondary">
 
+      <div class="filter-bar__section">
+          <div class="filter-bar__section-inner">
+            <button type="button" class="filter__toggle toggle" ng-class="{ 'filter__toggle--active': $ctrl.currentFilters.resource, 'filter__toggle--many': $ctrl.currentFilters.resources.length > 1}" ng-click="$ctrl.toggleResourcesFilters()">
+              <strong>Resources:</strong>
+                <span ng-if="$ctrl.currentFilters.resources.length === $ctrl.resources.length || $ctrl.currentFilters.resources.length === 0">All</span>
+                <span ng-if="$ctrl.currentFilters.resources.length !== $ctrl.resources.length">
+                {{$ctrl.currentFilters.resources[0].name}}
+                <span class="filter__more-count" ng-if="$ctrl.currentFilters.resources.length > 1">+ {{$ctrl.currentFilters.resources.length - 1}} more</span>
+              </span>
+                <svg class="icon">
+                  <use xlink:href="#icon-arrow-down"></use>
+                </svg>
+            </button>
+          </div>
+        </div>
+
     <div class="filter-bar__info">
         <button ng-click="$ctrl.openDialog()" class="button help">What do the stages mean?</button>
         <a href="mailto:admin@sheffield.cityofsanctuary.org?subject=Asylum Journey Feedback" class="feedback button help">Send us feedback</a>

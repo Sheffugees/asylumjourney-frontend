@@ -8,12 +8,14 @@ export default class DataService {
     this.dataStore = {
       categories: [],
       providers: [],
+      resources: [],
       services: [],
       stages: [],
       currentFilters: {
         stages: [],
         categories: [],
-        providers: []
+        providers: [],
+        resources: []
       }
     };
   }
@@ -40,6 +42,26 @@ export default class DataService {
 
   updateProvider (provider) {
     return updateItem.bind(this)(provider, 'providers');
+  }
+
+  createResource (resource) {
+    return createItem.bind(this)(resource, 'resources');
+  }
+
+  deleteResource (id) {
+    return deleteItem.bind(this)(id, 'resources');
+  }
+
+  getResource(id) {
+    return getItem.bind(this)(id, 'resources');
+  }
+
+  getResources() {
+    return getItems.bind(this)('resources');
+  }
+
+  updateResource (resource) {
+    return updateItem.bind(this)(resource, 'resources');
   }
 
   createService (service) {
@@ -70,7 +92,8 @@ export default class DataService {
     return this.dataStore.currentFilters = {
       stages: [],
       categories: [],
-      providers: []
+      providers: [],
+      resources: []
     }
   }
 
@@ -84,6 +107,9 @@ export default class DataService {
     }
     if (this.dataStore.currentFilters.providers.length) {
       nonEmptyFilters.providers = angular.copy(this.dataStore.currentFilters.providers);
+    }
+    if (this.dataStore.currentFilters.resources.length) {
+      nonEmptyFilters.resources = angular.copy(this.dataStore.currentFilters.resources);
     }
     return nonEmptyFilters;
   }

@@ -37,6 +37,16 @@
   }
 }
 
+.admin__list-expiry {
+  padding-right: 5px;
+  font-style: italic;
+}
+
+.admin__list-expiry--expired {
+  font-weight: bold;
+  color: $color-red;
+}
+
 .admin-success {
   border: 1px solid #ccc;
   border-radius: 8px;
