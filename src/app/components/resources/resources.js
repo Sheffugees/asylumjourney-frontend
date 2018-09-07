@@ -32,7 +32,7 @@ class resourcesController {
 
   deleteResource () {
     this.DataService.deleteResource(this.idToDelete).then( () => {
-      this.resources = angular.copy(this.DataService.dataStore.resources);
+      this.resources = formatExpiry.bind(this)(angular.copy(this.DataService.dataStore.resources));
       this.showDeleteSuccess = true;
       this.$timeout( () => {
         this.ngDialog.close();
@@ -47,20 +47,24 @@ class resourcesController {
   }
 }
 
+function formatExpiry (resources) {
+  angular.forEach(resources, resource => {
+    if (!resource.expiryDate) {
+      return;
+    }
+    const now = new Date();
+    const expiry = new Date(resource.expiryDate);
+    if (expiry < now) {
+      resource.expired = true;
+    }
+    resource.displayExpiryDate = this.$filter('date')(resource.expiryDate, 'dd MMM yyyy')
+  });
+  return resources;
+}
+
 function getResources () {
   this.DataService.getResources().then( () => {
-    this.resources = angular.copy(this.DataService.dataStore.resources);
-    angular.forEach(this.resources, resource => {
-      if (!resource.expiryDate) {
-        return;
-      }
-      const now = new Date();
-      const expiry = new Date(resource.expiryDate);
-      if (expiry < now) {
-        resource.expired = true;
-      }
-      resource.displayExpiryDate = this.$filter('date')(resource.expiryDate, 'dd MMM yyyy')
-    });
+    this.resources = formatExpiry.bind(this)(angular.copy(this.DataService.dataStore.resources));
   });
 }
 
