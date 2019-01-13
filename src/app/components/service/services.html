@@ -16,10 +16,10 @@
     <li ng-repeat="service in $ctrl.services | orderBy:$ctrl.order" ng-if="!$ctrl.showExpiredOnly || $ctrl.showExpiredOnly && service.expired">
       {{service.name}}
       <div class="admin__list-actions">
-        <span class="admin__list-expiry" ng-class="{'admin__list-expiry--expired': service.expired}">
-          <span ng-if="service.expired">Expired: </span>
-          <span ng-if="!service.expired && service.expiryDate">Expires: </span>
-          <span>{{service.displayExpiryDate}}</span>
+        <span class="admin__list-expiry" ng-class="{'admin__list-expiry--expired': service.reviewDue}">
+          <span ng-if="service.reviewDue">Review date: </span>
+          <span ng-if="!service.reviewDue && service.nextReviewDate">Review due: </span>
+          <span>{{service.displayNextReviewDate}}</span>
       </span>
         <a ng-href="/services/{{service.id}}/edit" class="button button--primary">Edit</a>
         <button type="button" ng-click="$ctrl.confirmDelete(service.id)" class="button button--primary">Delete</button>

@@ -32,7 +32,7 @@ class servicesController {
 
   deleteService () {
     this.DataService.deleteService(this.idToDelete).then( () => {
-      this.services = formatExpiry.bind(this)(angular.copy(this.DataService.dataStore.services));
+      this.services = formatNextReviewDate.bind(this)(angular.copy(this.DataService.dataStore.services));
       this.showDeleteSuccess = true;
       this.$timeout( () => {
         this.ngDialog.close();
@@ -47,24 +47,24 @@ class servicesController {
   }
 }
 
-function formatExpiry (services) {
+function formatNextReviewDate (services) {
   angular.forEach(services, service => {
-    if (!service.expiryDate) {
+    if (!service.nextReviewDate) {
       return;
     }
     const now = new Date();
-    const expiry = new Date(service.expiryDate);
-    if (expiry < now) {
-      service.expired = true;
+    const nextReview = new Date(service.nextReviewDate);
+    if (nextReview < now) {
+      service.reviewDue = true;
     }
-    service.displayExpiryDate = this.$filter('date')(service.expiryDate, 'dd MMM yyyy')
+    service.displayNextReviewDate = this.$filter('date')(service.nextReviewDate, 'dd MMM yyyy')
   });
   return services;
 }
 
 function getServices () {
   this.DataService.getServices().then( () => {
-    this.services = formatExpiry.bind(this)(angular.copy(this.DataService.dataStore.services));
+    this.services = formatNextReviewDate.bind(this)(angular.copy(this.DataService.dataStore.services));
   });
 }
 
