@@ -41,9 +41,9 @@ class servicesController {
     });
   }
 
-  toggleShowExpiredOnly () {
-    this.showExpiredOnly = !this.showExpiredOnly;
-    this.order = this.order === 'name' ? 'expiryDate' : 'name';
+  toggleShowReviewOverdueOnly () {
+    this.showReviewOverdueOnly = !this.showReviewOverdueOnly;
+    this.order = this.order === 'name' ? 'nextReviewDate' : 'name';
   }
 }
 
