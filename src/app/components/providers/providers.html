@@ -7,10 +7,20 @@
     <a ng-href="/providers/new" class="button button--secondary">Add new</a>
   </div>
 
+  <button ng-click="$ctrl.toggleShowReviewOverdueOnly()" class="button button--secondary">
+    <span ng-if="!$ctrl.showReviewOverdueOnly">Overdue reviews</span>
+    <span ng-if="$ctrl.showReviewOverdueOnly">Show all</span>
+  </button>
+
   <ul class="admin__list">
-    <li ng-repeat="provider in $ctrl.providers | orderBy: 'name'">
+    <li ng-repeat="provider in $ctrl.providers | orderBy:$ctrl.order" ng-if="!$ctrl.showReviewOverdueOnly || $ctrl.showReviewOverdueOnly && provider.reviewDue">
       {{provider.name}}
       <div class="admin__list-actions">
+        <span class="admin__list-expiry" ng-class="{'admin__list-expiry--expired': provider.reviewDue}">
+          <span ng-if="provider.reviewDue">Review date: </span>
+          <span ng-if="!provider.reviewDue && provider.nextReviewDate">Review due: </span>
+          <span>{{provider.displayNextReviewDate}}</span>
+        </span>
         <a ng-href="/providers/{{provider.id}}/edit" class="button button--primary">Edit</a>
         <button type="button" ng-click="$ctrl.confirmDelete(provider.id)" class="button button--primary">Delete</button>
       </div>
