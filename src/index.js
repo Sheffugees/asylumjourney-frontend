@@ -21,6 +21,7 @@ import providerEdit from './app/components/providers/providerEdit';
 import providers from './app/components/providers/providers';
 import resources from './app/components/resources/resources';
 import resourceEdit from './app/components/resources/resourceEdit';
+import services from './app/components/service/services';
 import serviceEdit from './app/components/service/serviceEdit';
 import serviceCard from './app/components/service/serviceCard';
 import ServiceController from './app/components/service/service';
@@ -58,6 +59,7 @@ angular
   .component('providerEdit', providerEdit)
   .component('resources', resources)
   .component('resourceEdit', resourceEdit)
+  .component('services', services)
   .component('serviceEdit', serviceEdit)
   .component('start', start)
   .component('tool', tool);

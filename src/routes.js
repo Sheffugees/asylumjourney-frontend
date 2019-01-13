@@ -44,6 +44,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/service/:serviceId',
       component: 'tool'
     })
+    .state('services', {
+      url: '/services',
+      component: 'services',
+      authenticate: true
+    })
     .state('serviceEdit', {
       url: '/services/:serviceId/edit',
       component: 'serviceEdit',
