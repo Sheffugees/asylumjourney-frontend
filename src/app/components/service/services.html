@@ -3,8 +3,8 @@
 <div class="container admin">
 
   <div class="admin__heading">
-    <h1>Manage resources</h1>
-    <a ng-href="/resources/new" class="button button--secondary">Add new</a>
+    <h1>Manage services</h1>
+    <a ng-href="/services/new" class="button button--secondary">Add new</a>
   </div>
   
   <button ng-click="$ctrl.toggleShowExpiredOnly()" class="button button--secondary">
@@ -13,16 +13,16 @@
   </button>
 
   <ul class="admin__list">
-    <li ng-repeat="resource in $ctrl.resources | orderBy:$ctrl.order" ng-if="!$ctrl.showExpiredOnly || $ctrl.showExpiredOnly && resource.expired">
-      {{resource.name}}
+    <li ng-repeat="service in $ctrl.services | orderBy:$ctrl.order" ng-if="!$ctrl.showExpiredOnly || $ctrl.showExpiredOnly && service.expired">
+      {{service.name}}
       <div class="admin__list-actions">
-        <span class="admin__list-expiry" ng-class="{'admin__list-expiry--expired': resource.expired}">
-          <span ng-if="resource.expired">Expired: </span>
-          <span ng-if="!resource.expired && resource.expiryDate">Expires: </span>
-          <span>{{resource.displayExpiryDate}}</span>
+        <span class="admin__list-expiry" ng-class="{'admin__list-expiry--expired': service.expired}">
+          <span ng-if="service.expired">Expired: </span>
+          <span ng-if="!service.expired && service.expiryDate">Expires: </span>
+          <span>{{service.displayExpiryDate}}</span>
       </span>
-        <a ng-href="/resources/{{resource.id}}/edit" class="button button--primary">Edit</a>
-        <button type="button" ng-click="$ctrl.confirmDelete(resource.id)" class="button button--primary">Delete</button>
+        <a ng-href="/services/{{service.id}}/edit" class="button button--primary">Edit</a>
+        <button type="button" ng-click="$ctrl.confirmDelete(service.id)" class="button button--primary">Delete</button>
       </div>
     </li>
   </ul>

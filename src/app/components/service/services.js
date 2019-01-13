@@ -1,5 +1,5 @@
-import resourcesModal from './confirmModal.html';
-class resourcesController {
+import servicesModal from './confirmModal.html';
+class servicesController {
   /** @ngInject */
   constructor (DataService, ngDialog, $filter, $scope, $timeout) {
     this.DataService = DataService;
@@ -7,12 +7,12 @@ class resourcesController {
     this.$filter = $filter;
     this.$scope = $scope;
     this.$timeout = $timeout;
-    this.resources = [];
+    this.services = [];
     this.showDeleteSuccess = false;
     this.idToDelete = 0;
     this.showExpiredOnly = false;
     this.order = 'name';
-    getResources.bind(this)();
+    getServices.bind(this)();
   }
 
   cancelDelete () {
@@ -24,15 +24,15 @@ class resourcesController {
     this.idToDelete = id;
     this.ngDialog.open({
       plain: true,
-      template: resourcesModal,
+      template: servicesModal,
       scope: this.$scope,
       className: 'ngdialog-theme-default confirm-modal'
     });
   }
 
-  deleteResource () {
-    this.DataService.deleteResource(this.idToDelete).then( () => {
-      this.resources = formatExpiry.bind(this)(angular.copy(this.DataService.dataStore.resources));
+  deleteService () {
+    this.DataService.deleteService(this.idToDelete).then( () => {
+      this.services = formatExpiry.bind(this)(angular.copy(this.DataService.dataStore.services));
       this.showDeleteSuccess = true;
       this.$timeout( () => {
         this.ngDialog.close();
@@ -47,29 +47,29 @@ class resourcesController {
   }
 }
 
-function formatExpiry (resources) {
-  angular.forEach(resources, resource => {
-    if (!resource.expiryDate) {
+function formatExpiry (services) {
+  angular.forEach(services, service => {
+    if (!service.expiryDate) {
       return;
     }
     const now = new Date();
-    const expiry = new Date(resource.expiryDate);
+    const expiry = new Date(service.expiryDate);
     if (expiry < now) {
-      resource.expired = true;
+      service.expired = true;
     }
-    resource.displayExpiryDate = this.$filter('date')(resource.expiryDate, 'dd MMM yyyy')
+    service.displayExpiryDate = this.$filter('date')(service.expiryDate, 'dd MMM yyyy')
   });
-  return resources;
+  return services;
 }
 
-function getResources () {
-  this.DataService.getResources().then( () => {
-    this.resources = formatExpiry.bind(this)(angular.copy(this.DataService.dataStore.resources));
+function getServices () {
+  this.DataService.getServices().then( () => {
+    this.services = formatExpiry.bind(this)(angular.copy(this.DataService.dataStore.services));
   });
 }
 
-const resources = {
-  template: require('./resources.html'),
-  controller: resourcesController
+const services = {
+  template: require('./services.html'),
+  controller: servicesController
 };
-export default resources;
+export default services;
