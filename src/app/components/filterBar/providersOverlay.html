@@ -8,6 +8,7 @@
       <button type="button" class="filter__button" ng-class="{ 'filter__button--active': provider.filtered}" ng-click="$ctrl.filterServices(provider.id, 'providers')">
         {{provider.name}}
       </button>
+      <button class="button" ng-click="$ctrl.showProvider(provider.id)">View</button>
     </li>
     <li class="filter__list-item">
       <button type="button"

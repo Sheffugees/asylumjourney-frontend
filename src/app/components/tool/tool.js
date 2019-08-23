@@ -1,6 +1,7 @@
  /* global ga:false */
 import './tool.scss';
 import serviceModalTemplate from '../service/service.html';
+import providerModalTemplate from '../providers/provider.html';
 import infoModal from '../infoOverlay/info.html';
 import providersModal from '../filterBar/providersOverlay.html';
 import resourcesModal from '../filterBar/resourcesOverlay.html';
@@ -56,6 +57,14 @@ class toolController {
       this.showService(params.serviceId);
     })
     $scope.$on('$destroy', showServiceEvent);
+
+    /**
+     * Show Provider event - called when search results clicked.
+     */
+    const showProviderEvent = $rootScope.$on('showProvider', (event, params) => {
+      this.showProvider(params.providerId);
+    })
+    $scope.$on('$destroy', showProviderEvent);
   }
 
   filterServices(filterId, type) {
@@ -152,6 +161,16 @@ class toolController {
     this.ngDialog.open({
       plain: true,
       template: serviceModalTemplate,
+      data: angular.toJson(data),
+      className: 'ngdialog-theme-default service-modal'
+    });
+  }
+
+  showProvider(id) {
+    const data = {id};
+    this.ngDialog.open({
+      plain: true,
+      template: providerModalTemplate,
       data: angular.toJson(data),
       className: 'ngdialog-theme-default service-modal'
     });
@@ -286,10 +305,17 @@ function addToQS(qs, item, type) {
  * Also checks for search term and shows search results if present.
  */
 function checkRoute() {
-  const id = this.$state.params.serviceId;
+  const serviceId = this.$state.params.serviceId;
+  const providerId = this.$state.params.providerId;
   const searchTerm = this.$state.params.q;
-  if (id) {
-    this.showService(id);
+  if (serviceId) {
+    this.showService(serviceId);
+    this.$location.search('');
+    this.$location.path('/tool');
+    return;
+  }
+  if (providerId) {
+    this.showProvider(providerId);
     this.$location.search('');
     this.$location.path('/tool');
     return;

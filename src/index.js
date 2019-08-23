@@ -19,6 +19,7 @@ import AuthController from './app/components/auth/auth';
 import filterBar from './app/components/filterBar/filterBar';
 import providerEdit from './app/components/providers/providerEdit';
 import providers from './app/components/providers/providers';
+import ProviderController from './app/components/providers/provider';
 import resources from './app/components/resources/resources';
 import resourceEdit from './app/components/resources/resourceEdit';
 import services from './app/components/service/services';
@@ -53,6 +54,7 @@ angular
   .directive('filterBar', filterBar)
   .directive('serviceCard', serviceCard)
   .controller('AuthController', AuthController)
+  .controller('ProviderController', ProviderController)
   .controller('ServiceController', ServiceController)
   .controller('SearchController', SearchController)
   .component('providers', providers)
