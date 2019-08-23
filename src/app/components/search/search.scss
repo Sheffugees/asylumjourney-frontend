@@ -20,6 +20,10 @@
   }
 }
 
+.search-result__expired {
+  color: $color-red;
+}
+
 .search-result__description {
   display: block;
   font-size: $font-size-small;

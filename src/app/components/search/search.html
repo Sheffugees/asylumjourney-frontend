@@ -9,7 +9,7 @@
   <ul ng-if="!$ctrl.showLoader">
     <li ng-repeat="item in $ctrl.searchResults" class="search-result">
       <a ng-if="item.isResource" ng-href="{{item.url}}" target="_blank" rel="noopener noreferrer" class="search-result__title">
-        <strong ng-if="item.expired">Expired:&nbsp;</strong>{{item.name}} (Printable resource)
+        <strong ng-if="item.expired" class="search-result__expired">Expired:&nbsp;</strong>{{item.name}} (Printable resource)
       </a>
       <button ng-if="!item.isResource" ng-click="$ctrl.showService(item.id)" class="search-result__title">
         <strong ng-if="item.hidden">DRAFT:&nbsp;</strong>{{ item.name }}

@@ -8,6 +8,7 @@
       ng-if="!resource.expired || resource.expired && $ctrl.AuthService.isAuthenticated">
         <button type="button" class="filter__button" ng-class="{ 'filter__button--active': resource.filtered}" ng-click="$ctrl.filterServices(resource.id, 'resources')">
           {{resource.name}} 
+          <span ng-if="$ctrl.AuthService.isAuthenticated && resource.expired" class="filter__list-expired">(Expired)</span>
         </button>
         <a ng-href="{{resource.url}}" target="_blank" rel="noopener noreferrer" class="button button--secondary">View</a>
       </li>
