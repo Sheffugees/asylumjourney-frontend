@@ -1,20 +1,45 @@
 <div ng-controller="SearchController as $ctrl">
-  <h2>Search results for "{{ $ctrl.searchTerm }}" ({{ $ctrl.searchResults.length }} results)</h2>
+  <h2 class="search__heading">Search results for "{{ $ctrl.searchTerm }}"</h2>
 
   <div ng-if="$ctrl.showLoader" class="tool__loader">
     <img ng-src="/app/images/loader-logo.svg" alt="Loading" />
     Loading...
   </div>
 
-  <ul ng-if="!$ctrl.showLoader">
-    <li ng-repeat="item in $ctrl.searchResults" class="search-result">
-      <a ng-if="item.isResource" ng-href="{{item.url}}" target="_blank" rel="noopener noreferrer" class="search-result__title">
-        <strong ng-if="item.expired" class="search-result__expired">Expired:&nbsp;</strong>{{item.name}} (Printable resource)
-      </a>
-      <button ng-if="!item.isResource" ng-click="$ctrl.showService(item.id)" class="search-result__title">
-        <strong ng-if="item.hidden">DRAFT:&nbsp;</strong>{{ item.name }}
-      </button>
-      <span ng-if="item.description" class="search-result__description">{{ item.description | stripHTML | limitTo: 200}}...</span>
-    </li>
-  </ul>
+  <div class="search-results">
+    <div class="search-results__list">
+      <h3 class="search__subheading">Services <span>({{ $ctrl.searchResultsServices.length }} result<span ng-if="$ctrl.searchResultsServices.length > 1">s</span>)</span></h3>
+      <ul ng-if="!$ctrl.showLoader">
+        <li ng-repeat="item in $ctrl.searchResultsServices" class="search-result">
+          <button ng-click="$ctrl.showService(item.id)" class="search-result__title">
+            <strong ng-if="item.hidden">DRAFT:&nbsp;</strong>{{ item.name }}
+          </button>
+          <span ng-if="item.description" class="search-result__description">{{ item.description | stripHTML | limitTo: 200}}...</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="search-results__list">
+      <h3 class="search__subheading">Providers <span>({{ $ctrl.searchResultsProviders.length }} result<span ng-if="$ctrl.searchResultsProviders.length > 1">s</span>)</span></h3>
+      <ul ng-if="!$ctrl.showLoader">
+        <li ng-repeat="item in $ctrl.searchResultsProviders" class="search-result">
+          <button ng-click="$ctrl.showProvider(item.id)" class="search-result__title">
+            {{ item.name }}
+          </button>
+          <span ng-if="item.description" class="search-result__description">{{ item.description | stripHTML | limitTo: 200}}...</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="search-results__list">
+      <h3 class="search__subheading">Resources <span>({{ $ctrl.searchResultsResources.length }} result<span ng-if="$ctrl.searchResultsResources.length > 1">s</span>)</span></h3>
+      <ul ng-if="!$ctrl.showLoader">
+        <li ng-repeat="item in $ctrl.searchResultsResources" class="search-result">
+          <a ng-href="{{item.url}}" target="_blank" rel="noopener noreferrer" class="search-result__title">
+            <strong ng-if="item.expired" class="search-result__expired">Expired:&nbsp;</strong>{{item.name}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

@@ -9,7 +9,9 @@ class SearchController {
     this.ngDialog = ngDialog;
     this.$rootScope = $rootScope;
     this.searchTerm = $scope.ngDialogData.searchTerm;
-    this.searchResults = [];
+    this.searchResultsProviders = [];
+    this.searchResultsServices = [];
+    this.searchResultsResources = [];
     this.showLoader = false;
     this.getSearchResults(this.searchTerm);
   }
@@ -19,11 +21,17 @@ class SearchController {
     this.$rootScope.$broadcast('showService', {serviceId});
   }
 
+  showProvider (providerId) {
+    this.ngDialog.close();
+    this.$rootScope.$broadcast('showProvider', {providerId});
+  }
+
   getSearchResults (searchTerm) {
     this.showLoader = true;
     this.DataService.getServices().then(() => {
       this.services = angular.copy(this.DataService.dataStore.services);
       this.resources = angular.copy(this.DataService.dataStore.resources);
+      this.providers = angular.copy(this.DataService.dataStore.providers);
 
       angular.forEach(this.services, item => {
 
@@ -33,19 +41,19 @@ class SearchController {
         
         if (searchTermInName(item, searchTerm)) {
           item.priority = 1;
-          this.searchResults.push(item);
+          this.searchResultsServices.push(item);
           return;
         }
 
         if (searchTermInDescription(item, searchTerm)) {
-          item.priority = 3;
-          this.searchResults.push(item);
+          item.priority = 2;
+          this.searchResultsServices.push(item);
           return;
         }
 
         if (searchTermInEvents(item, searchTerm)) {
-          item.priority = 4;
-          this.searchResults.push(item);
+          item.priority = 3;
+          this.searchResultsServices.push(item);
         }
       });
 
@@ -55,14 +63,29 @@ class SearchController {
         }
         
         if (searchTermInName(item, searchTerm)) {
-          item.priority = 2;
-          item.isResource = true;
-          this.searchResults.push(item);
+          item.priority = 1;
+          this.searchResultsResources.push(item);
           return;
         }
       });
 
-      this.searchResults = this.$filter('orderBy')(this.searchResults, ['priority', 'name']);
+      angular.forEach(this.providers, item => {
+        if (searchTermInName(item, searchTerm)) {
+          item.priority = 1;
+          this.searchResultsProviders.push(item);
+          return;
+        }
+
+        if (searchTermInDescription(item, searchTerm)) {
+          item.priority = 2;
+          this.searchResultsProviders.push(item);
+          return;
+        }
+      });
+
+      this.searchResultsServices = this.$filter('orderBy')(this.searchResultsServices, ['priority', 'name']);
+      this.searchResultsProviders = this.$filter('orderBy')(this.searchResultsProviders, ['priority', 'name']);
+      this.searchResultsResources = this.$filter('orderBy')(this.searchResultsResources, ['priority', 'name']);
       this.showLoader = false;    
     });
   }

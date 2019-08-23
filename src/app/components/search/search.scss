@@ -1,5 +1,41 @@
 @import '../../../theme/variables.scss';
 
+.search__heading {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: $vr*2;
+  display: flex;
+  border-bottom: 2px solid #666;
+}
+
+.search__subheading {
+  span {
+    font-weight: normal;
+  }
+}
+
+.search-results {
+  @media(min-width: $break-point-d) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.search-results__list {
+  flex-basis: 50%;
+  margin-bottom: $vr*3;
+
+  @media(min-width: $break-point-d) {
+    flex-basis: 33.33%;
+    padding-right: 30px;
+    margin-bottom: 0;
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+}
+
 .search-result {
   border-bottom: 1px solid $grey-d;
   margin-bottom: $vr*2;
@@ -14,9 +50,15 @@
   padding: 0;
   cursor: pointer;
   text-decoration: none;
+  text-align: left;
+  font-size: $font-size-small;
   
   &:hover, &:focus {
     text-decoration: underline;
+  }
+
+  @media(min-width: $break-point-d) {
+    font-size: $font-size-base;
   }
 }
 
@@ -27,4 +69,5 @@
 .search-result__description {
   display: block;
   font-size: $font-size-small;
+  line-height: 1.5;
 }
