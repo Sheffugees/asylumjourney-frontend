@@ -13,6 +13,7 @@
   color: $color-blue;
   padding: 0;
   cursor: pointer;
+  text-decoration: none;
   
   &:hover, &:focus {
     text-decoration: underline;

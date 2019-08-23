@@ -23,6 +23,7 @@ class SearchController {
     this.showLoader = true;
     this.DataService.getServices().then(() => {
       this.services = angular.copy(this.DataService.dataStore.services);
+      this.resources = angular.copy(this.DataService.dataStore.resources);
 
       angular.forEach(this.services, item => {
 
@@ -37,14 +38,27 @@ class SearchController {
         }
 
         if (searchTermInDescription(item, searchTerm)) {
-          item.priority = 2;
+          item.priority = 3;
           this.searchResults.push(item);
           return;
         }
 
         if (searchTermInEvents(item, searchTerm)) {
-          item.priority = 3;
+          item.priority = 4;
           this.searchResults.push(item);
+        }
+      });
+
+      angular.forEach(this.resources, item => {
+        if (!shouldShowResource.bind(this)(item)) {
+          return;
+        }
+        
+        if (searchTermInName(item, searchTerm)) {
+          item.priority = 2;
+          item.isResource = true;
+          this.searchResults.push(item);
+          return;
         }
       });
 
@@ -68,6 +82,17 @@ function searchTermInEvents (item, searchTerm) {
 
 function shouldShowService (item) {
   return this.AuthService.isAuthenticated || !item.hidden;
+}
+
+function shouldShowResource (item) {
+  if (item.expiryDate) {
+    const now = new Date();
+    const expiry = new Date(item.expiryDate);
+    if (expiry < now) {
+      item.expired = true;
+    }
+  }
+  return this.AuthService.isAuthenticated || !item.expired;
 }
 
 export default SearchController;

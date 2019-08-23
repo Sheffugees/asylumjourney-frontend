@@ -8,10 +8,13 @@
 
   <ul ng-if="!$ctrl.showLoader">
     <li ng-repeat="item in $ctrl.searchResults" class="search-result">
-      <button ng-click="$ctrl.showService(item.id)" class="search-result__title">
+      <a ng-if="item.isResource" ng-href="{{item.url}}" target="_blank" rel="noopener noreferrer" class="search-result__title">
+        <strong ng-if="item.expired">Expired:&nbsp;</strong>{{item.name}} (Printable resource)
+      </a>
+      <button ng-if="!item.isResource" ng-click="$ctrl.showService(item.id)" class="search-result__title">
         <strong ng-if="item.hidden">DRAFT:&nbsp;</strong>{{ item.name }}
       </button>
-      <span class="search-result__description">{{ item.description | stripHTML | limitTo: 200}}...</span>
+      <span ng-if="item.description" class="search-result__description">{{ item.description | stripHTML | limitTo: 200}}...</span>
     </li>
   </ul>
 </div>
