@@ -7,8 +7,9 @@
       <li class="filter__list-item" ng-repeat="resource in $ctrl.resources | orderBy: 'name'"
       ng-if="!resource.expired || resource.expired && $ctrl.AuthService.isAuthenticated">
         <button type="button" class="filter__button" ng-class="{ 'filter__button--active': resource.filtered}" ng-click="$ctrl.filterServices(resource.id, 'resources')">
-          {{resource.name}} {{resource.expired}}
+          {{resource.name}} 
         </button>
+        <a ng-href="{{resource.url}}" target="_blank" rel="noopener noreferrer" class="button button--secondary">View</a>
       </li>
       <li class="filter__list-item">
         <button type="button"
