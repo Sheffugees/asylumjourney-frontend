@@ -1,0 +1,69 @@
+<div ng-controller="ProviderController as $ctrl">
+    <div ng-if="$ctrl.deleted">
+      <p>Provider deleted</p>
+    </div>
+    <article class="details" ng-if="!$ctrl.deleted">
+      <h2 class="details__heading">
+        <span ng-if="$ctrl.errors.show">{{$ctrl.errors.message}}</span>
+        <strong ng-if="$ctrl.details.hidden">DRAFT:&nbsp;</strong>
+        {{ $ctrl.details.name }}
+      </h2>
+  
+      <div class="details__admin">
+        <span ng-if="$ctrl.AuthService.isAuthenticated">
+          <span ng-if="!$ctrl.showDeleteConfirmation">
+            <a ng-href="/providers/{{$ctrl.details.id}}/edit"  class="button">Edit</a>
+            <button type="button" class="button" ng-click="$ctrl.confirmDelete()">Delete</button>
+  
+          </span>
+          <span class="details__confirm" ng-if="$ctrl.showDeleteConfirmation">
+            <strong>Are you sure?</strong>
+            <button type="button" class="button button--primary" ng-click="$ctrl.deleteProvider($ctrl.id)">Yes, delete it</button>
+            <button type="button" class="button" ng-click="$ctrl.cancelDelete()">No</button>
+          </span>
+        </span>
+  
+        <button type="button" class="button details__print" ng-if="!$ctrl.showDeleteConfirmation" ng-click="$ctrl.print()">Print</button>
+  
+        <a href="mailto:admin@sheffield.cityofsanctuary.org?subject=Asylum Journey Provider Feedback: {{$ctrl.details.name}}" class="feedback button help" ng-if="!$ctrl.showDeleteConfirmation">Send us feedback</a>
+      </div>
+  
+      <div class="details__inner">
+  
+        <div class="details__block">
+  
+          <div class="details__section details__description" ng-class="{'format-text' : $ctrl.formatDescription}" ng-bind-html="$ctrl.details.description"></div>
+
+          <p ng-if="$ctrl.details.phone"><strong>Tel:</strong> {{ $ctrl.details.phone }}</p>
+          <p ng-if="$ctrl.details.email"><strong>Email:</strong> <a href="mailto:{{ $ctrl.details.email }}">{{ $ctrl.details.email }}</a></p>
+          <p ng-if="$ctrl.details.website"><strong>Website:</strong> <a href="{{ $ctrl.details.website }}" target="_blank">{{ $ctrl.details.website }}</a></p>
+          <p ng-if="$ctrl.details.facebook"><strong>Facebook:</strong> <a href="{{ $ctrl.details.facebook }}" target="_blank">{{ $ctrl.details.facebook }}</a></p>
+          <p ng-if="$ctrl.details.twitter"><strong>Twitter:</strong> <a href="{{ $ctrl.details.twitter }}" target="_blank">{{ $ctrl.details.twitter }}</a></p>
+          <p ng-if="$ctrl.details.address"><strong>Address:</strong>
+            <a href="{{ $ctrl.details.addressUrl }}" target="_blank">{{ $ctrl.details.address }}, {{ $ctrl.details.postcode }}</a>
+          </p>
+
+          <div class="details__section details__section--review" ng-if="$ctrl.AuthService.isAuthenticated">
+            <p>Last reviewed: {{$ctrl.details.lastReviewDate | date: 'dd MMM yyyy'}}
+            <span ng-if="$ctrl.details.lastReviewedBy"> by {{$ctrl.details.lastReviewedBy}}</span>
+            <span ng-if="$ctrl.details.lastReviewComments"><br>Comments: {{$ctrl.details.lastReviewComments}}</span></p>
+            <p>Next review date: {{$ctrl.details.nextReviewDate | date: 'dd MMM yyyy'}}
+            <span ng-if="$ctrl.details.nextReviewComments"><br>Comments: {{$ctrl.details.nextReviewComments}}</span></p>
+            <p ng-if="$ctrl.details.externalReviews">External reviews: {{$ctrl.details.externalReviews}}</p>
+
+            <p ng-if="$ctrl.details.providerContact">
+              Provider contact:
+              <span>{{$ctrl.details.providerContact}}</span>
+            </p>
+          </div>
+        </div>  
+      </div>
+      <div class="details__bottom">
+        <p class="permalink-container">
+          <label for="permalink">Permanent link:</label for="permalink">
+          <input type="text" id="permalink" disabled value="{{$ctrl.path}}/provider/{{$ctrl.details.id}}" class="permalink" />
+        </p>
+      </div>
+    </article>
+  </div>
+  
