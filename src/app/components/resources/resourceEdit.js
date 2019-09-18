@@ -28,7 +28,7 @@ class resourceEditController {
   save () {
     this.saving = true;
 
-    this.resource.lastReviewDate = new Date(this.resource.lastReviewDate);
+    // this.resource.lastReviewDate = new Date(this.resource.lastReviewDate);
 
     if (this.isNew) {
       this.DataService.createResource(this.resource).then( () => {
@@ -63,7 +63,7 @@ class resourceEditController {
 }
 
 function formatDates (resource) {
-  const dateFields = ['expiryDate'];
+  const dateFields = ['expiryDate', 'lastReviewDate', 'nextReviewDate'];
   angular.forEach(dateFields, (field) => {
     resource[field] = this.$filter('date')(resource[field], 'dd MMM yyyy')
   });

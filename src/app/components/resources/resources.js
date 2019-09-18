@@ -32,7 +32,7 @@ class resourcesController {
 
   deleteResource () {
     this.DataService.deleteResource(this.idToDelete).then( () => {
-      this.resources = formatExpiry.bind(this)(angular.copy(this.DataService.dataStore.resources));
+      this.resources = formatExpiryAndNextReview.bind(this)(angular.copy(this.DataService.dataStore.resources));
       this.showDeleteSuccess = true;
       this.$timeout( () => {
         this.ngDialog.close();
@@ -41,30 +41,48 @@ class resourcesController {
     });
   }
 
+  toggleShowAll () {
+    this.showExpiredOnly = false;
+    this.showReviewOverdueOnly = false;
+    this.order = 'name';
+  }
+
   toggleShowExpiredOnly () {
-    this.showExpiredOnly = !this.showExpiredOnly;
-    this.order = this.order === 'name' ? 'expiryDate' : 'name';
+    this.showExpiredOnly = true;
+    this.showReviewOverdueOnly = false;
+    this.order = 'expiryDate';
+  }
+
+  toggleShowReviewOverdueOnly () {
+    this.showReviewOverdueOnly = true;
+    this.showExpiredOnly = false;
+    this.order = 'nextReviewDate';
   }
 }
 
-function formatExpiry (resources) {
+function formatExpiryAndNextReview (resources) {
   angular.forEach(resources, resource => {
-    if (!resource.expiryDate) {
+    if (!resource.expiryDate && !resource.nextReviewDate) {
       return;
     }
     const now = new Date();
     const expiry = new Date(resource.expiryDate);
+    const nextReview = new Date(resource.nextReviewDate);
     if (expiry < now) {
       resource.expired = true;
     }
     resource.displayExpiryDate = this.$filter('date')(resource.expiryDate, 'dd MMM yyyy')
+    if (resource.nextReviewDate && nextReview < now) {
+      resource.reviewDue = true;
+    }
+    resource.displayNextReviewDate = this.$filter('date')(resource.nextReviewDate, 'dd MMM yyyy')
   });
   return resources;
 }
 
 function getResources () {
   this.DataService.getResources().then( () => {
-    this.resources = formatExpiry.bind(this)(angular.copy(this.DataService.dataStore.resources));
+    this.resources = formatExpiryAndNextReview.bind(this)(angular.copy(this.DataService.dataStore.resources));
   });
 }
 

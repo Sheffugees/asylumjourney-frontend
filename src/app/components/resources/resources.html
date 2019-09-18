@@ -7,15 +7,27 @@
     <a ng-href="/resources/new" class="button button--secondary">Add new</a>
   </div>
   
-  <button ng-click="$ctrl.toggleShowExpiredOnly()" class="button button--secondary">
-    <span ng-if="!$ctrl.showExpiredOnly">Show expired only</span>
-    <span ng-if="$ctrl.showExpiredOnly">Show all</span>
+  <button ng-disabled="$ctrl.showExpiredOnly" ng-click="$ctrl.toggleShowExpiredOnly()" class="button button--secondary">
+    <span>Show expired only</span>
   </button>
 
+  <button ng-disabled="$ctrl.showReviewOverdueOnly" ng-click="$ctrl.toggleShowReviewOverdueOnly()" class="button button--secondary">
+    <span>Show overdue reviews only</span> 
+  </button>
+
+  <button ng-if="$ctrl.showReviewOverdueOnly || $ctrl.showExpiredOnly" ng-click="$ctrl.toggleShowAll()" class="button button--secondary">
+    <span>Show all</span>
+    </button>
+
   <ul class="admin__list">
-    <li ng-repeat="resource in $ctrl.resources | orderBy:$ctrl.order" ng-if="!$ctrl.showExpiredOnly || $ctrl.showExpiredOnly && resource.expired">
+    <li ng-repeat="resource in $ctrl.resources | orderBy:$ctrl.order" ng-if="(!$ctrl.showExpiredOnly && !$ctrl.showReviewOverdueOnly) || $ctrl.showExpiredOnly && resource.expired || $ctrl.showReviewOverdueOnly && resource.reviewDue">
       {{resource.name}}
       <div class="admin__list-actions">
+        <span class="admin__list-expiry" ng-class="{'admin__list-expiry--expired': resource.reviewDue}">
+          <span ng-if="resource.reviewDue">Review date: </span>
+          <span ng-if="!resource.reviewDue && resource.nextReviewDate">Review due: </span>
+          <span>{{resource.displayNextReviewDate}}</span>
+        </span>
         <span class="admin__list-expiry" ng-class="{'admin__list-expiry--expired': resource.expired}">
           <span ng-if="resource.expired">Expired: </span>
           <span ng-if="!resource.expired && resource.expiryDate">Expires: </span>
