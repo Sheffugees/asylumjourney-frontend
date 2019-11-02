@@ -27,7 +27,6 @@ class toolController {
     this.filteredResources = [];
     this.searchText = '';
     this.showAllFilters = false;
-    this.numStagesDisplayed = 0;
     this.AuthService = AuthService;
     this.expandFilters = {
       stages: false,
@@ -70,14 +69,6 @@ class toolController {
   filterServices(filterId, type) {
     updateActiveFilters.bind(this)(filterId, type);
     updateCurrentFilter.bind(this)(filterId, type);
-
-    // Get number of stages displayed for use in CSS class
-    if (type === 'stages') {
-      const displayedStages = this.stages.filter(stage => {
-        return stage.display;
-      });
-      this.numStagesDisplayed = displayedStages.length;
-    }
   }
 
    // for mobile
@@ -89,7 +80,6 @@ class toolController {
     resetFilter(list);
     this.DataService.dataStore.currentFilters[type] = [];
     array = [];
-    this.numStagesDisplayed = this.stages.length;
   }
 
   showAll() {
@@ -97,7 +87,6 @@ class toolController {
     resetFilter(this.stages);
     resetFilter(this.categories);
     resetFilter(this.providers);
-    this.numStagesDisplayed = this.stages.length;
     this.filteredProviders = [];
     this.filteredResources = [];
     this.currentFilters = this.DataService.resetCurrentFilters();
@@ -246,9 +235,6 @@ class toolController {
 
   resetFilterType(type) {
     resetFilter(this[type]);
-    if (type === 'stages') {
-      this.numStagesDisplayed = this.stages.length;
-    }
     if (type === 'providers') {
       this.filteredProviders = [];
     }
@@ -335,13 +321,6 @@ function filterFromRouteParams(type, item) {
 
       updateActiveFilters.bind(this)(item.id, type);
       updateCurrentFilter.bind(this)(item.id, type);
-
-      if (type === 'stages') {
-        const displayedStages = this.stages.filter(stage => {
-          return stage.display;
-        });
-        this.numStagesDisplayed = displayedStages.length;
-      }
     }
   });
   return;

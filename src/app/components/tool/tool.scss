@@ -118,6 +118,9 @@ $numColumns: 8;
   &.tool-stages__stage--7 {
     background: $stage-7-color;
   }
+  &.tool-stages__stage--8 {
+    background: $stage-8-color;
+  }
 
   &.brand {
     display: none;
@@ -187,14 +190,11 @@ $numColumns: 8;
 }
 
 @media(min-width: $break-point-e) {
-  .tool-stages__stage {
-  }
   .tool-category {
     padding-top: $vr*2;
   }
   .tool-category__heading {
     position: relative;
-    // font-size: 16px;
     padding: $vr $vr $vr*2 $vr;
     margin: 0;
   }
