@@ -44,7 +44,7 @@ $stage-4-color: $color-green;
 $stage-5-color: $color-blue;
 $stage-6-color: $color-indigo;
 $stage-7-color: $color-violet;
-$stage-8-color: $color-dark-blue;
+$stage-11-color: $color-dark-blue;
 
 /**
  * TO DO use sass each loops for these and get rid of importants.
@@ -72,8 +72,8 @@ $stage-8-color: $color-dark-blue;
 .bg-stage-7 {
   background: $stage-7-color;
 }
-.bg-stage-8 {
-  background: $stage-8-color;
+.bg-stage-11 {
+  background: $stage-11-color;
 }
 
 .border-stage-1 {
@@ -98,7 +98,7 @@ $stage-8-color: $color-dark-blue;
   border-color: $stage-7-color !important;
 }
 .border-stage-8 {
-  border-color: $stage-8-color !important;
+  border-color: $stage-11-color !important;
 }
 
 $break-point-b: 480px;

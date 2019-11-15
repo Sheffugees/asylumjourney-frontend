@@ -39,10 +39,10 @@
         <div ng-show="$ctrl.showCategories" class="home-filters__categories">
           <h2>Select a category</h2>
           <div class="home-filters__stages">
-            <div class="home-filters__stage" ng-repeat="category in $ctrl.categories">
+            <div class="home-filters__stage home-filters__category" ng-repeat="category in $ctrl.categories">
               <button type="button"  ng-click="$ctrl.go(category)">{{category.name}}</button>
             </div>
-            <div class="home-filters__stage">
+            <div class="home-filters__stage home-filters__category">
               <button type="button"  ng-click="$ctrl.go()">All</button>
             </div>
           </div>

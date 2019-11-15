@@ -96,6 +96,11 @@ $numColumns: 8;
   line-height: 1.2;
   font-weight: bold;
   overflow: hidden;
+  background: $stage-11-color;
+
+  &.brand {
+    background: none;
+  }
 
   &.tool-stages__stage--1 {
     background: $stage-1-color;
@@ -118,8 +123,8 @@ $numColumns: 8;
   &.tool-stages__stage--7 {
     background: $stage-7-color;
   }
-  &.tool-stages__stage--8 {
-    background: $stage-8-color;
+  &.tool-stages__stage--11 {
+    background: $stage-11-color;
   }
 
   &.brand {
