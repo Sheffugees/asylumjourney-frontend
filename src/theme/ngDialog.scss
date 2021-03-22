@@ -343,4 +343,5 @@ body.ngdialog-open {
 .ngdialog.ngdialog-theme-default.service-modal .ngdialog-content {
     width: 92%;
     max-width: 1200px;
+    z-index: 1;
 }
