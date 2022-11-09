@@ -1,7 +1,6 @@
 {
   "extends": "eslint:recommended",
   "parser": "babel-eslint",
-  "plugins": ["angular"],
   "env": {
     "browser": true,
     "jasmine": true,
@@ -14,5 +13,9 @@
     "module": true,
     "window": true,
     "AutoLinker": true
+  },
+  "rules": {
+    "no-console": "warn",
+    "angular/log": 0
   }
 }

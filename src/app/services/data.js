@@ -1,4 +1,9 @@
 import { apiUrl } from '../../constants';
+import staticCategories from '../data/categories';
+import staticProviders from '../data/providers'
+import staticStages from '../data/stages';
+import staticResources from '../data/resources'
+import staticServices from '../data/services'
 
 export default class DataService {
   /** @ngInject */
@@ -6,11 +11,11 @@ export default class DataService {
     this.$http = $http;
     this.$q = $q;
     this.dataStore = {
-      categories: [],
-      providers: [],
-      resources: [],
-      services: [],
-      stages: [],
+      categories: staticCategories._embedded.categories,
+      providers: staticProviders._embedded.providers,
+      resources: staticResources._embedded.resources,
+      services: staticServices._embedded.services,
+      stages: staticStages._embedded.stages,
       currentFilters: {
         stages: [],
         categories: [],
@@ -21,6 +26,8 @@ export default class DataService {
   }
 
   getCategories() {
+    // const deferred = this.$q.defer();
+    // return deferred.promise;
     return getItems.bind(this)('categories');
   }
 
@@ -148,7 +155,7 @@ function deleteItem (id, type) {
 function getItem (id, type) {
   const deferred = this.$q.defer();
   const item = this.dataStore[type].filter(s => {
-    return s.id === id;
+    return s.id === id || s.id.toString() === id;
   })[0];
 
   if (item) {
